@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
-//앨랠래 속 냉장고
 //이동 - A/D
 //멈추기 - Left Shift
 //가속 - Ctrl
