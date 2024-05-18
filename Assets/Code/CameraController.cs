@@ -38,9 +38,6 @@ public class CameraFollow : MonoBehaviour {
         if (playerObject != null) {
             player = playerObject.transform;
         } 
-        else {
-            Debug.LogError("Player object not found. Make sure your player object has the 'Player' tag.");
-        }
     }
 
     private void FixedUpdate() {

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
+//앨랠래 속 냉장고
 //이동 - A/D
 //멈추기 - Left Shift
 //가속 - Ctrl
@@ -87,6 +89,8 @@ public class PlayerMove : MonoBehaviour
 //시작 함수
     void Awake() {
 
+        player = GameObject.FindGameObjectWithTag("Player");
+
         Time.timeScale = 1f;
 
         DontDestroyOnLoad(this.gameObject);//맵 바꿔도 안 날아가게
@@ -109,17 +113,6 @@ public class PlayerMove : MonoBehaviour
 
         shootCooldown = 0.1f;
 
-        respawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
-        
-        player = GameObject.FindGameObjectWithTag("Player");
-
-        LoadPlayerData();
-
-        if (SceneManager.GetActiveScene().name == "StartScene")
-        {
-            player.SetActive(false); // 첫 씬에서 플레이어 비활성화
-        }
-
         if (!playerExists)
         {
             playerExists = true;
@@ -136,10 +129,6 @@ public class PlayerMove : MonoBehaviour
 
 //업데이트 함수
     void Update(){
-        if (SceneManager.GetActiveScene().name == "StartScene")
-        {
-            player.SetActive(false); // 첫 씬에서 플레이어 비활성화
-        }
         
         if(respawnPoint==null){
             respawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
@@ -161,9 +150,11 @@ public class PlayerMove : MonoBehaviour
             animator = GetComponent<Animator>();
         }
 
-        if(HPbarImage==null||ChargebarImage==null){
+        if(HPbarImage==null){
             HPbarImage=GameObject.FindGameObjectWithTag("HealthBarImage").GetComponent<Image>();
+        }
 
+        if(ChargebarImage==null){
             ChargebarImage=GameObject.FindGameObjectWithTag("ChargeBarImage").GetComponent<Image>();
         }
 
@@ -388,7 +379,7 @@ public class PlayerMove : MonoBehaviour
 
 
 //스폰포인트 함수
-    public void SetRespwan(Vector3 position){
+    public void SetRespawn(Vector3 position){
 
         respawnPoint.position=position;
 
@@ -602,18 +593,18 @@ public class PlayerMove : MonoBehaviour
 
 //체력게이지 함수
     private void ChangeHealthBarAmount(){//* HP 게이지 변경
-
+        if(HPbarImage != null){
         HPbarImage.fillAmount = (float)currentHealth/maxHealth;
-
+        }
     }
 
 
 
 //차지게이지 함수
     public void ChangeChargeBarAmount(float min,float max){ //* Charge 게이지 변경 
-
+        if(ChargebarImage != null){
         ChargebarImage.fillAmount = min/max;
-
+        }
     }
 
 

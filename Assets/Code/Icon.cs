@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Icon : MonoBehaviour
 {
-   public Transform playerTransform;
+   public Transform CameraTransform;
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);//맵 바꿔도 안 날아가게
+        CameraTransform=GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -20,6 +21,6 @@ public class Icon : MonoBehaviour
     void LateUpdate()
     {
         // 플레이어의 위치를 기준으로 UI의 위치를 조정
-        transform.position = new Vector3(playerTransform.position.x-7.3f, playerTransform.position.y-7.8f,playerTransform.position.z+10f);
+        transform.position = new Vector3(CameraTransform.position.x-7.3f, CameraTransform.position.y-7.8f,CameraTransform.position.z+10f);
     }
 }

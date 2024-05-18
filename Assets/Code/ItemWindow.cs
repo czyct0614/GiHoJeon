@@ -5,7 +5,7 @@ public class ItemWindow : MonoBehaviour
     public GameObject[] itemSlots; // 아이템 슬롯 배열
     public GameObject[] equippedItems; // 장착된 아이템 배열
 
-    public Transform playerTransform; // 플레이어의 위치
+    public Transform cameraTransform; // 플레이어의 위치
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class ItemWindow : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector3(playerTransform.position.x +13.52f, playerTransform.position.y-8.43f,playerTransform.position.z+10f);
+        transform.position = new Vector3(cameraTransform.position.x +13.52f, cameraTransform.position.y-8.43f,cameraTransform.position.z+10f);
         // 아이템 슬롯이 플레이어를 따라다니도록 설정
         for (int i = 0; i < itemSlots.Length; i++)
         {
@@ -30,7 +30,7 @@ public class ItemWindow : MonoBehaviour
     // 아이템 슬롯의 위치를 플레이어를 기준으로 계산하는 함수
     Vector3 GetItemSlotPosition(int index)
     {
-        if (playerTransform == null)
+        if (cameraTransform == null)
         {
             Debug.LogWarning("Player transform is null.");
             return Vector3.zero;
@@ -47,7 +47,7 @@ public class ItemWindow : MonoBehaviour
         {
             xOffset = 14.63f;
         }
-        return new Vector3(playerTransform.position.x + xOffset, playerTransform.position.y - 9f, playerTransform.position.z + 10f);
+        return new Vector3(cameraTransform.position.x + xOffset, cameraTransform.position.y - 9f, cameraTransform.position.z + 10f);
     }
 
     // 아이템을 장착하는 메서드
@@ -86,7 +86,7 @@ public class ItemWindow : MonoBehaviour
     public GameObject[] itemSlots; // 아이템 슬롯 배열
     public GameObject[] equippedItems; // 장착된 아이템 배열
 
-    public Transform playerTransform; // 플레이어의 위치
+    public Transform cameraTransform; // 플레이어의 위치
 
     void Start()
     {
@@ -94,11 +94,12 @@ public class ItemWindow : MonoBehaviour
         //itemSlots = new GameObject[2];
         // 장착된 아이템 배열 초기화
         equippedItems = new GameObject[itemSlots.Length];
+        cameraTransform=GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
     }
 
     void Update()
     {
-        transform.position = new Vector3(playerTransform.position.x +13.52f, playerTransform.position.y-8.43f,playerTransform.position.z+10f);
+        transform.position = new Vector3(cameraTransform.position.x +13.52f, cameraTransform.position.y-8.43f,cameraTransform.position.z+10f);
         // 아이템 슬롯이 플레이어를 따라다니도록 설정
         for (int i = 0; i < itemSlots.Length; i++)
         {
@@ -119,7 +120,7 @@ public class ItemWindow : MonoBehaviour
     // 아이템 슬롯의 위치를 플레이어를 기준으로 계산하는 함수
     Vector3 GetItemSlotPosition(int index)
     {
-        if (playerTransform == null)
+        if (cameraTransform == null)
         {
             Debug.LogWarning("Player transform is null.");
             return Vector3.zero;
@@ -136,7 +137,7 @@ public class ItemWindow : MonoBehaviour
         {
             xOffset = 14.63f;
         }
-        return new Vector3(playerTransform.position.x + xOffset, playerTransform.position.y - 9f, playerTransform.position.z + 10f);
+        return new Vector3(cameraTransform.position.x + xOffset, cameraTransform.position.y - 9f, cameraTransform.position.z + 10f);
     }
 
     // 아이템을 장착하는 메서드
@@ -172,7 +173,7 @@ public class ItemWindow : MonoBehaviour
     private void DroppingItem(GameObject item){
         Debug.Log("sss");
         // 아이템을 현재 위치에서 생성
-        GameObject droppedItem = Instantiate(item, playerTransform.position, Quaternion.identity);
+        GameObject droppedItem = Instantiate(item, cameraTransform.position, Quaternion.identity);
         DropItem dropItemComponent = droppedItem.GetComponent<DropItem>();
         dropItemComponent.isFalling = true;
         dropItemComponent.Eaten = false;

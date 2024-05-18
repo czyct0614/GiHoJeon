@@ -40,7 +40,7 @@ public class TransferMap : MonoBehaviour
         {
             Debug.Log(nextSceneIndex);
             Debug.Log(GetSceneNameByIndex(nextSceneIndex));
-            SceneLoader.Instance.LoadScene(GetSceneNameByIndex(nextSceneIndex));
+            SceneLoader.Instance.LoadtheScene(GetSceneNameByIndex(nextSceneIndex));
         }
         else
         {

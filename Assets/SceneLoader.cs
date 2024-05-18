@@ -39,7 +39,7 @@ public class SceneLoader : MonoBehaviour
 
     public Transform CameraTransform;
 
-    public GameObject camera;
+    public GameObject maincamera;
 
     public static SceneLoader Create()
     {
@@ -53,10 +53,10 @@ public class SceneLoader : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            camera = GameObject.FindWithTag("MainCamera");
-            if (camera != null)
+            maincamera = GameObject.FindWithTag("MainCamera");
+            if (maincamera != null)
             {
-                CameraTransform = camera.transform;
+                CameraTransform = maincamera.transform;
                 UpdateLoaderPosition();
             }
         }
@@ -70,15 +70,15 @@ public class SceneLoader : MonoBehaviour
     {
         if (CameraTransform != null)
         {
-            CameraTransform = camera.transform;
+            CameraTransform = maincamera.transform;
             UpdateLoaderPosition();
         }
         else
         {
-            camera = GameObject.FindWithTag("MainCamera");
-            if (camera != null)
+            maincamera = GameObject.FindWithTag("MainCamera");
+            if (maincamera != null)
             {
-                CameraTransform = camera.transform;
+                CameraTransform = maincamera.transform;
                 UpdateLoaderPosition();
             }
         }
@@ -89,7 +89,7 @@ public class SceneLoader : MonoBehaviour
         transform.position = new Vector3(CameraTransform.position.x, CameraTransform.position.y, CameraTransform.position.z + 10f);
     }
 
-    public void LoadScene(string sceneName)
+    public void LoadtheScene(string sceneName)
     {
         if (gameObject.activeSelf)
             return;

@@ -9,6 +9,7 @@ public class ChargeBar : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);//맵 바꿔도 안 날아가게
+        CameraTransform=GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
     }
 
     // Update is called once per frame

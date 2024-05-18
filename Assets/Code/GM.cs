@@ -27,9 +27,14 @@ public class GM : MonoBehaviour
         }
     }
 
-    void Awake()
+    void Update()
     {
-        DontDestroyOnLoad(gameObject); // 다른 맵에서 없어지지 않게 해줌
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject); // 중복된 GM 객체를 파괴합니다.
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     public void SetMainCamera(Camera camera)
