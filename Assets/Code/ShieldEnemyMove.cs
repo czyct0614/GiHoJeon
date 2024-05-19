@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMove : MonoBehaviour
+public class ShieldEnemyMove : MonoBehaviour
 {
     PortalManager portalManager;
     Rigidbody2D rigid;
@@ -10,6 +10,8 @@ public class EnemyMove : MonoBehaviour
     Animator animator;
     SpriteRenderer spriteRenderer;
     public bool hacked = false;
+    GameObject shield;
+    SpriteRenderer shieldSpriteRenderer;
 
     public int maxHealth = 3; // 몬스터의 최대 체력
     private int currentHealth; // 현재 체력
@@ -20,6 +22,8 @@ public class EnemyMove : MonoBehaviour
         currentHealth = maxHealth; // 몬스터의 체력 초기화
         GameObject portalmanager = GameObject.Find("PortalManager"); // 포탈 찾기
         portalManager=portalmanager.GetComponent<PortalManager>();
+        shield = GameObject.Find("Shield1");
+        shieldSpriteRenderer = shield.GetComponent<SpriteRenderer>();
     }
     // 대미지를 받는 함수
     public void TakeDamage(int damage)
@@ -127,6 +131,7 @@ public class EnemyMove : MonoBehaviour
     public IEnumerator ForceTurn(float duration)
     {
         hacked = true;
+        Debug.Log("hacked");
         spriteRenderer.color = new Color(1, 0, 0, 1f);
 
         // 방향을 반대로 바꾸는 로직을 추가

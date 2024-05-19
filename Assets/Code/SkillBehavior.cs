@@ -7,13 +7,18 @@ public class SkillBehavior : MonoBehaviour
     public int damageAmount = 3;       // 탄환의 대미지량
     public TrailRenderer tr;           // 대쉬 잔상을 남기는 트레일 렌더러
     public PlayerMove move;
+    public EnemyMove enemy;
+    public ShieldEnemyMove Senemy;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         // 대쉬 잔상 초기에 비활성화
         tr.emitting = false;
-        move=ScriptFinder.FindScriptWithTag<PlayerMove>("Player");
+        move = ScriptFinder.FindScriptWithTag<PlayerMove>("Player");
+        enemy = ScriptFinder.FindScriptWithTag<EnemyMove>("Monster");
+        Senemy = ScriptFinder.FindScriptWithTag<ShieldEnemyMove>("ShieldEnemy");
     }
 
     // Update is called once per frame
@@ -29,7 +34,9 @@ public class SkillBehavior : MonoBehaviour
         if (!Input.GetButton("Charge"))
         {
             tr.emitting = true;
-        }else if(move.isDying)
+        }
+
+        else if(move.isDying)
         {
             Destroy(gameObject);
         }
@@ -58,10 +65,23 @@ public class SkillBehavior : MonoBehaviour
             {
                 other.GetComponent<StrongEnemyMove>().TakeDamage(damageAmount);
             }
-            else
+            else if (other.gameObject.name == "ShieldEnemy")
             {
+                SHacked();
+                other.GetComponent<ShieldEnemyMove>().TakeDamage(damageAmount);
+            }
+            else{
+                Hacked();
                 other.GetComponent<EnemyMove>().TakeDamage(damageAmount);
             }
         }
+    }
+
+    public void Hacked(){
+        StartCoroutine(enemy.ForceTurn(2f));
+    }
+
+    public void SHacked(){
+        StartCoroutine(Senemy.ForceTurn(2f));
     }
 }

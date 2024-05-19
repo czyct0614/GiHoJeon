@@ -278,6 +278,7 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("Down");
             // 초 후에 플레이어 콜라이더 다시 활성화
             StartCoroutine(EnableColliderAfterDelay(0.25f));
+            StartCoroutine(JumpCoolTime(1f));
         }
     }
 
@@ -620,6 +621,12 @@ public class PlayerMove : MonoBehaviour
 
         // 플레이어 콜라이더 활성화
         playerCollider.enabled = true;
+    }
+
+    private IEnumerator JumpCoolTime(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
         CanJump = true;
     }
 
