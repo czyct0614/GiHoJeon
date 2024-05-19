@@ -4,7 +4,11 @@ public class ScreenSizeFix : MonoBehaviour
 {
     private void Awake()
     {
-        // 현재 GameObject에 부착된 Camera 컴포넌트를 가져오는 코드
+        
+    }
+    private void Update()
+    {
+// 현재 GameObject에 부착된 Camera 컴포넌트를 가져오는 코드
         Camera cam = GetComponent<Camera>();
 
         // 현재 카메라의 뷰포트 영역을 가져오는 코드
