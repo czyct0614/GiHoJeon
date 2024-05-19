@@ -19,7 +19,7 @@ public class SkillSelect : MonoBehaviour
         playerMove = playermove.GetComponent<PlayerMove>();
 
         // Debug.Log를 사용하여 찾은 게임 오브젝트의 이름을 출력
-        Debug.Log(skillimage.name);
+        //Debug.Log(skillimage.name);
 
         // 마우스 클릭 시작 위치를 화면 좌표에서 월드 좌표로 변환하여 정규화(normalized)한 값으로 설정
         MouseStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized;
@@ -62,7 +62,7 @@ public class SkillSelect : MonoBehaviour
             }
 
             // 선택된 스킬 번호 출력
-            Debug.Log(SelectedSkillNumber);
+            //Debug.Log(SelectedSkillNumber);
 
             // 시간을 원래대로 되돌림
             Time.timeScale = 1;

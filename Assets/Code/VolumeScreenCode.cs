@@ -22,7 +22,6 @@ public class VolumeScreenCode : MonoBehaviour
         VbuttonObject2.SetActive(false);
         VbuttonObject3.SetActive(false);
         VolumePanel.SetActive(false);
-        DontDestroyOnLoad(this.gameObject);//다른 맵에서 없어지지 않게 해줌
     }
 
     // Update is called once per frame

@@ -61,8 +61,8 @@ public class EscapeCode : MonoBehaviour
             buttonObject2.SetActive(!buttonObject2.activeSelf);
             buttonObject3.SetActive(!buttonObject3.activeSelf);
             // 로그 출력
-            Debug.Log(!esc);
-            Debug.Log(Skillselect);
+            //Debug.Log(!esc);
+            //Debug.Log(Skillselect);
             // 일시 정지
             if (esc)
             {

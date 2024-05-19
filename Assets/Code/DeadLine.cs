@@ -24,7 +24,7 @@ public class DeadLine : MonoBehaviour
    {   
     // 충돌한 오브젝트가 몬스터인 경우
     if (other.CompareTag("Player")){
-        Debug.Log("qwer");  
+        Debug.Log("플레이어가 데드라인에 닿음(DeadLine 코드 27번 줄)");  
         playermove.Dead= true;
    }
    else{    

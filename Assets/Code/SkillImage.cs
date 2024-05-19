@@ -43,7 +43,6 @@ public class SkillImage : MonoBehaviour
     {
         playerTransform=GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         cameraTransform=GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
-        DontDestroyOnLoad(this.gameObject);//맵 바꿔도 안 날아가게
         // SpriteRenderer 컴포넌트를 가져옵니다.
         spriteRenderer = GetComponent<SpriteRenderer>();
 

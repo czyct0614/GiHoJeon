@@ -90,7 +90,6 @@ public class ItemWindow : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject); // 맵 전환 시에도 유지되도록 설정
         //itemSlots = new GameObject[2];
         // 장착된 아이템 배열 초기화
         equippedItems = new GameObject[itemSlots.Length];
@@ -109,7 +108,7 @@ public class ItemWindow : MonoBehaviour
         }
         foreach (GameObject items in itemSlots)
         {
-            DontDestroyOnLoad(items);
+            //DontDestroyOnLoad(items);
             string currentSceneName = SceneManager.GetActiveScene().name;
             if(currentSceneName == "StartScene"){
                 Destroy(items);

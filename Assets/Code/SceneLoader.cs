@@ -119,6 +119,8 @@ public class SceneLoader : MonoBehaviour
             if (Time.realtimeSinceStartup - startTime < minimumLoadingTime)
             {
                 timer += Time.unscaledDeltaTime;
+                Debug.Log(timer);
+                Debug.Log(Mathf.Lerp(0f, 0.9f, timer / minimumLoadingTime)); 
                 progressBar.fillAmount = Mathf.Lerp(0f, 0.9f, timer / minimumLoadingTime);
             }
             else

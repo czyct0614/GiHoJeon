@@ -45,7 +45,7 @@ public class DropItem : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F)&&canCollect)
             {
-                Debug.Log("F key pressed.");
+                //Debug.Log("F key pressed.");
                 PickUpItem();
             }
     }

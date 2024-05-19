@@ -54,7 +54,7 @@ public class EnemyBullet : MonoBehaviour
 
         }
     else if(other.gameObject.name!="StrongEnemy" && !other.CompareTag("Item") && !other.CompareTag("Portal") && !other.CompareTag("Monster") && !other.CompareTag("FlyingPlatform")){
-                Debug.Log("w");
+                Debug.Log("적 총알이 무언가에 닿아 없어짐");
                 Destroy(gameObject);
             }
    }

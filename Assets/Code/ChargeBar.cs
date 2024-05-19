@@ -8,7 +8,6 @@ public class ChargeBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);//맵 바꿔도 안 날아가게
         CameraTransform=GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
     }
 

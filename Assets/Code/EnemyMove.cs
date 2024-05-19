@@ -50,7 +50,7 @@ public class EnemyMove : MonoBehaviour
         }
         else
         {
-            Debug.LogError("PortalManager is not assigned!");
+            Debug.LogError("EnemyMove 코드에서 포탈매니저가 정의되지 않았다고 함");
         }
     }
 

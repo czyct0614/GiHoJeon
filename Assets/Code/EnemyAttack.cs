@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Player not found. Make sure there is a GameObject with the 'Player' tag in the scene.");
+            Debug.LogWarning("EnemyAttack 코드에서 플레이어를 찾지 못하고 있음");
         }
         animator = GetComponent<Animator>();
     }

@@ -7,7 +7,6 @@ public class SkillChargingCoolTime : MonoBehaviour
     public Transform CameraTransform; // 카메라의 Transform
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);//맵 바꿔도 안 날아가게
         CameraTransform=GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
     
     }

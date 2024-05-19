@@ -26,7 +26,6 @@ public class Settingcode : MonoBehaviour
         SbuttonObject2.SetActive(false);
         SbuttonObject3.SetActive(false);
         settingsPanel.SetActive(false);
-        DontDestroyOnLoad(this.gameObject);//다른 맵에서 없어지지 않게 해줌
     }
 
     // Update is called once per frame

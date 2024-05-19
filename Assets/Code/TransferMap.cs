@@ -38,8 +38,8 @@ public class TransferMap : MonoBehaviour
         // 만약 다음 스테이지가 존재한다면 해당 씬으로 이동합니다.
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
-            Debug.Log(nextSceneIndex);
-            Debug.Log(GetSceneNameByIndex(nextSceneIndex));
+            //Debug.Log(nextSceneIndex);
+            //Debug.Log(GetSceneNameByIndex(nextSceneIndex));
             SceneLoader.Instance.LoadtheScene(GetSceneNameByIndex(nextSceneIndex));
         }
         else

@@ -408,8 +408,12 @@ public class PlayerMove : MonoBehaviour
 
         MakeInvincible();
 
-        //스폰포인트에서 부활
-        transform.position=respawnPoint.position;
+        if(respawnPoint==null){
+            transform.position=new Vector3(0,0,0);
+        }
+        else{
+            transform.position=respawnPoint.position;
+        }
 
         //죽을수 있게
         isDying=false;
@@ -506,7 +510,7 @@ public class PlayerMove : MonoBehaviour
 
             currentHealth -= damage;
 
-            Debug.Log("Player took " + damage + " damage. Current health: " + currentHealth);
+            //Debug.Log("Player took " + damage + " damage. Current health: " + currentHealth);
 
             ChangeHealthBarAmount();
 
