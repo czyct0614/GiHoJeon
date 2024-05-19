@@ -59,7 +59,7 @@ public class PlayerMove : MonoBehaviour
     public bool canInput = true;
     private bool isInvincible = false; // 무적 상태 여부를 나타내는 변수
     private float JumpTime;
-    private float CanJumpTime = 0.6f;
+    private float CanJumpTime = 0.4f;
     public bool CanJump = true;
 
 
@@ -275,7 +275,6 @@ public class PlayerMove : MonoBehaviour
         {
             playerCollider.enabled = false;
             CanJump = false;
-            Debug.Log("Down");
             // 초 후에 플레이어 콜라이더 다시 활성화
             StartCoroutine(EnableColliderAfterDelay(0.25f));
             StartCoroutine(JumpCoolTime(1f));
@@ -340,7 +339,7 @@ public class PlayerMove : MonoBehaviour
 
         if(rayHit.collider != null){ //빔을 맞은 오브젝트가 있을때  -> 맞지않으면 collider도 생성되지않음 
 
-            if(rayHit.distance < 2.5f)
+            if(rayHit.distance < 2f)
                 
 
                     animator.SetBool("IsJumping",false); //거리가 0.5보다 작아지면 변경
@@ -465,10 +464,6 @@ public class PlayerMove : MonoBehaviour
 
         //이동
         float h = Input.GetAxisRaw("Horizontal");
-
-        if(IsJumping){
-            Debug.Log("Jump");
-        }
 
         IsRunning = true;
 

@@ -21,6 +21,7 @@ TagManager:
   - ChargeBarImage
   - SpawnPoint
   - Shield
+  - ShieldEnemy
   layers:
   - Default
   - TransparentFX

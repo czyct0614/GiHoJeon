@@ -65,7 +65,7 @@ public class SkillBehavior : MonoBehaviour
             {
                 other.GetComponent<StrongEnemyMove>().TakeDamage(damageAmount);
             }
-            else if (other.gameObject.name == "ShieldEnemy")
+            else if (other.gameObject.name == "ShieldEnemy1")
             {
                 SHacked();
                 other.GetComponent<ShieldEnemyMove>().TakeDamage(damageAmount);
@@ -82,6 +82,6 @@ public class SkillBehavior : MonoBehaviour
     }
 
     public void SHacked(){
-        StartCoroutine(Senemy.ForceTurn(2f));
+        StartCoroutine(Senemy.SForceTurn(2f));
     }
 }
