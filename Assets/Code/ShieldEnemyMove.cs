@@ -128,7 +128,7 @@ public class ShieldEnemyMove : MonoBehaviour
 
     }
 
-    public IEnumerator ForceTurn(float duration)
+    public IEnumerator SForceTurn(float duration)
     {
         hacked = true;
         Debug.Log("hacked");
