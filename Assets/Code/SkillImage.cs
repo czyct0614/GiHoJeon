@@ -19,13 +19,14 @@ public class SkillImage : MonoBehaviour
     public GameObject projectilePrefab;
 
     // 발사 위치와 충전 관련 변수
-    public bool doCharge=false;
-    public float maxChargeTime = 1f;
-    public float chargeSpeed = 1f;
-    public float minProjectileSize = 0.1f;
-    public float maxProjectileSize = 1.5f;
-    private float currentChargeTime = 0f;
-    private GameObject currentProjectile;
+    public bool Skill1DoCharge=false;
+    public float Skill1MaxChargeTime = 1f;
+    public float Skill1ChargeSpeed = 1f;
+    public float Skill1MinProjectileSize = 0.1f;
+    public float Skill1MaxProjectileSize = 1.5f;
+    private float Skill1CurrentChargeTime = 0f;
+    private GameObject Skill1CurrentProjectile;
+    private Vector3 Skill1ShootPosition;
 
     // 스킬 쿨타임 관련 변수
     public float cooldown = 3f;
@@ -56,7 +57,7 @@ public class SkillImage : MonoBehaviour
     void LateUpdate()
     {
         transform.position = new Vector3(cameraTransform.position.x - 14.63f, cameraTransform.position.y - 6.88f, cameraTransform.position.z + 10f); // UI 위치 설정
-        move.ChangeChargeBarAmount(currentChargeTime, maxChargeTime); // 충전 바 UI 업데이트
+        move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime); // 충전 바 UI 업데이트
         
         // 스킬이 준비되어 있을 때만 스킬을 사용할 수 있도록 합니다.
         if (!skillReady)
@@ -67,46 +68,47 @@ public class SkillImage : MonoBehaviour
         if(move.isDying)
         {
                 move.maxSpeed=10;
-                currentChargeTime=0f;
-                move.ChangeChargeBarAmount(currentChargeTime, maxChargeTime);
-                doCharge=false;
+                Skill1CurrentChargeTime=0f;
+                move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime);
+                Skill1DoCharge=false;
         }
 
         // 발사 버튼이 눌렸을 때
         if (Input.GetButtonDown("Charge") && skillReady)
         {
-            doCharge=true;
-            currentChargeTime = 0f; // 충전 시간 초기화
-            currentProjectile = Instantiate(projectilePrefab, playerTransform.position + Vector3.up * 2f, Quaternion.identity); // 발사체 생성
+            Skill1DoCharge=true;
+            Skill1CurrentChargeTime = 0f; // 충전 시간 초기화
+            Skill1CurrentProjectile = Instantiate(projectilePrefab, playerTransform.position + Vector3.up * 2f, Quaternion.identity); // 발사체 생성
         }
 
         // 발사 버튼을 누르고 있는 동안
-        if (Input.GetButton("Charge") && currentProjectile != null&doCharge)
+        if (Input.GetButton("Charge") && Skill1CurrentProjectile != null&Skill1DoCharge)
         {
             move.maxSpeed=3;
-            currentChargeTime += Time.deltaTime * chargeSpeed; // 충전 시간 증가
-            float scaleFactor = Mathf.Clamp01(currentChargeTime / maxChargeTime); // 충전 정도 계산
-            float projectileSize = Mathf.Lerp(minProjectileSize, maxProjectileSize, scaleFactor); // 발사체 크기 조절
-            currentProjectile.transform.localScale = new Vector3(projectileSize, projectileSize, 1f); // 발사체 크기 설정
-            currentProjectile.transform.position = playerTransform.position + Vector3.up * 2f; // 발사체 위치 조정
+            Skill1CurrentChargeTime += Time.deltaTime * Skill1ChargeSpeed; // 충전 시간 증가
+            float scaleFactor = Mathf.Clamp01(Skill1CurrentChargeTime / Skill1MaxChargeTime); // 충전 정도 계산
+            float projectileSize = Mathf.Lerp(Skill1MinProjectileSize, Skill1MaxProjectileSize, scaleFactor); // 발사체 크기 조절
+            Skill1CurrentProjectile.transform.localScale = new Vector3(projectileSize, projectileSize, 1f); // 발사체 크기 설정
+            Skill1ShootPosition=playerTransform.position + Vector3.up * 2f;
+            Skill1CurrentProjectile.transform.position = Skill1ShootPosition; // 발사체 위치 조정
 
             // 마우스 위치를 바라보도록 발사체 회전
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 PlayerPos = playerTransform.position;
-            Vector2 direction = mousePos - PlayerPos;
+            Vector2 SkillPos = new Vector2(Skill1ShootPosition.x,Skill1ShootPosition.y);
+            Vector2 direction = mousePos - SkillPos;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            currentProjectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            Skill1CurrentProjectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
         // 발사 버튼이 떼졌을 때
-        if (Input.GetButtonUp("Charge") && currentProjectile != null)
+        if (Input.GetButtonUp("Charge") && Skill1CurrentProjectile != null)
         {
-            doCharge=false;
+            Skill1DoCharge=false;
             // 발사체 방향 설정
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 PlayerPos = playerTransform.position;
-            Vector2 direction = (mousePos - PlayerPos).normalized;
-            float chargetime=currentChargeTime>maxChargeTime?maxChargeTime:currentChargeTime;
+            Vector2 SkillPos = new Vector2(Skill1ShootPosition.x,Skill1ShootPosition.y);
+            Vector2 direction = (mousePos - SkillPos).normalized;
+            float chargetime=Skill1CurrentChargeTime>Skill1MaxChargeTime?Skill1MaxChargeTime:Skill1CurrentChargeTime;
             // 발사 함수 호출
             Launch(direction, chargetime * 2000);
 
@@ -116,8 +118,8 @@ public class SkillImage : MonoBehaviour
 
             // 플레이어 속도 조정 및 충전 시간 초기화
             move.maxSpeed = 10;
-            currentChargeTime = 0f;
-            move.ChangeChargeBarAmount(currentChargeTime, maxChargeTime);
+            Skill1CurrentChargeTime = 0f;
+            move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime);
         }
     }
 
@@ -147,10 +149,10 @@ public class SkillImage : MonoBehaviour
         {
             Direction.Normalize();
             float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
-            currentProjectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            Skill1CurrentProjectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
-        currentProjectile.GetComponent<Rigidbody2D>().AddForce(Direction * Speed);
-        currentProjectile = null;
+        Skill1CurrentProjectile.GetComponent<Rigidbody2D>().AddForce(Direction * Speed);
+        Skill1CurrentProjectile = null;
     }
 
     // 스프라이트를 변경하는 함수입니다.
