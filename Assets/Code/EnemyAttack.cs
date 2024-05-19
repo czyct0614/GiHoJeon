@@ -60,7 +60,6 @@ public class EnemyController : MonoBehaviour
         }
 
         if (distanceToPlayer <= detectRange && enemyMove.hacked){
-            Debug.Log("hacked");
             ifHacked();
         }
     }
