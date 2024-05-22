@@ -23,6 +23,7 @@ TagManager:
   - Shield
   - ShieldEnemy
   - SkillSelectWindow
+  - SelectedSkill
   layers:
   - Default
   - TransparentFX

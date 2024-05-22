@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     public Rigidbody2D rigid; //물리이동을 위한 변수 선언
     SpriteRenderer spriteRenderer; //방향전환을 위한 변수 
     Animator animator; //애니메이터 조작을 위한 변수 
+    SkillImage skillimage;
 
 
 
@@ -61,6 +62,7 @@ public class PlayerMove : MonoBehaviour
     private float JumpTime;
     private float CanJumpTime = 0.4f;
     public bool CanJump = true;
+    public bool isSkillReady = false;
 
 
 
@@ -129,7 +131,12 @@ public class PlayerMove : MonoBehaviour
 
 //업데이트 함수
     void Update(){
-        
+
+        if(skillimage==null){
+            skillimage = GameObject.FindGameObjectWithTag("SelectedSkill").GetComponent<SkillImage>();
+        }
+        isSkillReady=skillimage.isSkillReady;
+
         if(respawnPoint==null){
             respawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
         }
@@ -186,7 +193,7 @@ public class PlayerMove : MonoBehaviour
 
 //총알 발사
 
-        if (canShoot && Input.GetMouseButtonDown(0) && !Input.GetMouseButton(1))
+        if (canShoot && Input.GetMouseButtonDown(0) && !Input.GetMouseButton(1)&!isSkillReady)
         {
             StartCoroutine(ShootWithCooldown());
         }

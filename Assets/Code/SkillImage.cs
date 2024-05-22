@@ -17,6 +17,10 @@ public class SkillImage : MonoBehaviour
     public Sprite newSprite3;
     public Sprite newSpriteUltimate;
     private SpriteRenderer spriteRenderer;
+    public bool isSkillReady;
+
+
+
     public GameObject projectilePrefab;
 
     // 발사 위치와 충전 관련 변수
@@ -32,22 +36,22 @@ public class SkillImage : MonoBehaviour
     // 스킬1 쿨타임 관련 변수
     public float Skill1CoolDown = 3f;
     private float Skill1LeftCoolDown = 0f;
-    private bool Skill1SkillReady = true;
+    private bool Skill1SkillReady = false;
 
     // 스킬2 쿨타임 관련 변수
     public float Skill2CoolDown = 3f;
     private float Skill2LeftCoolDown = 0f;
-    private bool Skill2SkillReady = true;
+    private bool Skill2SkillReady = false;
 
     // 스킬3 쿨타임 관련 변수
     public float Skill3CoolDown = 3f;
     private float Skill3LeftCoolDown = 0f;
-    private bool Skill3SkillReady = true;
+    private bool Skill3SkillReady = false;
 
     // 궁극기 쿨타임 관련 변수
     public float UltimateSkillCoolDown = 3f;
     private float UltimateSkillLeftCoolDown = 0f;
-    private bool UltimateSkillSkillReady = true;
+    private bool UltimateSkillSkillReady = false;
 
     // 기타 UI 요소들
     public TextMeshProUGUI timer;
@@ -78,11 +82,7 @@ public class SkillImage : MonoBehaviour
         
         // 스킬이 준비되어 있을 때만 스킬을 사용할 수 있도록 합니다.
         
-        if(spriteRenderer.sprite == newSprite1){
-            if (!Skill1SkillReady)
-            {
-                return;
-            }
+        if(spriteRenderer.sprite == newSprite1&&Skill1SkillReady){
             if(move.isDying)
             {
                     move.maxSpeed=10;
@@ -182,52 +182,49 @@ public class SkillImage : MonoBehaviour
     // 스킬1 쿨타임을 관리하는 코루틴입니다.
     private IEnumerator Skill1CoolDownCount()
     {
+        isSkillReady=false;
         Skill1SkillReady = false;
         while (Skill1LeftCoolDown > 0.0f)
         {
             Skill1LeftCoolDown -= Time.deltaTime;
             yield return new WaitForFixedUpdate();
-        }
-        Skill1SkillReady = true; // 스킬이 다시 사용 가능하도록 설정합니다.
+        } // 스킬이 다시 사용 가능하도록 설정합니다.
     }
 
     // 스킬2 쿨타임을 관리하는 코루틴입니다.
     private IEnumerator Skill2CoolDownCount()
     {
+        isSkillReady=false;
         Skill2SkillReady = false;
         while (Skill2LeftCoolDown > 0.0f)
         {
             Skill2LeftCoolDown -= Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }
-        timer.text = ""; // 쿨타임이 끝나면 텍스트를 비웁니다.
-        Skill2SkillReady = true; // 스킬이 다시 사용 가능하도록 설정합니다.
     }
 
     // 스킬3 쿨타임을 관리하는 코루틴입니다.
     private IEnumerator Skill3CoolDownCount()
     {
+        isSkillReady=false;
         Skill3SkillReady = false;
         while (Skill3LeftCoolDown > 0.0f)
         {
             Skill3LeftCoolDown -= Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }
-        timer.text = ""; // 쿨타임이 끝나면 텍스트를 비웁니다.
-        Skill3SkillReady = true; // 스킬이 다시 사용 가능하도록 설정합니다.
     }
 
     // 궁극기 쿨타임을 관리하는 코루틴입니다.
     private IEnumerator UltimateSkillCoolDownCountS()
     {
+        isSkillReady=false;
         UltimateSkillSkillReady = false;
         while (UltimateSkillLeftCoolDown > 0.0f)
         {
             UltimateSkillLeftCoolDown -= Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }
-        timer.text = ""; // 쿨타임이 끝나면 텍스트를 비웁니다.
-        UltimateSkillSkillReady = true; // 스킬이 다시 사용 가능하도록 설정합니다.
     }
 
     // 발사 함수
@@ -250,15 +247,23 @@ public class SkillImage : MonoBehaviour
         {
             case 1:
                 spriteRenderer.sprite = newSprite1;
+                Skill1SkillReady=true;
+                isSkillReady=true;
                 break;
             case 2:
                 spriteRenderer.sprite = newSprite2;
+                Skill2SkillReady=true;
+                isSkillReady=true;
                 break;
             case 3:
                 spriteRenderer.sprite = newSprite3;
+                Skill3SkillReady=true;
+                isSkillReady=true;
                 break;
             case 4:
                 spriteRenderer.sprite = newSpriteUltimate;
+                UltimateSkillSkillReady=true;
+                isSkillReady=true;
                 break;
         }
         Debug.Log(SpriteNumber);
