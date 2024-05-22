@@ -184,6 +184,15 @@ public class PlayerMove : MonoBehaviour
 
 
 
+//낙사
+        if(Dead){
+            OnDie();
+            //죽고 난 뒤 가속도 초기화하기(다시 죽는것 방지)
+            rigid.velocity = new Vector2(rigid.velocity.x , 0);
+        }
+
+
+
 //대쉬중일때 다른 행동 못하게
         if(isDashing){
             return;
@@ -268,13 +277,6 @@ public class PlayerMove : MonoBehaviour
         }
 
 
-
-//낙사
-        if(Dead){
-            OnDie();
-            //죽고 난 뒤 가속도 초기화하기(다시 죽는것 방지)
-            rigid.velocity = new Vector2(rigid.velocity.x , 0);
-        }
 
 //S점프 코드
 
