@@ -57,12 +57,22 @@ public class Missile : MonoBehaviour
                 else if(other.gameObject.name=="PStrongEnemy"){
                     other.GetComponent<PStrongEnemyMove>().TakeDamage(damageAmount);
                 }
-                else{
+                else if(other.gameObject.name=="BaseEnemy"){
                     other.GetComponent<EnemyMove>().TakeDamage(damageAmount);
+                }
+                else if(other.gameObject.name=="PlatformEnemy"){
+                    other.GetComponent<EnemyMove>().TakeDamage(damageAmount);
+                }
+                else if(other.gameObject.name=="DashEnemy"){
+                    other.GetComponent<DashEnemyMove>().TakeDamage(damageAmount);
                 }
                 // 탄환 파괴
                 Destroy(gameObject);
             }
+
+        else if(other.CompareTag("ShieldEnemy")){
+                    other.GetComponent<ShieldEnemyMove>().TakeDamage(damageAmount);
+                }
 
         else if(other.gameObject.name!="Player" && 
                 !other.CompareTag("Item") && 

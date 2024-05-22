@@ -65,16 +65,16 @@ public class SkillBehavior : MonoBehaviour
             {
                 other.GetComponent<StrongEnemyMove>().TakeDamage(damageAmount);
             }
-            else if (other.gameObject.name == "ShieldEnemy1")
-            {
-                SHacked();
-                other.GetComponent<ShieldEnemyMove>().TakeDamage(damageAmount);
-            }
             else{
                 Hacked();
                 other.GetComponent<EnemyMove>().TakeDamage(damageAmount);
             }
         }
+        else if (other.gameObject.name == "ShieldEnemy1")
+            {
+                SHacked();
+                other.GetComponent<ShieldEnemyMove>().TakeDamage(damageAmount);
+            }
     }
 
     public void Hacked(){
