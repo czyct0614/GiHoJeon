@@ -12,6 +12,7 @@ public class ShieldEnemyController : MonoBehaviour
     private bool canAttack = true; // 공격 가능 여부
     ShieldEnemyMove SenemyMove;
     Animator animator;
+    Transform shield; // 방패 오브젝트의 Transform
 
     void Start()
     {
@@ -31,6 +32,9 @@ public class ShieldEnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         GameObject Senemy = GameObject.FindGameObjectWithTag("ShieldEnemy");
         SenemyMove = Senemy.GetComponent<ShieldEnemyMove>();
+
+        // 방패 오브젝트의 Transform 가져오기
+        shield = transform.Find("XShield1");
     }
 
     void Update()
@@ -61,6 +65,23 @@ public class ShieldEnemyController : MonoBehaviour
 
         if (distanceToPlayer <= detectRange && SenemyMove.hacked){
             ifHacked();
+        }
+
+        // 방패를 플레이어 방향으로 향하도록 설정
+        if (shield != null && !SenemyMove.hacked)
+        {
+            // 플레이어가 오른쪽에 있으면 방패를 오른쪽으로 반전시킵니다.
+            if (target.position.x > transform.position.x)
+            {
+                shield.position = new Vector3(1.2f+transform.position.x, transform.position.y, 0);
+                Debug.Log("R");
+            }
+            // 플레이어가 왼쪽에 있으면 방패를 왼쪽으로 반전시킵니다.
+            else
+            {
+                shield.position = new Vector3(-1.2f+transform.position.x, transform.position.y, 0);
+                Debug.Log("L");
+            }
         }
     }
 
@@ -93,10 +114,22 @@ public class ShieldEnemyController : MonoBehaviour
 
     private void ifHacked()
     {
+        // 플레이어 반대 방향으로 이동합니다.
         float targetX = target.position.x;
         float targetY = -8f; // y축은 변경하지 않음
         float targetZ = target.position.z;
         Vector3 newPosition = new Vector3(-targetX, targetY, targetZ);
         transform.position = Vector3.MoveTowards(transform.position, newPosition, moveSpeed * Time.deltaTime);
+        if (target.position.x > transform.position.x)
+            {
+                shield.position = new Vector3(-1.2f+transform.position.x, transform.position.y, 0);
+                Debug.Log("R");
+            }
+            
+            else
+            {
+                shield.position = new Vector3(1.2f+transform.position.x, transform.position.y, 0);
+                Debug.Log("L");
+            }
     }
 }
