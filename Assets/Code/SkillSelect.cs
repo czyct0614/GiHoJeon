@@ -54,6 +54,10 @@ public class SkillSelect : MonoBehaviour
             {
                 SelectedSkillNumber = 1;
             }
+            else
+            {
+                SelectedSkillNumber = 4;
+            }
 
             // 선택된 스킬 번호가 0이 아닌 경우에만 스킬 이미지 변경
             if (SelectedSkillNumber != 0)
@@ -62,7 +66,7 @@ public class SkillSelect : MonoBehaviour
             }
 
             // 선택된 스킬 번호 출력
-            //Debug.Log(SelectedSkillNumber);
+            Debug.Log(SelectedSkillNumber);
 
             // 시간을 원래대로 되돌림
             Time.timeScale = 1;

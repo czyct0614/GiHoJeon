@@ -1137,6 +1137,10 @@ PrefabInstance:
       propertyPath: ground
       value: 
       objectReference: {fileID: 3805861544551408287, guid: 7eb4044b902fff14392c4b56a9d794df, type: 3}
+    - target: {fileID: 2462243119117574091, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
+      propertyPath: skillSelectPrefab
+      value: 
+      objectReference: {fileID: 7036774277444454461, guid: ef7daa44353ad86449d36b84a895cbb9, type: 3}
     - target: {fileID: 3533926365284957928, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: m_Name
       value: Player
