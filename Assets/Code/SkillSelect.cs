@@ -5,7 +5,6 @@ public class SkillSelect : MonoBehaviour
     SkillImage skillImage; // SkillImage 스크립트에 접근하기 위한 
     PlayerMove playerMove;
     private float spawnTime;  // 미사일 생성 시간
-    public Vector2 MouseStartPos; // 마우스 클릭 시작 위치
     public Vector2 MouseFinalPos; // 마우스 클릭 종료 위치
     public int SelectedSkillNumber; // 선택된 스킬 번호
 
@@ -18,15 +17,9 @@ public class SkillSelect : MonoBehaviour
         GameObject playermove = GameObject.Find("Player");
         playerMove = playermove.GetComponent<PlayerMove>();
 
-        // Debug.Log를 사용하여 찾은 게임 오브젝트의 이름을 출력
-        //Debug.Log(skillimage.name);
-
-        // 마우스 클릭 시작 위치를 화면 좌표에서 월드 좌표로 변환하여 정규화(normalized)한 값으로 설정
-        MouseStartPos = Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized;
-
         // 시간을 느리게
         playerMove.canInput = false;
-        Time.timeScale = 0.1f;
+        Time.timeScale = 0.3f;
     }
 
     void Update()
@@ -34,11 +27,13 @@ public class SkillSelect : MonoBehaviour
         // 마우스 오른쪽 버튼을 뗐을 때
         if (Input.GetMouseButtonUp(1))
         {
+            Vector2 skillPos = transform.position;
+
             // 마우스 클릭 종료 위치를 화면 좌표에서 월드 좌표로 변환하여 정규화(normalized)한 값으로 설정
-            MouseFinalPos = Camera.main.ScreenToWorldPoint(Input.mousePosition).normalized;
+            MouseFinalPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             // 마우스 클릭의 각도 계산
-            float angle = GetAngle(MouseStartPos, MouseFinalPos);
+            float angle = GetAngle(skillPos, MouseFinalPos);
             angle = angle > 0 ? angle : angle + 360;
 
             // 선택된 스킬 번호 설정
@@ -64,9 +59,6 @@ public class SkillSelect : MonoBehaviour
             {
                 skillImage.ChangeSprite(SelectedSkillNumber);
             }
-
-            // 선택된 스킬 번호 출력
-            Debug.Log(SelectedSkillNumber);
 
             // 시간을 원래대로 되돌림
             Time.timeScale = 1;
