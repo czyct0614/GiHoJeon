@@ -6970,6 +6970,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DashEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
+      propertyPath: m_TagString
+      value: DashEnemy
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9172075427735769792, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
     - {fileID: 1571452034499325421, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}

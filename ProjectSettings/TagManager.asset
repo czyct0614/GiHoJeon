@@ -22,6 +22,7 @@ TagManager:
   - SpawnPoint
   - Shield
   - ShieldEnemy
+  - DashEnemy
   layers:
   - Default
   - TransparentFX

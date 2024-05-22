@@ -20,6 +20,7 @@ public class DashEnemyMove : MonoBehaviour
     private int currentHealth; // 현재 체력
     private bool isDead = false; // 몬스터가 죽었는지 여부를 나타내는 변수
     private bool isDashing = false; // 대쉬 중인지 여부
+    private bool HisDashing = false; // 대쉬 중인지 여부
     private Transform Gplayer;
 
     private GameObject dashRangeIndicator;
@@ -106,7 +107,9 @@ public class DashEnemyMove : MonoBehaviour
         {
             CancelInvoke(); // think를 잠시 멈춘 후 재실행
             Invoke("Think", 2f);
-            StartCoroutine(DashSequence());
+            if(!hacked){
+                StartCoroutine(DashSequence());
+            }
         }
     }
 
@@ -138,7 +141,7 @@ public class DashEnemyMove : MonoBehaviour
         Invoke("Think", 2);
     }
 
-    public IEnumerator ForceTurn(float duration)
+    public IEnumerator DForceTurn(float duration)
     {
         hacked = true;
         spriteRenderer.color = new Color(1, 0, 0, 1f);
@@ -150,12 +153,60 @@ public class DashEnemyMove : MonoBehaviour
         // 이동 속도를 반전된 방향으로 설정
         rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
 
-        yield return new WaitForSeconds(duration); // 지정된 시간 동안 대기
+
+
+        HisDashing = true;
+        
+        // 현재 움직임 멈춤
+        rigid.velocity = Vector2.zero;
+        animator.SetInteger("WalkSpeed", 0);
+        CancelInvoke("Think"); // 대쉬 도중에는 Think 코루틴을 멈춥니다.
+
+        // 플레이어 위치 저장
+        Vector3 playerPosition = Gplayer.position;
+
+        // 범위 표시
+        dashRangeIndicator.SetActive(true);
+        dashRangeIndicator.transform.position = transform.position;
+
+        // 플레이어 방향으로 범위 표시
+        Vector3 dashDirection = (playerPosition - transform.position).normalized;
+        dashDirection.x = -dashDirection.x;
+        dashDirection.y = 0; // Y축 방향 제거
+        playerPosition.y = 0;
+        dashRangeIndicator.transform.rotation = Quaternion.FromToRotation(Vector3.right, playerPosition);
+        dashRangeIndicator.transform.localScale = new Vector2(dashRange, 1.5f);
+        dashRangeIndicator.transform.position += new Vector3(dashDirection.x, 0, 0);
+
+        // 빨간색으로 표시
+        SpriteRenderer dashRangeRenderer = dashRangeIndicator.GetComponent<SpriteRenderer>();
+        dashRangeRenderer.color = new Color(1, 0, 0, 0.5f);
+
+        yield return new WaitForSeconds(dashDelay);
+
+        dashRangeIndicator.SetActive(false);
+
+        // 돌진
+        float dashDistance = dashRange;
+        float dashTime = dashDistance / dashSpeed;
+
+        float elapsedTime = 0f;
+        Vector3 startingPosition = transform.position;
+
+        while (elapsedTime < dashTime)
+        {
+            transform.position = Vector3.Lerp(startingPosition, startingPosition + dashDirection * dashDistance, elapsedTime / dashTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = startingPosition + dashDirection * dashDistance;
+        HisDashing = false;
 
         // 원래 방향으로 돌아감
         nextMove = nextMove * -1; // 방향을 다시 반대로 바꿈
         spriteRenderer.flipX = nextMove == 1;
-        spriteRenderer.color = new Color(1, 1, 1, 1f); // 색상 복원
+        spriteRenderer.color = new Color(0, 0, 1, 1f); // 색상 복원
         hacked = false;
     }
 
@@ -187,12 +238,21 @@ public class DashEnemyMove : MonoBehaviour
     public void StartDashSequence()
     {
         if (isDashing) return;
-        StartCoroutine(DashSequence());
+        if(!hacked){
+            StartCoroutine(DashSequence());
+        }
     }
 
     // 대쉬 시퀀스를 처리하는 코루틴
     IEnumerator DashSequence()
     {
+
+        if (hacked)
+        {
+            isDashing = false; // 대쉬 중단
+            yield break; // 코루틴 종료
+        }
+
         isDashing = true;
         
         // 현재 움직임 멈춤

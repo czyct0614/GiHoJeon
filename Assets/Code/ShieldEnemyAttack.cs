@@ -74,13 +74,11 @@ public class ShieldEnemyController : MonoBehaviour
             if (target.position.x > transform.position.x)
             {
                 shield.position = new Vector3(1.2f+transform.position.x, transform.position.y, 0);
-                Debug.Log("R");
             }
             // 플레이어가 왼쪽에 있으면 방패를 왼쪽으로 반전시킵니다.
             else
             {
                 shield.position = new Vector3(-1.2f+transform.position.x, transform.position.y, 0);
-                Debug.Log("L");
             }
         }
     }
@@ -123,13 +121,11 @@ public class ShieldEnemyController : MonoBehaviour
         if (target.position.x > transform.position.x)
             {
                 shield.position = new Vector3(-1.2f+transform.position.x, transform.position.y, 0);
-                Debug.Log("R");
             }
-            
+
             else
             {
                 shield.position = new Vector3(1.2f+transform.position.x, transform.position.y, 0);
-                Debug.Log("L");
             }
     }
 }

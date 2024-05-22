@@ -9,6 +9,7 @@ public class SkillBehavior : MonoBehaviour
     public PlayerMove move;
     public EnemyMove enemy;
     public ShieldEnemyMove Senemy;
+    public DashEnemyMove Denemy;
     
 
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class SkillBehavior : MonoBehaviour
         move = ScriptFinder.FindScriptWithTag<PlayerMove>("Player");
         enemy = ScriptFinder.FindScriptWithTag<EnemyMove>("Monster");
         Senemy = ScriptFinder.FindScriptWithTag<ShieldEnemyMove>("ShieldEnemy");
+        Denemy = ScriptFinder.FindScriptWithTag<DashEnemyMove>("DashEnemy");
     }
 
     // Update is called once per frame
@@ -75,6 +77,11 @@ public class SkillBehavior : MonoBehaviour
                 SHacked();
                 other.GetComponent<ShieldEnemyMove>().TakeDamage(damageAmount);
             }
+        else if (other.gameObject.name == "DashEnemy")
+            {
+                DHacked();
+                other.GetComponent<DashEnemyMove>().TakeDamage(damageAmount);
+            }
     }
 
     public void Hacked(){
@@ -83,5 +90,9 @@ public class SkillBehavior : MonoBehaviour
 
     public void SHacked(){
         StartCoroutine(Senemy.SForceTurn(2f));
+    }
+
+    public void DHacked(){
+        StartCoroutine(Denemy.DForceTurn(2f));
     }
 }
