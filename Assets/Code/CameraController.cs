@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour {
     [SerializeField] float smoothing = 0.2f;
-    float maxVerticalOffset = 5f; // 카메라가 위로 이동하는 최대 오프셋
+    float maxVerticalOffset = 5f; // 카메라가 위로 이동하는 기준
     float minY = -3f;
 
     public static CameraFollow Instance;
