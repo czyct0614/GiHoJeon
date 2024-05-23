@@ -25,6 +25,8 @@ TagManager:
   - DashEnemy
   - SkillSelectWindow
   - SelectedSkill
+  - Room1
+  - Room2
   layers:
   - Default
   - TransparentFX
