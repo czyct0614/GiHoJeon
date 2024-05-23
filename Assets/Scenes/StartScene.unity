@@ -223,9 +223,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothing: 0.2
-  maxVerticalOffset: 0
-  minY: -3
-  maxY: 30
   OriginalPosition: {x: 0, y: 0, z: 0}
 --- !u!81 &40120830
 AudioListener:
@@ -1141,6 +1138,26 @@ PrefabInstance:
       propertyPath: skillSelectPrefab
       value: 
       objectReference: {fileID: 7036774277444454461, guid: ef7daa44353ad86449d36b84a895cbb9, type: 3}
+    - target: {fileID: 3451196197808452072, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
+      propertyPath: m_Size.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451196197808452072, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451196197808452072, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451196197808452072, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.02139216
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451196197808452072, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.09609696
+      objectReference: {fileID: 0}
     - target: {fileID: 3533926365284957928, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: m_Name
       value: Player

@@ -27,7 +27,6 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject missilePrefab;//총알 코드 가져오기
     public GameObject skillSelectPrefab;//스킬 선택 코드 가져오기
-    public GameObject ground;
 
 
 

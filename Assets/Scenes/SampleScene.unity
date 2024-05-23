@@ -13164,7 +13164,7 @@ GameObject:
   - component: {fileID: 1424583743}
   m_Layer: 0
   m_Name: Room1
-  m_TagString: Room1
+  m_TagString: Else
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13388,7 +13388,7 @@ GameObject:
   - component: {fileID: 1719924020}
   m_Layer: 0
   m_Name: Room2
-  m_TagString: Room2
+  m_TagString: Else
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
