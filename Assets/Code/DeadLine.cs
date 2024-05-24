@@ -26,6 +26,7 @@ public class DeadLine : MonoBehaviour
     if (other.CompareTag("Player")){
         Debug.Log("플레이어가 데드라인에 닿음(DeadLine 코드 27번 줄)");  
         playermove.Dead= true;
+        playermove.OnDie();
    }
    else{    
         playermove.Dead=false;
