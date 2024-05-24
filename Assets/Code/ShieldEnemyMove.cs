@@ -57,6 +57,7 @@ public class ShieldEnemyMove : MonoBehaviour
 
     // Start is called before the first frame update
     private void Awake() {
+        hacked = false;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
@@ -68,6 +69,9 @@ public class ShieldEnemyMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(hacked==true){
+            StartCoroutine(SForceTurn(2f));
+        }
         //Move
        rigid.velocity = new Vector2(nextMove,rigid.velocity.y); //nextMove 에 0:멈춤 -1:왼쪽 1:오른쪽 으로 이동 
 
@@ -126,7 +130,6 @@ public class ShieldEnemyMove : MonoBehaviour
 
     public IEnumerator SForceTurn(float duration)
     {
-        hacked = true;
         Debug.Log("hacked");
         spriteRenderer.color = new Color(1, 0, 0, 1f);
 

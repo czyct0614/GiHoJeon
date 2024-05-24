@@ -73,6 +73,7 @@ public class DashEnemyMove : MonoBehaviour
 
     private void Awake()
     {
+        hacked = false;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
@@ -81,6 +82,9 @@ public class DashEnemyMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(hacked==true){
+            StartCoroutine(DForceTurn(2f));
+        }
         if (isDashing) return;
 
         // Move
@@ -143,7 +147,6 @@ public class DashEnemyMove : MonoBehaviour
 
     public IEnumerator DForceTurn(float duration)
     {
-        hacked = true;
         spriteRenderer.color = new Color(1, 0, 0, 1f);
 
         // 방향을 반대로 바꾸는 로직을 추가

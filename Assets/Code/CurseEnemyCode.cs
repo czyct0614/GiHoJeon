@@ -69,6 +69,7 @@ public class CurseEnemyMove : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        hacked = false;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
@@ -78,6 +79,9 @@ public class CurseEnemyMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(hacked==true){
+            StartCoroutine(ForceTurn(2f));
+        }
         // 플레이어 감지 및 이동
         if (Vector2.Distance(transform.position, target.position) < detectionRange)
         {
@@ -134,7 +138,6 @@ public class CurseEnemyMove : MonoBehaviour
 
     public IEnumerator ForceTurn(float duration)
     {
-        hacked = true;
         spriteRenderer.color = new Color(1, 0, 0, 1f);
 
         // 방향을 반대로 바꾸는 로직을 추가

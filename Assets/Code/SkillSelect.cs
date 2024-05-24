@@ -4,7 +4,6 @@ public class SkillSelect : MonoBehaviour
 {
     SkillImage skillImage; // SkillImage 스크립트에 접근하기 위한 
     PlayerMove playerMove;
-    private float spawnTime;  // 미사일 생성 시간
     public Vector2 MouseFinalPos; // 마우스 클릭 종료 위치
     public int SelectedSkillNumber; // 선택된 스킬 번호
 

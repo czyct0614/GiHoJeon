@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     public Rigidbody2D rigid; //물리이동을 위한 변수 선언
     SpriteRenderer spriteRenderer; //방향전환을 위한 변수 
     Animator animator; //애니메이터 조작을 위한 변수 
-    SkillImage skillimage;
+    SkillImage skillimage;//스킬 이미지(왼쪽 아래  UI) 변수
 
 
 
@@ -30,14 +30,14 @@ public class PlayerMove : MonoBehaviour
 
 
 
-    public bool IsJumping = false;
-    private bool IsRunning = false;
-    private bool IsShooting = false;
+    public bool IsJumping = false;//점프 모션
+    private bool IsRunning = false;//달리기 모션
+    private bool IsShooting = false;//총쏘는 모션
     private bool canShoot = true;
 
 
-    public int maxHealth = 10;
-    private int currentHealth = 10;
+    public int maxHealth = 10;//최대체력
+    private int currentHealth = 10;//현재체력
 
 
 
@@ -47,8 +47,8 @@ public class PlayerMove : MonoBehaviour
     public float dashingTime=0.2f;//대쉬 지속시간
     public float dashingCooldown=1f;//대쉬 쿨타임
     public float isFlipped;
-    public float InvincibleDuration = 0.5f;
-    public float shootCooldown;
+    public float InvincibleDuration = 0.5f;//부활 무적시간
+    public float shootCooldown;//장전시간
 
 
 
@@ -69,8 +69,7 @@ public class PlayerMove : MonoBehaviour
     
     
     
-    public Transform respawnPoint;
-    public Transform firePoint;
+    public Transform respawnPoint;//리스폰포인트
 
 
 
@@ -112,8 +111,6 @@ public class PlayerMove : MonoBehaviour
 
         playerCollider = GetComponent<Collider2D>();
 
-        shootCooldown = 0.1f;
-
         if (!playerExists)
         {
             playerExists = true;
@@ -124,6 +121,37 @@ public class PlayerMove : MonoBehaviour
             Destroy(gameObject);
         }
 
+        maxHealth = 10;//최대체력
+
+        currentHealth = 10;//현재체력
+
+        dashingPower=9f;//얼마나 많이 움직일지
+
+        dashingTime=0.2f;//대쉬 지속시간
+
+        dashingCooldown=1f;//대쉬 쿨타임
+
+        InvincibleDuration = 0.5f;//부활무적 시간
+
+        shootCooldown=0.15f;//총 장전시간
+
+        Dead=false;
+
+        canDash=true;//대쉬가능한지
+
+        isDying=false;//죽고 있는지
+
+        canInput = true;
+
+        isInvincible = false; // 무적 상태 여부를 나타내는 변수
+
+        CanJumpTime = 0.4f;
+
+        CanJump = true;
+
+        isSkillReady = false;
+
+
     }
 
 
@@ -131,43 +159,73 @@ public class PlayerMove : MonoBehaviour
 //업데이트 함수
     void Update(){
 
+
+
+//스킬 불러오기
         if(skillimage==null){
             skillimage = GameObject.FindGameObjectWithTag("SelectedSkill").GetComponent<SkillImage>();
         }
         isSkillReady=skillimage.isSkillReady;
 
+
+
+//리스폰포인트 불러오기
         if(respawnPoint==null){
             respawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
         }
 
+
+
+//주인공 콜라이더 불러오기
         if(playerCollider==null){
             playerCollider = GetComponent<Collider2D>();
         }
 
+
+
+//주인공 물리엔진 불러오기
         if(rigid==null){
             rigid = GetComponent<Rigidbody2D>();
         }
 
+
+
+//주인공 스프라이트 렌더러 불러오기
         if(spriteRenderer==null){
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
+
+
+//주인공 애니메이터 불러오기
         if(animator==null){
             animator = GetComponent<Animator>();
         }
 
+
+
+//체력바 이미지 불러오기
         if(HPbarImage==null){
             HPbarImage=GameObject.FindGameObjectWithTag("HealthBarImage").GetComponent<Image>();
         }
 
+
+
+//차징바 이미지 불러오기
         if(ChargebarImage==null){
             ChargebarImage=GameObject.FindGameObjectWithTag("ChargeBarImage").GetComponent<Image>();
         }
 
+
+
+//죽고있을떄 다른 행동 못하게
         if(isDying){
             return;
         }
 
+
+
+//달리면서 총쏠때 달리면서총쏘기 모션 실행
         if(IsRunning && IsShooting){
             animator.SetBool("RunningShoot", true);
         }
@@ -175,11 +233,15 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("RunningShoot", false);
         }
 
-        Vector2 PlayerPos = GetComponent<Rigidbody2D>().position;//캐릭터 위치(좌표)
+
+
+//캐릭터 위치
+        Vector2 PlayerPos = GetComponent<Rigidbody2D>().position;
         
 
 
-        Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);//마우스 위치(좌표)
+//마우스 위치
+        Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 
 
@@ -454,16 +516,16 @@ public class PlayerMove : MonoBehaviour
 
 //속력을 0으로 바꾸는 함수
     public void VelocityZero()
-{
-    // 현재 rigidbody의 속도를 가져옵니다.
-    Vector2 currentVelocity = rigid.velocity;
+    {
+        // 현재 rigidbody의 속도를 가져옵니다.
+        Vector2 currentVelocity = rigid.velocity;
 
-    // y축 속도는 그대로 두고 x축 속도를 0으로 설정합니다.
-    currentVelocity.x = 0f;
+        // y축 속도는 그대로 두고 x축 속도를 0으로 설정합니다.
+        currentVelocity.x = 0f;
 
-    // 조작된 속도를 rigidbody에 할당합니다.
-    rigid.velocity = currentVelocity;
-}
+        // 조작된 속도를 rigidbody에 할당합니다.
+        rigid.velocity = currentVelocity;
+    }
 
 
 
@@ -480,15 +542,17 @@ public class PlayerMove : MonoBehaviour
         //움직일때 방향 바꾸기
         if(Input.GetButton("left") || Input.GetButton("right")){
 
-            if(!IsJumping && !isDashing){
-            animator.SetBool("IsRunning",true);
-        }
+            if(!IsJumping && !isDashing)
+            {
+                animator.SetBool("IsRunning",true);
+            }
 
-        if(Input.GetButton("left") && Input.GetButton("right") && !animator.GetBool("IsJumping")){
-            
-            VelocityZero();
+            if(Input.GetButton("left") && Input.GetButton("right") && !animator.GetBool("IsJumping"))
+            {
+                
+                VelocityZero();
 
-        }
+            }
 
             //왼쪽 화살표를 누를때 왼쪽 보기/오른쪽 화살표 누를 때 오른쪽 보기
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
@@ -626,6 +690,9 @@ public class PlayerMove : MonoBehaviour
         playerCollider.enabled = true;
     }
 
+
+
+//점프 쿨타임 함수
     private IEnumerator JumpCoolTime(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -638,32 +705,34 @@ public class PlayerMove : MonoBehaviour
 //총쏘는 함수
     private IEnumerator ShootWithCooldown()
     {
-    // 쿨타임 중인 동안은 총을 쏠 수 없음
-    canShoot = false;
+        // 쿨타임 중인 동안은 총을 쏠 수 없음
+        canShoot = false;
 
-    animator.SetBool("IsShooting", true);
+        animator.SetBool("IsShooting", true);
 
-    //캐릭터 위치(좌표)
-    Vector2 PlayerPos = GetComponent<Rigidbody2D>().position;
+        //캐릭터 위치(좌표)
+        Vector2 PlayerPos = GetComponent<Rigidbody2D>().position;
+            
+        //마우스 위치(좌표)
+        Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        //총알이 나가는 방향
+        Vector2 Dir = (MousePos - PlayerPos);
         
-    //마우스 위치(좌표)
-    Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // 총알 발사
+        GameObject missile = Instantiate(missilePrefab, transform.position, transform.rotation);
+        Missile missileScript = missile.GetComponent<Missile>();
+        missileScript.Launch(Dir.normalized, 2000);
 
-    //총알이 나가는 방향
-    Vector2 Dir = (MousePos - PlayerPos);
-    
-    // 총알 발사
-    GameObject missile = Instantiate(missilePrefab, transform.position, transform.rotation);
-    Missile missileScript = missile.GetComponent<Missile>();
-    missileScript.Launch(Dir.normalized, 2000);
+        // 쿨타임 대기
+        yield return new WaitForSeconds(shootCooldown);
 
-    // 쿨타임 대기
-    yield return new WaitForSeconds(shootCooldown);
-
-    // 쿨타임 종료 후 다시 총을 쏠 수 있도록 설정
-    canShoot = true;
+        // 쿨타임 종료 후 다시 총을 쏠 수 있도록 설정
+        canShoot = true;
 
     }
+
+
 
 // 플레이어의 위치와 체력을 저장하는 함수
     public void SavePlayerData(Vector3 position, int health)
@@ -676,6 +745,8 @@ public class PlayerMove : MonoBehaviour
         // 디버그 로그로 저장된 데이터 표시
         Debug.Log("Player data saved: Health=" + health);
     }
+
+
 
 // 저장된 플레이어 데이터를 불러오는 함수
     public void LoadPlayerData()
@@ -693,5 +764,7 @@ public class PlayerMove : MonoBehaviour
         // 디버그 로그로 불러온 데이터 표시
         Debug.Log("Player data loaded: Health=" + currentHealth);
     }
+
+
 
 }

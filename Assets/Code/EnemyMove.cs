@@ -57,6 +57,7 @@ public class EnemyMove : MonoBehaviour
 
     // Start is called before the first frame update
     private void Awake() {
+        hacked = false;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
@@ -68,6 +69,9 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(hacked==true){
+            StartCoroutine(ForceTurn(2f));
+        }
         //Move
        rigid.velocity = new Vector2(nextMove,rigid.velocity.y); //nextMove 에 0:멈춤 -1:왼쪽 1:오른쪽 으로 이동 
 
@@ -126,7 +130,6 @@ public class EnemyMove : MonoBehaviour
 
     public IEnumerator ForceTurn(float duration)
     {
-        hacked = true;
         spriteRenderer.color = new Color(1, 0, 0, 1f);
 
         // 방향을 반대로 바꾸는 로직을 추가
