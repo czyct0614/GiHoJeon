@@ -111,6 +111,8 @@ public class PlayerMove : MonoBehaviour
 
         playerCollider = GetComponent<Collider2D>();
 
+
+
         if (!playerExists)
         {
             playerExists = true;
@@ -120,6 +122,8 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
 
         maxHealth = 10;//최대체력
 
