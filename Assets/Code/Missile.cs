@@ -66,6 +66,9 @@ public class Missile : MonoBehaviour
                 else if(other.gameObject.name=="ExplodingEnemy"){
                     other.GetComponent<ExplodingEnemyMove>().TakeDamage(damageAmount);
                 }
+                else if(other.gameObject.name=="CurseEnemy"){
+                    other.GetComponent<CurseEnemyMove>().TakeDamage(damageAmount);
+                }
                 // 탄환 파괴
                 Destroy(gameObject);
             }

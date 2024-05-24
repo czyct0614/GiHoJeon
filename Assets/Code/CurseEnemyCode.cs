@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplodingEnemyMove : MonoBehaviour
+public class CurseEnemyMove : MonoBehaviour
 {
     public Transform target; // 플레이어의 Transform을 저장할 변수
     public float detectionRange = 10f; // 플레이어를 감지하는 범위
     public float speed = 5f; // 플레이어를 향해 이동하는 속도
-    public float explosionRadius = 2f; // 자폭 반경
-    public int explosionDamage = 5; // 자폭 피해량
+    public int CurseDamage = 2; // 자폭 피해량
 
     PortalManager portalManager;
     Rigidbody2D rigid;
@@ -55,6 +54,7 @@ public class ExplodingEnemyMove : MonoBehaviour
         if (portalManager != null) // portalManager가 null이 아닌지 확인합니다.
         {
             // 죽음 처리 로직
+            Curse();
             portalManager.MonsterDied(); // 포탈 매니저에 죽은 몬스터 수를 알림
             Destroy(gameObject); // 몬스터 오브젝트 파괴
             // 몬스터가 죽었음을 알리고 상태를 변경함
@@ -82,13 +82,7 @@ public class ExplodingEnemyMove : MonoBehaviour
         if (Vector2.Distance(transform.position, target.position) < detectionRange)
         {
             Vector2 direction = (target.position - transform.position).normalized;
-            rigid.velocity = new Vector2(direction.x * speed, rigid.velocity.y);
-
-            // 플레이어에게 도달하면 자폭
-            if (Vector2.Distance(transform.position, target.position) < 0.5f)
-            {
-                Explode();
-            }
+            rigid.velocity = new Vector2(-direction.x * speed, rigid.velocity.y);
         }
         else
         {
@@ -183,64 +177,7 @@ public class ExplodingEnemyMove : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void Explode()
-    {
-        // 자폭 효과를 추가하고 플레이어에게 피해를 줌
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
-        foreach (Collider2D nearbyObject in colliders)
-        {
-            if (nearbyObject.CompareTag("Player"))
-            {
-                playerHealth.TakeDamage(explosionDamage);
-            }
-
-            else if (nearbyObject.CompareTag("Monster"))
-            {
-                // 몬스터에게 대미지를 줌
-                if(nearbyObject.gameObject.name=="BOSS"){
-                    nearbyObject.GetComponent<BOSSMove>().TakeDamage(explosionDamage);
-                }
-                else if(nearbyObject.gameObject.name=="StrongEnemy"){
-                    nearbyObject.GetComponent<StrongEnemyMove>().TakeDamage(explosionDamage);
-                }
-                else if(nearbyObject.gameObject.name=="PStrongEnemy"){
-                    nearbyObject.GetComponent<PStrongEnemyMove>().TakeDamage(explosionDamage);
-                }
-                else if(nearbyObject.gameObject.name=="BaseEnemy"){
-                    nearbyObject.GetComponent<EnemyMove>().TakeDamage(explosionDamage);
-                }
-                else if(nearbyObject.gameObject.name=="PlatformEnemy"){
-                    nearbyObject.GetComponent<EnemyMove>().TakeDamage(explosionDamage);
-                }
-                else if(nearbyObject.gameObject.name=="ExplodingEnemy"){
-                    nearbyObject.GetComponent<ExplodingEnemyMove>().TakeDamage(explosionDamage);
-                }
-                else if(nearbyObject.gameObject.name=="CurseEnemy"){
-                    nearbyObject.GetComponent<CurseEnemyMove>().TakeDamage(explosionDamage);
-                }
-                // 탄환 파괴
-                Destroy(gameObject);
-            }
-
-        else if(nearbyObject.CompareTag("ShieldEnemy")){
-                    nearbyObject.GetComponent<ShieldEnemyMove>().TakeDamage(explosionDamage);
-                    Destroy(gameObject);
-                }
-
-        else if(nearbyObject.CompareTag("DashEnemy")){
-                    nearbyObject.GetComponent<DashEnemyMove>().TakeDamage(explosionDamage);
-                    Destroy(gameObject);
-                }
-        }
-
-        // 자폭 후 적 파괴
-        Die();
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        // 자폭 반경을 Scene 뷰에서 시각적으로 표시
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    void Curse(){
+        playerHealth.TakeDamage(CurseDamage);
     }
 }
