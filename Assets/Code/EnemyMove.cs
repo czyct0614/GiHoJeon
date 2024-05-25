@@ -130,6 +130,7 @@ public class EnemyMove : MonoBehaviour
 
     public IEnumerator ForceTurn(float duration)
     {
+        hacked = false;
         spriteRenderer.color = new Color(1, 0, 0, 1f);
 
         // 방향을 반대로 바꾸는 로직을 추가
@@ -145,7 +146,6 @@ public class EnemyMove : MonoBehaviour
         nextMove = nextMove * -1; // 방향을 다시 반대로 바꿈
         spriteRenderer.flipX = nextMove == 1;
         spriteRenderer.color = new Color(1, 1, 1, 1f); // 색상 복원
-        hacked = false;
     }
 
     public void OnDamaged(){ //몬스터가 데미지를 입었을때 

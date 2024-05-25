@@ -738,7 +738,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
-// 플레이어의 위치와 체력을 저장하는 함수
+// 플레이어의 체력을 저장하는 함수
     public void SavePlayerData(Vector3 position, int health)
     {
         // 플레이어의 체력을 저장
@@ -768,7 +768,4 @@ public class PlayerMove : MonoBehaviour
         // 디버그 로그로 불러온 데이터 표시
         Debug.Log("Player data loaded: Health=" + currentHealth);
     }
-
-
-
 }
