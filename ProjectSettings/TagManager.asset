@@ -25,6 +25,7 @@ TagManager:
   - DashEnemy
   - SkillSelectWindow
   - SelectedSkill
+  - Ladder
   layers:
   - Default
   - TransparentFX

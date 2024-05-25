@@ -51,7 +51,7 @@ public class Missile : MonoBehaviour
                 if(other.gameObject.name=="BOSS"){
                     other.GetComponent<BOSSMove>().TakeDamage(damageAmount);
                 }
-                else if(other.gameObject.name=="StrongEnemy"){
+                else if(other.gameObject.name=="StrongEnemy" || other.gameObject.name=="VeryStrongEnemy"){
                     other.GetComponent<StrongEnemyMove>().TakeDamage(damageAmount);
                 }
                 else if(other.gameObject.name=="PStrongEnemy"){
@@ -89,6 +89,7 @@ public class Missile : MonoBehaviour
                 !other.CompareTag("FlyingPlatform") && 
                 !other.CompareTag("Range") && 
                 !other.CompareTag("Skill") && 
+                !other.CompareTag("Ladder") && 
                 !other.CompareTag("Else")){
 
                     Destroy(gameObject);

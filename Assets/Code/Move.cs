@@ -48,6 +48,7 @@ public class PlayerMove : MonoBehaviour
     public float dashingCooldown=1f;//대쉬 쿨타임
     public float isFlipped;
     public float InvincibleDuration = 0.5f;//부활 무적시간
+    public float climbSpeed = 10f; // 사다리 오르기 속도
     public float shootCooldown;//장전시간
 
 
@@ -62,6 +63,7 @@ public class PlayerMove : MonoBehaviour
     private float CanJumpTime = 0.4f;
     public bool CanJump = true;
     public bool isSkillReady = false;
+    private bool isClimbing = false;
 
 
 
@@ -353,6 +355,8 @@ public class PlayerMove : MonoBehaviour
             StartCoroutine(EnableColliderAfterDelay(0.25f));
             StartCoroutine(JumpCoolTime(1f));
         }
+
+        Climb();
     }
 
 
@@ -399,7 +403,7 @@ public class PlayerMove : MonoBehaviour
         //rayHit는 여러개 맞더라도 처음 맞은 오브젝트의 정보만을 저장(?)
         if(!isDashing){ 
             
-            if(rayHit.collider == null){
+            if(rayHit.collider == null && !isClimbing){
                 animator.SetBool("IsJumping",true);
             
             }
@@ -407,6 +411,7 @@ public class PlayerMove : MonoBehaviour
 
         if(isDashing){
             animator.SetBool("IsJumping",false);
+            animator.SetBool("IsRunning",false);
             animator.SetBool("IsDashing",true);
         }
 
@@ -564,13 +569,6 @@ public class PlayerMove : MonoBehaviour
             //뒤집어졌는지
             isFlipped=Input.GetAxisRaw("Horizontal");
         }
-
-
-        if(isDashing){
-            animator.SetBool("IsRunning",false);
-            animator.SetBool("IsDashing",true);
-        }
-
     }
 
 
@@ -621,6 +619,8 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator Dash(){
 
         animator.SetBool("IsDashing",true);
+        animator.SetBool("IsRunning",false);
+        animator.SetBool("IsJumping",false);
 
         isInvincible = true;
 
@@ -631,7 +631,7 @@ public class PlayerMove : MonoBehaviour
         isDashing=true;
 
         //원래 중력 저장
-        float originalGravity=rigid.gravityScale;
+        float originalGravity=8f;
 
         //앞으로 대쉬하기 위해 중력 0으로 바꿈
         rigid.gravityScale=0f;
@@ -768,4 +768,50 @@ public class PlayerMove : MonoBehaviour
         // 디버그 로그로 불러온 데이터 표시
         Debug.Log("Player data loaded: Health=" + currentHealth);
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            isClimbing = true;
+            rigid.gravityScale = 0f; // 중력을 0으로 설정
+            rigid.velocity = new Vector2(rigid.velocity.x, 0f); // 현재 속도를 초기화
+            animator.SetBool("IsClimbing", true); // 애니메이션 설정
+            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsRunning", false);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            isClimbing = false;
+            rigid.gravityScale = 8f; // 중력을 원래대로 설정
+            animator.SetBool("IsClimbing", false); // 애니메이션 해제
+        }
+    }
+
+    void Climb()
+    {
+        if (isClimbing)
+        {
+            float vertical = Input.GetAxis("Vertical"); // 수직 입력값 가져오기
+            rigid.velocity = new Vector2(rigid.velocity.x, vertical * climbSpeed); // 사다리 오르기 속도 설정
+
+            if (Mathf.Abs(vertical) > 0.1f) // 사다리를 오르거나 내릴 때 애니메이션 설정
+            {
+                animator.speed = 1; // 애니메이션 재생 속도 정상
+            }
+            else
+            {
+                animator.speed = 0; // 애니메이션 정지
+            }
+        }
+        else
+        {
+            animator.speed = 1; // 사다리를 벗어나면 애니메이션 재생 속도 정상
+        }
+    }
+
 }
