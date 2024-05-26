@@ -90,6 +90,7 @@ public class Missile : MonoBehaviour
                 !other.CompareTag("Range") && 
                 !other.CompareTag("Skill") && 
                 !other.CompareTag("Ladder") && 
+                !other.CompareTag("SpawnPoint") && 
                 !other.CompareTag("Else")){
 
                     Destroy(gameObject);
