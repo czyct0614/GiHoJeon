@@ -65,6 +65,7 @@ public class PlayerMove : MonoBehaviour
     public bool CanJump = true;
     public bool isSkillReady = false;
     private bool isClimbing = false;
+    private bool velocityZero = false;
 
 
 
@@ -328,7 +329,7 @@ public class PlayerMove : MonoBehaviour
 
 
 //대쉬 코드
-        if(Input.GetButtonDown("Dash")&canDash){
+        if(Input.GetButtonDown("Dash") && canDash && !velocityZero){
             animator.SetBool("IsDashing",true);
             animator.SetBool("IsJumping",false);
             StartCoroutine(Dash());
@@ -392,7 +393,6 @@ public class PlayerMove : MonoBehaviour
         RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 2, LayerMask.GetMask("Platform"));
         //빔의 시작위치, 빔의 방향 , 1:distance , ( 빔에 맞은 오브젝트를 특정 레이어로 한정 지어야할 때 사용 ) // RaycastHit2D : Ray에 닿은 오브젝트 클래스 
     
-        //rayHit는 여러개 맞더라도 처음 맞은 오브젝트의 정보만을 저장(?)
         if(!isDashing){ 
             
             if(rayHit.collider == null && !isClimbing){
@@ -408,7 +408,7 @@ public class PlayerMove : MonoBehaviour
         }
 
 
-        if(rayHit.collider != null){ //빔을 맞은 오브젝트가 있을때  -> 맞지않으면 collider도 생성되지않음 
+        if(rayHit.collider != null){ //빔을 맞은 오브젝트가 있을때
 
             if(rayHit.distance < 2f)
                 
@@ -534,11 +534,15 @@ public class PlayerMove : MonoBehaviour
                 animator.SetBool("IsRunning",true);
             }
 
-            if(Input.GetButton("left") && Input.GetButton("right") && !animator.GetBool("IsJumping"))
+            if(Input.GetButton("left") && Input.GetButton("right"))
             {
                 
                 VelocityZero();
+                velocityZero = true;
 
+            }
+            else{
+                velocityZero = false;
             }
 
             //왼쪽 화살표를 누를때 왼쪽 보기/오른쪽 화살표 누를 때 오른쪽 보기

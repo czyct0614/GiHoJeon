@@ -21,9 +21,11 @@ public class DashEnemyMove : MonoBehaviour
     private bool isDead = false; // 몬스터가 죽었는지 여부를 나타내는 변수
     private bool isDashing = false; // 대쉬 중인지 여부
     private bool HisDashing = false; // 대쉬 중인지 여부
+    private bool isHackingInProgress = false; // 해킹 중인지 여부
     private Transform Gplayer;
 
     private GameObject dashRangeIndicator;
+    private Coroutine dashCoroutine; // 대쉬 코루틴 참조를 저장하기 위한 변수
 
     private void Start()
     {
@@ -74,6 +76,7 @@ public class DashEnemyMove : MonoBehaviour
     private void Awake()
     {
         hacked = false;
+        isHackingInProgress = false;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
@@ -82,9 +85,16 @@ public class DashEnemyMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(hacked==true){
-            StartCoroutine(DForceTurn(2f));
+        if (hacked && !isHackingInProgress)
+        {
+            StartCoroutine(DForceTurn());
         }
+
+        if (hacked){
+            // 대쉬 도중 해킹 발생시 현재 실행 중인 대쉬 중지
+            StopCoroutine(DashSequence());
+        }
+
         if (isDashing) return;
 
         // Move
@@ -107,13 +117,11 @@ public class DashEnemyMove : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, Gplayer.position);
 
-        if (distanceToPlayer <= detectionRange && !isDashing)
+        if (distanceToPlayer <= detectionRange && !isDashing && !hacked)
         {
             CancelInvoke(); // think를 잠시 멈춘 후 재실행
             Invoke("Think", 2f);
-            if(!hacked){
-                StartCoroutine(DashSequence());
-            }
+            StartDashSequence();
         }
     }
 
@@ -145,93 +153,6 @@ public class DashEnemyMove : MonoBehaviour
         Invoke("Think", 2);
     }
 
-    public IEnumerator DForceTurn(float duration)
-    {
-        spriteRenderer.color = new Color(1, 0, 0, 1f);
-
-        // 방향을 반대로 바꾸는 로직을 추가
-        nextMove = nextMove * -1; // 방향을 반대로 바꿈
-        spriteRenderer.flipX = nextMove == 1;
-
-        // 이동 속도를 반전된 방향으로 설정
-        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
-
-
-
-        HisDashing = true;
-        
-        // 현재 움직임 멈춤
-        rigid.velocity = Vector2.zero;
-        animator.SetInteger("WalkSpeed", 0);
-        CancelInvoke("Think"); // 대쉬 도중에는 Think 코루틴을 멈춥니다.
-
-        // 플레이어 위치 저장
-        Vector3 playerPosition = Gplayer.position;
-
-        // 범위 표시
-        dashRangeIndicator.SetActive(true);
-        dashRangeIndicator.transform.position = transform.position;
-
-        // 플레이어 방향으로 범위 표시
-        Vector3 dashDirection = (playerPosition - transform.position).normalized;
-        dashDirection.x = -dashDirection.x;
-        dashDirection.y = 0; // Y축 방향 제거
-        playerPosition.y = 0;
-        dashRangeIndicator.transform.rotation = Quaternion.FromToRotation(Vector3.right, playerPosition);
-        dashRangeIndicator.transform.localScale = new Vector2(dashRange, 1.5f);
-        dashRangeIndicator.transform.position += new Vector3(dashDirection.x, 0, 0);
-
-        // 빨간색으로 표시
-        SpriteRenderer dashRangeRenderer = dashRangeIndicator.GetComponent<SpriteRenderer>();
-        dashRangeRenderer.color = new Color(1, 0, 0, 0.5f);
-
-        yield return new WaitForSeconds(dashDelay);
-
-        dashRangeIndicator.SetActive(false);
-
-        // 돌진
-        float dashDistance = dashRange;
-        float dashTime = dashDistance / dashSpeed;
-
-        float elapsedTime = 0f;
-        Vector3 startingPosition = transform.position;
-
-        while (elapsedTime < dashTime)
-        {
-            transform.position = Vector3.Lerp(startingPosition, startingPosition + dashDirection * dashDistance, elapsedTime / dashTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.position = startingPosition + dashDirection * dashDistance;
-        HisDashing = false;
-
-        // 원래 방향으로 돌아감
-        nextMove = nextMove * -1; // 방향을 다시 반대로 바꿈
-        spriteRenderer.flipX = nextMove == 1;
-        spriteRenderer.color = new Color(0, 0, 1, 1f); // 색상 복원
-        hacked = false;
-    }
-
-    public void OnDamaged()
-    {
-        // 몬스터가 데미지를 입었을 때
-        // Sprite Alpha: 색상 변경
-        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
-
-        // Sprite Flip Y: 뒤집어지기
-        spriteRenderer.flipY = true;
-
-        // Collider Disable: 콜라이더 끄기
-        gameObject.GetComponent<BoxCollider2D>().enabled = false;
-
-        // Die Effect Jump: 아래로 추락(콜라이더 꺼서 바닥밑으로 추락함)
-        rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
-
-        // Destroy
-        Invoke("DeActive", 5);
-    }
-
     void DeActive()
     {
         gameObject.SetActive(false);
@@ -242,7 +163,12 @@ public class DashEnemyMove : MonoBehaviour
     {
         if (isDashing) return;
         if(!hacked){
-            StartCoroutine(DashSequence());
+            // 기존에 실행 중인 대쉬 코루틴이 있다면 중지하고 새로운 코루틴을 시작
+            if (dashCoroutine != null)
+            {
+                StopCoroutine(dashCoroutine);
+            }
+            dashCoroutine = StartCoroutine(DashSequence());
         }
     }
 
@@ -311,7 +237,66 @@ public class DashEnemyMove : MonoBehaviour
             yield return null;
         }
 
-        transform.position = startingPosition + dashDirection * dashDistance;
         isDashing = false;
+    }
+
+    public IEnumerator DForceTurn()
+    {
+
+        // 해킹 중일 때 중복 실행을 방지
+        if (isHackingInProgress) yield break;
+        isHackingInProgress = true;
+        
+        spriteRenderer.color = new Color(1, 0, 0, 1f);
+
+        HisDashing = true;
+        
+        // 현재 움직임 멈춤
+        rigid.velocity = Vector2.zero;
+        animator.SetInteger("WalkSpeed", 0);
+        CancelInvoke("Think"); // 대쉬 도중에는 Think 코루틴을 멈춥니다.
+
+        // 플레이어 위치 저장
+        Vector3 playerPosition = Gplayer.position;
+
+        // 범위 표시
+        dashRangeIndicator.SetActive(true);
+        dashRangeIndicator.transform.position = transform.position;
+
+        // !플레이어 방향으로 범위 표시
+        Vector3 dashDirection = (playerPosition - transform.position).normalized;
+        dashDirection.x = -dashDirection.x;
+        dashDirection.y = 0; // Y축 방향 제거
+        playerPosition.y = 0;
+        dashRangeIndicator.transform.rotation = Quaternion.FromToRotation(Vector3.right, playerPosition);
+        dashRangeIndicator.transform.localScale = new Vector2(dashRange, 1.5f);
+        dashRangeIndicator.transform.position += new Vector3(dashDirection.x, 0, 0);
+
+        // 빨간색으로 표시
+        SpriteRenderer dashRangeRenderer = dashRangeIndicator.GetComponent<SpriteRenderer>();
+        dashRangeRenderer.color = new Color(1, 0, 0, 0.5f);
+
+        yield return new WaitForSeconds(dashDelay);
+
+        dashRangeIndicator.SetActive(false);
+
+        // 돌진
+        float dashDistance = dashRange;
+        float dashTime = dashDistance / dashSpeed;
+
+        float elapsedTime = 0f;
+        Vector3 startingPosition = transform.position;
+
+        while (elapsedTime < dashTime)
+        {
+            transform.position = Vector3.Lerp(startingPosition, startingPosition + dashDirection * dashDistance, elapsedTime / dashTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        HisDashing = false;
+        spriteRenderer.color = new Color(0.1603774f, 0.1603774f, 0.1603774f, 1f); // 색상 복원
+        isHackingInProgress = false;
+        hacked = false;
     }
 }
