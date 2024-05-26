@@ -7,7 +7,7 @@ public class EnemyRangedAttack : MonoBehaviour
     public float projectileSpeed = 5f; // 발사체 속도
     public float attackCooldown = 2f; // 공격 쿨다운
     private bool canAttack = true; // 공격 가능 여부
-    private float attackRange = 20f;
+    public float attackRange = 20f;
     private Transform target; // 플레이어의 위치
 
     private void Start()

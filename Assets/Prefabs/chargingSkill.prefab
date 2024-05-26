@@ -172,10 +172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da0a71a8f04699a46a5853008f5fe3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 0
+  damageAmount: 3
   tr: {fileID: 662537265515735461}
   move: {fileID: 0}
   enemy: {fileID: 0}
+  Senemy: {fileID: 0}
+  Denemy: {fileID: 0}
 --- !u!96 &662537265515735461
 TrailRenderer:
   serializedVersion: 3

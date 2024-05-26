@@ -5,7 +5,7 @@ public class SkillBehavior : MonoBehaviour
 {
     private float lifetime = 5f;        // 미사일 수명 (초)
     public int damageAmount = 3;       // 탄환의 대미지량
-    public TrailRenderer tr;           // 대쉬 잔상을 남기는 트레일 렌더러
+    public TrailRenderer tr;           // 스킬 잔상을 남기는 트레일 렌더러
     public PlayerMove move;
     public EnemyMove enemy;
     public ShieldEnemyMove Senemy;
@@ -15,7 +15,7 @@ public class SkillBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 대쉬 잔상 초기에 비활성화
+        // 스킬 잔상 초기에 비활성화
         tr.emitting = false;
         move = ScriptFinder.FindScriptWithTag<PlayerMove>("Player");
         enemy = ScriptFinder.FindScriptWithTag<EnemyMove>("Monster");
@@ -26,13 +26,13 @@ public class SkillBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 대쉬 버튼이 눌렸을 때 미사일 파괴 코루틴 시작
+        // Charge 버튼이 눌렸을 때 미사일 파괴 코루틴 시작
         if (Input.GetButtonUp("Charge"))
         {
             StartCoroutine(DestroyMissile());
         }
 
-        // 대쉬 버튼이 눌리지 않은 경우 대쉬 잔상 활성화
+        // Charge 버튼이 눌리지 않은 경우 대쉬 잔상 활성화
         if (!Input.GetButton("Charge"))
         {
             tr.emitting = true;
@@ -68,31 +68,16 @@ public class SkillBehavior : MonoBehaviour
                 other.GetComponent<StrongEnemyMove>().TakeDamage(damageAmount);
             }
             else{
-                //Hacked();
                 other.GetComponent<EnemyMove>().TakeDamage(damageAmount);
             }
         }
         else if (other.gameObject.name == "ShieldEnemy1")
             {
-                //SHacked();
                 other.GetComponent<ShieldEnemyMove>().TakeDamage(damageAmount);
             }
         else if (other.gameObject.name == "DashEnemy")
             {
-                //DHacked();
                 other.GetComponent<DashEnemyMove>().TakeDamage(damageAmount);
             }
-    }
-
-    public void Hacked(){
-        StartCoroutine(enemy.ForceTurn(2f));
-    }
-
-    public void SHacked(){
-        StartCoroutine(Senemy.SForceTurn(2f));
-    }
-
-    public void DHacked(){
-        StartCoroutine(Denemy.DForceTurn(2f));
     }
 }
