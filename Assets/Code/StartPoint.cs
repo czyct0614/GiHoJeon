@@ -13,7 +13,7 @@ public class StartPoint : MonoBehaviour
         if (player != null)
         {
             player.transform.position = transform.position;
-            move.SetRespawn(transform.position);
+            move.LastPoint();
             move.Revival();
             
         }

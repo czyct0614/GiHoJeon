@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour
 
 
     public int maxHealth = 10;//최대체력
-    private int currentHealth = 10;//현재체력
+    public int currentHealth = 10;//현재체력
 
 
 
@@ -50,6 +50,7 @@ public class PlayerMove : MonoBehaviour
     public float InvincibleDuration = 0.5f;//부활 무적시간
     public float climbSpeed = 10f; // 사다리 오르기 속도
     public float shootCooldown;//장전시간
+    public Vector2 lastSpawnPoint;
 
 
 
@@ -69,11 +70,6 @@ public class PlayerMove : MonoBehaviour
 
     Vector2 originPos = new Vector2();//스폰포인트
     
-    
-    
-    public Transform respawnPoint;//리스폰포인트
-
-
 
     private Collider2D playerCollider;
     public bool playerOnPlatform = false;
@@ -165,6 +161,9 @@ public class PlayerMove : MonoBehaviour
 //업데이트 함수
     void Update(){
 
+        lastSpawnPoint = PlayerRoomManager.Instance.GetLastTouchedSpawnPoint();
+
+        ChangeHealthBarAmount();
 
 
 //스킬 불러오기
@@ -172,13 +171,6 @@ public class PlayerMove : MonoBehaviour
             skillimage = GameObject.FindGameObjectWithTag("SelectedSkill").GetComponent<SkillImage>();
         }
         isSkillReady=skillimage.isSkillReady;
-
-
-
-//리스폰포인트 불러오기
-        if(respawnPoint==null){
-            respawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").GetComponent<Transform>();
-        }
 
 
 
@@ -457,22 +449,6 @@ public class PlayerMove : MonoBehaviour
 
 
 
-//스폰포인트 함수
-    public void SetRespawn(Vector3 position){
-
-        respawnPoint.position=position;
-
-    }
-
-
-
-//스폰포인트 시작 함수
-    public void GoToSpawnPoint(){
-        transform.position=respawnPoint.position;
-    }
-
-
-
 //부활 함수
     public void Revival(){
 
@@ -487,11 +463,11 @@ public class PlayerMove : MonoBehaviour
 
         MakeInvincible();
 
-        if(respawnPoint==null){
+        if(lastSpawnPoint==null){
             transform.position=new Vector3(0,0,0);
         }
         else{
-            transform.position=respawnPoint.position;
+            transform.position=lastSpawnPoint;
         }
 
         //죽을수 있게
@@ -518,6 +494,8 @@ public class PlayerMove : MonoBehaviour
 
         //체력바 초기화
         ChangeHealthBarAmount();
+
+        ChangeChargeBarAmount(0f,1f);
 
     }
 
@@ -670,7 +648,7 @@ public class PlayerMove : MonoBehaviour
 //체력게이지 함수
     private void ChangeHealthBarAmount(){//* HP 게이지 변경
         if(HPbarImage != null){
-        HPbarImage.fillAmount = (float)currentHealth/maxHealth;
+            HPbarImage.fillAmount = (float)currentHealth/maxHealth;
         }
     }
 
@@ -743,11 +721,13 @@ public class PlayerMove : MonoBehaviour
     {
         // 플레이어의 체력을 저장
         PlayerPrefs.SetInt("PlayerHealth", health);
+        lastSpawnPoint = PlayerRoomManager.Instance.GetLastTouchedSpawnPoint();
 
         // 변경 사항을 저장
         PlayerPrefs.Save();
         // 디버그 로그로 저장된 데이터 표시
-        Debug.Log("Player data saved: Health=" + health);
+        Debug.Log("Player data saved: Health=" + currentHealth + "\n" +
+                  "Last SavePoint :" + lastSpawnPoint);
     }
 
 
@@ -763,10 +743,13 @@ public class PlayerMove : MonoBehaviour
         if (player != null)
         {
             ChangeHealthBarAmount();
+            ChangeChargeBarAmount(0f,1f);
+            LastPoint();
         }
 
         // 디버그 로그로 불러온 데이터 표시
-        Debug.Log("Player data loaded: Health=" + currentHealth);
+        Debug.Log("Player data loaded: Health=" + currentHealth + "\n" +
+                  "Last SavePoint :" + lastSpawnPoint);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -812,6 +795,10 @@ public class PlayerMove : MonoBehaviour
         {
             animator.speed = 1; // 사다리를 벗어나면 애니메이션 재생 속도 정상
         }
+    }
+
+    public void LastPoint(){
+        player.transform.position = lastSpawnPoint;
     }
 
 }

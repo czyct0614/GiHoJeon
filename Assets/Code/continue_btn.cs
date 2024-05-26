@@ -19,7 +19,7 @@ public class continue_btn : MonoBehaviour
         {
             sceneController.LoadScene("SampleScene");
             sceneController.LoadScene(currentMap); // 씬 이동 처리
-            player.GetComponent<PlayerMove>().GoToSpawnPoint();
+            player.GetComponent<PlayerMove>().LastPoint();
         }
     }
 }
