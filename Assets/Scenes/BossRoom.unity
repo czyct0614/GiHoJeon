@@ -910,6 +910,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BOSS
       objectReference: {fileID: 0}
+    - target: {fileID: 6459611656960668612, guid: 4971b2bf10bb8854db3cf79cc4bf6c22, type: 3}
+      propertyPath: m_TagString
+      value: BOSS
+      objectReference: {fileID: 0}
     - target: {fileID: 7550271644349470872, guid: 4971b2bf10bb8854db3cf79cc4bf6c22, type: 3}
       propertyPath: m_LocalScale.x
       value: 20

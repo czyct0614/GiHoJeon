@@ -26,6 +26,15 @@ TagManager:
   - SkillSelectWindow
   - SelectedSkill
   - Ladder
+  - StrongEnemy
+  - VeryStrongEnemy
+  - PStrongEnemy
+  - TurretEnemy
+  - Enemy
+  - PlatformEnemy
+  - ExplodingEnemy
+  - CurseEnemy
+  - BOSS
   layers:
   - Default
   - TransparentFX
