@@ -1572,7 +1572,7 @@ GameObject:
   - component: {fileID: 341022927}
   m_Layer: 0
   m_Name: StrongEnemy
-  m_TagString: Monster
+  m_TagString: StrongEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2288,6 +2288,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
+      propertyPath: m_TagString
+      value: CurseEnemy
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9172075427735769792, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
     - {fileID: 1571452034499325421, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
@@ -2900,6 +2904,10 @@ PrefabInstance:
     - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
+      propertyPath: m_TagString
+      value: ExplodingEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9172075427735769792, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
@@ -7831,7 +7839,7 @@ GameObject:
   - component: {fileID: 883495287}
   m_Layer: 0
   m_Name: VeryStrongEnemy
-  m_TagString: Monster
+  m_TagString: VeryStrongEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8521,7 +8529,7 @@ GameObject:
   - component: {fileID: 1090900556}
   m_Layer: 0
   m_Name: PStrongEnemy
-  m_TagString: Monster
+  m_TagString: PStrongEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15029,7 +15037,7 @@ GameObject:
   - component: {fileID: 2015321688}
   m_Layer: 0
   m_Name: Turret
-  m_TagString: Monster
+  m_TagString: TurretEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15717,6 +15725,10 @@ PrefabInstance:
     - target: {fileID: 3131274113206295942, guid: 7f00c6fd649cb124489dfbbccb082710, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131274113206295942, guid: 7f00c6fd649cb124489dfbbccb082710, type: 3}
+      propertyPath: m_TagString
+      value: PlatformEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16493,6 +16505,10 @@ PrefabInstance:
     - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

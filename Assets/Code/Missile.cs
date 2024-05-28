@@ -43,38 +43,35 @@ public class Missile : MonoBehaviour
         if (other.CompareTag("Shield")){
             Destroy(gameObject);
         }
-
-        // 충돌한 오브젝트가 몬스터인 경우
-        else if (other.CompareTag("Monster"))
-            {
-                // 몬스터에게 대미지를 줌
-                if(other.gameObject.name=="BOSS"){
-                    other.GetComponent<BOSSMove>().TakeDamage(damageAmount);
-                }
-                else if(other.gameObject.name=="StrongEnemy" || other.gameObject.name=="VeryStrongEnemy"){
-                    other.GetComponent<StrongEnemyMove>().TakeDamage(damageAmount);
-                }
-                else if(other.gameObject.name=="PStrongEnemy"){
-                    other.GetComponent<PStrongEnemyMove>().TakeDamage(damageAmount);
-                }
-                else if(other.gameObject.name=="BaseEnemy"){
-                    other.GetComponent<EnemyMove>().TakeDamage(damageAmount);
-                }
-                else if(other.gameObject.name=="PlatformEnemy"){
-                    other.GetComponent<EnemyMove>().TakeDamage(damageAmount);
-                }
-                else if(other.gameObject.name=="ExplodingEnemy"){
-                    other.GetComponent<ExplodingEnemyMove>().TakeDamage(damageAmount);
-                }
-                else if(other.gameObject.name=="CurseEnemy"){
-                    other.GetComponent<CurseEnemyMove>().TakeDamage(damageAmount);
-                }
-                else if(other.gameObject.name=="Turret"){
-                    other.GetComponent<TurretMove>().TakeDamage(damageAmount);
-                }
-                // 탄환 파괴
-                Destroy(gameObject);
-            }
+        // 몬스터에게 대미지를 줌
+        if(other.CompareTag("BOSS")){
+            other.GetComponent<BOSSMove>().TakeDamage(damageAmount);
+            Destroy(gameObject);
+        }
+        else if(other.CompareTag("StrongEnemy") || other.CompareTag("VeryStrongEnemy")){
+            other.GetComponent<StrongEnemyMove>().TakeDamage(damageAmount);
+            Destroy(gameObject);
+        }
+        else if(other.CompareTag("PStrongEnemy")){
+            other.GetComponent<PStrongEnemyMove>().TakeDamage(damageAmount);
+            Destroy(gameObject);
+        }
+        else if(other.CompareTag("Enemy") || other.CompareTag("PlatformEnemy")){
+            other.GetComponent<EnemyMove>().TakeDamage(damageAmount);
+            Destroy(gameObject);
+        }
+        else if(other.CompareTag("ExplodingEnemy")){
+            other.GetComponent<ExplodingEnemyMove>().TakeDamage(damageAmount);
+            Destroy(gameObject);
+        }
+        else if(other.CompareTag("CurseEnemy")){
+            other.GetComponent<CurseEnemyMove>().TakeDamage(damageAmount);
+            Destroy(gameObject);
+        }
+        else if(other.CompareTag("TurretEnemy")){
+            other.GetComponent<TurretMove>().TakeDamage(damageAmount);
+            Destroy(gameObject);
+        }
 
         else if(other.CompareTag("ShieldEnemy")){
                     other.GetComponent<ShieldEnemyMove>().TakeDamage(damageAmount);
