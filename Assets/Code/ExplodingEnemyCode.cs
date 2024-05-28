@@ -56,6 +56,11 @@ public class ExplodingEnemyMove : MonoBehaviour
         {
             // 죽음 처리 로직
             portalManager.MonsterDied(); // 포탈 매니저에 죽은 몬스터 수를 알림
+            // 마나 드롭
+            if (manaPrefab != null)
+            {
+                Instantiate(manaPrefab, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject); // 몬스터 오브젝트 파괴
             // 몬스터가 죽었음을 알리고 상태를 변경함
             isDead = true;
