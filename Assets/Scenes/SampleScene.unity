@@ -1572,7 +1572,7 @@ GameObject:
   - component: {fileID: 341022927}
   m_Layer: 0
   m_Name: StrongEnemy
-  m_TagString: Monster
+  m_TagString: StrongEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1915,7 +1915,7 @@ Transform:
   m_GameObject: {fileID: 372458806}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.371252, y: 0.86137795, z: 0.043737434}
+  m_LocalPosition: {x: 26.371252, y: 3, z: 0.043737434}
   m_LocalScale: {x: 10, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2287,6 +2287,10 @@ PrefabInstance:
     - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
+      propertyPath: m_TagString
+      value: CurseEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9172075427735769792, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
@@ -2704,7 +2708,7 @@ Transform:
   m_GameObject: {fileID: 788427176}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1887476, y: -2.161378, z: -0.043737434}
+  m_LocalPosition: {x: 1, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2900,6 +2904,10 @@ PrefabInstance:
     - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
+      propertyPath: m_TagString
+      value: ExplodingEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9172075427735769792, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
@@ -7831,7 +7839,7 @@ GameObject:
   - component: {fileID: 883495287}
   m_Layer: 0
   m_Name: VeryStrongEnemy
-  m_TagString: Monster
+  m_TagString: VeryStrongEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8085,7 +8093,7 @@ Transform:
   m_GameObject: {fileID: 911718485}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1887476, y: -2.161378, z: -0.043737434}
+  m_LocalPosition: {x: 1, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8433,11 +8441,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2767965356217246868, guid: 7eb4044b902fff14392c4b56a9d794df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.838622
+      value: -7.8
       objectReference: {fileID: 0}
     - target: {fileID: 2767965356217246868, guid: 7eb4044b902fff14392c4b56a9d794df, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.043737434
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2767965356217246868, guid: 7eb4044b902fff14392c4b56a9d794df, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8521,7 +8529,7 @@ GameObject:
   - component: {fileID: 1090900556}
   m_Layer: 0
   m_Name: PStrongEnemy
-  m_TagString: Monster
+  m_TagString: PStrongEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8869,7 +8877,7 @@ Transform:
   m_GameObject: {fileID: 1228457412}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.371252, y: -3.9086223, z: 0.043737434}
+  m_LocalPosition: {x: 26.371252, y: -2, z: 0.043737434}
   m_LocalScale: {x: 10, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14542,7 +14550,7 @@ Transform:
   m_GameObject: {fileID: 1860657464}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1887476, y: -2.161378, z: -0.043737434}
+  m_LocalPosition: {x: 1, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15029,7 +15037,7 @@ GameObject:
   - component: {fileID: 2015321688}
   m_Layer: 0
   m_Name: Turret
-  m_TagString: Monster
+  m_TagString: TurretEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15043,7 +15051,7 @@ Transform:
   m_GameObject: {fileID: 2015321680}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26, y: 2.3, z: 0}
+  m_LocalPosition: {x: 26, y: 4.4, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15718,6 +15726,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3131274113206295942, guid: 7f00c6fd649cb124489dfbbccb082710, type: 3}
+      propertyPath: m_TagString
+      value: PlatformEnemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16365,16 +16377,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 911718486}
     m_Modifications:
     - target: {fileID: 2767965356217246868, guid: 7eb4044b902fff14392c4b56a9d794df, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2767965356217246868, guid: 7eb4044b902fff14392c4b56a9d794df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1887476
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2767965356217246868, guid: 7eb4044b902fff14392c4b56a9d794df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.838622
+      value: -7.8
       objectReference: {fileID: 0}
     - target: {fileID: 2767965356217246868, guid: 7eb4044b902fff14392c4b56a9d794df, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.043737434
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2767965356217246868, guid: 7eb4044b902fff14392c4b56a9d794df, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16493,6 +16509,10 @@ PrefabInstance:
     - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758629859171232808, guid: dc871e037528c604baae6dd1357dd0a1, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

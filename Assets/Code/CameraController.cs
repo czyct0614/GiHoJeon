@@ -11,12 +11,16 @@ public class CameraFollow : MonoBehaviour {
     private Transform player; // 플레이어의 Transform
     public Vector3 OriginalPosition;
 
-    private RoomBounds? currentRoomBounds = null; // 현재 방의 경계를 저장하는 변수
+    public RoomBounds? currentRoomBounds = null; // 현재 방의 경계를 저장하는 변수
     private bool isFollowing = true;
 
     private void Awake() {
         DontDestroyOnLoad(gameObject); // 다른 맵에서 없어지지 않게 해줌
-        Instance = this;
+        if (Instance == null) {
+            Instance = this;
+        } else {
+            Destroy(gameObject);
+        }
     }
 
     private void Start() {
@@ -40,11 +44,17 @@ public class CameraFollow : MonoBehaviour {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null) {
             player = playerObject.transform;
-        } 
+        }
     }
 
     private void FixedUpdate() {
-        if (player != null && currentRoomBounds.HasValue) {
+        FindPlayer();
+
+        if (SceneManager.GetActiveScene().name == "StartScene") {
+            Debug.Log("a");
+            transform.position = new Vector3(0, -3, -10);
+        } else if (player != null && currentRoomBounds.HasValue) {
+            Debug.Log("b");
             // 캐릭터와 카메라의 거리 계산
             float verticalOffset = player.position.y - transform.position.y;
             float horizontalOffset = player.position.x - transform.position.x;
@@ -56,6 +66,9 @@ public class CameraFollow : MonoBehaviour {
 
             UpdateCameraPosition(horizontalOffset);
             OriginalPosition = transform.position;
+        } else {
+            Debug.Log("currentRoomBounds.HasValue: " + currentRoomBounds.HasValue);
+            Debug.Log("Current room name: " + GetCurrentRoomName());
         }
     }
 
@@ -92,11 +105,15 @@ public class CameraFollow : MonoBehaviour {
     }
 
     public void SetCurrentRoom(RoomBounds bounds) {
+        Debug.Log("SetCurrentRoom called with bounds: " + bounds.roomName);
         currentRoomBounds = bounds;
+        Debug.Log("currentRoomBounds.HasValue: " + currentRoomBounds.HasValue);
         isFollowing = true;
+        Debug.Log("Current room name after setting: " + GetCurrentRoomName());
     }
 
     public void ClearCurrentRoom() {
+        Debug.Log("ClearCurrentRoom called");
         currentRoomBounds = null;
         isFollowing = true;
     }

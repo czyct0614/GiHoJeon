@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//앨랠래 속 냉장고
 //이동 - A/D
 //멈추기 - Left Shift
 //가속 - Ctrl
@@ -51,7 +50,7 @@ public class PlayerMove : MonoBehaviour
     public float climbSpeed = 10f; // 사다리 오르기 속도
     public float shootCooldown;//장전시간
     public Vector2 lastSpawnPoint;
-
+    public string NowMap;
 
 
     public bool Dead=false;
@@ -87,6 +86,8 @@ public class PlayerMove : MonoBehaviour
 
 //시작 함수
     void Awake() {
+
+        NowMap=SceneManager.GetActiveScene().name;
 
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -162,6 +163,41 @@ public class PlayerMove : MonoBehaviour
 //업데이트 함수
     void Update(){
 
+
+        if(NowMap!=SceneManager.GetActiveScene().name)
+        {
+
+            if (SceneManager.GetActiveScene().name == "StartScene")
+            {
+
+                transform.position = new Vector3(0,-3,-10);
+
+                rigid.gravityScale = 0f;
+
+                isDying=true;
+
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x,transform.position.y,0f);
+                rigid.gravityScale = 8f;
+
+                isDying=false;
+            }
+            
+            NowMap=SceneManager.GetActiveScene().name;
+
+        }
+    
+
+
+//죽고있을떄 다른 행동 못하게
+        if(isDying){
+            return;
+        }
+
+
+
         lastSpawnPoint = PlayerRoomManager.Instance.GetLastTouchedSpawnPoint();
 
         ChangeHealthBarAmount();
@@ -217,10 +253,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
-//죽고있을떄 다른 행동 못하게
-        if(isDying){
-            return;
-        }
+
 
 
 
@@ -756,7 +789,7 @@ public class PlayerMove : MonoBehaviour
                   "Last SavePoint :" + lastSpawnPoint);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Ladder"))
         {
