@@ -26,6 +26,7 @@ public class DashEnemyMove : MonoBehaviour
 
     private GameObject dashRangeIndicator;
     private Coroutine dashCoroutine; // 대쉬 코루틴 참조를 저장하기 위한 변수
+    public GameObject manaPrefab; // 마나 프리팹
 
     private void Start()
     {

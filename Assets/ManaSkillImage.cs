@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Reflection;
 
-public class SkillImage : MonoBehaviour
+public class ManaSkillImage : MonoBehaviour
 {
 
 
@@ -635,3 +635,4 @@ public class SkillImage : MonoBehaviour
 
 
 }
+*/

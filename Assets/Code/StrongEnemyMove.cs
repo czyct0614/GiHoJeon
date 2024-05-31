@@ -14,6 +14,7 @@ public class StrongEnemyMove : MonoBehaviour
     public int maxHealth = 3; // 몬스터의 최대 체력
     private int currentHealth; // 현재 체력
     private bool isDead = false; // 몬스터가 죽었는지 여부를 나타내는 변수
+    public GameObject manaPrefab; // 마나 프리팹
     
     private void Start()
     {

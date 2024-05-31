@@ -21,6 +21,7 @@ public class ExplodingEnemyMove : MonoBehaviour
     private int currentHealth; // 현재 체력
     private bool isDead = false; // 몬스터가 죽었는지 여부를 나타내는 변수
     private PlayerMove playerHealth; // 플레이어의 체력을 관리하는 스크립트
+    public GameObject manaPrefab; // 마나 프리팹
 
     private void Start()
     {
