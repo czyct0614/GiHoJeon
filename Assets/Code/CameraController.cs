@@ -51,10 +51,10 @@ public class CameraFollow : MonoBehaviour {
         FindPlayer();
 
         if (SceneManager.GetActiveScene().name == "StartScene") {
-            Debug.Log("a");
+            //Debug.Log("a");
             transform.position = new Vector3(0, -3, -10);
         } else if (player != null && currentRoomBounds.HasValue) {
-            Debug.Log("b");
+            //Debug.Log("b");
             // 캐릭터와 카메라의 거리 계산
             float verticalOffset = player.position.y - transform.position.y;
             float horizontalOffset = player.position.x - transform.position.x;

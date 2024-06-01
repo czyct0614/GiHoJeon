@@ -23,8 +23,8 @@ public class Start_btn : MonoBehaviour
 
     public void GameStart(){
         // 지정한 씬으로 이동합니다.
-        GM.SaveCurrentMap("SampleScene");
-        sceneController.LoadScene("SampleScene");
+        GM.SaveCurrentMap(transferMapName);
+        sceneController.LoadScene(transferMapName);
         player.GetComponent<PlayerMove>().Revival();
 
     }

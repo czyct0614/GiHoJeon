@@ -163,6 +163,10 @@ public class PlayerMove : MonoBehaviour
 //업데이트 함수
     void Update(){
 
+        if (Input.GetMouseButtonDown(0)) {
+            Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Debug.Log("Clicked position: " + clickPosition);
+        }
 
         if(NowMap!=SceneManager.GetActiveScene().name)
         {
