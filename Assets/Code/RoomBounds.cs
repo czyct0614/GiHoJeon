@@ -1,8 +1,8 @@
 [System.Serializable]
 public struct RoomBounds {
     public string roomName;
-    public float minX;
-    public float maxX;
-    public float minY;
-    public float maxY;
+    public float CenterX;
+    public float CenterY;
+    public float MapSizeX;
+    public float MapSizeY;
 }

@@ -20,14 +20,14 @@ public class RoomCode : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             Debug.Log("Player entered room: " + roomBounds.roomName);
-            CameraFollow.Instance.SetCurrentRoom(roomBounds);
+            CameraController.Instance.SetCurrentRoom(roomBounds);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            if (CameraFollow.Instance.GetCurrentRoomName() == roomBounds.roomName) {
-                CameraFollow.Instance.ClearCurrentRoom();
+            if (CameraController.Instance.GetCurrentRoomName() == roomBounds.roomName) {
+                CameraController.Instance.ClearCurrentRoom();
             }
         }
     }
