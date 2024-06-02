@@ -76,9 +76,10 @@ public class CameraFollow : MonoBehaviour {
         RoomBounds bounds = currentRoomBounds.Value;
 
         if (isFollowing) {
-            // 카메라 이동
-            Vector3 targetPosition = new Vector3(transform.position.x, player.position.y - maxVerticalOffset, transform.position.z);
-            transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing);
+
+            // x축 이동 처리
+            Vector3 horizontalTargetPosition = new Vector3(player.position.x, transform.position.y, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, horizontalTargetPosition, smoothing);
 
             // 카메라가 방의 경계를 넘어가지 않도록 함
             if (transform.position.y > bounds.maxY) {
@@ -93,15 +94,21 @@ public class CameraFollow : MonoBehaviour {
                 transform.position = new Vector3(bounds.maxX, transform.position.y, transform.position.z);
                 isFollowing = false;
             }
+            else{
+                isFollowing = true;
+            }
             if (transform.position.x < bounds.minX) {
                 transform.position = new Vector3(bounds.minX, transform.position.y, transform.position.z);
                 isFollowing = false;
             }
-        }
+            else{
+                isFollowing = true;
+            }
 
-        // x축 이동 처리
-        Vector3 horizontalTargetPosition = new Vector3(player.position.x, transform.position.y, transform.position.z);
-        transform.position = Vector3.Lerp(transform.position, horizontalTargetPosition, smoothing);
+            // 카메라 이동
+            Vector3 targetPosition = new Vector3(transform.position.x, player.position.y - maxVerticalOffset, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing);
+        }
     }
 
     public void SetCurrentRoom(RoomBounds bounds) {
