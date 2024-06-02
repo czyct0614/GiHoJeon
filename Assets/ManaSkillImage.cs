@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -72,13 +72,14 @@ public class ManaSkillImage : MonoBehaviour
 
 
     // 마나 관련 변수
-    public float maxMana = 100f;
-    private float currentMana;
-    public float manaRecoveryRate = 5f; // 초당 회복되는 마나 양
-    public float skill1ManaCost = 20f;
-    public float skill2ManaCost = 30f;
-    public float skill3ManaCost = 40f;
-    public float ultimateSkillManaCost = 50f;
+    public float MaxMana = 100f;
+    private float CurrentMana;
+    public float ManaRecoveryRate = 15f; // 초당 회복되는 마나 양
+    public float Skill1ManaCost = 20f;
+    public float Skill2ManaCost = 30f;
+    public float Skill3ManaCost = 40f;
+    public float UltimateSkillManaCost = 50f;
+    public Image ManaBar;
 
 
 
@@ -90,6 +91,11 @@ public class ManaSkillImage : MonoBehaviour
 
     //플레이어 죽음시 스킬 초기화
     public PlayerMove move;
+
+
+
+    public GameObject chargeBarPrefab;
+    private GameObject chargeBarInstance;
 
 
 
@@ -119,8 +125,14 @@ public class ManaSkillImage : MonoBehaviour
         move=ScriptFinder.FindScriptWithTag<PlayerMove>("Player");
 
 
+
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // 플레이어의 머리 위치 찾기
+
+
+        ManaRecoveryRate = 15f;
+
         // 초기 마나 설정
-        currentMana = maxMana;
+        CurrentMana = MaxMana;
         UpdateManaUI();
         
         
@@ -129,6 +141,9 @@ public class ManaSkillImage : MonoBehaviour
     // LateUpdate에서 UI의 위치를 조정하고 스킬 발동 및 쿨타임을 관리합니다.
     void LateUpdate()
     {
+
+        
+        UpdateManaUI();
 
 
         RecoverMana();
@@ -143,12 +158,11 @@ public class ManaSkillImage : MonoBehaviour
 
 
 
-        move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime); // 충전 바 UI 업데이트
-        
         
         
         // 스킬이 준비되어 있을 때만 스킬을 사용할 수 있도록 합니다.
-        if(spriteRenderer.sprite == newSprite1&&Skill1SkillReady){
+        if(spriteRenderer.sprite == newSprite1&&Skill1SkillReady&&CurrentMana>Skill1ManaCost){
+            
 
 
 
@@ -159,7 +173,7 @@ public class ManaSkillImage : MonoBehaviour
 
                 Skill1CurrentChargeTime=0f;
 
-                move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime);
+                RemoveChargeBar();
 
                 Skill1DoCharge=false;
             }
@@ -169,7 +183,8 @@ public class ManaSkillImage : MonoBehaviour
             // 발사 버튼이 눌렸을 때
             if (Input.GetButtonDown("Charge") && Skill1SkillReady)
             {
-                
+                CreateChargeBar();
+
                 Skill1DoCharge=true;
 
                 Skill1CurrentChargeTime = 0f; // 충전 시간 초기화
@@ -207,6 +222,8 @@ public class ManaSkillImage : MonoBehaviour
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
                 Skill1CurrentProjectile.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+                ChangeChargeBarAmount(Skill1CurrentChargeTime,Skill1MaxChargeTime);
             }
 
 
@@ -214,7 +231,7 @@ public class ManaSkillImage : MonoBehaviour
             // 발사 버튼이 떼졌을 때
             if (Input.GetButtonUp("Charge") && Skill1CurrentProjectile != null)
             {
-
+                UseMana(Skill1ManaCost);
                 Skill1DoCharge=false;
 
                 // 발사체 방향 설정
@@ -239,7 +256,7 @@ public class ManaSkillImage : MonoBehaviour
 
                 Skill1CurrentChargeTime = 0f;
 
-                move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime);
+                RemoveChargeBar();
             }
 
 
@@ -249,13 +266,15 @@ public class ManaSkillImage : MonoBehaviour
 
 
     // 스킬이 준비되어 있을 때만 스킬을 사용할 수 있도록 합니다.
-        if(spriteRenderer.sprite == newSprite2 && Skill2SkillReady){
+        if(spriteRenderer.sprite == newSprite2 && Skill2SkillReady&&CurrentMana>Skill2ManaCost){
 
             if(Input.GetButtonDown("Charge")){
 
                 CastHackSkill();
 
                 Skill2LeftCoolDown = Skill2CoolDown;
+
+                UseMana(Skill2ManaCost);
 
                 StartCoroutine(Skill2CoolDownCount());
 
@@ -520,6 +539,7 @@ public class ManaSkillImage : MonoBehaviour
         {
 
             case 1:
+            Debug.Log(Skill1LeftCoolDown);
                 yield return new WaitForSeconds(Skill1LeftCoolDown);
 
                 Skill1SkillReady=true;
@@ -605,10 +625,10 @@ public class ManaSkillImage : MonoBehaviour
     void UseMana(float amount)
     {
         // 마나 소비
-        currentMana -= amount;
-        if (currentMana < 0)
+        CurrentMana -= amount;
+        if (CurrentMana < 0)
         {
-            currentMana = 0;
+            CurrentMana = 0;
         }
 
         // UI 업데이트
@@ -618,21 +638,53 @@ public class ManaSkillImage : MonoBehaviour
     void RecoverMana()
     {
         // 마나 회복
-        currentMana += manaRecoveryRate * Time.deltaTime;
-        currentMana = Mathf.Clamp(currentMana, 0, maxMana); // 마나가 최대치를 넘지 않도록 클램핑
+        CurrentMana += ManaRecoveryRate * Time.deltaTime;
+        CurrentMana = Mathf.Clamp(CurrentMana, 0, MaxMana); // 마나가 최대치를 넘지 않도록 클램핑
 
         // UI 업데이트
         UpdateManaUI();
     }
 
+
     void UpdateManaUI()
     {
-        if (manaSlider != null)
+        if (ManaBar != null)
         {
-            manaSlider.value = currentMana / maxMana;
+            ManaBar.fillAmount = CurrentMana / MaxMana;
+
+        }else{
+            Debug.Log("a");
         }
-}
+    }
 
 
+    void CreateChargeBar()
+    {
+        chargeBarInstance = Instantiate(chargeBarPrefab, playerTransform.position, Quaternion.identity);
+    }
+
+    public void ChangeChargeBarAmount(float currentAmount, float maxAmount)
+    {
+        if (chargeBarInstance != null)
+        {
+            Transform imageTransform = chargeBarInstance.transform.Find("Image");
+            if (imageTransform != null)
+            {
+                Image chargeBarImage = imageTransform.GetComponent<Image>();
+                if (chargeBarImage != null)
+                {
+                    chargeBarImage.fillAmount = currentAmount / maxAmount;
+                }
+            }
+        }
+    }
+
+    public void RemoveChargeBar()
+    {
+        if (chargeBarInstance != null)
+        {
+            Destroy(chargeBarInstance); // 차지바 제거
+        }
+    }
+
 }
-*/

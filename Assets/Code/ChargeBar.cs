@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ChargeBar : MonoBehaviour
 {
-   public Transform CameraTransform;
+   public Transform PlayerTransform;
     // Start is called before the first frame update
     void Start()
     {
-        CameraTransform=GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
+        PlayerTransform=GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -20,6 +20,6 @@ public class ChargeBar : MonoBehaviour
     void LateUpdate()
     {
         // 플레이어의 위치를 기준으로 UI의 위치를 조정
-        transform.position = new Vector3(CameraTransform.position.x, CameraTransform.position.y-9.5f,CameraTransform.position.z+10f);
+        transform.position = new Vector3(PlayerTransform.position.x, PlayerTransform.position.y+3f,PlayerTransform.position.z);
     }
 }

@@ -67,8 +67,8 @@ public class CameraFollow : MonoBehaviour {
             UpdateCameraPosition(horizontalOffset);
             OriginalPosition = transform.position;
         } else {
-            Debug.Log("currentRoomBounds.HasValue: " + currentRoomBounds.HasValue);
-            Debug.Log("Current room name: " + GetCurrentRoomName());
+            //Debug.Log("currentRoomBounds.HasValue: " + currentRoomBounds.HasValue);
+            //Debug.Log("Current room name: " + GetCurrentRoomName());
         }
     }
 

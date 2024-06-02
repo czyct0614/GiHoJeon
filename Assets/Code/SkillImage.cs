@@ -125,7 +125,7 @@ public class SkillImage : MonoBehaviour
 
 
 
-        move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime); // 충전 바 UI 업데이트
+        //move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime); // 충전 바 UI 업데이트
         
         
         
@@ -141,7 +141,7 @@ public class SkillImage : MonoBehaviour
 
                 Skill1CurrentChargeTime=0f;
 
-                move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime);
+                //move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime);
 
                 Skill1DoCharge=false;
             }
@@ -221,7 +221,7 @@ public class SkillImage : MonoBehaviour
 
                 Skill1CurrentChargeTime = 0f;
 
-                move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime);
+                //move.ChangeChargeBarAmount(Skill1CurrentChargeTime, Skill1MaxChargeTime);
             }
 
 
@@ -581,6 +581,5 @@ public class SkillImage : MonoBehaviour
                 break;
 
         }
-        Debug.Log(SpriteNumber);
     }
 }

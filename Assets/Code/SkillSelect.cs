@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class SkillSelect : MonoBehaviour
 {
-    SkillImage skillImage; // SkillImage 스크립트에 접근하기 위한 
+    ManaSkillImage skillImage; // SkillImage 스크립트에 접근하기 위한 
+    //SkillImage skillimage;
     PlayerMove playerMove;
     public Vector2 MouseFinalPos; // 마우스 클릭 종료 위치
     public int SelectedSkillNumber; // 선택된 스킬 번호
@@ -11,7 +12,8 @@ public class SkillSelect : MonoBehaviour
     {
         // SkillImage 스크립트를 가진 게임 오브젝트를 찾아서 skillImage에 할당
         GameObject skillimage = GameObject.Find("Skill");
-        skillImage = skillimage.GetComponent<SkillImage>();
+        skillImage = skillimage.GetComponent<ManaSkillImage>();
+        //skillImage = skillimage.GetComponent<SkillImage>();
 
         GameObject playermove = GameObject.Find("Player");
         playerMove = playermove.GetComponent<PlayerMove>();
