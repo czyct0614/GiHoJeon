@@ -22,7 +22,10 @@ public class CameraController : MonoBehaviour
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
 
         height = Camera.main.orthographicSize;
-        width = height * Screen.width / Screen.height;
+        width = height * 16/9;
+        Debug.Log(Screen.width);
+        Debug.Log(Screen.height);
+        Debug.Log(width);
     }
 
     private void Awake() {

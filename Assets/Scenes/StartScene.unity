@@ -1024,6 +1024,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3805861544551408287, guid: 7eb4044b902fff14392c4b56a9d794df, type: 3}
     - target: {fileID: 2462243119117574091, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
+      propertyPath: maxSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462243119117574091, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: jumpPower
       value: 40
       objectReference: {fileID: 0}
@@ -1062,6 +1066,18 @@ PrefabInstance:
     - target: {fileID: 3533926365284957928, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6234353256677715527, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 761734267, guid: 164a28aee5fdf184b908826636116286, type: 3}
+    - target: {fileID: 6234353256677715527, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6234353256677715527, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7506282235115118211, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2191,6 +2207,18 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1965648748}
+    - target: {fileID: 7619917705936685011, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619917705936685011, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619917705936685011, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
+      propertyPath: m_RenderingPath
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7619917705936685011, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
       propertyPath: orthographic size
       value: 10

@@ -4847,7 +4847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4489533350917046259, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
       propertyPath: roomBounds.CenterX
-      value: 7.25
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 4489533350917046259, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
       propertyPath: roomBounds.CenterY

@@ -10,7 +10,7 @@ public class Door : MonoBehaviour
     
     public GameObject DoorAxis;
     public float rotationSpeed;
-    private const float maxRotationValue = 90f;
+    private const float maxRotationValue = 120f;
     private const float FLOAT_COMPARISON_VALUE = 2f;
     private WaitForSeconds gatePassWaitTime = new WaitForSeconds(0.5f);
     void Start(){
