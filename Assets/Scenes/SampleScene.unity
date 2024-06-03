@@ -12852,10 +12852,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomBounds:
     roomName: Room2
-    minX: 40
-    maxX: 110
-    minY: -3
-    maxY: 30
+    CenterX: 74
+    CenterY: 2
+    MapSizeX: 70
+    MapSizeY: 35
 --- !u!1 &1767412378
 GameObject:
   m_ObjectHideFlags: 0
@@ -14049,6 +14049,22 @@ PrefabInstance:
     - target: {fileID: 1754985385187512714, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
       propertyPath: m_Name
       value: Room1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489533350917046259, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
+      propertyPath: roomBounds.CenterX
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489533350917046259, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
+      propertyPath: roomBounds.CenterY
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489533350917046259, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
+      propertyPath: roomBounds.MapSizeX
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489533350917046259, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
+      propertyPath: roomBounds.MapSizeY
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 4988733818451460607, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
       propertyPath: m_LocalPosition.x
