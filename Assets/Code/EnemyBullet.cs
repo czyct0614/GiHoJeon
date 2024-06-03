@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     public float speed = 10f;  // 미사일 이동 속도
-    private float lifetime = 5f;  // 미사일 수명 (초)
+    private float lifetime = 2f;  // 미사일 수명 (초)
     private float spawnTime;  // 미사일 생성 시간
     public int damageAmount = 2; // 탄환의 대미지량
     private PlayerMove playerHealth; // 플레이어의 체력을 관리하는 스크립트

@@ -980,8 +980,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 0
   dropItemPrefab: {fileID: 8804673931339658953, guid: eef103bccbefe664cadd650f22cd68a1, type: 3}
+  bulletPrefab: {fileID: 8411583513067764514, guid: 3ec2f406f9e40d14bbbb4c21c1cb3417, type: 3}
+  firePoint: {fileID: 2135951563}
   maxHealth: 7
-  manaPrefab: {fileID: 0}
+  manaPrefab: {fileID: 6696409374842583693, guid: 3036fa54d73462e48a871e2f51d92587, type: 3}
 --- !u!114 &341022927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6874,6 +6876,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 0
   dropItemPrefab: {fileID: 8804673931339658953, guid: eef103bccbefe664cadd650f22cd68a1, type: 3}
+  bulletPrefab: {fileID: 0}
+  firePoint: {fileID: 0}
   maxHealth: 3
   manaPrefab: {fileID: 0}
 --- !u!95 &883495289
