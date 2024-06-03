@@ -35,6 +35,7 @@ TagManager:
   - ExplodingEnemy
   - CurseEnemy
   - BOSS
+  - Wall
   layers:
   - Default
   - TransparentFX
