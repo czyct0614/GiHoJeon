@@ -121,7 +121,7 @@ public class SkillImage : MonoBehaviour
 
 
 
-        transform.position = new Vector3(cameraTransform.position.x - 14.63f, cameraTransform.position.y - 6.88f, cameraTransform.position.z + 10f); // UI 위치 설정
+        transform.position = new Vector3(cameraTransform.position.x - 29.26f, cameraTransform.position.y - 13.76f, cameraTransform.position.z + 10f); // UI 위치 설정
 
 
 

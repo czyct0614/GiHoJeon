@@ -21,6 +21,6 @@ public class Icon : MonoBehaviour
     void LateUpdate()
     {
         // 플레이어의 위치를 기준으로 UI의 위치를 조정
-        transform.position = new Vector3(CameraTransform.position.x-7.3f, CameraTransform.position.y-7.8f,CameraTransform.position.z+10f);
+        //transform.position = new Vector3(CameraTransform.position.x-7.3f, CameraTransform.position.y-7.8f,CameraTransform.position.z+10f);
     }
 }
