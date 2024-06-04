@@ -1350,7 +1350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9369225bd5210b4abae29180b3ea106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transferMapName: FirstStage
+  transferMapName: SampleScene
   player: {fileID: 1965648737}
 --- !u!114 &1524624810
 MonoBehaviour:
@@ -1593,7 +1593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9369225bd5210b4abae29180b3ea106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transferMapName: SampleScene
+  transferMapName: FirstStage
   player: {fileID: 1965648737}
 --- !u!114 &1538490841
 MonoBehaviour:
