@@ -16,6 +16,9 @@ public class ShieldEnemyMove : MonoBehaviour
     private int currentHealth; // 현재 체력
     private bool isDead = false; // 몬스터가 죽었는지 여부를 나타내는 변수
     public GameObject manaPrefab; // 마나 프리팹
+    public bool rush = false;
+    public bool forceturn = false;
+    public bool explosion = false;
     
     private void Start()
     {
@@ -75,11 +78,15 @@ public class ShieldEnemyMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (hacked)
+        if (explosion && !rush)
         {
-            StartHackedRush();
-            StartCoroutine(HackedRush(2f));
+            StartCoroutine(HackedRush(0.5f));
         }
+
+        if (hacked && !forceturn){
+            StartCoroutine(SForceTurn(2f));
+        }
+        
         else
         {
             // Move
@@ -135,27 +142,63 @@ public class ShieldEnemyMove : MonoBehaviour
         Invoke("Think", 2);
     }
 
-    public void StartHackedRush()
+    public IEnumerator SForceTurn(float duration)
     {
-        hackedPlayerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-        hacked = true;
+        forceturn = true;
+        Debug.Log("hacked");
+        spriteRenderer.color = new Color(1, 0, 0, 1f);
+
+        // 방향을 반대로 바꾸는 로직을 추가
+        nextMove = nextMove * -1; // 방향을 반대로 바꿈
+        spriteRenderer.flipX = nextMove == 1;
+
+        // 이동 속도를 반전된 방향으로 설정
+        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+
+        yield return new WaitForSeconds(duration); // 지정된 시간 동안 대기
+
+        // 원래 방향으로 돌아감
+        nextMove = nextMove * -1; // 방향을 다시 반대로 바꿈
+        spriteRenderer.flipX = nextMove == 1;
+        spriteRenderer.color = new Color(1, 1, 1, 1f); // 색상 복원
+        hacked = false;
+        forceturn = false;
     }
+
 
     public IEnumerator HackedRush(float duration)
     {
+        rush = true;
         Debug.Log("Hacked Rush");
+        hackedPlayerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
         spriteRenderer.color = new Color(1, 0, 0, 1f);
 
         // 해킹된 순간의 플레이어 위치를 기준으로 반대 방향으로 돌진
-        int rushDirection = transform.position.x > hackedPlayerPosition.x ? 1 : -1;
+        Vector3 dashDirection = -(hackedPlayerPosition - transform.position).normalized;
+        dashDirection.y = 0;
+        Vector3 rushDirection = dashDirection;
 
-        rigid.velocity = new Vector2(rushDirection * 10f, rigid.velocity.y);
+        // 돌진
+        float dashSpeed = 10f;
+        float dashDistance = 20f;
+        float dashTime = dashDistance / dashSpeed;
 
-        yield return new WaitForSeconds(duration); // 지정된 시간 동안 돌진
+        float elapsedTime = 0f;
+        Vector3 startingPosition = transform.position;
+
+        yield return new WaitForSeconds(duration);
+
+        while (elapsedTime < dashTime)
+        {
+            transform.position = Vector3.Lerp(startingPosition, startingPosition + rushDirection * dashDistance, elapsedTime / dashTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
 
         rigid.velocity = Vector2.zero; // 멈춤
         spriteRenderer.color = new Color(1, 1, 1, 1f); // 색상 복원
         hacked = false;
+        rush = false;
     }
 
     void DeActive()
@@ -164,14 +207,14 @@ public class ShieldEnemyMove : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (hacked && other.gameObject.CompareTag("Wall"))
+        if (rush && other.gameObject.CompareTag("Wall"))
         {
             Debug.Log("STOP");
-            TakeDamage(1); // 충돌 시 스스로 데미지를 입음
+            TakeDamage(3); // 충돌 시 스스로 데미지를 입음
             rigid.velocity = Vector2.zero; // 멈춤
-            StopCoroutine(HackedRush(2f));
+            StopCoroutine(HackedRush(0.5f));
         }
     }
 
