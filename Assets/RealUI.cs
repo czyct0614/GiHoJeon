@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBar : MonoBehaviour
+public class RealUI : MonoBehaviour
 {
-   public Transform CameraTransform;
+    public Transform CameraTransform;
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,6 +20,6 @@ public class HealthBar : MonoBehaviour
     void LateUpdate()
     {
         // 플레이어의 위치를 기준으로 UI의 위치를 조정
-        transform.position = new Vector3(CameraTransform.position.x, CameraTransform.position.y-17.4f,CameraTransform.position.z+10f);
+        transform.position = new Vector3(CameraTransform.position.x, CameraTransform.position.y,CameraTransform.position.z+10f);
     }
 }
