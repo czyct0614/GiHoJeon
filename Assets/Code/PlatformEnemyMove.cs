@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMove : MonoBehaviour
+public class PlatformEnemyMove : MonoBehaviour
 {
     PortalManager portalManager;
     Rigidbody2D rigid;
