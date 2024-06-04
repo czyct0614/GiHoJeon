@@ -19,6 +19,9 @@ public class ShieldEnemyMove : MonoBehaviour
     public bool rush = false;
     public bool forceturn = false;
     public bool explosion = false;
+    float explosionRadius = 2f;
+    int explosionDamage = 1;
+    private PlayerMove playerHealth; // 플레이어의 체력을 관리하는 스크립트
     
     private void Start()
     {
@@ -73,6 +76,8 @@ public class ShieldEnemyMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         Invoke("Think", 5); // 초기화 함수 안에 넣어서 실행될 때 마다(최초 1회) nextMove변수가 초기화 되도록함
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerHealth = player.GetComponent<PlayerMove>();
     }
 
     // Update is called once per frame
@@ -84,9 +89,9 @@ public class ShieldEnemyMove : MonoBehaviour
         }
 
         if (hacked && !forceturn){
-            StartCoroutine(SForceTurn(2f));
+            StartCoroutine(SForceTurn(0.1f));
         }
-        
+
         else
         {
             // Move
@@ -146,16 +151,30 @@ public class ShieldEnemyMove : MonoBehaviour
     {
         forceturn = true;
         Debug.Log("hacked");
+        hackedPlayerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
         spriteRenderer.color = new Color(1, 0, 0, 1f);
 
-        // 방향을 반대로 바꾸는 로직을 추가
-        nextMove = nextMove * -1; // 방향을 반대로 바꿈
-        spriteRenderer.flipX = nextMove == 1;
-
-        // 이동 속도를 반전된 방향으로 설정
-        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
-
         yield return new WaitForSeconds(duration); // 지정된 시간 동안 대기
+
+        float dashSpeed = 3f;
+        float dashDistance = 5f;
+        float dashTime = dashDistance / dashSpeed;
+
+        float elapsedTime = 0f;
+        Vector3 startingPosition = transform.position;
+
+        Vector3 dashDirection = -(hackedPlayerPosition - transform.position).normalized;
+        dashDirection.y = 0;
+        Vector3 rushDirection = dashDirection;
+
+        yield return new WaitForSeconds(duration);
+
+        while (elapsedTime < dashTime)
+        {
+            transform.position = Vector3.Lerp(startingPosition, startingPosition + rushDirection * dashDistance, elapsedTime / dashTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
 
         // 원래 방향으로 돌아감
         nextMove = nextMove * -1; // 방향을 다시 반대로 바꿈
@@ -212,10 +231,65 @@ public class ShieldEnemyMove : MonoBehaviour
         if (rush && other.gameObject.CompareTag("Wall"))
         {
             Debug.Log("STOP");
-            TakeDamage(3); // 충돌 시 스스로 데미지를 입음
+            Explode();
             rigid.velocity = Vector2.zero; // 멈춤
             StopCoroutine(HackedRush(0.5f));
         }
     }
+
+    private void Explode()
+    {
+        // 자폭 효과를 추가하고 플레이어에게 피해를 줌
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        foreach (Collider2D nearbyObject in colliders)
+        {
+            if (nearbyObject.CompareTag("Player"))
+            {
+                playerHealth.TakeDamage(explosionDamage);
+            }
+
+            else if (nearbyObject.CompareTag("Monster"))
+            {
+                // 몬스터에게 대미지를 줌
+                if(nearbyObject.gameObject.name=="BOSS"){
+                    nearbyObject.GetComponent<BOSSMove>().TakeDamage(explosionDamage);
+                }
+                else if(nearbyObject.gameObject.name=="StrongEnemy"){
+                    nearbyObject.GetComponent<StrongEnemyMove>().TakeDamage(explosionDamage);
+                }
+                else if(nearbyObject.gameObject.name=="PStrongEnemy"){
+                    nearbyObject.GetComponent<PStrongEnemyMove>().TakeDamage(explosionDamage);
+                }
+                else if(nearbyObject.gameObject.name=="BaseEnemy"){
+                    nearbyObject.GetComponent<EnemyMove>().TakeDamage(explosionDamage);
+                }
+                else if(nearbyObject.gameObject.name=="PlatformEnemy"){
+                    nearbyObject.GetComponent<EnemyMove>().TakeDamage(explosionDamage);
+                }
+                else if(nearbyObject.gameObject.name=="ExplodingEnemy"){
+                    nearbyObject.GetComponent<ExplodingEnemyMove>().TakeDamage(explosionDamage);
+                }
+                else if(nearbyObject.gameObject.name=="CurseEnemy"){
+                    nearbyObject.GetComponent<CurseEnemyMove>().TakeDamage(explosionDamage);
+                }
+
+                Destroy(gameObject);
+            }
+
+        else if(nearbyObject.CompareTag("ShieldEnemy")){
+                    nearbyObject.GetComponent<ShieldEnemyMove>().TakeDamage(explosionDamage);
+                    Destroy(gameObject);
+                }
+
+        else if(nearbyObject.CompareTag("DashEnemy")){
+                    nearbyObject.GetComponent<DashEnemyMove>().TakeDamage(explosionDamage);
+                    Destroy(gameObject);
+                }
+        }
+
+        // 자폭 후 적 파괴
+        Die();
+    }
+
 
 }

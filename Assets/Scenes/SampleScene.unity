@@ -1564,7 +1564,7 @@ MonoBehaviour:
   nextMove: 0
   hacked: 0
   maxHealth: 2
-  manaPrefab: {fileID: 0}
+  manaPrefab: {fileID: 6696409374842583693, guid: 3036fa54d73462e48a871e2f51d92587, type: 3}
 --- !u!4 &594170313 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1236073247036357219, guid: 786081038713fb246ae5c5963648f17a, type: 3}
@@ -1769,7 +1769,10 @@ MonoBehaviour:
   nextMove: 0
   hacked: 0
   maxHealth: 5
-  manaPrefab: {fileID: 0}
+  manaPrefab: {fileID: 6696409374842583693, guid: 3036fa54d73462e48a871e2f51d92587, type: 3}
+  rush: 0
+  forceturn: 0
+  explosion: 0
 --- !u!114 &694842172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6877,10 +6880,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 0
   dropItemPrefab: {fileID: 8804673931339658953, guid: eef103bccbefe664cadd650f22cd68a1, type: 3}
-  bulletPrefab: {fileID: 0}
-  firePoint: {fileID: 0}
+  bulletPrefab: {fileID: 8411583513067764514, guid: 3ec2f406f9e40d14bbbb4c21c1cb3417, type: 3}
+  firePoint: {fileID: 1767412379}
   maxHealth: 3
-  manaPrefab: {fileID: 0}
+  manaPrefab: {fileID: 6696409374842583693, guid: 3036fa54d73462e48a871e2f51d92587, type: 3}
   hacked: 0
 --- !u!95 &883495289
 Animator:
@@ -7530,7 +7533,7 @@ MonoBehaviour:
   nextMove: 0
   dropItemPrefab: {fileID: 2194426590354985778, guid: d1255c2cf38bcc549b1a4a746a092425, type: 3}
   maxHealth: 3
-  manaPrefab: {fileID: 0}
+  manaPrefab: {fileID: 6696409374842583693, guid: 3036fa54d73462e48a871e2f51d92587, type: 3}
 --- !u!1 &1192127896 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4177698647959066446, guid: 3414c7da82d967344aee51b2899de197, type: 3}
@@ -12993,7 +12996,7 @@ MonoBehaviour:
   nextMove: 0
   hacked: 0
   maxHealth: 2
-  manaPrefab: {fileID: 0}
+  manaPrefab: {fileID: 6696409374842583693, guid: 3036fa54d73462e48a871e2f51d92587, type: 3}
 --- !u!1 &2015321680
 GameObject:
   m_ObjectHideFlags: 0
@@ -13214,7 +13217,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxHealth: 3
-  manaPrefab: {fileID: 0}
+  manaPrefab: {fileID: 6696409374842583693, guid: 3036fa54d73462e48a871e2f51d92587, type: 3}
 --- !u!1 &2057139852
 GameObject:
   m_ObjectHideFlags: 0
@@ -13654,6 +13657,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: PlatformEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7732808008331605182, guid: 7f00c6fd649cb124489dfbbccb082710, type: 3}
+      propertyPath: manaPrefab
+      value: 
+      objectReference: {fileID: 6696409374842583693, guid: 3036fa54d73462e48a871e2f51d92587, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

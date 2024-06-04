@@ -248,9 +248,6 @@ public class DashEnemyMove : MonoBehaviour
 
     public IEnumerator DForceTurn()
     {
-
-        // 해킹 중일 때 중복 실행을 방지
-        if (isHackingInProgress) yield break;
         isHackingInProgress = true;
         
         spriteRenderer.color = new Color(1, 0, 0, 1f);

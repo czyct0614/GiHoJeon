@@ -64,7 +64,7 @@ public class ShieldEnemyController : MonoBehaviour
         }
 
         if (distanceToPlayer <= detectRange && SenemyMove.hacked){
-            //ifHacked();
+            ifHacked();
         }
 
         // 방패를 플레이어 방향으로 향하도록 설정

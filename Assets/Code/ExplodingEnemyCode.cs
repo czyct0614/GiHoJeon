@@ -167,24 +167,6 @@ public class ExplodingEnemyMove : MonoBehaviour
         hacked = false;
     }
 
-    public void OnDamaged()
-    {
-        // 몬스터가 데미지를 입었을 때
-        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
-
-        // Sprite Flip Y : 뒤집어지기
-        spriteRenderer.flipY = true;
-
-        // Collider Disable : 콜라이더 끄기
-        gameObject.GetComponent<BoxCollider2D>().enabled = false;
-
-        // Die Effect Jump : 아래로 추락(콜라이더 꺼서 바닥밑으로 추락함)
-        rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
-
-        // Destroy
-        Invoke("DeActive", 5);
-    }
-
     void DeActive()
     {
         // 오브젝트 끄기
@@ -226,7 +208,7 @@ public class ExplodingEnemyMove : MonoBehaviour
                 else if(nearbyObject.gameObject.name=="CurseEnemy"){
                     nearbyObject.GetComponent<CurseEnemyMove>().TakeDamage(explosionDamage);
                 }
-                // 탄환 파괴
+
                 Destroy(gameObject);
             }
 
