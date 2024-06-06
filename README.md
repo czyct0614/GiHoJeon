@@ -24,3 +24,13 @@
 * esc 메뉴창
   * 우측 상단 톱니바퀴에서 설정 접근 가능
     * 소리 소절 가능
+
+
+---
+
+### 가장 최신버전 빌드파일
+https://drive.google.com/file/d/1gtUHt6AXQ492CWHTEnC31_XFYlcToXRW/view?usp=sharing
+
+
+### 구 공유문서
+https://docs.google.com/document/d/1le9YfCbxx4UhX-Pu8dRgzHwoyLmm-nThoyvMlv8mvJg/edit#heading=h.lvizfp54i5te
