@@ -177,7 +177,7 @@ public class PlayerMove : MonoBehaviour
             else
             {
                 transform.position = new Vector3(transform.position.x,transform.position.y,0f);
-                rigid.gravityScale = 16f;
+                rigid.gravityScale = 8f;
 
                 isDying=false;
             }
@@ -657,7 +657,7 @@ public class PlayerMove : MonoBehaviour
         isDashing=true;
 
         //원래 중력 저장
-        float originalGravity=16f;
+        float originalGravity=8f;
 
         //앞으로 대쉬하기 위해 중력 0으로 바꿈
         rigid.gravityScale=0f;
@@ -880,7 +880,7 @@ public class PlayerMove : MonoBehaviour
 
             isClimbing = false;
 
-            rigid.gravityScale = 16f; // 중력을 원래대로 설정
+            rigid.gravityScale = 8f; // 중력을 원래대로 설정
 
             animator.SetBool("IsClimbing", false); // 애니메이션 해제
 
