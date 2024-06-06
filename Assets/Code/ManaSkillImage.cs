@@ -11,6 +11,11 @@ public class ManaSkillImage : MonoBehaviour
 
 
 
+    private object previousHackedObject;
+    private Dictionary<object, Vector3> originalScales = new Dictionary<object, Vector3>();
+
+
+
     // 카메라와 플레이어의 Transform을 저장하는 변수
     public Transform cameraTransform;
     public Transform playerTransform;
@@ -154,7 +159,7 @@ public class ManaSkillImage : MonoBehaviour
 
 
 
-        transform.position = new Vector3(cameraTransform.position.x - 14.63f, cameraTransform.position.y - 6.88f, cameraTransform.position.z + 10f); // UI 위치 설정
+        //transform.position = new Vector3(cameraTransform.position.x - 36.4f, cameraTransform.position.y - 5.75f, cameraTransform.position.z + 10f); // UI 위치 설정
 
 
 
@@ -267,6 +272,8 @@ public class ManaSkillImage : MonoBehaviour
 
     // 스킬이 준비되어 있을 때만 스킬을 사용할 수 있도록 합니다.
         if(spriteRenderer.sprite == newSprite2 && Skill2SkillReady&&CurrentMana>Skill2ManaCost){
+            
+            MassiveSelectedEnemy();
 
             if(Input.GetButtonDown("Charge")){
 
@@ -280,7 +287,122 @@ public class ManaSkillImage : MonoBehaviour
 
             }
         }
+
+
+        if(spriteRenderer.sprite == newSprite3 && Skill3SkillReady&&CurrentMana>Skill3ManaCost){
+            
+            MassiveSelectedEnemy();
+
+            if(Input.GetButtonDown("Charge")){
+
+                CastExplodeSkill();
+
+                Skill3LeftCoolDown = Skill3CoolDown;
+
+                UseMana(Skill3ManaCost);
+
+                StartCoroutine(Skill3CoolDownCount());
+
+            }
+        }
     }
+
+
+
+
+
+    void MassiveSelectedEnemy()
+{
+    // Mouse pointer position is used to cast a ray.
+    Vector2 rayPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+    RaycastHit2D[] hits = Physics2D.RaycastAll(rayPosition, Vector2.zero);
+
+    bool found = false;
+
+    if (hits.Length > 0)
+    {
+        // Find the topmost monster among the objects hit by the raycast.
+        foreach (RaycastHit2D hit in hits)
+        {
+            // Get the appropriate component based on the tag.
+            var enemycode = hit.transform.GetComponent(hit.transform.tag + "Move");
+
+            if (enemycode != null)
+            {
+                SpriteRenderer spriteRenderer = hit.transform.GetComponent<SpriteRenderer>();
+
+                if (previousHackedObject != null && previousHackedObject != enemycode)
+                {
+                    var previousSpriteRenderer = ((Component)previousHackedObject).GetComponent<SpriteRenderer>();
+                    if (previousSpriteRenderer != null)
+                    {
+                        previousSpriteRenderer.transform.localScale = originalScales[previousHackedObject];
+                    }
+                    originalScales.Remove(previousHackedObject);
+                }
+
+                if (previousHackedObject != enemycode)
+                {
+                    if (spriteRenderer != null)
+                    {
+                        originalScales[enemycode] = spriteRenderer.transform.localScale;
+                        
+                        // Save the current bottom position of the sprite
+                        Vector3 originalBottomPosition = spriteRenderer.bounds.min;
+
+                        // Increase the size by 1.5 times
+                        spriteRenderer.transform.localScale = originalScales[enemycode] * 1.5f;
+
+                        // Adjust the position to maintain the bottom alignment
+                        Vector3 newBottomPosition = spriteRenderer.bounds.min;
+                        Vector3 positionAdjustment = originalBottomPosition - newBottomPosition;
+                        spriteRenderer.transform.position += positionAdjustment;
+                    }
+
+                    previousHackedObject = enemycode;
+                }
+                found = true;
+                break; // Break the loop since we only want to hack the topmost monster.
+            }
+        }
+
+        if (previousHackedObject != null && originalScales.ContainsKey(previousHackedObject) && !found)
+        {
+            var previousSpriteRenderer = ((Component)previousHackedObject).GetComponent<SpriteRenderer>();
+            if (previousSpriteRenderer != null)
+            {
+                // Save the current bottom position of the sprite
+                Vector3 originalBottomPosition = previousSpriteRenderer.bounds.min;
+
+                // Reset the scale
+                previousSpriteRenderer.transform.localScale = originalScales[previousHackedObject];
+
+                // Adjust the position to maintain the bottom alignment
+                Vector3 newBottomPosition = previousSpriteRenderer.bounds.min;
+                Vector3 positionAdjustment = originalBottomPosition - newBottomPosition;
+                previousSpriteRenderer.transform.position += positionAdjustment;
+            }
+            originalScales.Remove(previousHackedObject);
+            previousHackedObject = null;
+            Debug.Log("s");
+        }
+        else
+        {
+            if (previousHackedObject == null)
+            {
+                Debug.LogError("previousHackedObject is null");
+            }
+            if (!originalScales.ContainsKey(previousHackedObject))
+            {
+                Debug.LogError("originalScales does not contain the key: " + previousHackedObject);
+            }
+        }
+    }
+}
+
+
+
 
 
 
@@ -316,6 +438,56 @@ public class ManaSkillImage : MonoBehaviour
 
                         // 'hacked' 필드의 값을 true로 설정합니다.
                         hackedField.SetValue(enemycode, true);
+
+                        ((Component)enemycode).transform.localScale = originalScales[enemycode];
+
+                        break; // 맨 위에 있는 몬스터만 해킹하기 때문에 반복문을 종료합니다.
+
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+    void CastExplodeSkill()
+    {
+
+        // 마우스 포인터 위치에서 레이를 발사합니다.
+        Vector2 rayPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(rayPosition, Vector2.zero);
+
+
+
+        if (hits.Length > 0)
+        {
+
+            // 레이캐스트로 맞은 오브젝트들 중에서 맨 위에 있는 몬스터를 찾습니다.
+            foreach (RaycastHit2D hit in hits)
+            {
+
+                if (hit.collider != null) // 충돌한 컬라이더가 있는지 확인합니다.
+                {
+
+                    // 태그에 따라 적절한 컴포넌트를 가져옵니다.
+                    var enemycode = hit.transform.GetComponent(hit.transform.tag + "Move");
+
+                    if (enemycode != null)
+                    {
+
+                        FieldInfo hackedField = enemycode.GetType().GetField("explotion");
+
+                        // 'hacked' 필드의 값을 true로 설정합니다.
+                        hackedField.SetValue(enemycode, true);
+
+                        ((Component)enemycode).transform.localScale = originalScales[enemycode];
 
                         break; // 맨 위에 있는 몬스터만 해킹하기 때문에 반복문을 종료합니다.
 

@@ -177,7 +177,7 @@ public class PlayerMove : MonoBehaviour
             else
             {
                 transform.position = new Vector3(transform.position.x,transform.position.y,0f);
-                rigid.gravityScale = 8f;
+                rigid.gravityScale = 16f;
 
                 isDying=false;
             }
@@ -420,7 +420,7 @@ public class PlayerMove : MonoBehaviour
 //점프 모션
         Debug.DrawRay(rigid.position, Vector3.down, new Color(0,1,0)); //빔을 쏨(디버그는 게임상에서보이지 않음 ) 시작위치, 어디로 쏠지, 빔의 색 
 
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 2, LayerMask.GetMask("Platform"));
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 6, LayerMask.GetMask("Platform"));
         //빔의 시작위치, 빔의 방향 , 1:distance , ( 빔에 맞은 오브젝트를 특정 레이어로 한정 지어야할 때 사용 ) // RaycastHit2D : Ray에 닿은 오브젝트 클래스 
     
         if(!isDashing){ 
@@ -440,7 +440,7 @@ public class PlayerMove : MonoBehaviour
 
         if(rayHit.collider != null){ //빔을 맞은 오브젝트가 있을때
 
-            if(rayHit.distance < 2f)
+            if(rayHit.distance < 6f)
                 
 
                     animator.SetBool("IsJumping",false); //거리가 0.5보다 작아지면 변경
@@ -657,7 +657,7 @@ public class PlayerMove : MonoBehaviour
         isDashing=true;
 
         //원래 중력 저장
-        float originalGravity=8f;
+        float originalGravity=16f;
 
         //앞으로 대쉬하기 위해 중력 0으로 바꿈
         rigid.gravityScale=0f;
@@ -880,7 +880,7 @@ public class PlayerMove : MonoBehaviour
 
             isClimbing = false;
 
-            rigid.gravityScale = 8f; // 중력을 원래대로 설정
+            rigid.gravityScale = 16f; // 중력을 원래대로 설정
 
             animator.SetBool("IsClimbing", false); // 애니메이션 해제
 
