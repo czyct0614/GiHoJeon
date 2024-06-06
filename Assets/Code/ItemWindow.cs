@@ -96,7 +96,7 @@ public class ItemWindow : MonoBehaviour
 
     void Update()
     {
-        //transform.position = new Vector3(cameraTransform.position.x + 32.4f, cameraTransform.position.y - 14.8f, cameraTransform.position.z + 10f);
+        transform.position = new Vector3(cameraTransform.position.x + 13.52f, cameraTransform.position.y - 8.43f, cameraTransform.position.z + 10f);
 
         for (int i = 0; i < itemSlots.Length; i++)
         {
