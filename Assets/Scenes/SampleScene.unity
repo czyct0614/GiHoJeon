@@ -7284,7 +7284,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 925383007}
@@ -13066,10 +13066,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomBounds:
     roomName: Room2
-    CenterX: 160
-    CenterY: 14
-    MapSizeX: 140
-    MapSizeY: 70
+    CenterX: 80
+    CenterY: 6
+    MapSizeX: 70
+    MapSizeY: 35
 --- !u!1 &1767412378
 GameObject:
   m_ObjectHideFlags: 0
@@ -13127,7 +13127,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: -2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 341022921}
@@ -14105,6 +14105,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 914847788290118278, guid: 3414c7da82d967344aee51b2899de197, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 914847788290118278, guid: 3414c7da82d967344aee51b2899de197, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 914847788290118278, guid: 3414c7da82d967344aee51b2899de197, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -14209,6 +14217,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6627786499711522006, guid: 3414c7da82d967344aee51b2899de197, type: 3}
+      propertyPath: m_RenderMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627786499711522006, guid: 3414c7da82d967344aee51b2899de197, type: 3}
+      propertyPath: m_SortingOrder
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 6627786499711522006, guid: 3414c7da82d967344aee51b2899de197, type: 3}
       propertyPath: m_OverrideSorting
       value: 1
       objectReference: {fileID: 0}
@@ -14227,14 +14243,6 @@ PrefabInstance:
     - target: {fileID: 6928267242552276057, guid: 3414c7da82d967344aee51b2899de197, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6627786499711522006, guid: 3414c7da82d967344aee51b2899de197, type: 3}
-      propertyPath: m_RenderMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6627786499711522006, guid: 3414c7da82d967344aee51b2899de197, type: 3}
-      propertyPath: m_SortingOrder
-      value: 101
       objectReference: {fileID: 0}
     - target: {fileID: 7005552610227866622, guid: 3414c7da82d967344aee51b2899de197, type: 3}
       propertyPath: m_Name
@@ -14641,15 +14649,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4489533350917046259, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
       propertyPath: roomBounds.CenterY
-      value: 14
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4489533350917046259, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
       propertyPath: roomBounds.MapSizeX
-      value: 180
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4489533350917046259, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
       propertyPath: roomBounds.MapSizeY
-      value: 70
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 4988733818451460607, guid: 6369220b40763c44597eb9fa001921d3, type: 3}
       propertyPath: m_LocalScale.x
