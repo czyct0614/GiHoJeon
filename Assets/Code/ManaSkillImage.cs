@@ -280,7 +280,7 @@ public class ManaSkillImage : MonoBehaviour
     // 스킬이 준비되어 있을 때만 스킬을 사용할 수 있도록 합니다.
         if(spriteRenderer.sprite == newSprite2 && Skill2SkillReady&&CurrentMana>Skill2ManaCost){
             
-            MassiveSelectedEnemy();
+            //MassiveSelectedEnemy();
 
             if(Input.GetButtonDown("Charge")){
 
@@ -298,7 +298,7 @@ public class ManaSkillImage : MonoBehaviour
 
         if(spriteRenderer.sprite == newSprite3 && Skill3SkillReady&&CurrentMana>Skill3ManaCost){
             
-            MassiveSelectedEnemy();
+            //MassiveSelectedEnemy();
 
             if(Input.GetButtonDown("Charge")){
 
@@ -332,69 +332,87 @@ public class ManaSkillImage : MonoBehaviour
         // Find the topmost monster among the objects hit by the raycast.
         foreach (RaycastHit2D hit in hits)
         {
-            if(hit.transform.tag!="Player"){
-            // Get the appropriate component based on the tag.
-            var enemycode = hit.transform.GetComponent(hit.transform.tag + "Move");
-
-            if (enemycode != null)
+            if (hit.transform.tag != "Player")
             {
-                SpriteRenderer spriteRenderer = hit.transform.GetComponent<SpriteRenderer>();
+                // Get the appropriate component based on the tag.
+                var enemycode = hit.transform.GetComponent(hit.transform.tag + "Move");
 
-                if (previousHackedObject != null && previousHackedObject != enemycode)
+                if (enemycode != null)
                 {
-                    var previousSpriteRenderer = ((Component)previousHackedObject).GetComponent<SpriteRenderer>();
-                    if (previousSpriteRenderer != null)
+                    SpriteRenderer spriteRenderer = hit.transform.GetComponent<SpriteRenderer>();
+
+                    if (previousHackedObject != null && previousHackedObject != enemycode)
                     {
-                        previousSpriteRenderer.transform.localScale = originalScales[previousHackedObject];
-                    }
-                    originalScales.Remove(previousHackedObject);
-                }
-
-                if (previousHackedObject != enemycode)
-                {
-                    if (spriteRenderer != null)
-                    {
-                        originalScales[enemycode] = spriteRenderer.transform.localScale;
-                        
-                        // Save the current bottom position of the sprite
-                        Vector3 originalBottomPosition = spriteRenderer.bounds.min;
-
-                        // Increase the size by 1.5 times
-                        spriteRenderer.transform.localScale = originalScales[enemycode] * 1.5f;
-
-                        // Adjust the position to maintain the bottom alignment
-                        Vector3 newBottomPosition = spriteRenderer.bounds.min;
-                        Vector3 positionAdjustment = originalBottomPosition - newBottomPosition;
-                        spriteRenderer.transform.position += positionAdjustment;
+                        // Check if the previousHackedObject has been destroyed
+                        if (previousHackedObject == null)
+                        {
+                            originalScales.Remove(previousHackedObject);
+                            previousHackedObject = null;
+                        }
+                        else
+                        {
+                            var previousSpriteRenderer = ((Component)previousHackedObject).GetComponent<SpriteRenderer>();
+                            if (previousSpriteRenderer != null)
+                            {
+                                previousSpriteRenderer.transform.localScale = originalScales[previousHackedObject];
+                            }
+                            originalScales.Remove(previousHackedObject);
+                        }
                     }
 
-                    previousHackedObject = enemycode;
+                    if (previousHackedObject != enemycode)
+                    {
+                        if (spriteRenderer != null)
+                        {
+                            originalScales[enemycode] = spriteRenderer.transform.localScale;
+
+                            // Save the current bottom position of the sprite
+                            Vector3 originalBottomPosition = spriteRenderer.bounds.min;
+
+                            // Increase the size by 1.5 times
+                            spriteRenderer.transform.localScale = originalScales[enemycode] * 1.5f;
+
+                            // Adjust the position to maintain the bottom alignment
+                            Vector3 newBottomPosition = spriteRenderer.bounds.min;
+                            Vector3 positionAdjustment = originalBottomPosition - newBottomPosition;
+                            spriteRenderer.transform.position += positionAdjustment;
+                        }
+
+                        previousHackedObject = enemycode;
+                    }
+                    found = true;
+                    break; // Break the loop since we only want to hack the topmost monster.
                 }
-                found = true;
-                break; // Break the loop since we only want to hack the topmost monster.
-            }
             }
         }
 
         if (previousHackedObject != null && originalScales.ContainsKey(previousHackedObject) && !found)
         {
-            var previousSpriteRenderer = ((Component)previousHackedObject).GetComponent<SpriteRenderer>();
-            if (previousSpriteRenderer != null)
+            // Check if the previousHackedObject has been destroyed
+            if (previousHackedObject == null)
             {
-                // Save the current bottom position of the sprite
-                Vector3 originalBottomPosition = previousSpriteRenderer.bounds.min;
-
-                // Reset the scale
-                previousSpriteRenderer.transform.localScale = originalScales[previousHackedObject];
-
-                // Adjust the position to maintain the bottom alignment
-                Vector3 newBottomPosition = previousSpriteRenderer.bounds.min;
-                Vector3 positionAdjustment = originalBottomPosition - newBottomPosition;
-                previousSpriteRenderer.transform.position += positionAdjustment;
+                originalScales.Remove(previousHackedObject);
+                previousHackedObject = null;
             }
-            originalScales.Remove(previousHackedObject);
-            previousHackedObject = null;
-            Debug.Log("s");
+            else
+            {
+                var previousSpriteRenderer = ((Component)previousHackedObject)?.GetComponent<SpriteRenderer>();
+                if (previousSpriteRenderer != null)
+                {
+                    // Save the current bottom position of the sprite
+                    Vector3 originalBottomPosition = previousSpriteRenderer.bounds.min;
+
+                    // Reset the scale
+                    previousSpriteRenderer.transform.localScale = originalScales[previousHackedObject];
+
+                    // Adjust the position to maintain the bottom alignment
+                    Vector3 newBottomPosition = previousSpriteRenderer.bounds.min;
+                    Vector3 positionAdjustment = originalBottomPosition - newBottomPosition;
+                    previousSpriteRenderer.transform.position += positionAdjustment;
+                }
+                originalScales.Remove(previousHackedObject);
+                previousHackedObject = null;
+            }
         }
         else
         {
@@ -409,6 +427,9 @@ public class ManaSkillImage : MonoBehaviour
         }
     }
 }
+
+
+
 
 
 
