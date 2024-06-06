@@ -17,7 +17,7 @@ public class RoomCode : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerStay2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             Debug.Log("Player entered room: " + roomBounds.roomName);
             CameraController.Instance.SetCurrentRoom(roomBounds);

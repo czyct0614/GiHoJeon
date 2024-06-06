@@ -376,7 +376,7 @@ public class PlayerMove : MonoBehaviour
             CanJump = false;
             // 초 후에 플레이어 콜라이더 다시 활성화
             StartCoroutine(EnableColliderAfterDelay(0.25f));
-            StartCoroutine(JumpCoolTime(1f));
+            StartCoroutine(JumpCoolTime(0.3f));
         }
 
         Climb();
@@ -420,7 +420,7 @@ public class PlayerMove : MonoBehaviour
 //점프 모션
         Debug.DrawRay(rigid.position, Vector3.down, new Color(0,1,0)); //빔을 쏨(디버그는 게임상에서보이지 않음 ) 시작위치, 어디로 쏠지, 빔의 색 
 
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 6, LayerMask.GetMask("Platform"));
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 2.5f, LayerMask.GetMask("Platform"));
         //빔의 시작위치, 빔의 방향 , 1:distance , ( 빔에 맞은 오브젝트를 특정 레이어로 한정 지어야할 때 사용 ) // RaycastHit2D : Ray에 닿은 오브젝트 클래스 
     
         if(!isDashing){ 
