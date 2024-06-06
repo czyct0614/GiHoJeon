@@ -89,7 +89,7 @@ public class ShieldEnemyMove : MonoBehaviour
         }
 
         if (hacked && !forceturn){
-            StartCoroutine(SForceTurn(0.05f));
+            StartCoroutine(SForceTurn(0.1f));
         }
 
         else

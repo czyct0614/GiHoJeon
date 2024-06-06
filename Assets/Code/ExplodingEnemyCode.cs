@@ -22,8 +22,6 @@ public class ExplodingEnemyMove : MonoBehaviour
     private bool isDead = false; // 몬스터가 죽었는지 여부를 나타내는 변수
     private PlayerMove playerHealth; // 플레이어의 체력을 관리하는 스크립트
     public GameObject manaPrefab; // 마나 프리팹
-    bool forceturn = false;
-    private Vector3 hackedPlayerPosition; // 해킹된 순간의 플레이어 위치
 
     private void Start()
     {
@@ -86,8 +84,8 @@ public class ExplodingEnemyMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(hacked && !forceturn){
-            StartCoroutine(ForceTurn(0.05f));
+        if(hacked==true){
+            StartCoroutine(ForceTurn(2f));
         }
         // 플레이어 감지 및 이동
         if (Vector2.Distance(transform.position, target.position) < detectionRange)
@@ -151,39 +149,22 @@ public class ExplodingEnemyMove : MonoBehaviour
 
     public IEnumerator ForceTurn(float duration)
     {
-        forceturn = true;
-        Debug.Log("hacked");
-        hackedPlayerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
         spriteRenderer.color = new Color(1, 0, 0, 1f);
 
+        // 방향을 반대로 바꾸는 로직을 추가
+        nextMove = nextMove * -1; // 방향을 반대로 바꿈
+        spriteRenderer.flipX = nextMove == 1;
+
+        // 이동 속도를 반전된 방향으로 설정
+        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+
         yield return new WaitForSeconds(duration); // 지정된 시간 동안 대기
-
-        float dashSpeed = 3f;
-        float dashDistance = 5f;
-        float dashTime = dashDistance / dashSpeed;
-
-        float elapsedTime = 0f;
-        Vector3 startingPosition = transform.position;
-
-        Vector3 dashDirection = -(hackedPlayerPosition - transform.position).normalized;
-        dashDirection.y = 0;
-        Vector3 rushDirection = dashDirection;
-
-        yield return new WaitForSeconds(duration);
-
-        while (elapsedTime < dashTime)
-        {
-            transform.position = Vector3.Lerp(startingPosition, startingPosition + rushDirection * dashDistance, elapsedTime / dashTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
 
         // 원래 방향으로 돌아감
         nextMove = nextMove * -1; // 방향을 다시 반대로 바꿈
         spriteRenderer.flipX = nextMove == 1;
         spriteRenderer.color = new Color(1, 1, 1, 1f); // 색상 복원
         hacked = false;
-        forceturn = false;
     }
 
     void DeActive()
