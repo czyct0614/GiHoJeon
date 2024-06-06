@@ -79,11 +79,11 @@ public class ManaSkillImage : MonoBehaviour
     // 마나 관련 변수
     public float MaxMana = 100f;
     private float CurrentMana;
-    public float ManaRecoveryRate = 15f; // 초당 회복되는 마나 양
-    public float Skill1ManaCost = 20f;
-    public float Skill2ManaCost = 30f;
-    public float Skill3ManaCost = 40f;
-    public float UltimateSkillManaCost = 50f;
+    public float ManaRecoveryRate = 3f; // 초당 회복되는 마나 양
+    public float Skill1ManaCost;
+    public float Skill2ManaCost;
+    public float Skill3ManaCost;
+    public float UltimateSkillManaCost;
     public Image ManaBar;
 
 
@@ -134,13 +134,20 @@ public class ManaSkillImage : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // 플레이어의 머리 위치 찾기
 
 
-        ManaRecoveryRate = 15f;
+        ManaRecoveryRate = 3f;
 
         // 초기 마나 설정
         CurrentMana = MaxMana;
         UpdateManaUI();
         
-        
+        Skill1ManaCost = -30f;
+
+        Skill2ManaCost = -40f; 
+
+        Skill3ManaCost = -50f;
+
+        UltimateSkillManaCost = -60f; 
+
     }
 
     // LateUpdate에서 UI의 위치를 조정하고 스킬 발동 및 쿨타임을 관리합니다.
@@ -236,7 +243,7 @@ public class ManaSkillImage : MonoBehaviour
             // 발사 버튼이 떼졌을 때
             if (Input.GetButtonUp("Charge") && Skill1CurrentProjectile != null)
             {
-                UseMana(Skill1ManaCost);
+                Mana(Skill1ManaCost);
                 Skill1DoCharge=false;
 
                 // 발사체 방향 설정
@@ -281,7 +288,7 @@ public class ManaSkillImage : MonoBehaviour
 
                 Skill2LeftCoolDown = Skill2CoolDown;
 
-                UseMana(Skill2ManaCost);
+                Mana(Skill2ManaCost);
 
                 StartCoroutine(Skill2CoolDownCount());
 
@@ -299,7 +306,7 @@ public class ManaSkillImage : MonoBehaviour
 
                 Skill3LeftCoolDown = Skill3CoolDown;
 
-                UseMana(Skill3ManaCost);
+                Mana(Skill3ManaCost);
 
                 StartCoroutine(Skill3CoolDownCount());
 
@@ -325,6 +332,7 @@ public class ManaSkillImage : MonoBehaviour
         // Find the topmost monster among the objects hit by the raycast.
         foreach (RaycastHit2D hit in hits)
         {
+            if(hit.transform.tag!="Player"){
             // Get the appropriate component based on the tag.
             var enemycode = hit.transform.GetComponent(hit.transform.tag + "Move");
 
@@ -364,6 +372,7 @@ public class ManaSkillImage : MonoBehaviour
                 }
                 found = true;
                 break; // Break the loop since we only want to hack the topmost monster.
+            }
             }
         }
 
@@ -794,13 +803,16 @@ public class ManaSkillImage : MonoBehaviour
         Debug.Log(SpriteNumber);
     }
 
-    void UseMana(float amount)
+    public void Mana(float amount)
     {
         // 마나 소비
-        CurrentMana -= amount;
+        CurrentMana += amount;
         if (CurrentMana < 0)
         {
             CurrentMana = 0;
+        }
+        else if(CurrentMana>100){
+            CurrentMana=100;
         }
 
         // UI 업데이트
