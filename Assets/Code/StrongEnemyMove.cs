@@ -34,7 +34,6 @@ public class StrongEnemyMove : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            FireInArc();
             Die(); // 몬스터가 죽음
         }
     }
@@ -49,7 +48,6 @@ public class StrongEnemyMove : MonoBehaviour
     {
         if (!isDead)
         {
-            FireInArc();
             Die();
         }
     }
