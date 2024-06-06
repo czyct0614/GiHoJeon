@@ -49,6 +49,7 @@ public class StrongEnemyMove : MonoBehaviour
         if (!isDead)
         {
             Die();
+            FireInArc();
         }
     }
 

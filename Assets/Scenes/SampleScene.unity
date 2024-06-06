@@ -2960,6 +2960,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3955962495367687426, guid: a67d99782a3b9f24ab21a251339b54f9, type: 3}
+      propertyPath: dashDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8925682049652980042, guid: a67d99782a3b9f24ab21a251339b54f9, type: 3}
       propertyPath: m_Name
       value: DashEnemy
