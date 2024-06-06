@@ -1029,7 +1029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462243119117574091, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: jumpPower
-      value: 40
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2462243119117574091, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: shootCooldown
@@ -2253,7 +2253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7619917705936685011, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
       propertyPath: orthographic size
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8713355111281346557, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
       propertyPath: m_LocalPosition.x
