@@ -1019,21 +1019,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1886899525492369675, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
-      propertyPath: m_GravityScale
-      value: 16
-      objectReference: {fileID: 0}
     - target: {fileID: 2462243119117574091, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: ground
       value: 
       objectReference: {fileID: 3805861544551408287, guid: 7eb4044b902fff14392c4b56a9d794df, type: 3}
     - target: {fileID: 2462243119117574091, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: maxSpeed
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2462243119117574091, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: jumpPower
-      value: 80
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2462243119117574091, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: shootCooldown
