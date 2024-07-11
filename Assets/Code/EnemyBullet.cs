@@ -43,19 +43,15 @@ public class EnemyBullet : MonoBehaviour
 }       
     private void OnTriggerEnter2D(Collider2D other)
    {   
-    // 충돌한 오브젝트가 몬스터인 경우
-    if (other.gameObject.name!="StrongEnemy" && !other.CompareTag("Monster"))
-        {
-            // 몬스터에게 대미지를 줌
-            if(other.gameObject.name=="Player"){
-                playerHealth.TakeDamage(damageAmount);
-                Destroy(gameObject);
-            }
 
-        }
-    else if(other.gameObject.name!="StrongEnemy" && !other.CompareTag("Item") && !other.CompareTag("Portal") && !other.CompareTag("Monster") && !other.CompareTag("FlyingPlatform")){
-                Debug.Log("적 총알이 무언가에 닿아 없어짐");
-                Destroy(gameObject);
-            }
+    if(other.gameObject.name == "Player"){
+        playerHealth.TakeDamage(damageAmount);
+        Destroy(gameObject);
+    }
+        
+    else if (!other.CompareTag("Turret") && !other.CompareTag("VeryStrongEnemy") && !other.CompareTag("Item") && !other.CompareTag("Portal") && !other.CompareTag("StrongEnemy") && !other.CompareTag("FlyingPlatform") && !other.CompareTag("Else")){
+        Debug.Log("적 총알이 무언가에 닿아 없어짐");
+        Destroy(gameObject);
+    }
    }
 }
