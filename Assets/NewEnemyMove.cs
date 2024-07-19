@@ -4,7 +4,6 @@ public class NewEnemy : MonoBehaviour
 {
     public float visionRange = 5f;      // 시야 범위 길이
     public float visionWidth = 1f;      // 시야 범위 폭
-    public float hearingRange = 10f;    // 소리 인식 범위
     public float moveSpeed = 1f;
     public LayerMask playerLayer;       // 플레이어 레이어
 
@@ -15,6 +14,7 @@ public class NewEnemy : MonoBehaviour
     private bool isPlayerDetected = false;
     private bool attacking = false;
     private bool flipping = false;
+    public bool isHeared = false;
 
     void Start()
     {
@@ -31,7 +31,7 @@ public class NewEnemy : MonoBehaviour
         float distanceToPlayer = directionToPlayer.magnitude;
 
         // 소리 범위 체크
-        if (distanceToPlayer <= hearingRange && !attacking)
+        if (isHeared && !attacking)
         {
             Debug.Log("플레이어가 소리 범위에 들어옴!");
             FollowPlayer();
