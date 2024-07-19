@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - SoundCheck
+  - SelectedSkill
+  - ItemWindow
+  - ChargeBarImage
+  - HealthBarImage
+  - SkillSelect
+  - Skill
+  - Music
   layers:
   - Default
   - TransparentFX
