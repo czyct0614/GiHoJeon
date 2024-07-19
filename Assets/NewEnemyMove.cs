@@ -5,6 +5,7 @@ public class NewEnemy : MonoBehaviour
     public float visionRange = 5f;      // 시야 범위 길이
     public float visionWidth = 1f;      // 시야 범위 폭
     public float moveSpeed = 1f;
+    public float attackMoveSpeed = 3f;
     public LayerMask playerLayer;       // 플레이어 레이어
 
     private Transform player;
@@ -96,7 +97,7 @@ public class NewEnemy : MonoBehaviour
         // 플레이어를 향해 이동합니다.
         attacking = true;
         Vector3 targetPosition = new Vector3(player.position.x, transform.position.y, player.position.z);
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, attackMoveSpeed * Time.deltaTime);
         Debug.Log("공격");
     }
 }
