@@ -36,6 +36,7 @@ TagManager:
   - CurseEnemy
   - BOSS
   - Wall
+  - door
   layers:
   - Default
   - TransparentFX
