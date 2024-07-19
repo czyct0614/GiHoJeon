@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstStage.unity
     guid: de556b92bc5654d489b5b048edad5547
+  - enabled: 1
+    path: Assets/Scenes/HallMap.unity
+    guid: b261fd8039b54ef4e889ccc7c6d21a8e
   m_configObjects: {}
