@@ -36,12 +36,9 @@ TagManager:
   - CurseEnemy
   - BOSS
   - Wall
-<<<<<<< Updated upstream
   - door
-=======
   - SoundRange
   - SoundCheck
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
