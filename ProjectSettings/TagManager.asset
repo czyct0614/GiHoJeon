@@ -3,16 +3,54 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Monster
+  - Ground
+  - DeadLine
+  - FlyingPlatform
+  - Item
+  - Portal
+  - ItemWindow
+  - Range
+  - Skill
+  - Else
+  - SkillSelect
+  - ContinueMapName
+  - Music
+  - HealthBarImage
+  - ChargeBarImage
+  - SpawnPoint
+  - Shield
+  - ShieldEnemy
+  - DashEnemy
+  - SkillSelectWindow
+  - SelectedSkill
+  - Ladder
+  - StrongEnemy
+  - VeryStrongEnemy
+  - PStrongEnemy
+  - TurretEnemy
+  - Enemy
+  - PlatformEnemy
+  - ExplodingEnemy
+  - CurseEnemy
+  - BOSS
+  - Wall
+<<<<<<< Updated upstream
+  - door
+=======
+  - SoundRange
+  - SoundCheck
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Platform
   - Water
   - UI
-  - 
-  - 
+  - playerLayer
+  - Monster
   - 
   - 
   - 
