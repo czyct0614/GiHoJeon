@@ -387,9 +387,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionRange: 5
   visionWidth: 1
+  hearingRange: 10
   moveSpeed: 1
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   visionObject: {fileID: 6476424474061840975}
-  isHeared: 0
