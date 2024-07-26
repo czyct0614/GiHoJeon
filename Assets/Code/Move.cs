@@ -6,75 +6,90 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
-    Missile misile;//총알 프리팹
+    private Missile misile;//총알 프리팹
+    private Rigidbody2D rigid; //물리이동을 위한 변수 선언
+    private SpriteRenderer spriteRenderer; //방향전환을 위한 변수 
+    private Animator animator; //애니메이터 조작을 위한 변수 
+    private SkillImage skillimage;//스킬 이미지(왼쪽 아래  UI) 변수
+    private bool velocityZero = false;
+    private bool isInvincible = false; // 무적 상태 여부를 나타내는 변수
+    private Collider2D playerCollider;
+    Vector2 originPos = new Vector2();//스폰포인트
+    private static bool playerExists = false;
+    private GameObject player;
+    
+    
 
-
-
-    public Rigidbody2D rigid; //물리이동을 위한 변수 선언
-    SpriteRenderer spriteRenderer; //방향전환을 위한 변수 
-    Animator animator; //애니메이터 조작을 위한 변수 
-    SkillImage skillimage;//스킬 이미지(왼쪽 아래  UI) 변수
-
-
-
+    [Header("====>총알과 스킬 프리팹<====")]
     public GameObject missilePrefab;//총알 코드 가져오기
     public GameObject skillSelectPrefab;//스킬 선택 코드 가져오기
 
 
 
+    [Header("====>모션<====")]
     public bool IsJumping = false;//점프 모션
     private bool IsRunning = false;//달리기 모션
     private bool IsShooting = false;//총쏘는 모션
     private bool canShoot = true;
+    private bool isClimbing = false;
 
 
+
+    [Header("====>체력<====")]
     public int maxHealth = 10;//최대체력
     public int currentHealth = 10;//현재체력
 
 
 
+    [Header("====>이동<====")]
     public float maxSpeed; //최대 속력 변수 
-    public float jumpPower;//점프 높이
-    public float dashingPower=9f;//얼마나 많이 움직일지
-    public float dashingTime=0.2f;//대쉬 지속시간
-    public float dashingCooldown=1f;//대쉬 쿨타임
     public float isFlipped;
-    public float InvincibleDuration = 0.5f;//부활 무적시간
-    public float climbSpeed = 10f; // 사다리 오르기 속도
-    public float shootCooldown;//장전시간
-    public Vector2 lastSpawnPoint;
-    public string NowMap;
 
 
-    public bool Dead=false;
-    private bool canDash=true;//대쉬가능한지
-    private bool isDashing;//대쉬하고있는지
-    public bool isDying=false;//죽고 있는지
-    public bool canInput = true;
-    private bool isInvincible = false; // 무적 상태 여부를 나타내는 변수
+
+    [Header("====>점프<====")]
+    public float jumpPower;//점프 높이
     private float JumpTime;
     private float CanJumpTime = 0.4f;
     public bool CanJump = true;
-    public bool isSkillReady = false;
-    private bool isClimbing = false;
-    private bool velocityZero = false;
-    public bool isHided = false;
 
-
-
-    Vector2 originPos = new Vector2();//스폰포인트
     
 
-    private Collider2D playerCollider;
+    [Header("====>대쉬<====")]
+    public float dashingPower=9f;//얼마나 많이 움직일지
+    public float dashingTime=0.2f;//대쉬 지속시간
+    public float dashingCooldown=1f;//대쉬 쿨타임
+    private bool canDash=true;//대쉬가능한지
+    private bool isDashing;//대쉬하고있는지
+    
+
+    
+    [Header("====>s점프<====")]
     public bool playerOnPlatform = false;
 
-    
-    
+
+
+    [Header("====>죽음/부활<====")]
+    public float InvincibleDuration = 0.5f;//부활 무적시간
+    public Vector2 lastSpawnPoint;
+    public string NowMap;
+    public bool Dead=false;
+    public bool isDying=false;//죽고 있는지
+    public bool canInput = true;
+
+
+
+    [Header("====>그외<====")]
+    public bool isSkillReady = false;
+    public bool isHided = false;
+    public float climbSpeed = 10f; // 사다리 오르기 속도
+    public float shootCooldown;//장전시간
     [SerializeField] private TrailRenderer tr;//대쉬 잔상 남기기
     [SerializeField] private Image HPbarImage;
     [SerializeField] private Image ChargebarImage;
-    private static bool playerExists = false;
-    private GameObject player;
+
+
+
 
 
 //시작 함수
