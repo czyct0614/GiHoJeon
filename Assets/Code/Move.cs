@@ -1,5 +1,3 @@
-
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -60,6 +58,7 @@ public class PlayerMove : MonoBehaviour
     public bool isSkillReady = false;
     private bool isClimbing = false;
     private bool velocityZero = false;
+    public bool isHided = false;
 
 
 
@@ -68,7 +67,6 @@ public class PlayerMove : MonoBehaviour
 
     private Collider2D playerCollider;
     public bool playerOnPlatform = false;
-    
 
     
     
@@ -148,6 +146,9 @@ public class PlayerMove : MonoBehaviour
 
         isSkillReady = false;
 
+        isHided = false;
+
+
 
     }
 
@@ -177,6 +178,7 @@ public class PlayerMove : MonoBehaviour
             else
             {
                 transform.position = new Vector3(transform.position.x,transform.position.y,0f);
+
                 rigid.gravityScale = 8f;
 
                 isDying=false;
@@ -250,7 +252,36 @@ public class PlayerMove : MonoBehaviour
 
 
 
+//은신
+        if(rigid.velocity==new Vector2(0,0)&&Input.GetButtonDown("Interact")){
+            if(isHided==false)
+            {
+                spriteRenderer.color = new Color(1,1,1,0f);
+                rigid.gravityScale=0f;
+                EnableAllBoxColliders(this.gameObject,false);
+                isInvincible=true;
+                isHided=true;
+            }
+            else if(isHided==true)
+            {
+                spriteRenderer.color = new Color(1,1,1,1f);
+                EnableAllBoxColliders(this.gameObject,true);
+                rigid.gravityScale=8f;
+                isInvincible=false;
+                isHided=false;
+            }
+            else
+            {
+                Debug.Log("은신 오류남");
+            }
+        }
 
+
+
+//은신시 아무 행동 못하게
+        if(isHided==true){
+            return;
+        }
 
 
 
@@ -394,6 +425,13 @@ public class PlayerMove : MonoBehaviour
 
 
 
+//은신시 아무 행동 못하게
+        if(isHided==true){
+            return;
+        }
+
+
+
 //이동
         if (!isDying)
         {
@@ -515,6 +553,9 @@ public class PlayerMove : MonoBehaviour
         //대쉬할수 있게
         canDash = true;
 
+        //은신 풀리게
+        isHided=false;
+
         //모션 초기화
         animator.SetBool("IsJumping",false);
 
@@ -523,6 +564,8 @@ public class PlayerMove : MonoBehaviour
         animator.SetBool("IsDashing",false);
 
         tr.emitting=false;
+
+        rigid.gravityScale=8f;
 
         //체력바 초기화
         ChangeHealthBarAmount();
@@ -927,4 +970,24 @@ public class PlayerMove : MonoBehaviour
         player.transform.position = lastSpawnPoint;
     }
 
+
+
+
+
+//플레이어 오브젝트와 자식 오브젝트 콜라이더 다 끄는 함수
+    void EnableAllBoxColliders(GameObject obj,bool turnoff)
+    {
+        // 현재 게임 오브젝트의 모든 BoxCollider2D 컴포넌트를 가져와 비활성화합니다.
+        BoxCollider2D[] colliders = obj.GetComponents<BoxCollider2D>();
+        foreach (BoxCollider2D collider in colliders)
+        {
+            collider.enabled = turnoff;
+        }
+
+        // 모든 자식 오브젝트들을 순회하며 모든 BoxCollider2D를 비활성화합니다.
+        foreach (Transform child in obj.transform)
+        {
+            EnableAllBoxColliders(child.gameObject,turnoff);
+        }
+    }
 }
