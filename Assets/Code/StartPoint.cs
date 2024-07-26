@@ -13,6 +13,7 @@ public class StartPoint : MonoBehaviour
         if (player != null)
         {
             player.transform.position = transform.position;
+            PlayerRoomManager.Instance.SetLastTouchedSpawnPoint(transform.position);
             move.LastPoint();
             move.Revival();
             

@@ -16,12 +16,14 @@ public class NewEnemy : MonoBehaviour
     private bool attacking = false;
     private bool flipping = false;
     public bool isHeared = false;
+    private bool didThisEverChangedDangerRate=false;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerScript = player.GetComponent<PlayerMove>();
         visionObject.transform.localPosition = new Vector3(3, 0, 0);
+        didThisEverChangedDangerRate=false;
     }
 
     void Update()
@@ -34,6 +36,7 @@ public class NewEnemy : MonoBehaviour
         // 소리 범위 체크
         if (isHeared && !attacking)
         {
+            
             Debug.Log("플레이어가 소리 범위에 들어옴!");
             FollowPlayer();
         }
@@ -72,6 +75,11 @@ public class NewEnemy : MonoBehaviour
 
     public void OnPlayerDetected()
     {
+        if(!didThisEverChangedDangerRate)
+        {
+            Script.Find<DangerRate>("DangerBar").ChangeDangerRate(-1);
+            didThisEverChangedDangerRate=true;
+        }
         isPlayerDetected = true;
         AttackPlayer();
     }

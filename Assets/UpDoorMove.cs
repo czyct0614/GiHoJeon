@@ -6,8 +6,8 @@ public class UpDoorMove : MonoBehaviour
     private Transform player; // 플레이어의 Transform
     public float triggerDistance = 5f; // 플레이어와의 거리 임계값
     public float moveAmount = 3f; // 이동할 Y축 거리
-    public float moveDuration = 2f; // 이동하는 데 걸리는 시간
-    public float stayOpenDuration = 3f; // 열린 상태로 유지되는 시간
+    public float moveDuration; // 이동하는 데 걸리는 시간
+    public float stayOpenDuration; // 열린 상태로 유지되는 시간
 
     private Vector3 originalPosition;
     public bool isgoingup = false;

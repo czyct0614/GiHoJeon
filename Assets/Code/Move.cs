@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
     private static bool playerExists = false;
     private GameObject player;
     
-    
+
 
     [Header("====>총알과 스킬 프리팹<====")]
     public GameObject missilePrefab;//총알 코드 가져오기
@@ -982,6 +982,7 @@ public class PlayerMove : MonoBehaviour
 
 //마지막 스폰포인트로 이동하는 함수
     public void LastPoint(){
+        lastSpawnPoint = PlayerRoomManager.Instance.GetLastTouchedSpawnPoint();
         player.transform.position = lastSpawnPoint;
     }
 

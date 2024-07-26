@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class ScriptFinder : MonoBehaviour
+public class Script : MonoBehaviour
 {
     // 싱글톤 인스턴스
-    private static ScriptFinder instance= null;
+    private static Script instance= null;
 
     void Awake()
     {
@@ -19,7 +19,6 @@ public class ScriptFinder : MonoBehaviour
         }
         else
         {
-            //만약 씬 이동이 되었는데 그 씬에도 Hierarchy에 ㄴㅊ갸ㅔㅅ랴ㅜㅇㄷㄱ이 존재할 수도 있다.
             //그럴 경우엔 이전 씬에서 사용하던 인스턴스를 계속 사용해주는 경우가 많은 것 같다.
             //그래서 이미 전역변수인 instance에 인스턴스가 존재한다면 자신(새로운 씬의 GameMgr)을 삭제해준다.
             Destroy(this.gameObject);
@@ -27,12 +26,12 @@ public class ScriptFinder : MonoBehaviour
     }
 
     // 스크립트 찾기 함수
-    public static T FindScriptWithTag<T>(string tag) where T : MonoBehaviour
+    public static T Find<T>(string tag) where T : MonoBehaviour
     {
         // 인스턴스가 없을 경우 새로 생성
         if (instance == null)
         {
-            instance = new GameObject("ScriptFinder").AddComponent<ScriptFinder>();
+            instance = new GameObject("Script").AddComponent<Script>();
         }
 
         // 해당 태그를 가진 모든 게임 오브젝트를 가져옴

@@ -1033,6 +1033,10 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2462243119117574091, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
+      propertyPath: isSkillReady
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462243119117574091, guid: b5bbb0222133e734cae4d127c1ec5242, type: 3}
       propertyPath: shootCooldown
       value: 0.25
       objectReference: {fileID: 0}

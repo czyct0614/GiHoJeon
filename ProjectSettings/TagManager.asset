@@ -41,6 +41,7 @@ TagManager:
   - SoundCheck
   - updoor
   - downdoor
+  - DangerBar
   layers:
   - Default
   - TransparentFX

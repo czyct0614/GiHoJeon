@@ -34,7 +34,7 @@ public class ManaRevive : MonoBehaviour
         Debug.Log(other.tag);
         if (other.CompareTag("Player"))
         {
-            ScriptFinder.FindScriptWithTag<ManaSkillImage>("SelectedSkill").Mana(30);
+            Script.Find<ManaSkillImage>("SelectedSkill").Mana(30);
             Destroy(gameObject);
         }
         if (other.CompareTag("Ground") || other.CompareTag("FlyingPlatform"))

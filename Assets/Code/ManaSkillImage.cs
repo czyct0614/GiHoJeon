@@ -127,7 +127,7 @@ public class ManaSkillImage : MonoBehaviour
 
 
 
-        move=ScriptFinder.FindScriptWithTag<PlayerMove>("Player");
+        move=Script.Find<PlayerMove>("Player");
 
 
 

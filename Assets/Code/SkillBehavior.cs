@@ -17,10 +17,10 @@ public class SkillBehavior : MonoBehaviour
     {
         // 스킬 잔상 초기에 비활성화
         tr.emitting = false;
-        move = ScriptFinder.FindScriptWithTag<PlayerMove>("Player");
-        enemy = ScriptFinder.FindScriptWithTag<EnemyMove>("Monster");
-        Senemy = ScriptFinder.FindScriptWithTag<ShieldEnemyMove>("ShieldEnemy");
-        Denemy = ScriptFinder.FindScriptWithTag<DashEnemyMove>("DashEnemy");
+        move = Script.Find<PlayerMove>("Player");
+        enemy = Script.Find<EnemyMove>("Monster");
+        Senemy = Script.Find<ShieldEnemyMove>("ShieldEnemy");
+        Denemy = Script.Find<DashEnemyMove>("DashEnemy");
     }
 
     // Update is called once per frame
