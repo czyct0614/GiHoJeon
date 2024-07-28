@@ -268,6 +268,7 @@ public class PlayerMove : MonoBehaviour
 
 
 //은신
+/*
         if(rigid.velocity==new Vector2(0,0)&&Input.GetButtonDown("Interact")){
             if(isHided==false)
             {
@@ -290,7 +291,7 @@ public class PlayerMove : MonoBehaviour
                 Debug.Log("은신 오류남");
             }
         }
-
+*/
 
 
 //은신시 아무 행동 못하게
