@@ -44,6 +44,7 @@ public class PlayerMove : MonoBehaviour
     [Header("====>이동<====")]
     public float maxSpeed; //최대 속력 변수 
     public float isFlipped;
+    public bool isFastRunning;
 
 
 
@@ -162,7 +163,8 @@ public class PlayerMove : MonoBehaviour
         isSkillReady = false;
 
         isHided = false;
-
+        
+        maxSpeed=15f;
 
 
     }
@@ -406,12 +408,12 @@ public class PlayerMove : MonoBehaviour
 
 
 //대쉬 코드
-        if(Input.GetButtonDown("Dash") && canDash && !velocityZero){
+        /*if(Input.GetButtonDown("Dash") && canDash && !velocityZero){
             animator.SetBool("IsDashing",true);
             animator.SetBool("IsJumping",false);
             StartCoroutine(Dash());
             IsRunning = false;
-        }
+        }*/
 
 
 
@@ -617,7 +619,7 @@ public class PlayerMove : MonoBehaviour
 
         IsRunning = true;
 
-        rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+        rigid.AddForce(Vector2.right * h*(maxSpeed/15f), ForceMode2D.Impulse);
 
         //움직일때 방향 바꾸기
         if(Input.GetButton("left") || Input.GetButton("right")){
@@ -625,6 +627,7 @@ public class PlayerMove : MonoBehaviour
             if(!IsJumping && !isDashing)
             {
                 animator.SetBool("IsRunning",true);
+                animator.SetFloat("RunSpeed", maxSpeed/15f);
             }
 
             if(Input.GetButton("left") && Input.GetButton("right"))
@@ -635,6 +638,19 @@ public class PlayerMove : MonoBehaviour
 
             }
             else{
+                if(Input.GetButton("Run")){
+                    if(!isFastRunning){
+                        isFastRunning=true;
+                        ChangeMaxSpeed(1.5f);
+                    }
+                }
+                else
+                {
+                    if(isFastRunning){
+                        ChangeMaxSpeed(2/3f);
+                        isFastRunning=false;
+                    }
+                }
                 velocityZero = false;
             }
 
@@ -1006,5 +1022,22 @@ public class PlayerMove : MonoBehaviour
         {
             EnableAllBoxColliders(child.gameObject,turnoff);
         }
+    }
+
+
+
+
+
+//소리 범위 켜고 늘리고 끄는 함수
+    void ChangeSoundRange(){
+
+    }
+
+
+
+
+//최대속도 조절하는 함수
+    public void ChangeMaxSpeed(float amount){
+        maxSpeed=maxSpeed*amount;
     }
 }

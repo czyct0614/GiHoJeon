@@ -380,6 +380,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e00f00729a899604b9a727419f5b35b7, type: 3}
+--- !u!1 &291779439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 291779440}
+  m_Layer: 0
+  m_Name: HidingBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &291779440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291779439}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.575611, y: -7.1104918, z: 0.56045204}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &367816269
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,8 +820,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerDistance: 5
   moveAmount: -3
-  moveDuration: 1
-  stayOpenDuration: 3
+  moveDuration: 0.5
+  stayOpenDuration: 2
   isgoingdown: 0
 --- !u!61 &829632589
 BoxCollider2D:
@@ -1068,8 +1099,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerDistance: 5
   moveAmount: 3
-  moveDuration: 1
-  stayOpenDuration: 3
+  moveDuration: 0.5
+  stayOpenDuration: 2
   isgoingup: 0
 --- !u!61 &997939097
 BoxCollider2D:
@@ -1394,6 +1425,7 @@ MonoBehaviour:
   transformPoint: {x: -40, y: 6.5, z: 0}
   Vent: {fileID: 1469299802}
   doShow: 0
+  changeSpeedRate: 0.5
 --- !u!1 &1412682343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,6 +2382,7 @@ MonoBehaviour:
   transformPoint: {x: 9.5, y: -2, z: 0}
   Vent: {fileID: 1469299802}
   doShow: 1
+  changeSpeedRate: 2
 --- !u!4 &1812613557
 Transform:
   m_ObjectHideFlags: 0
@@ -2858,3 +2891,4 @@ SceneRoots:
   - {fileID: 1094664087}
   - {fileID: 1361066903}
   - {fileID: 1812613557}
+  - {fileID: 291779440}

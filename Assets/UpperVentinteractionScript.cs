@@ -9,6 +9,7 @@ public class UpperVentinteractionScript : MonoBehaviour
     public Vector3 transformPoint;
     public GameObject Vent;
     public bool doShow;
+    public float changeSpeedRate;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class UpperVentinteractionScript : MonoBehaviour
         if(Entered && Input.GetButtonDown("Interact")){
             Vent.SetActive(doShow);
             player.position = transformPoint;
+            Script.Find<PlayerMove>("Player").ChangeMaxSpeed(changeSpeedRate);
         }
     }
     
