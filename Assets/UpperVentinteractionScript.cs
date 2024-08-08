@@ -7,7 +7,9 @@ public class UpperVentinteractionScript : MonoBehaviour
     private Transform player;
     public bool Entered = false;
     public Vector3 transformPoint;
-    
+    public GameObject Vent;
+    public bool doShow;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class UpperVentinteractionScript : MonoBehaviour
     void Update()
     {
         if(Entered && Input.GetButtonDown("Interact")){
+            Vent.SetActive(doShow);
             player.position = transformPoint;
         }
     }
