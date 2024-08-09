@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4417392168745261683}
   - component: {fileID: 1001220782042986209}
   - component: {fileID: 2410586839460668314}
+  - component: {fileID: 4762163860745682979}
   m_Layer: 5
   m_Name: ScreenSizeFix
   m_TagString: Untagged
@@ -101,3 +102,15 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4762163860745682979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662295604581650153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20fddfb7643e5dc4d9853904d96f9d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
