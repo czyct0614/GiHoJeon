@@ -4,48 +4,53 @@ using UnityEngine;
 using UnityEngine.UI;
 public class DangerRate : MonoBehaviour
 {
-    [SerializeField] private Image DangerBarImage;
+
+
+
+    [SerializeField] private Image dangerBarImage;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        SetDangerRate(5);
+        SetDangerRate(0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
     public void SetDangerRate(int num)
     {
-        if(num!=1&&num!=2&&num!=3&&num!=4&&num!=5){
-            Debug.LogWarning("경고 값은 1에서 5까지 정수로만 하기");
+        if(num!=0&&num!=1&&num!=2&&num!=3&&num!=4&&num!=5)
+        {
+            Debug.LogWarning("경고 값은 0에서 5까지 정수로만 하기");
             return;
         }
-        if(DangerBarImage != null){
+        if(dangerBarImage != null)
+        {
 
-            DangerBarImage.fillAmount = (float)num/5;
+            dangerBarImage.fillAmount = (float)num/5;
 
         }
         switch (num)
         {
             case 1:
-                DangerBarImage.color = Color.red; // 빨강
+                dangerBarImage.color = Color.blue; // 파랑
                 break;
             case 2:
-                DangerBarImage.color = new Color(1f, 0.647f, 0f); // 주황
+                dangerBarImage.color = Color.green; // 초록
                 break;
             case 3:
-                DangerBarImage.color = Color.yellow; // 노랑
+                dangerBarImage.color = Color.yellow; // 노랑
                 break;
             case 4:
-                DangerBarImage.color = Color.green; // 초록
+                dangerBarImage.color = new Color(1f, 0.647f, 0f); // 주황
                 break;
             case 5:
-                DangerBarImage.color = Color.blue; // 파랑
+                dangerBarImage.color = Color.red; // 빨강
                 break;
             default:
-                DangerBarImage.color = Color.white; // 기본값 (색상 코드가 유효하지 않은 경우)
+                dangerBarImage.color = Color.white; // 기본값 (색상 코드가 유효하지 않은 경우)
                 break;
         }
     }
@@ -54,49 +59,55 @@ public class DangerRate : MonoBehaviour
 
     public void ChangeDangerRate(int num)
     {
-        int OriginalRate=(int)(DangerBarImage.fillAmount*5);
-        int FinalRate=OriginalRate+num;
-        if(FinalRate>=5)
+        int originalRate=(int)(dangerBarImage.fillAmount*5);
+        int finalRate=originalRate+num;
+        if(finalRate>=5)
         {
-            FinalRate=5;
+            finalRate=5;
         }
-        else if(FinalRate<=0)
+        else if(finalRate<=0)
         {
-            FinalRate=0;
-        }
-
-
-        if(DangerBarImage != null)
-        {
-            DangerBarImage.fillAmount = (float)FinalRate/5;
+            finalRate=0;
         }
 
 
+        if(dangerBarImage != null)
+        {
+            dangerBarImage.fillAmount = (float)finalRate/5;
+        }
 
-        switch (FinalRate)
+
+
+        switch (finalRate)
         {
             case 1:
-                DangerBarImage.color = Color.red; // 빨강
+                dangerBarImage.color = Color.blue; // 파랑
                 break;
             case 2:
-                DangerBarImage.color = new Color(1f, 0.647f, 0f); // 주황
+                dangerBarImage.color = Color.green; // 초록
                 break;
             case 3:
-                DangerBarImage.color = Color.yellow; // 노랑
+                dangerBarImage.color = Color.yellow; // 노랑
                 break;
             case 4:
-                DangerBarImage.color = Color.green; // 초록
+                dangerBarImage.color = new Color(1f, 0.647f, 0f); // 주황
                 break;
             case 5:
-                DangerBarImage.color = Color.blue; // 파랑
+                dangerBarImage.color = Color.red; // 빨강
                 break;
             default:
-                DangerBarImage.color = Color.white; // 기본값 (색상 코드가 유효하지 않은 경우)
+                dangerBarImage.color = Color.white; // 기본값 (색상 코드가 유효하지 않은 경우)
                 break;
         }
     }
+
+
+
     public int CheckDangerRate()
     {
-        return (int)(DangerBarImage.fillAmount*5);
+        return (int)(dangerBarImage.fillAmount*5);
     }
+
+
+
 }

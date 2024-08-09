@@ -339,6 +339,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1548360453773441347, guid: e00f00729a899604b9a727419f5b35b7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1038
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548360453773441347, guid: e00f00729a899604b9a727419f5b35b7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548360453773441347, guid: e00f00729a899604b9a727419f5b35b7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548360453773441347, guid: e00f00729a899604b9a727419f5b35b7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2191203166914827526, guid: e00f00729a899604b9a727419f5b35b7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -369,6 +385,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7834611348827645636, guid: e00f00729a899604b9a727419f5b35b7, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840389139326740022, guid: e00f00729a899604b9a727419f5b35b7, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8820435744526151013, guid: e00f00729a899604b9a727419f5b35b7, type: 3}
@@ -981,9 +1001,9 @@ MonoBehaviour:
   roomBounds:
     roomName: Room
     CenterX: -21
-    CenterY: 0
+    CenterY: 3
     MapSizeX: 82
-    MapSizeY: 26
+    MapSizeY: 20
 --- !u!4 &996933815
 Transform:
   m_ObjectHideFlags: 0
@@ -993,8 +1013,8 @@ Transform:
   m_GameObject: {fileID: 996933812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21, y: 0, z: 0}
-  m_LocalScale: {x: 82, y: 26, z: 1}
+  m_LocalPosition: {x: -21, y: 3, z: 0}
+  m_LocalScale: {x: 82, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

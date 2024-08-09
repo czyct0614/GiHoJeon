@@ -11,7 +11,7 @@ public class CCTVCode : MonoBehaviour
         {
             if(!didThisEverChangedDangerRate)
             {
-                Script.Find<DangerRate>("DangerBar").ChangeDangerRate(-1);
+                Script.Find<DangerRate>("DangerBar").ChangeDangerRate(1);
                 didThisEverChangedDangerRate=true;
             }
         }

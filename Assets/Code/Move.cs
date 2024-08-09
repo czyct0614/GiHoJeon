@@ -220,11 +220,12 @@ public class PlayerMove : MonoBehaviour
 
 
 //스킬 불러오기
+/*
         if(skillimage==null){
             skillimage = GameObject.FindGameObjectWithTag("SelectedSkill").GetComponent<SkillImage>();
         }
         isSkillReady=skillimage.isSkillReady;
-
+*/
 
 
 //주인공 콜라이더 불러오기
@@ -256,16 +257,20 @@ public class PlayerMove : MonoBehaviour
 
 
 //체력바 이미지 불러오기
+/*
         if(HPbarImage==null){
             HPbarImage=GameObject.FindGameObjectWithTag("HealthBarImage").GetComponent<Image>();
         }
+*/
 
 
 
 //차징바 이미지 불러오기
+/*
         if(ChargebarImage==null){
             ChargebarImage=GameObject.FindGameObjectWithTag("ChargeBarImage").GetComponent<Image>();
         }
+*/
 
 
 
