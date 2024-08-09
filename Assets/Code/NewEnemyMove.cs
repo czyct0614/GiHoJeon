@@ -36,8 +36,6 @@ public class NewEnemy : MonoBehaviour
         // 소리 범위 체크
         if (isHeared && !attacking)
         {
-            
-            Debug.Log("플레이어가 소리 범위에 들어옴!");
             FollowPlayer();
         }
 
@@ -61,7 +59,6 @@ public class NewEnemy : MonoBehaviour
     {
         if(!flipping){
             flipping = true;
-            Debug.Log("Flip");
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1;
