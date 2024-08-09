@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
-    
+
     private Missile misile; // 총알 프리팹
     private Rigidbody2D rigid; // 물리 이동을 위한 변수 선언
     private SpriteRenderer spriteRenderer; // 방향 전환을 위한 변수 
@@ -217,15 +217,15 @@ public class PlayerMove : MonoBehaviour
         ChangeHealthBarAmount();
 
 
-
 // 스킬 불러오기
-        if (skillimage == null)
+/*
+        if (skillimage==null)
         {
             skillimage = GameObject.FindGameObjectWithTag("SelectedSkill").GetComponent<SkillImage>();
         }
 
         isSkillReady = skillimage.isSkillReady;
-
+*/
 
 
 // 주인공 콜라이더 불러오기
@@ -261,18 +261,22 @@ public class PlayerMove : MonoBehaviour
 
 
 // 체력바 이미지 불러오기
-        if (healthBarImage == null)
+/*
+        if (HPbarImage==null)
         {
-            healthBarImage = GameObject.FindGameObjectWithTag("HealthBarImage").GetComponent<Image>();
+            HPbarImage=GameObject.FindGameObjectWithTag("HealthBarImage").GetComponent<Image>();
         }
+*/
 
 
 
 // 차징바 이미지 불러오기
-        if (chargrBarImage == null)
+/*
+        if (ChargebarImage==null)
         {
-            chargrBarImage = GameObject.FindGameObjectWithTag("ChargeBarImage").GetComponent<Image>();
+            ChargebarImage=GameObject.FindGameObjectWithTag("ChargeBarImage").GetComponent<Image>();
         }
+*/
 
 
 

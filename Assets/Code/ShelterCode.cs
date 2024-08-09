@@ -11,7 +11,7 @@ public class ShelterCode : MonoBehaviour
         {
             if(!didThisEverChangedDangerRate)
             {
-                Script.Find<DangerRate>("DangerBar").SetDangerRate(5);
+                Script.Find<DangerRate>("DangerBar").SetDangerRate(0);
                 didThisEverChangedDangerRate=true;
             }
         }

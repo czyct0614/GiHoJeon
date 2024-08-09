@@ -22,7 +22,6 @@ public class PlayerRoomManager : MonoBehaviour
     public void SetLastTouchedSpawnPoint(Vector2 spawnPoint)
     {
         lastTouchedSpawnPoint = spawnPoint;
-        Debug.Log("마지막으로 닿은 스폰포인트가 설정되었습니다: " + spawnPoint);
     }
 
     public Vector2 GetLastTouchedSpawnPoint()
