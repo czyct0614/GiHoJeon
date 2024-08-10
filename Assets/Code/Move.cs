@@ -7,50 +7,66 @@ using UnityEngine.SceneManagement;
 public class PlayerMove : MonoBehaviour
 {
 
-    private Missile misile; // 총알 프리팹
-    private Rigidbody2D rigid; // 물리 이동을 위한 변수 선언
-    private SpriteRenderer spriteRenderer; // 방향 전환을 위한 변수 
-    private Animator animator; // 애니메이터 조작을 위한 변수 
-    private SkillImage skillimage; // 스킬 이미지 (왼쪽 아래 UI) 변수
-    private bool velocityZero = false;
-    private bool isInvincible = false; // 무적 상태 여부를 나타내는 변수
-    private Collider2D playerCollider;
-    Vector2 originPos = new Vector2(); // 스폰포인트
-    private static bool playerExists = false;
-    private GameObject player;
-    
+    [Header("====>총알 및 스킬<====")]
 
-
-    [Header("====>총알과 스킬 프리팹<====")]
-    public GameObject missilePrefab; // 총알 코드 가져오기
-    public GameObject skillSelectPrefab; // 스킬 선택 코드 가져오기
+    [SerializeField] private Image chargrBarImage;
+    // 총알 코드 가져오기
+    public GameObject missilePrefab;
+    // 스킬 선택 코드 가져오기
+    public GameObject skillSelectPrefab;
+    // 총알 프리팹
+    private Missile misile;
+    // 스킬 이미지 (왼쪽 아래 UI) 변수
+    private SkillImage skillimage;
+    public bool isSkillReady = false;
+    // 장전시간
+    public float shootCooldown;
 
 
 
     [Header("====>모션<====")]
-    public bool isJumping = false; // 점프 모션
-    private bool isRunning = false; // 달리기 모션
-    private bool isShooting = false; // 총쏘는 모션
+
+    // 방향 전환을 위한 변수
+    private SpriteRenderer spriteRenderer;
+    // 애니메이터 조작을 위한 변수
+    private Animator animator;
+    // 점프 모션
+    public bool isJumping = false;
+    // 달리기 모션
+    private bool isRunning = false;
+    // 총쏘는 모션
+    private bool isShooting = false;
     private bool canShoot = true;
     private bool isClimbing = false;
 
 
 
     [Header("====>체력<====")]
-    public int maxHealth = 10; // 최대체력
-    public int currentHealth = 10; // 현재체력
+
+    [SerializeField] private Image healthBarImage;
+    // 최대 체력
+    public int maxHealth = 10;
+    // 현재 체력
+    public int currentHealth = 10;
 
 
 
     [Header("====>이동<====")]
-    public float maxSpeed; // 최대 속력 변수 
+
+    // 물리 이동을 위한 변수 선언
+    private Rigidbody2D rigid;
+    // 최대 속력 변수 
+    public float maxSpeed;
     public float isFlipped;
     public bool isFastRunning;
+    private bool velocityZero = false;
 
 
 
     [Header("====>점프<====")]
-    public float jumpPower; // 점프 높이
+
+    // 점프 높이
+    public float jumpPower;
     private float JumpTime;
     private float canJumpTime = 0.4f;
     public bool canJump = true;
@@ -58,37 +74,58 @@ public class PlayerMove : MonoBehaviour
     
 
     [Header("====>대쉬<====")]
-    public float dashingPower = 9f; // 얼마나 많이 움직일지
-    public float dashingTime = 0.2f; // 대쉬 지속시간
-    public float dashingCooldown = 1f; // 대쉬 쿨타임
-    private bool canDash = true; // 대쉬 가능한지
-    private bool isDashing; // 대쉬하고있는지
+
+    // 대쉬 잔상 남기기
+    [SerializeField] private TrailRenderer tr;
+    // 얼마나 많이 움직일지
+    public float dashingPower = 9f;
+    // 대쉬 지속시간
+    public float dashingTime = 0.2f;
+    // 대쉬 쿨타임
+    public float dashingCooldown = 1f;
+    // 대쉬 가능한지
+    private bool canDash = true;
+    // 대쉬하고있는지
+    private bool isDashing;
     
 
     
     [Header("====>s점프<====")]
+
     public bool playerOnPlatform = false;
 
 
 
     [Header("====>죽음/부활<====")]
-    public float invincibleDuration = 0.5f; // 부활 무적시간
+
     public Vector2 lastSpawnPoint;
+    // 부활 무적시간
+    public float invincibleDuration = 0.5f;
     public string nowMap;
     public bool dead = false;
-    public bool isDying = false; // 죽고 있는지
+    // 죽고 있는지
+    public bool isDying = false;
     public bool canInput = true;
 
 
 
-    [Header("====>그외<====")]
-    public bool isSkillReady = false;
+    [Header("====>기타<====")]
+
     public bool isHided = false;
-    public float climbSpeed = 10f; // 사다리 오르기 속도
-    public float shootCooldown; // 장전시간
-    [SerializeField] private TrailRenderer tr; // 대쉬 잔상 남기기
-    [SerializeField] private Image healthBarImage;
-    [SerializeField] private Image chargrBarImage;
+
+    // 사다리 오르기 속도
+    public float climbSpeed = 10f;
+
+    private GameObject player;
+
+    // 무적 상태 여부를 나타내는 변수
+    private bool isInvincible = false;
+
+    private static bool playerExists = false;
+
+    private Collider2D playerCollider;
+
+    Vector2 originPos = new Vector2();
 
 
 
@@ -104,13 +141,17 @@ public class PlayerMove : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        DontDestroyOnLoad(this.gameObject); // 맵 바꿔도 안 날아가게
+        // 맵 바꿔도 안 날아가게
+        DontDestroyOnLoad(this.gameObject);
 
-        originPos = transform.position; // 게임 시작하면 위치 저장
+        // 게임 시작하면 위치 저장
+        originPos = transform.position;
 
-        rigid = GetComponent<Rigidbody2D>(); // 변수 초기화 
+        // 변수 초기화
+        rigid = GetComponent<Rigidbody2D>();
 
-        spriteRenderer = GetComponent<SpriteRenderer>(); // 초기화 
+        // 초기화
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         animator = GetComponent<Animator>();
 
@@ -134,29 +175,39 @@ public class PlayerMove : MonoBehaviour
 
 
 
-        maxHealth = 10; // 최대체력
+        // 최대 체력
+        maxHealth = 10;
 
-        currentHealth = 10; // 현재체력
+        // 현재 체력
+        currentHealth = 10;
 
-        dashingPower = 9f; // 얼마나 많이 움직일지
+        // 얼마나 많이 움직일지
+        dashingPower = 9f;
 
-        dashingTime = 0.2f; // 대쉬 지속시간
+        // 대쉬 지속시간
+        dashingTime = 0.2f;
 
-        dashingCooldown = 1f; // 대쉬 쿨타임
+        // 대쉬 쿨타임
+        dashingCooldown = 1f;
 
-        invincibleDuration = 0.5f; // 부활무적 시간
+        // 부활무적 시간
+        invincibleDuration = 0.5f;
 
-        shootCooldown = 0.15f; // 총 장전시간
+        // 총 장전시간
+        shootCooldown = 0.15f;
 
         dead = false;
 
-        canDash = true; // 대쉬가능한지
+        // 대쉬 가능한지
+        canDash = true;
 
-        isDying = false; // 죽고 있는지
+        // 죽고 있는지
+        isDying = false;
 
         canInput = true;
 
-        isInvincible = false; // 무적 상태 여부를 나타내는 변수
+        // 무적 상태 여부를 나타내는 변수
+        isInvincible = false;
 
         canJumpTime = 0.4f;
 

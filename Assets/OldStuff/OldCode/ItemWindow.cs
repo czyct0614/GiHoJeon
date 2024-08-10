@@ -163,7 +163,7 @@ public class ItemWindow : MonoBehaviour
         GameObject droppedItem = Instantiate(item, cameraTransform.position, Quaternion.identity);
         DropItem dropItemComponent = droppedItem.GetComponent<DropItem>();
         dropItemComponent.isFalling = true;
-        dropItemComponent.Eaten = false;
+        dropItemComponent.eaten = false;
 
         for (int i = 0; i < equippedItems.Length; i++)
         {

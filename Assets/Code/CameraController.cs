@@ -3,70 +3,119 @@ using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
-    Transform playerTransform;
-    [SerializeField]
-    Vector3 cameraPosition;
 
-    [SerializeField]
-    float cameraMoveSpeed;
+    [SerializeField] Transform playerTransform;
+    [SerializeField] Vector3 cameraPosition;
+
+    [SerializeField] float cameraMoveSpeed;
     float height;
     float width;
 
-    public RoomBounds? currentRoomBounds = null; // 현재 방의 경계를 저장하는 변수
+    // 현재 방의 경계를 저장하는 변수
+    public RoomBounds? currentRoomBounds = null;
 
     public static CameraController Instance;
 
     void Start()
     {
+
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
 
         height = Camera.main.orthographicSize;
-        width = height * 16/9;
+        width = height * 16 / 9;
+        
     }
 
-    private void Awake() {
-        DontDestroyOnLoad(gameObject); // 다른 맵에서 없어지지 않게 해줌
-        if (Instance == null) {
+
+
+
+
+    private void Awake() 
+    {
+
+        // 다른 맵에서 없어지지 않게 해줌
+        DontDestroyOnLoad(gameObject);
+
+        if (Instance == null) 
+        {
             Instance = this;
-        } else {
+        } 
+        else 
+        {
             Destroy(gameObject);
         }
+
     }
+
+
+
+
 
     void FixedUpdate()
     {
-        if (SceneManager.GetActiveScene().name == "StartScene") {
+
+        if (SceneManager.GetActiveScene().name == "StartScene") 
+        {
             transform.position = new Vector3(0, -3, -10);
         }
+
         LimitCameraArea();
+
     }
+
+
+
+
 
     void LimitCameraArea()
     {
+
         RoomBounds bounds = currentRoomBounds.Value;
 
         transform.position = Vector3.Lerp(transform.position, 
                                           playerTransform.position + cameraPosition, 
                                           Time.deltaTime * cameraMoveSpeed);
-        float lx = bounds.MapSizeX/2 - width;
-        float clampX = Mathf.Clamp(transform.position.x, -lx + bounds.CenterX, lx + bounds.CenterX);
+        float lx = bounds.mapSizeX / 2 - width;
+        float clampX = Mathf.Clamp(transform.position.x, -lx + bounds.centerX, lx + bounds.centerX);
 
-        float ly = bounds.MapSizeY/2 - height;
-        float clampY = Mathf.Clamp(transform.position.y, -ly + bounds.CenterY, ly + bounds.CenterY);
+        float ly = bounds.mapSizeY / 2 - height;
+        float clampY = Mathf.Clamp(transform.position.y, -ly + bounds.centerY, ly + bounds.centerY);
 
         transform.position = new Vector3(clampX, clampY, -10f);
+
     }
 
-    public void SetCurrentRoom(RoomBounds bounds) {
+
+
+
+
+    public void SetCurrentRoom(RoomBounds bounds) 
+    {
+
         currentRoomBounds = bounds;
+
     }
 
-    public void ClearCurrentRoom() {
+
+
+
+
+    public void ClearCurrentRoom() 
+    {
+
         currentRoomBounds = null;
+
     }
 
-    public string GetCurrentRoomName() {
+
+
+
+
+    public string GetCurrentRoomName() 
+    {
+
         return currentRoomBounds?.roomName;
+
     }
+
 }

@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GM : MonoBehaviour
 {
+
     private const string MAP_KEY = "CurrentMap";
     private static GM instance;
 
@@ -16,6 +17,7 @@ public class GM : MonoBehaviour
             if (instance == null)
             {
                 instance = FindObjectOfType<GM>();
+
                 if (instance == null)
                 {
                     GameObject obj = new GameObject();
@@ -23,48 +25,84 @@ public class GM : MonoBehaviour
                     instance = obj.AddComponent<GM>();
                 }
             }
+
             return instance;
         }
     }
 
     void Update()
     {
+
         if (instance != null && instance != this)
         {
-            Destroy(gameObject); // 중복된 GM 객체를 파괴합니다.
+            // 중복된 GM 객체를 파괴합니다.
+            Destroy(gameObject);
             return;
         }
+
         DontDestroyOnLoad(gameObject);
+
     }
+
+
+
+
 
     public void SetMainCamera(Camera camera)
     {
+
         mainCamera = camera;
+
     }
+
+
+
+
 
     public static void SaveCurrentMap(string mapName)
     {
+
         PlayerPrefs.SetString(MAP_KEY, mapName);
         PlayerPrefs.Save();
+
     }
+
+
+
+
 
     public static string LoadCurrentMap()
     {
+
         return PlayerPrefs.GetString(MAP_KEY, "SampleScene");
+
     }
+
+
+
+
 
     public void MoveCameraToTargetScene(string targetSceneName)
     {
+
         StartCoroutine(MoveCameraToScene(targetSceneName));
+
     }
+
+
+
+
 
     private IEnumerator MoveCameraToScene(string targetSceneName)
     {
+
         // 씬이 존재하는지 확인합니다.
         if (!SceneExists(targetSceneName))
         {
+
             Debug.LogWarning("Scene does not exist: " + targetSceneName);
             yield break;
+
         }
 
         // 타겟 씬을 로드합니다.
@@ -92,11 +130,17 @@ public class GM : MonoBehaviour
 
         // SampleScene을 언로드합니다.
         SceneManager.UnloadSceneAsync("SampleScene");
+
     }
+
+
+
+
 
     // 씬이 존재하는지 확인하는 메서드
     private bool SceneExists(string sceneName)
     {
+
         for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
         {
             string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
@@ -106,6 +150,9 @@ public class GM : MonoBehaviour
                 return true;
             }
         }
+        
         return false;
+
     }
+    
 }

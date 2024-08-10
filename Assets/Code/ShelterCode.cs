@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class ShelterCode : MonoBehaviour
 {
-    private bool didThisEverChangedDangerRate=false;
+
+    private bool didThisEverChangedDangerRate = false;
+    
     void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.CompareTag("Player"))
         {
-            if(!didThisEverChangedDangerRate)
+            if (!didThisEverChangedDangerRate)
             {
                 Script.Find<DangerRate>("DangerBar").SetDangerRate(0);
-                didThisEverChangedDangerRate=true;
+                didThisEverChangedDangerRate = true;
             }
         }
+
     }
+
 }

@@ -558,10 +558,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomBounds:
     roomName: Room
-    CenterX: -21
-    CenterY: 3
-    MapSizeX: 82
-    MapSizeY: 20
+    centerX: 0
+    centerY: 0
+    mapSizeX: 0
+    mapSizeY: 0
 --- !u!4 &996933815
 Transform:
   m_ObjectHideFlags: 0
@@ -655,10 +655,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomBounds:
     roomName: Shelter
-    CenterX: 41
-    CenterY: 0
-    MapSizeX: 42
-    MapSizeY: 26
+    centerX: 0
+    centerY: 0
+    mapSizeX: 0
+    mapSizeY: 0
 --- !u!4 &1035271139
 Transform:
   m_ObjectHideFlags: 0
@@ -851,9 +851,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ebe3c54faa7c145a444d5de54cec02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Entered: 0
   transformPoint: {x: -40, y: 6.5, z: 0}
   Vent: {fileID: 1469299802}
+  entered: 0
   doShow: 0
   changeSpeedRate: 0.5
 --- !u!1 &1412682343
@@ -1775,9 +1775,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ebe3c54faa7c145a444d5de54cec02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Entered: 0
   transformPoint: {x: 9.5, y: -2, z: 0}
   Vent: {fileID: 1469299802}
+  entered: 0
   doShow: 1
   changeSpeedRate: 2
 --- !u!4 &1812613557
@@ -2123,26 +2123,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2047640674}
   - component: {fileID: 2047640673}
-  - component: {fileID: 2047640672}
+  - component: {fileID: 2047640675}
   m_Layer: 0
-  m_Name: GroundCheck
+  m_Name: DoorManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2047640672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047640671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a370682e4e0185949b0f940464350733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &2047640673
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2210,6 +2198,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2047640675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047640671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf97e0db148e214c926005dcca62668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2092116054
 PrefabInstance:
   m_ObjectHideFlags: 0

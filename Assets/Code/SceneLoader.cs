@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
+
     private static SceneLoader instance;
+
     public static SceneLoader Instance
     {
         get
@@ -13,6 +15,7 @@ public class SceneLoader : MonoBehaviour
             if (instance == null)
             {
                 var obj = FindObjectOfType<SceneLoader>();
+
                 if (obj != null)
                 {
                     instance = obj;
@@ -30,30 +33,36 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private CanvasGroup sceneLoaderCanvasGroup;
-    [SerializeField]
-    private Image progressBar;
+    [SerializeField] private CanvasGroup sceneLoaderCanvasGroup;
+    [SerializeField] private Image progressBar;
 
     private string loadSceneName;
 
     public Transform CameraTransform;
-
     public GameObject maincamera;
 
     public static SceneLoader Create()
     {
+
         var SceneLoaderPrefab = Resources.Load<SceneLoader>("SceneLoader");
         return Instantiate(SceneLoaderPrefab);
+
     }
+
+
+
+
 
     private void Awake()
     {
+
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
             maincamera = GameObject.FindWithTag("MainCamera");
+
             if (maincamera != null)
             {
                 CameraTransform = maincamera.transform;
@@ -64,45 +73,74 @@ public class SceneLoader : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
+
+
+
+
 
     private void LateUpdate()
     {
+
         if (CameraTransform != null)
         {
             CameraTransform = maincamera.transform;
+
             UpdateLoaderPosition();
         }
         else
         {
             maincamera = GameObject.FindWithTag("MainCamera");
+
             if (maincamera != null)
             {
                 CameraTransform = maincamera.transform;
+
                 UpdateLoaderPosition();
             }
         }
+
     }
+
+
+
+
 
     private void UpdateLoaderPosition()
     {
+
         transform.position = new Vector3(CameraTransform.position.x, CameraTransform.position.y, CameraTransform.position.z + 10f);
+
     }
+
+
+
+
 
     public void LoadtheScene(string sceneName)
     {
+
         if (gameObject.activeSelf)
             return;
 
         gameObject.SetActive(true);
         SceneManager.sceneLoaded += LoadSceneEnd;
         loadSceneName = sceneName;
+
         StartCoroutine(Load(sceneName));
+
     }
+
+
+
+
 
     private IEnumerator Load(string sceneName)
     {
+
         progressBar.fillAmount = 0f;
+
         yield return StartCoroutine(Fade(true));
 
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
@@ -137,16 +175,27 @@ public class SceneLoader : MonoBehaviour
                 }
             }
         }
+
     }
+
+
+
+
 
     private void LoadSceneEnd(Scene scene, LoadSceneMode loadSceneMode)
     {
+
         if (scene.name == loadSceneName)
         {
             StartCoroutine(Fade(false));
             SceneManager.sceneLoaded -= LoadSceneEnd;
         }
+        
     }
+
+
+
+
 
     private IEnumerator Fade(bool isFadeIn)
     {
@@ -164,4 +213,5 @@ public class SceneLoader : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
 }

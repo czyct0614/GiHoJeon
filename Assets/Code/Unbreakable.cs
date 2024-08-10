@@ -5,19 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class Unbreakable : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);//다른 맵에서 없어지지 않게 해줌
+
+        //다른 맵에서 없어지지 않게 해줌
+        DontDestroyOnLoad(this.gameObject);
+
     }
 
-    // Update is called once per frame
     void Update()
     {
+
         // 현재 씬의 이름을 가져오기
         string currentSceneName = SceneManager.GetActiveScene().name;
-        if(currentSceneName == "StartScene"){
-        Destroy(gameObject);
+
+        if (currentSceneName == "StartScene")
+        {
+            Destroy(gameObject);
         }
+
     }
+    
 }

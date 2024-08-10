@@ -7,44 +7,58 @@ public class Settingcode : MonoBehaviour
 
     public GameObject settingsPanel;
     public GameObject escPanel;
+    public GameObject sButtonObject1;
+    public GameObject sButtonObject2;
+    public GameObject sButtonObject3;
+    public GameObject volumePanel;
 
     // 카메라 중심
     private Vector3 cameraCenter;
     // Renderer 컴포넌트
     private Renderer myRenderer;
-    public GameObject SbuttonObject;
-    public GameObject SbuttonObject2;
-    public GameObject SbuttonObject3;
-    public GameObject VolumePanel;
+
     public bool VisActive;
 
-    // Start is called before the first frame update
     void Start()
     {
+
         // 버튼 비활성화
-        SbuttonObject.SetActive(false);
-        SbuttonObject2.SetActive(false);
-        SbuttonObject3.SetActive(false);
+        sButtonObject1.SetActive(false);
+        sButtonObject2.SetActive(false);
+        sButtonObject3.SetActive(false);
         settingsPanel.SetActive(false);
+
     }
 
-    // Update is called once per frame
+
+
+
+
     void Update()
     {
 
-        VisActive = VolumePanel.activeSelf;
+        VisActive = volumePanel.activeSelf;
 
-        if (Input.GetButtonDown("Escape") && !VisActive){
+        if (Input.GetButtonDown("Escape") && !VisActive)
+        {
             settingsPanel.SetActive(false);
             escPanel.SetActive(true);
         }
-        else{
+        else
+        {
             escPanel.SetActive(false);
             settingsPanel.SetActive(true);
         }
+
     }
 
-    public void SettingPressed(){
+
+
+
+
+    public void SettingPressed()
+    {
+        
         // Renderer 컴포넌트 가져오기
         myRenderer = GetComponent<Renderer>();
 
@@ -59,18 +73,26 @@ public class Settingcode : MonoBehaviour
         transform.position = targetPosition;
 
         // 버튼 상태
-        SbuttonObject.SetActive(true);
-        SbuttonObject2.SetActive(true);
-        SbuttonObject3.SetActive(true);
+        sButtonObject1.SetActive(true);
+        sButtonObject2.SetActive(true);
+        sButtonObject3.SetActive(true);
+
     }
+
+
+
+
 
     public void respawnSetting()
     {
+
         myRenderer.enabled = true;
 
         // 버튼 상태
-        SbuttonObject.SetActive(false);
-        SbuttonObject2.SetActive(false);
-        SbuttonObject3.SetActive(false);
+        sButtonObject1.SetActive(false);
+        sButtonObject2.SetActive(false);
+        sButtonObject3.SetActive(false);
+
     }
+
 }

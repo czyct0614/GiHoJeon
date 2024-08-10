@@ -367,6 +367,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &340064488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2762894960471637698, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
+  m_PrefabInstance: {fileID: 622004164157610319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &340064492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340064488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2233e6105ad26bb4dae53b6649958c3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  cameraPosition: {x: 0, y: 0, z: 0}
+  cameraMoveSpeed: 0
 --- !u!1 &717409410
 GameObject:
   m_ObjectHideFlags: 0
@@ -2426,10 +2446,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6236104142937280163, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2762894960471637698, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 340064492}
   m_SourcePrefab: {fileID: 100100000, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
 --- !u!1001 &1744394808928200783
 PrefabInstance:
