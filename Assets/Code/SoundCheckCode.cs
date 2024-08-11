@@ -22,7 +22,7 @@ public class SoundCheckCode : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.CompareTag("SoundRange"))
+        if (other.CompareTag("Player"))
         {
             newEnemy.isHeared = true;
         }

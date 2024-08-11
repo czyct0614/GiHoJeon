@@ -558,10 +558,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomBounds:
     roomName: Room
-    centerX: 0
-    centerY: 0
-    mapSizeX: 0
-    mapSizeY: 0
+    centerX: -21
+    centerY: 3
+    mapSizeX: 82
+    mapSizeY: 20
 --- !u!4 &996933815
 Transform:
   m_ObjectHideFlags: 0
@@ -655,10 +655,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomBounds:
     roomName: Shelter
-    centerX: 0
+    centerX: 41
     centerY: 0
-    mapSizeX: 0
-    mapSizeY: 0
+    mapSizeX: 42
+    mapSizeY: 26
 --- !u!4 &1035271139
 Transform:
   m_ObjectHideFlags: 0
@@ -2107,6 +2107,10 @@ PrefabInstance:
     - target: {fileID: 7436816670302533155, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
       propertyPath: m_Name
       value: NewEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
+      propertyPath: endPoint.x
+      value: -15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

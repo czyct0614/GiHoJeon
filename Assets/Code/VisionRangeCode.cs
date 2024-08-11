@@ -23,7 +23,8 @@ public class EnemyVision : MonoBehaviour
     void Update()
     {
 
-        if (attack){
+        if (attack)
+        {
             enemyScript.OnPlayerDetected();
         }
 
