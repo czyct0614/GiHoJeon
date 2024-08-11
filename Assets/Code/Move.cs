@@ -117,6 +117,7 @@ public class PlayerMove : MonoBehaviour
     public float climbSpeed = 10f;
 
     private GameObject player;
+    private GameObject soundRange;
 
     // 무적 상태 여부를 나타내는 변수
     private bool isInvincible = false;
@@ -138,6 +139,8 @@ public class PlayerMove : MonoBehaviour
         nowMap = SceneManager.GetActiveScene().name;
 
         player = GameObject.FindGameObjectWithTag("Player");
+
+        soundRange = GameObject.FindGameObjectWithTag("SoundRange");
 
         Time.timeScale = 1f;
 
@@ -231,6 +234,17 @@ public class PlayerMove : MonoBehaviour
         {
             Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Debug.Log("Clicked position: " + clickPosition);
+        }
+
+
+
+        if (Input.GetButton("left") || Input.GetButton("right") || Input.GetButton("Run") || Input.GetButton("Interact"))
+        {
+            ActivateSoundRange();
+        }
+        else 
+        {
+            DeactivateSoundRange();
         }
 
 
@@ -1119,6 +1133,28 @@ public class PlayerMove : MonoBehaviour
     {
 
         maxSpeed = maxSpeed * amount;
+
+    }
+
+
+
+
+
+    private void ActivateSoundRange()
+    {
+
+        soundRange.SetActive(true);
+
+    }
+
+
+
+
+
+    private void DeactivateSoundRange()
+    {
+
+        soundRange.SetActive(false);
 
     }
 

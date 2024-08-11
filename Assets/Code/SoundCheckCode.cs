@@ -6,11 +6,14 @@ public class SoundCheckCode : MonoBehaviour
 {
 
     private NewEnemy newEnemy;
+    private GameObject player;
+    public Vector2 lastPlayerPoint;
 
     void Start()
     {
 
         newEnemy = GetComponentInParent<NewEnemy>();
+        player = GameObject.FindGameObjectWithTag("Player");
 
     }
 
@@ -18,13 +21,13 @@ public class SoundCheckCode : MonoBehaviour
 
 
 
-    // 충돌한 오브젝트가 트리거 안에 머무를 때 호출되는 메서드
     void OnTriggerEnter2D(Collider2D other)
     {
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("SoundRange"))
         {
             newEnemy.isHeared = true;
+            lastPlayerPoint = new Vector2(player.transform.position.x, 0);
         }
 
     }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class NewEnemy : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class NewEnemy : MonoBehaviour
     public GameObject visionObject;
     public Vector2 startPoint;
     public Vector2 endPoint;
-    private Vector2 moveEndPoint;
+    public Vector2 moveEndPoint;
 
     private bool isFacingRight = true;
     private bool isPlayerDetected = false;
@@ -25,7 +26,8 @@ public class NewEnemy : MonoBehaviour
     private bool flipping = false;
     public bool isHeared = false;
     public bool patrolling = false;
-    private bool didThisEverChangedDangerRate=false;
+    private bool didThisEverChangedDangerRate = false;
+    public bool findingPlayer = false;
 
     void Start()
     {
@@ -45,17 +47,15 @@ public class NewEnemy : MonoBehaviour
     void Update()
     {
 
-        if (player == null) return;
-
-        // 소리 범위 체크
-        if (isHeared && !attacking)
+        if (isHeared && !isPlayerDetected)
         {
-            FollowPlayer();
+            StartCoroutine(FindPlayer(Script.Find<SoundCheckCode>("SoundCheck").lastPlayerPoint));
+            return;
         }
 
 
-
-        if (!isHeared && !attacking)
+        
+        if (!isHeared && !isPlayerDetected && !findingPlayer)
         {
             if (!patrolling)
             {
@@ -65,8 +65,13 @@ public class NewEnemy : MonoBehaviour
             Patrol();
         }
 
-        // 이동 방향에 따라 시야 범위 회전
-        UpdateVisionDirection(moveEndPoint);
+
+
+        if (!findingPlayer)
+        {
+            // 이동 방향에 따라 시야 범위 회전
+            UpdateVisionDirection(moveEndPoint);
+        }
 
     }
 
@@ -120,7 +125,7 @@ public class NewEnemy : MonoBehaviour
         if (!didThisEverChangedDangerRate)
         {
             Script.Find<DangerRate>("DangerBar").ChangeDangerRate(1);
-            didThisEverChangedDangerRate=true;
+            didThisEverChangedDangerRate = true;
         }
 
         isPlayerDetected = true;
@@ -149,9 +154,8 @@ public class NewEnemy : MonoBehaviour
     {
 
         patrolling = false;
-        
+
         // 플레이어를 향해 이동합니다.
-        moveEndPoint = new Vector2 (player.position.x, transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, moveEndPoint, Time.deltaTime * moveSpeed);
         Debug.Log("이동");
 
@@ -170,7 +174,7 @@ public class NewEnemy : MonoBehaviour
         attacking = true;
 
         // 플레이어를 향해 이동합니다.
-        moveEndPoint = new Vector2 (player.position.x, transform.position.y);
+        moveEndPoint = new Vector2(player.position.x, transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, moveEndPoint, Time.deltaTime * attackMoveSpeed);
         Debug.Log("공격");
 
@@ -183,6 +187,8 @@ public class NewEnemy : MonoBehaviour
     private void Patrol()
     {
 
+        patrolling = true;
+
         transform.position = Vector2.MoveTowards(transform.position, moveEndPoint, Time.deltaTime * moveSpeed);
 
         if (transform.position.x == endPoint.x)
@@ -194,7 +200,40 @@ public class NewEnemy : MonoBehaviour
             moveEndPoint = endPoint;
         }
 
-        patrolling = true;
+    }
+
+
+
+
+    public IEnumerator FindPlayer(Vector2 lastPlayerPoint)
+    {
+
+        patrolling = false;
+        findingPlayer = true;
+
+        if (isPlayerDetected)
+        {
+            findingPlayer = false;
+            Debug.Log("Break");
+            yield break;
+        }
+
+
+
+        while (Mathf.Abs(transform.position.x - lastPlayerPoint.x) > 0.01f)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, lastPlayerPoint, Time.deltaTime * moveSpeed);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1f);
+        Flip();
+
+        yield return new WaitForSeconds(1f);
+        Flip();
+
+        findingPlayer = false;
+        yield break;
 
     }
 
