@@ -34,7 +34,7 @@ public class DoorManager : MonoBehaviour
     void Update()
     {
 
-        float distance = Vector3.Distance(transform.position,player.position);
+        float distance = Vector3.Distance(transform.position, player.position);
 
         if (distance < triggerDistance && !updoormove.isgoingup)
         {

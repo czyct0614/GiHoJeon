@@ -28,6 +28,7 @@ public class NewEnemy : MonoBehaviour
     public bool patrolling = false;
     private bool didThisEverChangedDangerRate = false;
     public bool findingPlayer = false;
+    private SirenCode sirenCode;
 
     void Start()
     {
@@ -37,6 +38,7 @@ public class NewEnemy : MonoBehaviour
         visionObject.transform.localPosition = new Vector3(3, 0, 0);
         didThisEverChangedDangerRate=false;
         moveEndPoint = endPoint;
+        sirenCode = Script.Find<SirenCode>("Siren");
 
     }
 
@@ -54,7 +56,7 @@ public class NewEnemy : MonoBehaviour
 
 
         
-        if (!isHeared && !isPlayerDetected && !findingPlayer)
+        if (!isHeared && !isPlayerDetected && !findingPlayer && !sirenCode.ringing)
         {
             if (!patrolling)
             {
