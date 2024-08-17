@@ -20,7 +20,7 @@ public class NewEnemy : MonoBehaviour
     public Vector2 endPoint;
     public Vector2 moveEndPoint;
 
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
     private bool isPlayerDetected = false;
     private bool attacking = false;
     private bool flipping = false;
@@ -35,7 +35,7 @@ public class NewEnemy : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerScript = player.GetComponent<PlayerMove>();
-        visionObject.transform.localPosition = new Vector3(3, 0, 0);
+        visionObject.transform.localPosition = new Vector3(2.5f, 0, 0);
         didThisEverChangedDangerRate=false;
         moveEndPoint = endPoint;
         sirenCode = Script.Find<SirenCode>("Siren");
@@ -107,7 +107,7 @@ public class NewEnemy : MonoBehaviour
             transform.localScale = localScale;
 
             // 시야 범위 오브젝트도 회전
-            visionObject.transform.localPosition = new Vector3(3, 0, 0);
+            visionObject.transform.localPosition = new Vector3(2.5f, 0, 0);
             flipping = false;
         }
 
