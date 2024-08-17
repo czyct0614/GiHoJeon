@@ -25,6 +25,7 @@ public class EnemyVision : MonoBehaviour
 
     void Update()
     {
+
         if (attack)
         {
             if (playerScript.isHided)
@@ -34,12 +35,18 @@ public class EnemyVision : MonoBehaviour
                 {
                     enemyScript.OnPlayerDetected();
                 }
+                else
+                {
+                    attack = false;
+                    enemyScript.isPlayerDetected = false;
+                }
             }
             else
             {
                 enemyScript.OnPlayerDetected();
             }
         }
+
     }
 
 

@@ -21,7 +21,7 @@ public class NewEnemy : MonoBehaviour
     public Vector2 moveEndPoint;
 
     public bool isFacingRight = true;
-    private bool isPlayerDetected = false;
+    public bool isPlayerDetected = false;
     private bool attacking = false;
     private bool flipping = false;
     public bool isHeared = false;
