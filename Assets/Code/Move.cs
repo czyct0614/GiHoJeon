@@ -388,7 +388,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            animator.SetBool("RunningShoot", false);
+            //animator.SetBool("RunningShoot", false);
         }
 
 
