@@ -59,12 +59,12 @@
 * 클래스 위아래에 띄어쓰기 하기
 ---
 
-### 가장 최신버전 빌드파일
+### ~~가장 최신버전 빌드파일~~
 https://drive.google.com/file/d/1gtUHt6AXQ492CWHTEnC31_XFYlcToXRW/view?usp=sharing
 
 
-### 구 공유문서
+### 스토리 공유문서
 https://docs.google.com/document/d/1le9YfCbxx4UhX-Pu8dRgzHwoyLmm-nThoyvMlv8mvJg/edit#heading=h.lvizfp54i5te
 
-### 아트(홍진하) 작업물 전체 파일
+### ~~아트(홍진하) 작업물 전체 파일~~
 https://drive.google.com/file/d/1hFqqjDVj3G_XRfsOUszd5JSgcr8XpAA-/view?usp=sharing
