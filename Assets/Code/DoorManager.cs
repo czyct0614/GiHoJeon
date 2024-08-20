@@ -12,6 +12,9 @@ public class DoorManager : MonoBehaviour
     
     private float triggerDistance = 5f;
 
+    public  GameObject updoorObject;
+    public   GameObject downdoorObject;
+
     void Start()
     {
 
@@ -19,10 +22,10 @@ public class DoorManager : MonoBehaviour
 
         player = GameObject.FindWithTag("Player").transform;
 
-        GameObject updoorObject = GameObject.FindWithTag("updoor");
+        
         updoormove = updoorObject.GetComponent<UpDoorMove>();
 
-        GameObject downdoorObject = GameObject.FindWithTag("downdoor");
+        
         downdoormove = downdoorObject.GetComponent<DownDoorMove>();
       
     }
