@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
     [Header("====>모션<====")]
 
     // 방향 전환을 위한 변수
-    public SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
     // 애니메이터 조작을 위한 변수
     private Animator animator;
     // 점프 모션
@@ -226,7 +226,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
-// 업데이트 함수
+//업데이트 함수
     void Update() 
     {
 
@@ -269,7 +269,7 @@ public class PlayerMove : MonoBehaviour
     
 
 
-// 죽고있을떄 다른 행동 못하게
+//죽고있을떄 다른 행동 못하게
         if (isDying)
         {
             return;
@@ -347,9 +347,8 @@ public class PlayerMove : MonoBehaviour
 
 // 은신
 /*
-        if (rigid.velocity==new Vector2(0,0)&&Input.GetButtonDown("Interact"))
-        {
-            if (isHided==false)
+        if(rigid.velocity==new Vector2(0,0)&&Input.GetButtonDown("Interact")){
+            if(isHided==false)
             {
                 spriteRenderer.color = new Color(1,1,1,0f);
                 rigid.gravityScale=0f;
@@ -357,7 +356,7 @@ public class PlayerMove : MonoBehaviour
                 isInvincible=true;
                 isHided=true;
             }
-            else if (isHided==true)
+            else if(isHided==true)
             {
                 spriteRenderer.color = new Color(1,1,1,1f);
                 EnableAllBoxColliders(this.gameObject,true);
@@ -385,11 +384,11 @@ public class PlayerMove : MonoBehaviour
 // 달리면서 총쏠때 달리면서총쏘기 모션 실행
         if (isRunning && isShooting)
         {
-            animator.SetBool("runningShoot", true);
+            animator.SetBool("RunningShoot", true);
         }
         else
         {
-            animator.SetBool("runningShoot", false);
+            animator.SetBool("RunningShoot", false);
         }
 
 
@@ -478,7 +477,7 @@ public class PlayerMove : MonoBehaviour
  
 
 // 서서히 정지 
-        if (Input.GetButtonUp("left") || Input.GetButtonUp("right"))
+        if(Input.GetButtonUp("left") || Input.GetButtonUp("right"))
         {
             // normalized : 벡터 크기를 1로 만든 상태 (단위벡터 : 크기가 1인 벡터)
             // 벡터는 방향과 크기를 동시에 가지는데 크기(- : 왼 , + : 오)를 구별하기 위하여 단위벡터(1,-1)로 방향을 알 수 있도록 단위벡터를 곱함 
@@ -500,7 +499,7 @@ public class PlayerMove : MonoBehaviour
         /*
         if (Input.GetButtonDown("Dash") && canDash && !velocityZero)
         {
-            animator.SetBool("isDashing", true);
+            animator.SetBool("IsDashing", true);
             animator.SetBool("isJumping", false);
             StartCoroutine(Dash());
             isRunning = false;
@@ -509,7 +508,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
-// S점프 코드
+//S점프 코드
         if (Input.GetButton("Stop") && Input.GetButtonDown("Jump") && playerOnPlatform)
         {
             playerCollider.enabled = false;
@@ -591,7 +590,7 @@ public class PlayerMove : MonoBehaviour
         {
             animator.SetBool("isJumping", false);
             animator.SetBool("isRunning", false);
-            animator.SetBool("isDashing", true);
+            animator.SetBool("IsDashing", true);
         }
 
 
@@ -678,13 +677,13 @@ public class PlayerMove : MonoBehaviour
         // 모션 초기화
         animator.SetBool("isJumping",false);
         animator.SetBool("isRunning",false);
-        animator.SetBool("isDashing",false);
+        animator.SetBool("IsDashing",false);
 
         tr.emitting = false;
 
         rigid.gravityScale = 8f;
 
-        // 체력바 초기화
+        //체력바 초기화
         ChangeHealthBarAmount();
 
     }
@@ -726,7 +725,7 @@ public class PlayerMove : MonoBehaviour
             if (!isJumping && !isDashing)
             {
                 animator.SetBool("isRunning", true);
-                animator.SetFloat("runSpeed", maxSpeed / 15f);
+                animator.SetFloat("RunSpeed", maxSpeed / 15f);
             }
 
 
@@ -748,7 +747,7 @@ public class PlayerMove : MonoBehaviour
                 }
                 else
                 {
-                    if (isFastRunning)
+                    if(isFastRunning)
                     {
                         ChangeMaxSpeed(2/3f);
                         isFastRunning = false;
@@ -823,7 +822,7 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator Dash()
     {
 
-        animator.SetBool("isDashing",true);
+        animator.SetBool("IsDashing",true);
         animator.SetBool("isRunning",false);
         animator.SetBool("isJumping",false);
 
@@ -852,7 +851,7 @@ public class PlayerMove : MonoBehaviour
         isDashing = false;
         isInvincible = false;
         rigid.velocity = new Vector2( 0.1f * rigid.velocity.normalized.x , rigid.velocity.y);
-        animator.SetBool("isDashing",false);
+        animator.SetBool("IsDashing",false);
 
         // 대쉬 쿨타임동안 대쉬 못하게
         yield return new WaitForSeconds(dashingCooldown);
@@ -1018,7 +1017,7 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity = new Vector2(rigid.velocity.x, 0f);
 
             // 애니메이션 설정
-            animator.SetBool("isClimbing", true);
+            animator.SetBool("IsClimbing", true);
             animator.SetBool("isJumping", false);
             animator.SetBool("isRunning", false);
         }
@@ -1038,7 +1037,7 @@ public class PlayerMove : MonoBehaviour
             isClimbing = false;
             rigid.gravityScale = 8f; // 중력을 원래대로 설정
 
-            animator.SetBool("isClimbing", false); // 애니메이션 해제
+            animator.SetBool("IsClimbing", false); // 애니메이션 해제
 
         }
 
