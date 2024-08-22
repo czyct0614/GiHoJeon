@@ -42,8 +42,6 @@ TagManager:
   - updoor
   - downdoor
   - DangerBar
-  - NewEnemy
-  - Siren
   layers:
   - Default
   - TransparentFX
