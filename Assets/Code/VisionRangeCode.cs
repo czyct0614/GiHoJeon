@@ -9,10 +9,13 @@ public class EnemyVision : MonoBehaviour
     
     private bool attack = false;
 
+    private PlayerMove playerScript;
+
     void Start()
     {
 
         enemyScript = GetComponentInParent<NewEnemy>();
+        playerScript = Script.Find<PlayerMove>("Player");
 
     }
 
@@ -25,7 +28,23 @@ public class EnemyVision : MonoBehaviour
 
         if (attack)
         {
-            enemyScript.OnPlayerDetected();
+            if (playerScript.isHided)
+            {
+                // 플레이어가 숨겨졌을 때 적의 시야 방향이 플레이어의 방향과 일치해야 함
+                if (enemyScript.isFacingRight != playerScript.spriteRenderer.flipX)
+                {
+                    enemyScript.OnPlayerDetected();
+                }
+                else
+                {
+                    attack = false;
+                    enemyScript.isPlayerDetected = false;
+                }
+            }
+            else
+            {
+                enemyScript.OnPlayerDetected();
+            }
         }
 
     }

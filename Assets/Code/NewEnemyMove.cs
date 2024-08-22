@@ -20,23 +20,25 @@ public class NewEnemy : MonoBehaviour
     public Vector2 endPoint;
     public Vector2 moveEndPoint;
 
-    private bool isFacingRight = true;
-    private bool isPlayerDetected = false;
+    public bool isFacingRight = true;
+    public bool isPlayerDetected = false;
     private bool attacking = false;
     private bool flipping = false;
     public bool isHeared = false;
     public bool patrolling = false;
     private bool didThisEverChangedDangerRate = false;
     public bool findingPlayer = false;
+    private SirenCode sirenCode;
 
     void Start()
     {
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerScript = player.GetComponent<PlayerMove>();
-        visionObject.transform.localPosition = new Vector3(3, 0, 0);
+        visionObject.transform.localPosition = new Vector3(2.5f, 0, 0);
         didThisEverChangedDangerRate=false;
         moveEndPoint = endPoint;
+        sirenCode = Script.Find<SirenCode>("Siren");
 
     }
 
@@ -50,12 +52,11 @@ public class NewEnemy : MonoBehaviour
         if (isHeared && !isPlayerDetected)
         {
             StartCoroutine(FindPlayer(Script.Find<SoundCheckCode>("SoundCheck").lastPlayerPoint));
-            return;
         }
 
 
         
-        if (!isHeared && !isPlayerDetected && !findingPlayer)
+        if (!isHeared && !isPlayerDetected && !findingPlayer && !sirenCode.ringing)
         {
             if (!patrolling)
             {
@@ -65,13 +66,8 @@ public class NewEnemy : MonoBehaviour
             Patrol();
         }
 
-
-
-        if (!findingPlayer)
-        {
             // 이동 방향에 따라 시야 범위 회전
             UpdateVisionDirection(moveEndPoint);
-        }
 
     }
 
@@ -102,6 +98,8 @@ public class NewEnemy : MonoBehaviour
 
         if (!flipping)
         {
+            Debug.Log("회전");
+
             flipping = true;
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
@@ -109,7 +107,7 @@ public class NewEnemy : MonoBehaviour
             transform.localScale = localScale;
 
             // 시야 범위 오브젝트도 회전
-            visionObject.transform.localPosition = new Vector3(3, 0, 0);
+            visionObject.transform.localPosition = new Vector3(2.5f, 0, 0);
             flipping = false;
         }
 
@@ -150,23 +148,10 @@ public class NewEnemy : MonoBehaviour
 
 
 
-    private void FollowPlayer()
-    {
-
-        patrolling = false;
-
-        // 플레이어를 향해 이동합니다.
-        transform.position = Vector2.MoveTowards(transform.position, moveEndPoint, Time.deltaTime * moveSpeed);
-        Debug.Log("이동");
-
-    }
-
-
-
-
-
     private void AttackPlayer()
     {
+
+        Debug.Log("공격");
 
         if (!isPlayerDetected) return;
 
@@ -176,7 +161,6 @@ public class NewEnemy : MonoBehaviour
         // 플레이어를 향해 이동합니다.
         moveEndPoint = new Vector2(player.position.x, transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, moveEndPoint, Time.deltaTime * attackMoveSpeed);
-        Debug.Log("공격");
 
     }
 
@@ -186,6 +170,8 @@ public class NewEnemy : MonoBehaviour
 
     private void Patrol()
     {
+
+        Debug.Log("순찰중..");
 
         patrolling = true;
 
@@ -208,8 +194,11 @@ public class NewEnemy : MonoBehaviour
     public IEnumerator FindPlayer(Vector2 lastPlayerPoint)
     {
 
+        Debug.Log("소리 감지");
+
         patrolling = false;
         findingPlayer = true;
+        moveEndPoint = lastPlayerPoint;
 
         if (isPlayerDetected)
         {
@@ -223,17 +212,23 @@ public class NewEnemy : MonoBehaviour
         while (Mathf.Abs(transform.position.x - lastPlayerPoint.x) > 0.01f)
         {
             transform.position = Vector2.MoveTowards(transform.position, lastPlayerPoint, Time.deltaTime * moveSpeed);
-            yield return null;
+            yield return new WaitForSeconds(0.05f);
+
+            if (patrolling)
+            {
+                findingPlayer = false;
+                break;
+            }
         }
 
-        yield return new WaitForSeconds(1f);
-        Flip();
 
-        yield return new WaitForSeconds(1f);
-        Flip();
 
-        findingPlayer = false;
-        yield break;
+        if (Mathf.Abs(transform.position.x - lastPlayerPoint.x) < 0.01f)
+        {
+            yield return new WaitForSeconds(3f);
+
+            findingPlayer = false;
+        }
 
     }
 

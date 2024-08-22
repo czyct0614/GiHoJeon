@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
     [Header("====>모션<====")]
 
     // 방향 전환을 위한 변수
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     // 애니메이터 조작을 위한 변수
     private Animator animator;
     // 점프 모션
@@ -345,34 +345,6 @@ public class PlayerMove : MonoBehaviour
 
 
 
-// 은신
-/*
-        if(rigid.velocity==new Vector2(0,0)&&Input.GetButtonDown("Interact")){
-            if(isHided==false)
-            {
-                spriteRenderer.color = new Color(1,1,1,0f);
-                rigid.gravityScale=0f;
-                EnableAllBoxColliders(this.gameObject,false);
-                isInvincible=true;
-                isHided=true;
-            }
-            else if(isHided==true)
-            {
-                spriteRenderer.color = new Color(1,1,1,1f);
-                EnableAllBoxColliders(this.gameObject,true);
-                rigid.gravityScale=8f;
-                isInvincible=false;
-                isHided=false;
-            }
-            else
-            {
-                Debug.Log("은신 오류남");
-            }
-        }
-*/
-
-
-
 // 은신시 아무 행동 못하게
         if (isHided == true)
         {
@@ -388,7 +360,7 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            animator.SetBool("RunningShoot", false);
+            //animator.SetBool("RunningShoot", false);
         }
 
 
@@ -710,7 +682,7 @@ public class PlayerMove : MonoBehaviour
 
 
 // 이동 & 방향전환
-    public void Move()
+    private void Move()
     {
 
         // 이동
@@ -725,7 +697,7 @@ public class PlayerMove : MonoBehaviour
             if (!isJumping && !isDashing)
             {
                 animator.SetBool("isRunning", true);
-                animator.SetFloat("RunSpeed", maxSpeed / 15f);
+                animator.SetFloat("runSpeed", maxSpeed / 15f);
             }
 
 
@@ -1119,11 +1091,12 @@ public class PlayerMove : MonoBehaviour
 
 
 
-// 소리 범위 켜고 늘리고 끄는 함수
+// 소리 범위 늘리고 줄이는 함수
     void ChangeSoundRange()
     {
 
     }
+
 
 
 
@@ -1140,6 +1113,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
+// 소리범위 켜는 함수
     private void ActivateSoundRange()
     {
 
@@ -1151,6 +1125,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
+// 소리범위 끄는 함수
     private void DeactivateSoundRange()
     {
 
@@ -1158,4 +1133,43 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+
+
+
+
+// 은신 함수
+    public void Hide()
+    {
+
+        VelocityZero();
+        spriteRenderer.color = new Color(1,1,1,0.5f);
+        isHided = true;
+        animator.SetBool("isJumping",false);
+        animator.SetBool("isRunning",false);
+        animator.SetBool("IsDashing",false);
+
+    }
+
+
+
+
+
+// 은신 함수
+    public void GetOutOfHiding()
+    {
+        VelocityZero();
+        spriteRenderer.color = new Color(1,1,1,1f);
+        isHided = false;
+
+    }
+
+
+
+
+
+// 뒤집기 함수
+    public void PlayerFlipX(bool flip)
+    {
+        spriteRenderer.flipX = flip;
+    }
 }
