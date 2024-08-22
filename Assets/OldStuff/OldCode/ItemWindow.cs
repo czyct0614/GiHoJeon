@@ -21,7 +21,7 @@ public class ItemWindow : MonoBehaviour
         // 아이템 슬롯이 플레이어를 따라다니도록 설정
         for (int i = 0; i < itemSlots.Length; i++)
         {
-            if(itemSlots[i]){
+            if (itemSlots[i]){
             itemSlots[i].transform.position = GetItemSlotPosition(i);
             }
         }

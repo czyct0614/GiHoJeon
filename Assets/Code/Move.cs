@@ -347,8 +347,9 @@ public class PlayerMove : MonoBehaviour
 
 // 은신
 /*
-        if(rigid.velocity==new Vector2(0,0)&&Input.GetButtonDown("Interact")){
-            if(isHided==false)
+        if (rigid.velocity==new Vector2(0,0)&&Input.GetButtonDown("Interact"))
+        {
+            if (isHided==false)
             {
                 spriteRenderer.color = new Color(1,1,1,0f);
                 rigid.gravityScale=0f;
@@ -356,7 +357,7 @@ public class PlayerMove : MonoBehaviour
                 isInvincible=true;
                 isHided=true;
             }
-            else if(isHided==true)
+            else if (isHided==true)
             {
                 spriteRenderer.color = new Color(1,1,1,1f);
                 EnableAllBoxColliders(this.gameObject,true);
@@ -477,7 +478,7 @@ public class PlayerMove : MonoBehaviour
  
 
 // 서서히 정지 
-        if(Input.GetButtonUp("left") || Input.GetButtonUp("right"))
+        if (Input.GetButtonUp("left") || Input.GetButtonUp("right"))
         {
             // normalized : 벡터 크기를 1로 만든 상태 (단위벡터 : 크기가 1인 벡터)
             // 벡터는 방향과 크기를 동시에 가지는데 크기(- : 왼 , + : 오)를 구별하기 위하여 단위벡터(1,-1)로 방향을 알 수 있도록 단위벡터를 곱함 
@@ -747,7 +748,7 @@ public class PlayerMove : MonoBehaviour
                 }
                 else
                 {
-                    if(isFastRunning)
+                    if (isFastRunning)
                     {
                         ChangeMaxSpeed(2/3f);
                         isFastRunning = false;
