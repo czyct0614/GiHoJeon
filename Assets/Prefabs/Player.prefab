@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 5757208229397368692}
   - component: {fileID: 4980205348556909250}
   - component: {fileID: 3965657767298184448}
+  - component: {fileID: 4123786960287695303}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -351,33 +352,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4d4e722c239db418e2f408a3236c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chargrBarImage: {fileID: 0}
   missilePrefab: {fileID: 6893506956618878376, guid: dca9e5aa1c2ff544288fc2e7c24fb0dc, type: 3}
   skillSelectPrefab: {fileID: 7036774277444454461, guid: ef7daa44353ad86449d36b84a895cbb9, type: 3}
-  IsJumping: 0
+  isSkillReady: 0
+  shootCooldown: 0.25
+  spriteRenderer: {fileID: 0}
+  isJumping: 0
+  healthBarImage: {fileID: 0}
   maxHealth: 10
   currentHealth: 10
   maxSpeed: 15
   isFlipped: 0
   isFastRunning: 0
   jumpPower: 40
-  CanJump: 1
+  canJump: 1
+  tr: {fileID: 5757208229397368692}
   dashingPower: 9
   dashingTime: 0.2
   dashingCooldown: 1
   playerOnPlatform: 0
-  InvincibleDuration: 2
   lastSpawnPoint: {x: 0, y: 0}
-  NowMap: 
-  Dead: 0
+  invincibleDuration: 0.5
+  nowMap: 
+  dead: 0
   isDying: 0
   canInput: 1
-  isSkillReady: 0
   isHided: 0
   climbSpeed: 10
-  shootCooldown: 0.25
-  tr: {fileID: 5757208229397368692}
-  HPbarImage: {fileID: 0}
-  ChargebarImage: {fileID: 0}
 --- !u!95 &1251142057131298220
 Animator:
   serializedVersion: 5
@@ -602,3 +604,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.6}
   m_EdgeRadius: 0
+--- !u!114 &4123786960287695303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9001837065108196279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2dc0dd6bd2fa848806e8295fc97210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
