@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class NewEnemy : MonoBehaviour
+public class NewEnemyMove : MonoBehaviour
 {
 
     // 시야 범위 길이
@@ -29,6 +29,7 @@ public class NewEnemy : MonoBehaviour
     private bool didThisEverChangedDangerRate = false;
     public bool findingPlayer = false;
     private SirenCode sirenCode;
+    public bool hacked;
 
     void Start()
     {

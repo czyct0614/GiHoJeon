@@ -5,16 +5,15 @@ using System.Reflection;
 
 public class SkillCode : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
+        if(Input.GetButtonDown("Skill"))
+        {
+            CastHackSkill();
+        }
+
     }
 
 
@@ -38,6 +37,7 @@ public class SkillCode : MonoBehaviour
                 // 충돌한 컬라이더가 있는지 확인합니다.
                 if (hit.collider != null) 
                 {
+                    Debug.Log(hit.transform.tag);
                     // 태그에 따라 적절한 컴포넌트를 가져옵니다.
                     var enemycode = hit.transform.GetComponent(hit.transform.tag + "Move");
 
@@ -50,6 +50,7 @@ public class SkillCode : MonoBehaviour
 
                         // 맨 위에 있는 몬스터만 해킹하기 때문에 반복문을 종료합니다.
                         break;
+                        
                     }
 
                 }

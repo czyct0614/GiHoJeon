@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyVision : MonoBehaviour
 {
 
-    private NewEnemy enemyScript;
+    private NewEnemyMove enemyScript;
     
     private bool attack = false;
 
@@ -14,7 +14,7 @@ public class EnemyVision : MonoBehaviour
     void Start()
     {
 
-        enemyScript = GetComponentInParent<NewEnemy>();
+        enemyScript = GetComponentInParent<NewEnemyMove>();
         playerScript = Script.Find<PlayerMove>("Player");
 
     }

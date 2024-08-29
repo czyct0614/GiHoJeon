@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     // 총알 프리팹
     private Missile misile;
     // 스킬 이미지 (왼쪽 아래 UI) 변수
-    private SkillImage skillimage;
+    //private SkillImage skillimage;
     public bool isSkillReady = false;
     // 장전시간
     public float shootCooldown;
@@ -1069,7 +1069,7 @@ public class PlayerMove : MonoBehaviour
 
 
 // 플레이어 오브젝트와 자식 오브젝트 콜라이더 다 끄는 함수
-    void EnableAllBoxColliders(GameObject obj, bool turnoff)
+    public void EnableAllBoxColliders(GameObject obj, bool turnoff)
     {
 
         // 현재 게임 오브젝트의 모든 BoxCollider2D 컴포넌트를 가져와 비활성화합니다.

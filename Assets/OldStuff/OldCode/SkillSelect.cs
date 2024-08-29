@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 public class SkillSelect : MonoBehaviour
 {
@@ -77,3 +77,4 @@ public class SkillSelect : MonoBehaviour
         return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
     }
 }
+*/

@@ -6,6 +6,7 @@ public class FoxHoleScript : MonoBehaviour
 {
 
     private GameObject player;
+    private PlayerMove playermove;
 
     public bool hided = false;
     public bool entered = false;
@@ -14,6 +15,7 @@ public class FoxHoleScript : MonoBehaviour
     {
 
         player = GameObject.FindGameObjectWithTag("Player");
+        playermove = player.GetComponent<PlayerMove>();
 
     }
 
@@ -33,14 +35,14 @@ public class FoxHoleScript : MonoBehaviour
 
         if (!hided && Input.GetButtonDown("Interact") && entered)
         {
+            playermove.EnableAllBoxColliders(player, false);
             player.gameObject.SetActive(false);
-            BoxCollider2D collider = player.GetComponent<BoxCollider2D>();
-            collider.enabled = false;
             hided = true;
         }
         else if (hided && Input.GetButtonDown("Interact") && entered)
         {
             player.gameObject.SetActive(true);
+            playermove.EnableAllBoxColliders(player, true);
             hided = false;
         }
 
