@@ -128,6 +128,8 @@ public class PlayerMove : MonoBehaviour
 
     Vector2 originPos = new Vector2();
 
+    public int soundAmount = 0;
+
 
 
 
@@ -245,6 +247,27 @@ public class PlayerMove : MonoBehaviour
         else 
         {
             DeactivateSoundRange();
+        }
+
+
+
+        if (Input.GetButton("left") || Input.GetButton("right"))
+        {
+            soundAmount = 5;
+        }
+
+
+
+        if (Input.GetButton("Run"))
+        {
+            soundAmount = 10;
+        }
+
+
+
+        if (Input.GetButton("Interact"))
+        {
+            soundAmount = 7;
         }
 
 
@@ -447,12 +470,9 @@ public class PlayerMove : MonoBehaviour
         }
 
  
-
-// 서서히 정지 
+ 
         if(Input.GetButtonUp("left") || Input.GetButtonUp("right"))
         {
-            // normalized : 벡터 크기를 1로 만든 상태 (단위벡터 : 크기가 1인 벡터)
-            // 벡터는 방향과 크기를 동시에 가지는데 크기(- : 왼 , + : 오)를 구별하기 위하여 단위벡터(1,-1)로 방향을 알 수 있도록 단위벡터를 곱함 
             rigid.velocity = new Vector2( 0f * rigid.velocity.normalized.x , rigid.velocity.y);
         }
 
@@ -1117,6 +1137,7 @@ public class PlayerMove : MonoBehaviour
     private void ActivateSoundRange()
     {
 
+        soundRange.transform.localScale = new Vector3 (soundAmount, 3, 5);
         soundRange.SetActive(true);
 
     }
