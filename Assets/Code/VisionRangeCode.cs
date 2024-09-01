@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyVision : MonoBehaviour
 {
 
-    private NewEnemyMove enemyScript;
+    private NewEnemyCode enemyScript;
     
     private bool attack = false;
 
@@ -14,7 +14,7 @@ public class EnemyVision : MonoBehaviour
     void Start()
     {
 
-        enemyScript = GetComponentInParent<NewEnemyMove>();
+        enemyScript = GetComponentInParent<NewEnemyCode>();
         playerScript = Script.Find<PlayerMove>("Player");
 
     }
@@ -82,6 +82,32 @@ public class EnemyVision : MonoBehaviour
             enemyScript.OnPlayerLost();
         }
 
+    }
+
+
+
+
+
+//시야 범위 크기 바꾸는 함수
+    public void ChangeVisionRange(int rangeSize)
+    {
+        Vector3 OriginalScale = transform.localScale;
+
+        OriginalScale.x = rangeSize;
+
+        transform.localScale = OriginalScale;
+
+        // 이동할 x 좌표를 계산합니다.
+        float newXPosition = (rangeSize - 1) / 2;
+
+        // 현재 오브젝트의 위치를 가져옵니다.
+        Vector3 newPosition = transform.position;
+
+        // 새로운 x 좌표로 위치를 설정합니다.
+        newPosition.x = newXPosition;
+
+        // 오브젝트의 위치를 업데이트합니다.
+        transform.position = newPosition;
     }
 
 }

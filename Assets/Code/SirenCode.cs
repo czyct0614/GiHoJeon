@@ -9,7 +9,7 @@ public class SirenCode : MonoBehaviour
     private GameObject soundCheck;
     private SpriteRenderer spriteRenderer;
 
-    private NewEnemyMove newEnemyMove;
+    private NewEnemyCode newEnemyCode;
     private SoundCheckCode soundCheckCode;
 
     private float distance;
@@ -23,7 +23,7 @@ public class SirenCode : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         soundCheck = GameObject.FindGameObjectWithTag("SoundCheck");
         spriteRenderer = GetComponent<SpriteRenderer>();
-        newEnemyMove = Script.Find<NewEnemyMove>("NewEnemy");
+        newEnemyCode = Script.Find<NewEnemyCode>("NewEnemy");
         soundCheckCode = Script.Find<SoundCheckCode>("SoundCheck");
 
     }
@@ -65,11 +65,11 @@ public class SirenCode : MonoBehaviour
 
             spriteRenderer.color = new Color(1, 0, 0, 1f);
 
-            newEnemyMove.isHeared = true;
+            newEnemyCode.isHeared = true;
             soundCheckCode.lastPlayerPoint = new Vector2(transform.position.x, 0);
         }
 
-        newEnemyMove.isHeared = false;
+        newEnemyCode.isHeared = false;
         soundCheck.transform.localScale = new Vector3(20, 1, 1);
         ringing = false;
 

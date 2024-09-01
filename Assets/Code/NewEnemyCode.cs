@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class NewEnemyMove : MonoBehaviour
+public class NewEnemyCode : MonoBehaviour
 {
 
     // 시야 범위 길이

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundCheckCode : MonoBehaviour
 {
 
-    private NewEnemyMove newEnemyMove;
+    private NewEnemyCode newEnemyCode;
     private GameObject player;
     public Vector2 lastPlayerPoint;
     private PlayerMove playerScript;
@@ -13,7 +13,7 @@ public class SoundCheckCode : MonoBehaviour
     void Start()
     {
 
-        newEnemyMove = GetComponentInParent<NewEnemyMove>();
+        newEnemyCode = GetComponentInParent<NewEnemyCode>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerMove>();
 
@@ -28,7 +28,7 @@ public class SoundCheckCode : MonoBehaviour
 
         if (other.CompareTag("SoundRange") && playerScript.soundAmount >= 7)
         {
-            newEnemyMove.isHeared = true;
+            newEnemyCode.isHeared = true;
             lastPlayerPoint = new Vector2(player.transform.position.x, 0);
         }
 
@@ -41,7 +41,7 @@ public class SoundCheckCode : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
 
-        newEnemyMove.isHeared = false;
+        newEnemyCode.isHeared = false;
 
     }
 
