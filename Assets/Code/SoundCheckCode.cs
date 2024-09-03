@@ -10,6 +10,8 @@ public class SoundCheckCode : MonoBehaviour
     public Vector2 lastPlayerPoint;
     private PlayerMove playerScript;
 
+    public bool canKill = false;
+
     void Start()
     {
 
@@ -28,8 +30,16 @@ public class SoundCheckCode : MonoBehaviour
 
         if (other.CompareTag("SoundRange") && playerScript.soundAmount >= 7)
         {
+            Debug.Log("소리 감지");
             newEnemyCode.isHeared = true;
             lastPlayerPoint = new Vector2(player.transform.position.x, 0);
+        }
+
+
+
+        if (other.CompareTag("Player"))
+        {
+            canKill = true;
         }
 
     }
@@ -42,6 +52,7 @@ public class SoundCheckCode : MonoBehaviour
     {
 
         newEnemyCode.isHeared = false;
+        canKill = false;
 
     }
 

@@ -130,6 +130,14 @@ public class PlayerMove : MonoBehaviour
 
     public int soundAmount = 0;
 
+    private GameObject soundCheck;
+
+    private SoundCheckCode soundCheckCode;
+
+    private GameObject newEnemy;
+
+    private NewEnemyCode newEnemyCode;
+
 
 
 
@@ -138,16 +146,24 @@ public class PlayerMove : MonoBehaviour
     void Awake() 
     {
 
+        // 맵 바꿔도 안 날아가게
+        DontDestroyOnLoad(this.gameObject);
+
+        soundRange = GameObject.FindGameObjectWithTag("SoundRange");
+
         nowMap = SceneManager.GetActiveScene().name;
 
         player = GameObject.FindGameObjectWithTag("Player");
 
-        soundRange = GameObject.FindGameObjectWithTag("SoundRange");
+        newEnemy = GameObject.FindGameObjectWithTag("NewEnemy");
+
+        newEnemyCode = newEnemy.GetComponent<NewEnemyCode>();
+
+        soundCheck = GameObject.FindGameObjectWithTag("SoundCheck");
+
+        soundCheckCode = soundCheck.GetComponent<SoundCheckCode>();
 
         Time.timeScale = 1f;
-
-        // 맵 바꿔도 안 날아가게
-        DontDestroyOnLoad(this.gameObject);
 
         // 게임 시작하면 위치 저장
         originPos = transform.position;
@@ -160,9 +176,9 @@ public class PlayerMove : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
 
-        ChangeHealthBarAmount();
+        //ChangeHealthBarAmount();
 
         playerCollider = GetComponent<Collider2D>();
 
@@ -181,30 +197,30 @@ public class PlayerMove : MonoBehaviour
 
 
         // 최대 체력
-        maxHealth = 10;
+        //maxHealth = 10;
 
         // 현재 체력
-        currentHealth = 10;
+        //currentHealth = 10;
 
         // 얼마나 많이 움직일지
-        dashingPower = 9f;
+        //dashingPower = 9f;
 
         // 대쉬 지속시간
-        dashingTime = 0.2f;
+        //dashingTime = 0.2f;
 
         // 대쉬 쿨타임
-        dashingCooldown = 1f;
+        //dashingCooldown = 1f;
 
         // 부활무적 시간
         invincibleDuration = 0.5f;
 
         // 총 장전시간
-        shootCooldown = 0.15f;
+        //shootCooldown = 0.15f;
 
         dead = false;
 
         // 대쉬 가능한지
-        canDash = true;
+        //canDash = true;
 
         // 죽고 있는지
         isDying = false;
@@ -268,6 +284,21 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetButton("Interact"))
         {
             soundAmount = 7;
+        }
+
+
+
+        if (Input.GetButton("Kill"))
+        {
+            soundAmount = 5;
+            Kill();
+        }
+
+
+
+        if (Input.GetButton("Skill"))
+        {
+            soundAmount = 5;
         }
 
 
@@ -1178,6 +1209,7 @@ public class PlayerMove : MonoBehaviour
 // 은신 함수
     public void GetOutOfHiding()
     {
+
         VelocityZero();
         spriteRenderer.color = new Color(1,1,1,1f);
         isHided = false;
@@ -1191,6 +1223,32 @@ public class PlayerMove : MonoBehaviour
 // 뒤집기 함수
     public void PlayerFlipX(bool flip)
     {
+
         spriteRenderer.flipX = flip;
+
     }
+
+
+
+
+    void Kill()
+    {
+
+        if (soundCheckCode.canKill)
+        {
+            if (transform.position.x > newEnemy.transform.position.x && !newEnemyCode.isFacingRight)
+            {
+                newEnemy.SetActive(false);
+                Debug.Log("암살");
+            }
+
+            else if (transform.position.x < newEnemy.transform.position.x && newEnemyCode.isFacingRight)
+            {
+                newEnemy.SetActive(false);
+                Debug.Log("암살");
+            }
+        }
+
+    }
+
 }

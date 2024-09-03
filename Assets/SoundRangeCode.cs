@@ -11,7 +11,6 @@ public class SoundRangeCode : MonoBehaviour
     {
         
         DontDestroyOnLoad(this);
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
     }
 
