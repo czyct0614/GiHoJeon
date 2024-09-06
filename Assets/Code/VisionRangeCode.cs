@@ -25,7 +25,7 @@ public class EnemyVision : MonoBehaviour
 
     void Update()
     {
-
+    
         if (attack)
         {
             if (playerScript.isHided)
@@ -89,7 +89,7 @@ public class EnemyVision : MonoBehaviour
 
 
 //시야 범위 크기 바꾸는 함수
-    public void ChangeVisionRange(int rangeSize)
+    public void ChangeVisionRange(float rangeSize)
     {
         Vector3 OriginalScale = transform.localScale;
 
@@ -101,13 +101,14 @@ public class EnemyVision : MonoBehaviour
         float newXPosition = (rangeSize - 1) / 2;
 
         // 현재 오브젝트의 위치를 가져옵니다.
-        Vector3 newPosition = transform.position;
+        Vector3 newPosition = transform.localPosition;
 
         // 새로운 x 좌표로 위치를 설정합니다.
         newPosition.x = newXPosition;
 
         // 오브젝트의 위치를 업데이트합니다.
-        transform.position = newPosition;
+        transform.localPosition = newPosition;
+
     }
 
 }

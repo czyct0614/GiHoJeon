@@ -45,6 +45,7 @@ TagManager:
   - NewEnemy
   - Siren
   - DoorManager
+  - CeilingLight
   layers:
   - Default
   - TransparentFX

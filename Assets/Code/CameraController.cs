@@ -57,6 +57,20 @@ public class CameraController : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "StartScene") 
         {
             transform.position = new Vector3(0, -3, -10);
+            RoomBounds StartScene;
+            StartScene.roomName = "StartScene";
+            StartScene.centerX = 0f;
+            StartScene.centerY = -3f;
+            StartScene.mapSizeX = 36f;
+            StartScene.mapSizeY = 20f;
+            SetCurrentRoom(StartScene);
+        }
+        else
+        {
+            if (GetCurrentRoomName() == "StartScene") 
+            {
+                ClearCurrentRoom();
+            }
         }
 
         LimitCameraArea();

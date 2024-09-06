@@ -5,9 +5,9 @@ public class NewEnemyCode : MonoBehaviour
 {
 
     // 시야 범위 길이
-    public float visionRange = 5f;
+    //public float visionRange = 5f;
     // 시야 범위 폭
-    public float visionWidth = 1f;
+    //public float visionWidth = 1f;
     public float moveSpeed = 1f;
     public float attackMoveSpeed = 3f;
 
@@ -30,6 +30,8 @@ public class NewEnemyCode : MonoBehaviour
     public bool findingPlayer = false;
     private SirenCode sirenCode;
     public bool hacked;
+    public float newEnemyHackingDuration;
+    private bool isHackingActivate;
 
     void Start()
     {
@@ -40,6 +42,8 @@ public class NewEnemyCode : MonoBehaviour
         didThisEverChangedDangerRate=false;
         moveEndPoint = endPoint;
         sirenCode = Script.Find<SirenCode>("Siren");
+        hacked = false;
+        isHackingActivate = false;
 
     }
 
@@ -50,14 +54,21 @@ public class NewEnemyCode : MonoBehaviour
     void Update()
     {
 
-        if (isHeared && !isPlayerDetected)
+         if (hacked && !isHackingActivate)
+        {
+
+            StartCoroutine(ResetAfterDelay());
+
+        }
+
+        if (isHeared && !isPlayerDetected && !hacked)
         {
             StartCoroutine(FindPlayer(Script.Find<SoundCheckCode>("SoundCheck").lastPlayerPoint));
         }
 
 
         
-        if (!isHeared && !isPlayerDetected && !findingPlayer && !sirenCode.ringing)
+        if ((!isHeared && !isPlayerDetected && !findingPlayer && !sirenCode.ringing) || hacked)
         {
             if (!patrolling)
             {
@@ -106,9 +117,6 @@ public class NewEnemyCode : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1;
             transform.localScale = localScale;
-
-            // 시야 범위 오브젝트도 회전
-            visionObject.transform.localPosition = new Vector3(2.5f, 0, 0);
             flipping = false;
         }
 
@@ -155,7 +163,7 @@ public class NewEnemyCode : MonoBehaviour
         Debug.Log("공격");
 
         if (!isPlayerDetected) return;
-
+        if (hacked) return;
         patrolling = false;
         attacking = true;
 
@@ -230,6 +238,23 @@ public class NewEnemyCode : MonoBehaviour
 
             findingPlayer = false;
         }
+
+    }
+
+
+
+
+
+    private IEnumerator ResetAfterDelay()
+    {
+
+        isHackingActivate = true;
+
+        yield return new WaitForSeconds(newEnemyHackingDuration);
+
+        hacked = false;
+
+        isHackingActivate = false;
 
     }
 

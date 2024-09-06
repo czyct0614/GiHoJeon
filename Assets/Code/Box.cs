@@ -27,7 +27,7 @@ public class Box : MonoBehaviour
 
         if (Input.GetButtonDown("Interact") && entered)
         {
-            if(!hided)
+            if (!hided)
             {
                 
                 playerMove.Hide();

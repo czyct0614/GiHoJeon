@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastPlayerPoint: {x: 0, y: 0}
+  canKill: 0
 --- !u!61 &6467733948474077816
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -388,8 +389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1310b43ed225e845ad5beee6af10d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionRange: 5
-  visionWidth: 1
   moveSpeed: 1
   attackMoveSpeed: 3
   playerLayer:
@@ -405,6 +404,7 @@ MonoBehaviour:
   patrolling: 0
   findingPlayer: 0
   hacked: 0
+  newEnemyHackingDuration: 3
 --- !u!61 &5062069233189498150
 BoxCollider2D:
   m_ObjectHideFlags: 0

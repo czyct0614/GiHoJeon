@@ -241,10 +241,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 347613751650141589}
   escPanel: {fileID: 5470813966115882607}
-  SbuttonObject: {fileID: 1689182390673479996}
-  SbuttonObject2: {fileID: 5169789075480335350}
-  SbuttonObject3: {fileID: 7612161297839137545}
-  VolumePanel: {fileID: 5058906086676475258}
+  sButtonObject1: {fileID: 1689182390673479996}
+  sButtonObject2: {fileID: 7612161297839137545}
+  sButtonObject3: {fileID: 5169789075480335350}
+  volumePanel: {fileID: 5058906086676475258}
   VisActive: 0
 --- !u!1 &397352888429344239
 GameObject:
@@ -256,8 +256,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2063784585693368469}
   - component: {fileID: 7730289974369611852}
-  - component: {fileID: 7008084714622335471}
-  - component: {fileID: 2388304532696897074}
   m_Layer: 0
   m_Name: Skill
   m_TagString: SelectedSkill
@@ -332,78 +330,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7008084714622335471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 397352888429344239}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7306feeb6377f8f4abf69a767e668dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 0}
-  playerTransform: {fileID: 0}
-  newSprite1: {fileID: 21300000, guid: 157174c3a51c0c6428b6fdb5ef5e3668, type: 3}
-  newSprite2: {fileID: 21300000, guid: 21d06472faac77e46bec5151f5c2ee73, type: 3}
-  newSprite3: {fileID: 21300000, guid: efe9659fb3fbda24f8f5778aa8a57f1e, type: 3}
-  newSpriteUltimate: {fileID: 21300000, guid: 89c63d5f04fbc4844965d657bf3127dc, type: 3}
-  isSkillReady: 0
-  projectilePrefab: {fileID: 6423460956875674080, guid: 3af12c08e89382947b903cfe7861112f, type: 3}
-  Skill1DoCharge: 0
-  Skill1MaxChargeTime: 1
-  Skill1ChargeSpeed: 1
-  Skill1MinProjectileSize: 0.1
-  Skill1MaxProjectileSize: 1.5
-  Skill1CoolDown: 3
-  Skill2CoolDown: 3
-  Skill3CoolDown: 3
-  UltimateSkillCoolDown: 3
-  timer: {fileID: 8701942034432618520}
-  disable: {fileID: 8079112562558271096}
-  move: {fileID: 0}
---- !u!114 &2388304532696897074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 397352888429344239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38bdc8af274d3614b9b44de540bb20df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 0}
-  playerTransform: {fileID: 0}
-  newSprite1: {fileID: 21300000, guid: 157174c3a51c0c6428b6fdb5ef5e3668, type: 3}
-  newSprite2: {fileID: 21300000, guid: 21d06472faac77e46bec5151f5c2ee73, type: 3}
-  newSprite3: {fileID: 21300000, guid: efe9659fb3fbda24f8f5778aa8a57f1e, type: 3}
-  newSpriteUltimate: {fileID: 21300000, guid: 89c63d5f04fbc4844965d657bf3127dc, type: 3}
-  isSkillReady: 0
-  projectilePrefab: {fileID: 6423460956875674080, guid: 3af12c08e89382947b903cfe7861112f, type: 3}
-  Skill1DoCharge: 0
-  Skill1MaxChargeTime: 1
-  Skill1ChargeSpeed: 1
-  Skill1MinProjectileSize: 0.1
-  Skill1MaxProjectileSize: 1.5
-  Skill1CoolDown: 0.5
-  Skill2CoolDown: 0.5
-  Skill3CoolDown: 0.5
-  UltimateSkillCoolDown: 0.5
-  MaxMana: 100
-  ManaRecoveryRate: 5
-  Skill1ManaCost: 20
-  Skill2ManaCost: 30
-  Skill3ManaCost: 40
-  UltimateSkillManaCost: 50
-  ManaBar: {fileID: 5498621187153114589}
-  timer: {fileID: 8701942034432618520}
-  disable: {fileID: 8079112562558271096}
-  move: {fileID: 0}
-  chargeBarPrefab: {fileID: 4454978043395957666, guid: 98ae787cd197fb244801294116fe7319, type: 3}
 --- !u!1 &515905551530998678
 GameObject:
   m_ObjectHideFlags: 0
@@ -2576,9 +2502,9 @@ MonoBehaviour:
   SbuttonObject: {fileID: 1689182390673479996}
   SbuttonObject2: {fileID: 7612161297839137545}
   SbuttonObject3: {fileID: 5169789075480335350}
-  VbuttonObject: {fileID: 6976950989005689358}
-  VbuttonObject2: {fileID: 87759801981843067}
-  VbuttonObject3: {fileID: 8585097176268724904}
+  vButtonObject1: {fileID: 6976950989005689358}
+  vButtonObject2: {fileID: 87759801981843067}
+  vButtonObject3: {fileID: 8585097176268724904}
   settingsPanel: {fileID: 347613751650141589}
   VolumePanel: {fileID: 5058906086676475258}
 --- !u!1 &5133804801262762307

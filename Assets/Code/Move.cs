@@ -157,11 +157,17 @@ public class PlayerMove : MonoBehaviour
 
         newEnemy = GameObject.FindGameObjectWithTag("NewEnemy");
 
-        newEnemyCode = newEnemy.GetComponent<NewEnemyCode>();
+        if(newEnemy!=null)
+        {
+            newEnemyCode = newEnemy.GetComponent<NewEnemyCode>();
+        }
 
         soundCheck = GameObject.FindGameObjectWithTag("SoundCheck");
 
-        soundCheckCode = soundCheck.GetComponent<SoundCheckCode>();
+        if(soundCheck!=null)
+        {
+            soundCheckCode = soundCheck.GetComponent<SoundCheckCode>();
+        }
 
         Time.timeScale = 1f;
 
@@ -502,7 +508,7 @@ public class PlayerMove : MonoBehaviour
 
  
  
-        if(Input.GetButtonUp("left") || Input.GetButtonUp("right"))
+        if (Input.GetButtonUp("left") || Input.GetButtonUp("right"))
         {
             rigid.velocity = new Vector2( 0f * rigid.velocity.normalized.x , rigid.velocity.y);
         }
@@ -770,7 +776,7 @@ public class PlayerMove : MonoBehaviour
                 }
                 else
                 {
-                    if(isFastRunning)
+                    if (isFastRunning)
                     {
                         ChangeMaxSpeed(2/3f);
                         isFastRunning = false;
@@ -1231,6 +1237,8 @@ public class PlayerMove : MonoBehaviour
 
 
 
+
+//암살 함수
     void Kill()
     {
 
