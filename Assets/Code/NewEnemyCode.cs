@@ -37,9 +37,8 @@ public class NewEnemyCode : MonoBehaviour
     {
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        
         playerScript = player.GetComponent<PlayerMove>();
-
-        visionObject.transform.localPosition = new Vector3(2.5f, 0, 0);
 
         didThisEverChangedDangerRate=false;
 

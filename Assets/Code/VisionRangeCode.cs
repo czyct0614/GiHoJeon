@@ -16,6 +16,7 @@ public class EnemyVision : MonoBehaviour
 
         enemyScript = GetComponentInParent<NewEnemyCode>();
         playerScript = Script.Find<PlayerMove>("Player");
+        RelocateVisionRange();
 
     }
 
@@ -97,8 +98,22 @@ public class EnemyVision : MonoBehaviour
 
         transform.localScale = OriginalScale;
 
+        RelocateVisionRange();
+
+    }
+
+
+
+
+
+//시야 범위 위치 맞추는 함수
+    public void RelocateVisionRange()
+    {
+
+        float rangeX = transform.localScale.x;
+
         // 이동할 x 좌표를 계산합니다.
-        float newXPosition = (rangeSize - 1) / 2;
+        float newXPosition = (rangeX - 1) / 2;
 
         // 현재 오브젝트의 위치를 가져옵니다.
         Vector3 newPosition = transform.localPosition;
@@ -108,6 +123,7 @@ public class EnemyVision : MonoBehaviour
 
         // 오브젝트의 위치를 업데이트합니다.
         transform.localPosition = newPosition;
+        Debug.Log(newPosition);
 
     }
 
