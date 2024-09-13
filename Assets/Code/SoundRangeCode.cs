@@ -9,7 +9,7 @@ public class SoundRangeCode : MonoBehaviour
 
     void Start()
     {
-        
+
         DontDestroyOnLoad(this);
 
     }

@@ -10,11 +10,13 @@ public class NewEnemyCode : MonoBehaviour
     //public float visionWidth = 1f;
     public float moveSpeed = 1f;
     public float attackMoveSpeed = 3f;
+    public float newEnemyHackingDuration;
 
     // 플레이어 레이어
     public LayerMask playerLayer;
     private Transform player;
     private PlayerMove playerScript;
+    private SirenCode sirenCode;
     public GameObject visionObject;
     public Vector2 startPoint;
     public Vector2 endPoint;
@@ -28,9 +30,7 @@ public class NewEnemyCode : MonoBehaviour
     public bool patrolling = false;
     private bool didThisEverChangedDangerRate = false;
     public bool findingPlayer = false;
-    private SirenCode sirenCode;
     public bool hacked;
-    public float newEnemyHackingDuration;
     private bool isHackingActivate;
 
     void Start()
@@ -38,10 +38,15 @@ public class NewEnemyCode : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerScript = player.GetComponent<PlayerMove>();
+
         visionObject.transform.localPosition = new Vector3(2.5f, 0, 0);
+
         didThisEverChangedDangerRate=false;
+
         moveEndPoint = endPoint;
+
         sirenCode = Script.Find<SirenCode>("Siren");
+
         hacked = false;
         isHackingActivate = false;
 
@@ -54,12 +59,14 @@ public class NewEnemyCode : MonoBehaviour
     void Update()
     {
 
-         if (hacked && !isHackingActivate)
+        if (hacked && !isHackingActivate)
         {
 
             StartCoroutine(ResetAfterDelay());
 
         }
+
+
 
         if (isHeared && !isPlayerDetected && !hacked)
         {
@@ -94,6 +101,7 @@ public class NewEnemyCode : MonoBehaviour
         {
             Flip();
         }
+
         else if (moveEndPoint.x < transform.position.x && isFacingRight)
         {
             Flip();
@@ -190,6 +198,7 @@ public class NewEnemyCode : MonoBehaviour
         {
             moveEndPoint = startPoint;
         }
+
         else if (transform.position.x == startPoint.x)
         {
             moveEndPoint = endPoint;

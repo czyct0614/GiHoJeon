@@ -35,10 +35,12 @@ public class FoxHoleScript : MonoBehaviour
 
         if (!hided && Input.GetButtonDown("Interact") && entered)
         {
+            playermove.DeactivateSoundRange();
             playermove.EnableAllBoxColliders(player, false);
             player.gameObject.SetActive(false);
             hided = true;
         }
+
         else if (hided && Input.GetButtonDown("Interact") && entered)
         {
             player.gameObject.SetActive(true);
