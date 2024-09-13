@@ -1,16 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// Scene 매니저 라이브러리 추가
 using UnityEngine.SceneManagement;
 using System.IO;
 
-
 public class TransferMap : MonoBehaviour
 {
-
-    // 이동할 맵 이름을 설정합니다.
-    public string transferMapName;
+    // 이동할 맵 이름을 public으로 설정하여 Inspector에서 설정 가능하게 합니다.
+    public string targetMapName;
 
     // 박스 콜라이더에 닿는 순간 이벤트 발생
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,35 +16,10 @@ public class TransferMap : MonoBehaviour
         // 충돌한 오브젝트의 이름이 "Player"인 경우
         if (collision.gameObject.name == "Player")
         {
-            
-            // 지정한 씬으로 이동합니다.
-            LoadNextStage();
-        }
 
-        
-    }
+            // 지정한 맵으로 이동합니다.
+            LoadTargetStage(targetMapName);
 
-
-
-
-
-    // 다음 스테이지로 이동합니다.
-    public void LoadNextStage()
-    {
-
-        // 현재 실행 중인 씬의 빌드 인덱스를 가져옵니다.
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        // 다음 스테이지의 빌드 인덱스를 계산합니다.
-        int nextSceneIndex = currentSceneIndex + 1;
-
-        // 만약 다음 스테이지가 존재한다면 해당 씬으로 이동합니다.
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-        {
-            SceneLoader.Instance.LoadtheScene(GetSceneNameByIndex(nextSceneIndex));
-        }
-        else
-        {
-            Debug.LogWarning("다음 스테이지가 없습니다!");
         }
 
     }
@@ -56,21 +28,49 @@ public class TransferMap : MonoBehaviour
 
 
 
-    public string GetSceneNameByIndex(int index)
+    // 지정한 맵 이름으로 스테이지를 이동합니다.
+    public void LoadTargetStage(string mapName)
     {
 
-        if (index >= 0 && index < SceneManager.sceneCountInBuildSettings)
+        // SceneManager를 이용해 해당 맵 이름으로 씬을 로드합니다.
+        if (SceneExists(mapName))
         {
-            string scenePath = SceneUtility.GetScenePathByBuildIndex(index);
-            string sceneName = Path.GetFileNameWithoutExtension(scenePath);
-            return sceneName;
+
+            SceneLoader.Instance.LoadtheScene(mapName);
         }
         else
         {
-            Debug.LogError("Invalid scene index: " + index);
-            return null;
+
+            Debug.LogWarning("해당 맵이 존재하지 않습니다: " + mapName);
+
         }
-        
+
+    }
+
+
+
+
+
+    // 맵 이름이 유효한지 확인하는 메서드
+    public bool SceneExists(string sceneName)
+    {
+
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            string sceneNameFromPath = Path.GetFileNameWithoutExtension(scenePath);
+
+            if (sceneNameFromPath == sceneName)
+            {
+
+                return true;
+
+            }
+
+        }
+        return false;
+
     }
 
 }
