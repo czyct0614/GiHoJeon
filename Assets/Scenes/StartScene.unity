@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9369225bd5210b4abae29180b3ea106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transferMapName: FirstStage
+  transferMapName: MapPrototype
   player: {fileID: 3533926364410082651}
 --- !u!114 &555079587
 MonoBehaviour:
@@ -2313,7 +2313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9369225bd5210b4abae29180b3ea106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transferMapName: Map Prototype
+  transferMapName: HallMap
   player: {fileID: 3533926364410082651}
 --- !u!114 &1698292474
 MonoBehaviour:

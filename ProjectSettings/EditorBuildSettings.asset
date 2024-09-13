@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Map Prototype.unity
+    path: Assets/Scenes/MapPrototype.unity
     guid: 91fe0d74f7bf6e44ea95d9bb39131cd9
   - enabled: 1
     path: Assets/Scenes/BossRoom.unity
