@@ -1184,7 +1184,7 @@ public class PlayerMove : MonoBehaviour
 
 
 // 소리범위 끄는 함수
-    private void DeactivateSoundRange()
+    public void DeactivateSoundRange()
     {
 
         soundRange.SetActive(false);

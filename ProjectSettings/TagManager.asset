@@ -46,6 +46,7 @@ TagManager:
   - Siren
   - DoorManager
   - CeilingLight
+  - FoxHole
   layers:
   - Default
   - TransparentFX
