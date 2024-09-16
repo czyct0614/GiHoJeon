@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 4605977853431167810}
   m_Layer: 0
   m_Name: NewEnemy
-  m_TagString: Untagged
+  m_TagString: NewEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -391,6 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   attackMoveSpeed: 3
+  newEnemyHackingDuration: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -404,7 +405,6 @@ MonoBehaviour:
   patrolling: 0
   findingPlayer: 0
   hacked: 0
-  newEnemyHackingDuration: 3
 --- !u!61 &5062069233189498150
 BoxCollider2D:
   m_ObjectHideFlags: 0
