@@ -59,6 +59,7 @@ public class PlayerMove : MonoBehaviour
     public float maxSpeed;
     public float isFlipped;
     public bool isFastRunning;
+    public bool isCrouching;
     private bool velocityZero = false;
 
 
@@ -245,6 +246,9 @@ public class PlayerMove : MonoBehaviour
         isHided = false;
         
         maxSpeed=15f;
+
+        isFastRunning = false;
+        isCrouching = false;
 
     }
 
@@ -747,6 +751,7 @@ public class PlayerMove : MonoBehaviour
         rigid.AddForce(Vector2.right * h * (maxSpeed / 15f), ForceMode2D.Impulse);
 
         isRunning = true;
+        
 
         // 움직일 때 방향 바꾸기
         if (Input.GetButton("left") || Input.GetButton("right"))
@@ -780,6 +785,23 @@ public class PlayerMove : MonoBehaviour
                     {
                         ChangeMaxSpeed(2/3f);
                         isFastRunning = false;
+                    }
+                }
+                
+                if (Input.GetButton("Crouch"))
+                {
+                    if (!isCrouching)
+                    {
+                        isCrouching = true;
+                        ChangeMaxSpeed(1/3f);
+                    }
+                }
+                else
+                {
+                    if (isCrouching)
+                    {
+                        ChangeMaxSpeed(3f);
+                        isCrouching = false;
                     }
                 }
 
@@ -848,7 +870,7 @@ public class PlayerMove : MonoBehaviour
 
 
 // 대쉬 함수
-    private IEnumerator Dash()
+    /*private IEnumerator Dash()
     {
 
         animator.SetBool("IsDashing",true);
@@ -889,7 +911,7 @@ public class PlayerMove : MonoBehaviour
         canDash = true;
 
     }   
-
+*/
 
 
 
