@@ -1,23 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// Light2D를 사용하기 위한 네임스페이스
+using UnityEngine.Experimental.Rendering.Universal; 
 
 public class LightRangeCode : MonoBehaviour
 {
     public bool turnOff;
     public bool reset;
-    private SpriteRenderer spriteRenderer;
-    private BoxCollider2D boxCollider;
+    private UnityEngine.Rendering.Universal.Light2D light2D; // Light2D 컴포넌트를 참조
+    private PolygonCollider2D polygonCollider;
     private Color originalColor;
     private List<Collider2D> detectedEnemies = new List<Collider2D>(); // 이미 들어온 적들을 저장하는 리스트
     private Dictionary<Collider2D, float> originalVisionRangeSizes = new Dictionary<Collider2D, float>();
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        originalColor = spriteRenderer.color;
-        boxCollider = GetComponent<BoxCollider2D>();
-        reset = false;    
+
+        light2D = GetComponent<UnityEngine.Rendering.Universal.Light2D>(); // Light2D 컴포넌트 참조
+        originalColor = light2D.color; // Light2D의 원래 색상 저장
+        polygonCollider = GetComponent<PolygonCollider2D>();
+        reset = false;
+
     }
 
 
@@ -27,41 +31,42 @@ public class LightRangeCode : MonoBehaviour
     void Update()
     {
 
-        // turnOff가 true일 때 색상 변경
+        // turnOff가 true일 때 Light2D의 색상 변경
         if (turnOff)
         {
 
-            spriteRenderer.color = new Color(0.5f, 0.5f, 0.5f, 0.3f); // 불투명한 회색
+            // Light2D의 색상과 알파값을 수정하여 불투명한 회색으로 변경
+            light2D.color = new Color(1f, 0.1f, 0.1f, 0.6f); // 불투명한 회색
 
             // detectedEnemies 리스트 복사 후 순회
             foreach (var enemy in new List<Collider2D>(detectedEnemies))
             {
-                ProcessEnemy(enemy); // 이미 감지된 적에 대해서도 처리
+
+                // 이미 감지된 적에 대해서도 처리
+                ProcessEnemy(enemy); 
+
             }
-            
+
         }
         else
         {
 
-            spriteRenderer.color = originalColor;
+            light2D.color = originalColor; // 원래 색상 복구
 
             if (reset)
             {
-
                 // detectedEnemies 리스트 복사 후 순회
                 foreach (var enemy in new List<Collider2D>(detectedEnemies))
-                {
-
-                    ReturnEnemy(enemy); // 이미 감지된 적에 대해서도 처리
-
+                { 
+                    // 이미 감지된 적에 대해서도 처리
+                    ReturnEnemy(enemy);
                 }
 
                 StartCoroutine(DisableColliderTemporarily(0.1f));
 
                 reset = false;
-
             }
-
+            
         }
 
     }
@@ -88,7 +93,7 @@ public class LightRangeCode : MonoBehaviour
 
             if (turnOff)
             {
-
+                
                 ProcessEnemy(other); // 즉시 처리
 
             }
@@ -125,14 +130,13 @@ public class LightRangeCode : MonoBehaviour
 
         if (visionRange != null)
         {
-            
+
             EnemyVision enemyVision = visionRange.GetComponent<EnemyVision>();
 
             if (enemyVision != null)
             {
 
                 enemyVision.ChangeVisionRange(2f); // 원하는 범위로 변경
-
             }
 
         }
@@ -171,7 +175,7 @@ public class LightRangeCode : MonoBehaviour
                 }
 
             }
-            
+
         }
 
     }
@@ -179,18 +183,19 @@ public class LightRangeCode : MonoBehaviour
 
 
 
+
     // 콜라이더를 비활성화 후 일정 시간 뒤에 다시 활성화
     IEnumerator DisableColliderTemporarily(float duration)
     {
-        
-        // BoxCollider2D 비활성화
-        boxCollider.enabled = false;
+
+        // PolygonCollider2D 비활성화
+        polygonCollider.enabled = false;
 
         // duration만큼 대기
         yield return new WaitForSeconds(duration);
 
-        // BoxCollider2D 다시 활성화
-        boxCollider.enabled = true;
+        // PolygonCollider2D 다시 활성화
+        polygonCollider.enabled = true;
 
     }
 

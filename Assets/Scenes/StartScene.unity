@@ -522,6 +522,50 @@ MonoBehaviour:
   playerTransform: {fileID: 7506282235987891504}
   cameraPosition: {x: 0, y: 0, z: 0}
   cameraMoveSpeed: 4
+--- !u!114 &340064496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340064488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &555079583
 GameObject:
   m_ObjectHideFlags: 0
@@ -2887,6 +2931,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2762894960471637698, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
       insertIndex: -1
       addedObject: {fileID: 340064492}
+    - targetCorrespondingSourceObject: {fileID: 2762894960471637698, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 340064496}
   m_SourcePrefab: {fileID: 100100000, guid: 823ea4735b6f99d4e9253e6cf02b5566, type: 3}
 --- !u!1001 &1744394808928200783
 PrefabInstance:
@@ -2945,8 +2992,7 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 4123786960287695303, guid: d34597fb7e1620643aa1a3341e8a40eb, type: 3}
-    - {fileID: 7091882314350821103, guid: d34597fb7e1620643aa1a3341e8a40eb, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
