@@ -7,7 +7,7 @@ public class PlatformEnemyController : MonoBehaviour
     public float attackCooldown = 0.5f; // 공격 쿨다운
     public int attackDamage = 1; // 공격 데미지
     private Transform target; // 추적할 대상 (플레이어)
-    private PlayerMove playerHealth; // 플레이어의 체력을 관리하는 스크립트
+    private NewPlayerCode playerHealth; // 플레이어의 체력을 관리하는 스크립트
     private bool canAttack = true; // 공격 가능 여부
     Animator animator;
     float targetY;
@@ -17,7 +17,7 @@ public class PlatformEnemyController : MonoBehaviour
         // 플레이어를 타겟으로 설정
         target = GameObject.FindGameObjectWithTag("Player").transform;
         // 플레이어의 체력을 관리하는 스크립트 가져오기
-        playerHealth = target.GetComponent<PlayerMove>();
+        playerHealth = target.GetComponent<NewPlayerCode>();
         animator = GetComponent<Animator>();
         targetY = transform.position.y;
     }

@@ -6,7 +6,7 @@ public class SkillBehavior : MonoBehaviour
     private float lifetime = 5f;        // 미사일 수명 (초)
     public int damageAmount = 3;       // 탄환의 대미지량
     public TrailRenderer tr;           // 스킬 잔상을 남기는 트레일 렌더러
-    public PlayerMove move;
+    public NewPlayerCode move;
     public EnemyMove enemy;
     public ShieldEnemyMove Senemy;
     public DashEnemyMove Denemy;
@@ -17,7 +17,7 @@ public class SkillBehavior : MonoBehaviour
     {
         // 스킬 잔상 초기에 비활성화
         tr.emitting = false;
-        move = Script.Find<PlayerMove>("Player");
+        move = Script.Find<NewPlayerCode>("Player");
         enemy = Script.Find<EnemyMove>("Monster");
         Senemy = Script.Find<ShieldEnemyMove>("ShieldEnemy");
         Denemy = Script.Find<DashEnemyMove>("DashEnemy");

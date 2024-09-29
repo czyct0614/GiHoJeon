@@ -220,7 +220,7 @@ public class DashEnemyMove : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dashDirection, dashRange, playerLayer);
         if (hit.collider != null)
         {
-            PlayerMove player = hit.collider.GetComponent<PlayerMove>(); // 플레이어 스크립트에 접근
+            NewPlayerCode player = hit.collider.GetComponent<NewPlayerCode>(); // 플레이어 스크립트에 접근
             if (player != null)
             {
                 player.TakeDamage(1); // 플레이어에게 대미지

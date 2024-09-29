@@ -15,7 +15,7 @@ public class NewEnemyCode : MonoBehaviour
     // 플레이어 레이어
     public LayerMask playerLayer;
     private Transform player;
-    private PlayerMove playerScript;
+    private NewPlayerCode playerScript;
     private SirenCode sirenCode;
     public GameObject visionObject;
     public Vector2 startPoint;
@@ -38,7 +38,7 @@ public class NewEnemyCode : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         
-        playerScript = player.GetComponent<PlayerMove>();
+        playerScript = player.GetComponent<NewPlayerCode>();
 
         didThisEverChangedDangerRate=false;
 

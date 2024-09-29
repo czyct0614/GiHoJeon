@@ -32,7 +32,7 @@ public class Start_btn : MonoBehaviour
         GM.SaveCurrentMap(transferMapName);
         sceneController.LoadScene(transferMapName);
         
-        player.GetComponent<PlayerMove>().Revival();
+        player.GetComponent<NewPlayerCode>().Revival();
 
     }
 

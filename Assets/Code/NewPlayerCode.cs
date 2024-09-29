@@ -1,27 +1,11 @@
-/*
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PlayerMove : MonoBehaviour
+public class NewPlayerCode : MonoBehaviour
 {
-
-    [Header("====>총알 및 스킬<====")]
-
-    [SerializeField] private Image chargrBarImage;
-    // 총알 코드 가져오기
-    public GameObject missilePrefab;
-    // 스킬 선택 코드 가져오기
-    public GameObject skillSelectPrefab;
-    // 총알 프리팹
-    private Missile misile;
-    // 스킬 이미지 (왼쪽 아래 UI) 변수
-    //private SkillImage skillimage;
-    public bool isSkillReady = false;
-    // 장전시간
-    public float shootCooldown;
 
 
 
@@ -31,20 +15,13 @@ public class PlayerMove : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     // 애니메이터 조작을 위한 변수
     private Animator animator;
-    // 점프 모션
-    public bool isJumping = false;
     // 달리기 모션
     private bool isRunning = false;
-    // 총쏘는 모션
-    private bool isShooting = false;
-    private bool canShoot = true;
-    private bool isClimbing = false;
 
 
 
     [Header("====>체력<====")]
 
-    [SerializeField] private Image healthBarImage;
     // 최대 체력
     public int maxHealth = 10;
     // 현재 체력
@@ -62,40 +39,7 @@ public class PlayerMove : MonoBehaviour
     public bool isFastRunning;
     public bool isCrouching;
     private bool velocityZero = false;
-
-
-
-    [Header("====>점프<====")]
-
-    // 점프 높이
-    public float jumpPower;
-    private float JumpTime;
-    private float canJumpTime = 0.4f;
-    public bool canJump = true;
-
     
-
-    [Header("====>대쉬<====")]
-
-    // 대쉬 잔상 남기기
-    [SerializeField] private TrailRenderer tr;
-    // 얼마나 많이 움직일지
-    public float dashingPower = 9f;
-    // 대쉬 지속시간
-    public float dashingTime = 0.2f;
-    // 대쉬 쿨타임
-    public float dashingCooldown = 1f;
-    // 대쉬 가능한지
-    private bool canDash = true;
-    // 대쉬하고있는지
-    private bool isDashing;
-    
-
-    
-    [Header("====>s점프<====")]
-
-    public bool playerOnPlatform = false;
-
 
 
     [Header("====>죽음/부활<====")]
@@ -114,9 +58,6 @@ public class PlayerMove : MonoBehaviour
     [Header("====>기타<====")]
 
     public bool isHided = false;
-
-    // 사다리 오르기 속도
-    public float climbSpeed = 10f;
 
     private GameObject player;
     private GameObject soundRange;
@@ -204,31 +145,10 @@ public class PlayerMove : MonoBehaviour
 
 
 
-        // 최대 체력
-        //maxHealth = 10;
-
-        // 현재 체력
-        //currentHealth = 10;
-
-        // 얼마나 많이 움직일지
-        //dashingPower = 9f;
-
-        // 대쉬 지속시간
-        //dashingTime = 0.2f;
-
-        // 대쉬 쿨타임
-        //dashingCooldown = 1f;
-
         // 부활무적 시간
         invincibleDuration = 0.5f;
 
-        // 총 장전시간
-        //shootCooldown = 0.15f;
-
         dead = false;
-
-        // 대쉬 가능한지
-        //canDash = true;
 
         // 죽고 있는지
         isDying = false;
@@ -237,12 +157,6 @@ public class PlayerMove : MonoBehaviour
 
         // 무적 상태 여부를 나타내는 변수
         isInvincible = false;
-
-        canJumpTime = 0.4f;
-
-        canJump = true;
-
-        isSkillReady = false;
 
         isHided = false;
         
@@ -344,20 +258,8 @@ public class PlayerMove : MonoBehaviour
 
         lastSpawnPoint = PlayerRoomManager.Instance.GetLastTouchedSpawnPoint();
 
-        ChangeHealthBarAmount();
 
 
-// 스킬 불러오기
-/*
-        if (skillimage==null)
-        {
-            skillimage = GameObject.FindGameObjectWithTag("SelectedSkill").GetComponent<SkillImage>();
-        }
-
-        isSkillReady = skillimage.isSkillReady;
-*/
-
-/*
 // 주인공 콜라이더 불러오기
         if (playerCollider == null)
         {
@@ -390,42 +292,10 @@ public class PlayerMove : MonoBehaviour
 
 
 
-// 체력바 이미지 불러오기
-/*
-        if (HPbarImage==null)
-        {
-            HPbarImage=GameObject.FindGameObjectWithTag("HealthBarImage").GetComponent<Image>();
-        }
-*/
-
-
-
-// 차징바 이미지 불러오기
-/*
-        if (ChargebarImage==null)
-        {
-            ChargebarImage=GameObject.FindGameObjectWithTag("ChargeBarImage").GetComponent<Image>();
-        }
-*/
-
-
-/*
 // 은신시 아무 행동 못하게
         if (isHided == true)
         {
             return;
-        }
-
-
-
-// 달리면서 총쏠때 달리면서총쏘기 모션 실행
-        if (isRunning && isShooting)
-        {
-            animator.SetBool("RunningShoot", true);
-        }
-        else
-        {
-            //animator.SetBool("RunningShoot", false);
         }
 
 
@@ -450,69 +320,6 @@ public class PlayerMove : MonoBehaviour
 
 
 
-// 대쉬중일때 다른 행동 못하게
-        if (isDashing)
-        {
-            return;
-        }
-
-
-
-// 총알 발사
-
-        if (canShoot && Input.GetMouseButtonDown(0) && !Input.GetMouseButton(1) && !isSkillReady)
-        {
-            StartCoroutine(ShootWithCooldown());
-        }
-        else
-        {
-            animator.SetBool("isShooting", false);
-        }
-
-
-
-// 스킬창 불러오기
-        if (Input.GetMouseButtonDown(1))
-        {
-            // 마우스 위치로 스킬 선택창 복제하기
-            GameObject select = Instantiate(skillSelectPrefab, MousePos, transform.rotation);
-        }
-
-
-
-// 점프
-        if (Input.GetButtonDown("Jump") && !animator.GetBool("isJumping") && canInput && !Input.GetButton("Stop") && canJump) // 스페이스 버튼을 누르면서 점프중이 아닐때
-        {
-            // 위로 힘 가하기
-            animator.SetBool("isJumping", true);
-            animator.SetBool("isRunning", false);
-
-            // 현재 시간을 저장
-            JumpTime = Time.time;
-            rigid.AddForce(Vector2.up* jumpPower , ForceMode2D.Impulse);
-
-            // 점프 중이라는 신호 보내기
-            isJumping = true;
-            isRunning = false;
-            isShooting = false;
-        }
-
-
-
-        if (Time.time - JumpTime >= canJumpTime)
-        {
-            canJump = true;
-        }
-
-
-
-        if (Time.time - JumpTime < canJumpTime)
-        {
-            canJump = false;
-        }
-
- 
- 
         if (Input.GetButtonUp("left") || Input.GetButtonUp("right"))
         {
             rigid.velocity = new Vector2( 0f * rigid.velocity.normalized.x , rigid.velocity.y);
@@ -525,34 +332,7 @@ public class PlayerMove : MonoBehaviour
         {
             animator.SetBool("isRunning",false);
             isRunning = false;
-            isShooting = false;
         }
-
-
-// 대쉬 코드
-        /*
-        if (Input.GetButtonDown("Dash") && canDash && !velocityZero)
-        {
-            animator.SetBool("IsDashing", true);
-            animator.SetBool("isJumping", false);
-            StartCoroutine(Dash());
-            isRunning = false;
-        }
-        */
-
-
-/*
-//S점프 코드
-        if (Input.GetButton("Stop") && Input.GetButtonDown("Jump") && playerOnPlatform)
-        {
-            playerCollider.enabled = false;
-            canJump = false;
-            // 0.25초 후에 플레이어 콜라이더 다시 활성화
-            StartCoroutine(EnableColliderAfterDelay(0.25f));
-            StartCoroutine(JumpCoolTime(0.3f));
-        }
-
-        Climb();
 
     }
 
@@ -560,20 +340,6 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-
-// 대쉬하고 있을 때 딴 행동 못하게 하기
-        if (isDashing)
-        {
-            return;
-        }
-
-
-
-// 은신시 아무 행동 못하게
-        if (isHided == true)
-        {
-            return;
-        }
 
 
 
@@ -600,46 +366,6 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity =  new Vector2(maxSpeed * (-1), rigid.velocity.y); 
         }
 
-
-
-// 점프 모션
-        // 빔을 쏨 (디버그는 게임상에서 보이지 않음) 시작위치, 어디로 쏠지, 빔의 색
-        Debug.DrawRay(rigid.position, Vector3.down, new Color(0,1,0));
-
-        // 빔의 시작위치, 빔의 방향 , 1:distance , (빔에 맞은 오브젝트를 특정 레이어로 한정 지어야 할 때 사용) 
-        // RaycastHit2D : Ray에 닿은 오브젝트 클래스
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 2.5f, LayerMask.GetMask("Platform")); 
-    
-        if (!isDashing)
-        {
-            if (rayHit.collider == null && !isClimbing)
-            {
-                animator.SetBool("isJumping", true);
-            }
-        }
-
-
-
-        if (isDashing)
-        {
-            animator.SetBool("isJumping", false);
-            animator.SetBool("isRunning", false);
-            animator.SetBool("IsDashing", true);
-        }
-
-
-
-        // 빔을 맞은 오브젝트가 있을때
-        if (rayHit.collider != null)
-        {
-            if (rayHit.distance < 6f)
-            {
-                // 거리가 0.5보다 작아지면 변경
-                animator.SetBool("isJumping", false);
-                isJumping = false;
-            }
-        }
-
     }
 
 
@@ -652,10 +378,8 @@ public class PlayerMove : MonoBehaviour
         // 죽고 있지 않는다면
         if (!isDying)
         {
-            tr.emitting = false;
             isDying = true;
             canInput = false;
-            canDash = false;
             rigid.velocity = Vector2.zero;
 
             // Sprite Alpha : 색상 변경 
@@ -703,22 +427,13 @@ public class PlayerMove : MonoBehaviour
         dead = false;
         // 체력 초기화
         currentHealth = 10;
-        // 대쉬할수 있게
-        canDash = true;
         // 은신 풀리게
         isHided = false;
 
         // 모션 초기화
-        animator.SetBool("isJumping",false);
         animator.SetBool("isRunning",false);
-        animator.SetBool("IsDashing",false);
-
-        tr.emitting = false;
 
         rigid.gravityScale = 8f;
-
-        //체력바 초기화
-        ChangeHealthBarAmount();
 
     }
 
@@ -757,13 +472,8 @@ public class PlayerMove : MonoBehaviour
         // 움직일 때 방향 바꾸기
         if (Input.GetButton("left") || Input.GetButton("right"))
         {
-            if (!isJumping && !isDashing)
-            {
-                animator.SetBool("isRunning", true);
-                animator.SetFloat("runSpeed", maxSpeed / 15f);
-            }
-
-
+            animator.SetBool("isRunning", true);
+            animator.SetFloat("runSpeed", maxSpeed / 15f);
 
             if (Input.GetButton("left") && Input.GetButton("right"))
             {
@@ -831,7 +541,6 @@ public class PlayerMove : MonoBehaviour
         if (!isInvincible)
         {
             currentHealth -= damage;
-            ChangeHealthBarAmount();
             if (currentHealth <= 0)
             {
                 OnDie();
@@ -870,271 +579,6 @@ public class PlayerMove : MonoBehaviour
 
 
 
-// 대쉬 함수
-    /*private IEnumerator Dash()
-    {
-
-        animator.SetBool("IsDashing",true);
-        animator.SetBool("isRunning",false);
-        animator.SetBool("isJumping",false);
-
-        isInvincible = true;
-        // 대쉬중에 재대쉬 못하게 막음
-        canDash = false;
-        // 대쉬하고 있을때 딴 코드 실행 안되게
-        isDashing = true;
-        // 원래 중력 저장
-        float originalGravity = 8f;
-        // 앞으로 대쉬하기 위해 중력 0으로 바꿈
-        rigid.gravityScale = 0f;
-        // 캐릭터가 보고있는 방향으로 대쉬파워만큼 가속도 주기
-        rigid.velocity = new Vector2(isFlipped * transform.localScale.x * dashingPower, 0f);
-        // 자취 남기기
-        tr.emitting = true;
-
-        // dashingTime 동안 대쉬하기
-        yield return new WaitForSeconds(dashingTime);
-
-        // 자취 끄기
-        tr.emitting = false;
-        // 원래 중력으로 돌려놓기
-        rigid.gravityScale=originalGravity;
-        // 다시 다른 코드 실행되게
-        isDashing = false;
-        isInvincible = false;
-        rigid.velocity = new Vector2( 0.1f * rigid.velocity.normalized.x , rigid.velocity.y);
-        animator.SetBool("IsDashing",false);
-
-        // 대쉬 쿨타임동안 대쉬 못하게
-        yield return new WaitForSeconds(dashingCooldown);
-
-        // 다시 대쉬 가능하게
-        canDash = true;
-
-    }   
-*/
-
-
-
-/*
-// 체력게이지 함수
-    // HP 게이지 변경
-    private void ChangeHealthBarAmount()
-    {
-
-        if (healthBarImage != null)
-        {
-            healthBarImage.fillAmount = (float) currentHealth / maxHealth;
-        }
-
-    }
-
-
-
-
-
-/* // 차지게이지 함수
-    // Charge 게이지 변경
-    public void ChangeChargeBarAmount(float min, float max)
-    {
-
-        if (chargrBarImage != null)
-        {
-        chargrBarImage.fillAmount = min / max;
-        }
-
-    }
-*/
-
-
-
-
-/*
-// 지연 후 플레이어 콜라이더 활성화하는 코루틴
-    private IEnumerator EnableColliderAfterDelay(float delay)
-    {
-
-        yield return new WaitForSeconds(delay);
-
-        // 플레이어 콜라이더 활성화
-        playerCollider.enabled = true;
-
-    }
-
-
-
-
-
-// 점프 쿨타임 함수
-    private IEnumerator JumpCoolTime(float delay)
-    {
-
-        yield return new WaitForSeconds(delay);
-
-        canJump = true;
-
-    }
-
-
-
-
-
-// 총 쏘는 함수
-    private IEnumerator ShootWithCooldown()
-    {
-
-        // 쿨타임 중인 동안은 총을 쏠 수 없음
-        canShoot = false;
-        animator.SetBool("isShooting", true);
-
-        // 캐릭터 위치 (좌표)
-        Vector2 PlayerPos = GetComponent<Rigidbody2D>().position;
-        // 마우스 위치 (좌표)
-        Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // 총알이 나가는 방향
-        Vector2 Dir = (MousePos - PlayerPos);
-        
-        // 총알 발사
-        GameObject missile = Instantiate(missilePrefab, transform.position, transform.rotation);
-        Missile missileScript = missile.GetComponent<Missile>();
-        missileScript.Launch(Dir.normalized, 2000);
-
-        // 쿨타임 대기
-        yield return new WaitForSeconds(shootCooldown);
-
-        // 쿨타임 종료 후 다시 총을 쏠 수 있도록 설정
-        canShoot = true;
-
-    }
-
-
-
-
-
-// 플레이어의 체력을 저장하는 함수
-    public void SavePlayerData(Vector3 position, int health)
-    {
-
-        // 플레이어의 체력을 저장
-        PlayerPrefs.SetInt("PlayerHealth", health);
-        lastSpawnPoint = PlayerRoomManager.Instance.GetLastTouchedSpawnPoint();
-        // 변경 사항을 저장
-        PlayerPrefs.Save();
-
-        // 디버그 로그로 저장된 데이터 표시
-        Debug.Log("Player data saved: Health = " + currentHealth + "\n" +
-                  "Last SavePoint : " + lastSpawnPoint);
-
-    }
-
-
-
-
-
-// 저장된 플레이어 데이터를 불러오는 함수
-    public void LoadPlayerData()
-    {
-
-        // 플레이어의 체력을 불러옵니다.
-        currentHealth = PlayerPrefs.GetInt("PlayerHealth");
-        // 플레이어 오브젝트를 찾아 위치와 체력을 설정합니다.
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        if (player != null)
-        {
-            ChangeHealthBarAmount();
-            LastPoint();
-        }
-
-        // 디버그 로그로 불러온 데이터 표시
-        Debug.Log("Player data loaded: Health=" + currentHealth + "\n" +
-                  "Last SavePoint :" + lastSpawnPoint);
-
-    }
-
-
-
-
-
-// 사다리 탈때 중력 0되는 코드
-    private void OnTriggerStay2D(Collider2D other)
-    {
-
-        if (other.CompareTag("Ladder"))
-        {
-            isClimbing = true;
-            // 중력을 0으로 설정
-            rigid.gravityScale = 0f;
-            // 현재 속도를 초기화
-            rigid.velocity = new Vector2(rigid.velocity.x, 0f);
-
-            // 애니메이션 설정
-            animator.SetBool("IsClimbing", true);
-            animator.SetBool("isJumping", false);
-            animator.SetBool("isRunning", false);
-        }
-
-    }
-
-
-
-
-
-// 사다리 벗어나면 중력 돌아오는 함수
-    private void OnTriggerExit2D(Collider2D other)
-    {
-
-        if (other.CompareTag("Ladder"))
-        {
-            isClimbing = false;
-            rigid.gravityScale = 8f; // 중력을 원래대로 설정
-
-            animator.SetBool("IsClimbing", false); // 애니메이션 해제
-
-        }
-
-    }
-
-
-
-
-
-// 사다리 오르는 함수
-    void Climb()
-    {
-
-        if (isClimbing)
-        {
-            // 수직 입력값 가져오기
-            float vertical = Input.GetAxis("Vertical");
-
-            // 사다리 오르기 속도 설정
-            rigid.velocity = new Vector2(rigid.velocity.x, vertical * climbSpeed);
-
-            // 사다리를 오르거나 내릴 때 애니메이션 설정
-            if (Mathf.Abs(vertical) > 0.1f)
-            {
-                // 애니메이션 재생 속도 정상
-                animator.speed = 1;
-            }
-            else
-            {
-                // 애니메이션 정지
-                animator.speed = 0;
-            }
-        }
-        else
-        {
-            // 사다리를 벗어나면 애니메이션 재생 속도 정상
-            animator.speed = 1;
-        }
-
-    }
-
-
-
-
-
 // 마지막 스폰포인트로 이동하는 함수
     public void LastPoint()
     {
@@ -1164,16 +608,6 @@ public class PlayerMove : MonoBehaviour
         {
             EnableAllBoxColliders(child.gameObject,turnoff);
         }
-
-    }
-
-
-
-
-
-// 소리 범위 늘리고 줄이는 함수
-    void ChangeSoundRange()
-    {
 
     }
 
@@ -1225,9 +659,7 @@ public class PlayerMove : MonoBehaviour
         VelocityZero();
         spriteRenderer.color = new Color(1,1,1,0.5f);
         isHided = true;
-        animator.SetBool("isJumping",false);
         animator.SetBool("isRunning",false);
-        animator.SetBool("IsDashing",false);
 
     }
 
@@ -1235,7 +667,7 @@ public class PlayerMove : MonoBehaviour
 
 
 
-// 은신 함수
+// 은신 해제 함수
     public void GetOutOfHiding()
     {
 
@@ -1254,6 +686,49 @@ public class PlayerMove : MonoBehaviour
     {
 
         spriteRenderer.flipX = flip;
+
+    }
+
+
+
+
+// 플레이어의 체력을 저장하는 함수
+    public void SavePlayerData(Vector3 position, int health)
+    {
+
+        // 플레이어의 체력을 저장
+        PlayerPrefs.SetInt("PlayerHealth", health);
+        lastSpawnPoint = PlayerRoomManager.Instance.GetLastTouchedSpawnPoint();
+        // 변경 사항을 저장
+        PlayerPrefs.Save();
+
+        // 디버그 로그로 저장된 데이터 표시
+        Debug.Log("Player data saved: Health = " + currentHealth + "\n" +
+                  "Last SavePoint : " + lastSpawnPoint);
+
+    }
+
+
+
+
+
+// 저장된 플레이어 데이터를 불러오는 함수
+    public void LoadPlayerData()
+    {
+
+        // 플레이어의 체력을 불러옵니다.
+        currentHealth = PlayerPrefs.GetInt("PlayerHealth");
+        // 플레이어 오브젝트를 찾아 위치와 체력을 설정합니다.
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            LastPoint();
+        }
+
+        // 디버그 로그로 불러온 데이터 표시
+        Debug.Log("Player data loaded: Health=" + currentHealth + "\n" +
+                  "Last SavePoint :" + lastSpawnPoint);
 
     }
 
@@ -1283,4 +758,3 @@ public class PlayerMove : MonoBehaviour
     }
 
 }
-*/

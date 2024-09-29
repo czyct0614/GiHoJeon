@@ -6,14 +6,14 @@ public class EnemyBullet : MonoBehaviour
     private float lifetime = 2f;  // 미사일 수명 (초)
     private float spawnTime;  // 미사일 생성 시간
     public int damageAmount = 2; // 탄환의 대미지량
-    private PlayerMove playerHealth; // 플레이어의 체력을 관리하는 스크립트
+    private NewPlayerCode playerHealth; // 플레이어의 체력을 관리하는 스크립트
     private Transform target; // 추적할 대상 (플레이어)
 
     void Start()
     {
         spawnTime = Time.time;  // 현재 시간을 저장
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        playerHealth = target.GetComponent<PlayerMove>();
+        playerHealth = target.GetComponent<NewPlayerCode>();
     }
 
     void Update()

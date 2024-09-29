@@ -8,7 +8,7 @@ public class ShieldEnemyController : MonoBehaviour
     public int attackDamage = 1; // 공격 데미지
     public float detectRange = 10f; // 플레이어를 감지할 수 있는 최대 거리
     private Transform target; // 추적할 대상 (플레이어)
-    private PlayerMove playerHealth; // 플레이어의 체력을 관리하는 스크립트
+    private NewPlayerCode playerHealth; // 플레이어의 체력을 관리하는 스크립트
     private bool canAttack = true; // 공격 가능 여부
     ShieldEnemyMove SenemyMove;
     Animator animator;
@@ -23,7 +23,7 @@ public class ShieldEnemyController : MonoBehaviour
         {
             target = player.transform;
             // 플레이어의 체력을 관리하는 스크립트 가져오기
-            playerHealth = player.GetComponent<PlayerMove>();
+            playerHealth = player.GetComponent<NewPlayerCode>();
         }
         else
         {

@@ -34,7 +34,7 @@ public class UpperVentinteractionScript : MonoBehaviour
         {
             Vent.SetActive(doShow);
             player.position = transformPoint;
-            Script.Find<PlayerMove>("Player").ChangeMaxSpeed(changeSpeedRate);
+            Script.Find<NewPlayerCode>("Player").ChangeMaxSpeed(changeSpeedRate);
         }
 
     }

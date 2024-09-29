@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class DeadLine : MonoBehaviour
 {
-     PlayerMove playermove;
+     NewPlayerCode playermove;
 
     // Start is called before the first frame update
     void Start()
     {
         GameObject player = GameObject.Find("Player");
 
-        playermove = player.GetComponent<PlayerMove>();
+        playermove = player.GetComponent<NewPlayerCode>();
     }
 
     // Update is called once per frame

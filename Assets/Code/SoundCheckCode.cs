@@ -8,7 +8,7 @@ public class SoundCheckCode : MonoBehaviour
     private NewEnemyCode newEnemyCode;
     private GameObject player;
     public Vector2 lastPlayerPoint;
-    private PlayerMove playerScript;
+    private NewPlayerCode playerScript;
 
     public bool canKill = false;
 
@@ -17,7 +17,7 @@ public class SoundCheckCode : MonoBehaviour
 
         newEnemyCode = GetComponentInParent<NewEnemyCode>();
         player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<PlayerMove>();
+        playerScript = player.GetComponent<NewPlayerCode>();
 
     }
 

@@ -21,7 +21,7 @@ public class ShieldEnemyMove : MonoBehaviour
     public bool explosion = false;
     float explosionRadius = 2f;
     int explosionDamage = 1;
-    private PlayerMove playerHealth; // 플레이어의 체력을 관리하는 스크립트
+    private NewPlayerCode playerHealth; // 플레이어의 체력을 관리하는 스크립트
     
     private void Start()
     {
@@ -77,7 +77,7 @@ public class ShieldEnemyMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         Invoke("Think", 5); // 초기화 함수 안에 넣어서 실행될 때 마다(최초 1회) nextMove변수가 초기화 되도록함
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        playerHealth = player.GetComponent<PlayerMove>();
+        playerHealth = player.GetComponent<NewPlayerCode>();
     }
 
     // Update is called once per frame

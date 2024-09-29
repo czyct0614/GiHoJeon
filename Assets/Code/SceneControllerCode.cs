@@ -8,7 +8,7 @@ public class SceneController : MonoBehaviour
     private static SceneController instance;
 
     private GameObject player;
-    private PlayerMove playerMove;
+    private NewPlayerCode playerMove;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class SceneController : MonoBehaviour
 
         if (player != null)
         {
-            playerMove = player.GetComponent<PlayerMove>();
+            playerMove = player.GetComponent<NewPlayerCode>();
 
             if (playerMove == null)
             {
@@ -122,7 +122,7 @@ public class SceneController : MonoBehaviour
                 // 플레이어 전체 활성화
                 player.SetActive(true);
                 
-                var playerMove = player.GetComponent<PlayerMove>();
+                var playerMove = player.GetComponent<NewPlayerCode>();
 
                 if (playerMove != null)
                 {

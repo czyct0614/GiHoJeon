@@ -9,13 +9,13 @@ public class EnemyVision : MonoBehaviour
     
     private bool attack = false;
 
-    private PlayerMove playerScript;
+    private NewPlayerCode playerScript;
 
     void Start()
     {
 
         enemyScript = GetComponentInParent<NewEnemyCode>();
-        playerScript = Script.Find<PlayerMove>("Player");
+        playerScript = Script.Find<NewPlayerCode>("Player");
         RelocateVisionRange();
 
     }

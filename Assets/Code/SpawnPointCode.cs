@@ -4,13 +4,13 @@ public class SpawnPoint : MonoBehaviour
 {
 
     public GameObject player;
-    PlayerMove playercode;
+    NewPlayerCode playercode;
 
     void Start()
     {
 
         player = GameObject.FindGameObjectWithTag("Player");
-        playercode = player.GetComponent<PlayerMove>();
+        playercode = player.GetComponent<NewPlayerCode>();
 
     }
 

@@ -813,7 +813,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2462243118244271224}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerMove, Assembly-CSharp
         m_MethodName: LoadPlayerData
         m_Mode: 1
@@ -2944,22 +2944,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4123786960287695303, guid: d34597fb7e1620643aa1a3341e8a40eb, type: 3}
+    - {fileID: 7091882314350821103, guid: d34597fb7e1620643aa1a3341e8a40eb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9001837065108196279, guid: d34597fb7e1620643aa1a3341e8a40eb, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 7506282235987891511}
   m_SourcePrefab: {fileID: 100100000, guid: d34597fb7e1620643aa1a3341e8a40eb, type: 3}
---- !u!114 &2462243118244271224 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7091882314350821103, guid: d34597fb7e1620643aa1a3341e8a40eb, type: 3}
-  m_PrefabInstance: {fileID: 1744394808928200783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3533926364410082651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a4d4e722c239db418e2f408a3236c0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3533926364410082651 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9001837065108196279, guid: d34597fb7e1620643aa1a3341e8a40eb, type: 3}
@@ -3071,6 +3065,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6706256164887007886, guid: d34597fb7e1620643aa1a3341e8a40eb, type: 3}
   m_PrefabInstance: {fileID: 1744394808928200783}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7506282235987891511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3533926364410082651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faaea7acc176005418a09943eae4e085, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  maxHealth: 10
+  currentHealth: 10
+  maxSpeed: 0
+  isFlipped: 0
+  isFastRunning: 0
+  isCrouching: 0
+  lastSpawnPoint: {x: 0, y: 0}
+  invincibleDuration: 0.5
+  nowMap: 
+  dead: 0
+  isDying: 1
+  canInput: 1
+  isHided: 0
+  soundAmount: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -7,14 +7,14 @@ public class Box : MonoBehaviour
     private GameObject player;
     private bool hideInRight = true;
     private bool entered;
-    private PlayerMove playerMove;
+    private NewPlayerCode playerMove;
     private bool hided;
 
     void Start()
     {
         hided = false;
         entered = false;
-        playerMove = Script.Find<PlayerMove>("Player");
+        playerMove = Script.Find<NewPlayerCode>("Player");
         player = GameObject.FindGameObjectWithTag("Player");
     }
 

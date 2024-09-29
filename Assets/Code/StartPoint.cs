@@ -5,14 +5,14 @@ using UnityEngine;
 public class StartPoint : MonoBehaviour
 {
 
-    PlayerMove move;
+    NewPlayerCode move;
 
     void Start()
     {
 
         // 플레이어를 찾아서 그 위치로 이동시킵니다.
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        move = player.GetComponent<PlayerMove>();
+        move = player.GetComponent<NewPlayerCode>();
         
         if (player != null)
         {

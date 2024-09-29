@@ -20,7 +20,7 @@ public class ExplodingEnemyMove : MonoBehaviour
     public int maxHealth = 2; // 몬스터의 최대 체력
     private int currentHealth; // 현재 체력
     private bool isDead = false; // 몬스터가 죽었는지 여부를 나타내는 변수
-    private PlayerMove playerHealth; // 플레이어의 체력을 관리하는 스크립트
+    private NewPlayerCode playerHealth; // 플레이어의 체력을 관리하는 스크립트
     public GameObject manaPrefab; // 마나 프리팹
     bool forceturn = false;
     private Vector3 hackedPlayerPosition; // 해킹된 순간의 플레이어 위치
@@ -33,7 +33,7 @@ public class ExplodingEnemyMove : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         target = player.transform;
         // 플레이어의 체력을 관리하는 스크립트 가져오기
-        playerHealth = player.GetComponent<PlayerMove>();
+        playerHealth = player.GetComponent<NewPlayerCode>();
     }
 
     // 대미지를 받는 함수

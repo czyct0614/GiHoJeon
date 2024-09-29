@@ -6,7 +6,7 @@ public class FoxHoleScript : MonoBehaviour
 {
 
     private GameObject player;
-    private PlayerMove playermove;
+    private NewPlayerCode playermove;
 
     public bool hided = false;
     public bool entered = false;
@@ -15,7 +15,7 @@ public class FoxHoleScript : MonoBehaviour
     {
 
         player = GameObject.FindGameObjectWithTag("Player");
-        playermove = player.GetComponent<PlayerMove>();
+        playermove = player.GetComponent<NewPlayerCode>();
 
     }
 
