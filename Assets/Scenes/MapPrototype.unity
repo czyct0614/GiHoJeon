@@ -1617,14 +1617,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1948321106}
     m_Modifications:
-    - target: {fileID: 54385231939466521, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-    - target: {fileID: 249621305185997174, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 249621305185997174, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.5
@@ -1665,37 +1657,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3112679666582433583, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-    - target: {fileID: 5062069233189498150, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7436816670302533155, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
       propertyPath: m_Name
       value: NewEnemy (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7459415451548478697, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-    - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
-      propertyPath: endPoint.x
-      value: 48
-      objectReference: {fileID: 0}
-    - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
-      propertyPath: endPoint.y
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
-      propertyPath: startPoint.x
-      value: 21
-      objectReference: {fileID: 0}
-    - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
-      propertyPath: startPoint.y
-      value: -0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
