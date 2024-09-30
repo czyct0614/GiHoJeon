@@ -36,19 +36,24 @@ public class Box : MonoBehaviour
                                                         player.transform.position.y,
                                                         player.transform.position.z);
 
-                hided=true;
-                entered=true;
+                hided = true;
+                entered = true;
 
             }
             else
             {
 
                 playerMove.GetOutOfHiding();
-                hided=false;
+                hided = false;
 
             }
-            
         }
+
+        if (hided)
+        {
+            playerMove.VelocityZero();
+        }
+
     }
 
 
