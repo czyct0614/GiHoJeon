@@ -204,6 +204,13 @@ public class NewPlayerCode : MonoBehaviour
             soundAmount = 10;
         }
 
+        
+        if (Input.GetButton("Crouch"))
+        {
+            soundAmount = 2;
+        }
+ 
+
 
 
         if (Input.GetButton("Interact"))
