@@ -17,6 +17,8 @@ public class NewPlayerCode : MonoBehaviour
     private Animator animator;
     // 달리기 모션
     private bool isRunning = false;
+    private bool isFastRunning = false;
+    private bool isCrouching = false;
 
 
 
@@ -36,8 +38,6 @@ public class NewPlayerCode : MonoBehaviour
     // 최대 속력 변수 
     public float maxSpeed;
     public float isFlipped;
-    public bool isFastRunning;
-    public bool isCrouching;
     private bool velocityZero = false;
     
 
@@ -328,9 +328,13 @@ public class NewPlayerCode : MonoBehaviour
 
 
 // 속도 낮을때 멈추기
-        if (Mathf.Abs(rigid.velocity.x) < 0.8) // 속도가 0 == 멈춤
+        if (Mathf.Abs(rigid.velocity.x) < 0.1) // 속도가 0 == 멈춤
         {
+            // 모션 초기화
             animator.SetBool("isRunning",false);
+            animator.SetBool("isFastRunning",false);
+            animator.SetBool("isCrouching",false);
+
             isRunning = false;
         }
 
@@ -432,6 +436,8 @@ public class NewPlayerCode : MonoBehaviour
 
         // 모션 초기화
         animator.SetBool("isRunning",false);
+        animator.SetBool("isFastRunning",false);
+        animator.SetBool("isCrouching",false);
 
         rigid.gravityScale = 8f;
 
@@ -444,6 +450,11 @@ public class NewPlayerCode : MonoBehaviour
 // 속력을 0으로 바꾸는 함수
     public void VelocityZero()
     {
+
+        // 모션 초기화
+        animator.SetBool("isRunning",false);
+        animator.SetBool("isFastRunning",false);
+        animator.SetBool("isCrouching",false);
 
         // 현재 rigidbody의 속도를 가져옵니다.
         Vector2 currentVelocity = rigid.velocity;
@@ -484,6 +495,8 @@ public class NewPlayerCode : MonoBehaviour
             {
                 if (Input.GetButton("Run"))
                 {
+                    animator.SetBool("isFastRunning", true);
+                    animator.SetBool("isRunning", false);
                     if (!isFastRunning)
                     {
                         isFastRunning = true;
@@ -492,6 +505,7 @@ public class NewPlayerCode : MonoBehaviour
                 }
                 else
                 {
+                    animator.SetBool("isFastRunning", false);
                     if (isFastRunning)
                     {
                         ChangeMaxSpeed(2/3f);
@@ -501,6 +515,8 @@ public class NewPlayerCode : MonoBehaviour
                 
                 if (Input.GetButton("Crouch"))
                 {
+                    animator.SetBool("isCrouching", true);
+                    animator.SetBool("isRunning", false);
                     if (!isCrouching)
                     {
                         isCrouching = true;
@@ -509,6 +525,7 @@ public class NewPlayerCode : MonoBehaviour
                 }
                 else
                 {
+                    animator.SetBool("isCrouching", false);
                     if (isCrouching)
                     {
                         ChangeMaxSpeed(3f);
@@ -659,7 +676,10 @@ public class NewPlayerCode : MonoBehaviour
         VelocityZero();
         spriteRenderer.color = new Color(1,1,1,0.5f);
         isHided = true;
+        // 모션 초기화
         animator.SetBool("isRunning",false);
+        animator.SetBool("isFastRunning",false);
+        animator.SetBool("isCrouching",false);
 
     }
 
