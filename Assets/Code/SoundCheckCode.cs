@@ -34,7 +34,7 @@ public class SoundCheckCode : MonoBehaviour
         {
             Debug.Log("소리 감지");
             newEnemyCode.isHeared = true;
-            lastPlayerPoint = new Vector2(player.transform.position.x, 0);
+            lastPlayerPoint = new Vector2(player.transform.position.x, transform.position.y);
         }
 
 
