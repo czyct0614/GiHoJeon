@@ -17,6 +17,10 @@ public class SirenCode : MonoBehaviour
 
     public bool ringing = false;
 
+    public bool hacked;
+    public float sirenHackingDuration;
+    private bool isHackingActivate;
+
     void Start()
     {
 
@@ -25,6 +29,8 @@ public class SirenCode : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         newEnemyCode = Script.Find<NewEnemyCode>("NewEnemy");
         soundCheckCode = Script.Find<SoundCheckCode>("SoundCheck");
+        hacked = false;
+        isHackingActivate = false;
 
     }
 
@@ -35,14 +41,16 @@ public class SirenCode : MonoBehaviour
     void Update()
     {
 
-        distance = Vector3.Distance(transform.position, player.transform.position);
+        //distance = Vector3.Distance(transform.position, player.transform.position);
 
-        if (distance < interactDistance && Input.GetButtonDown("Interact"))
+        if (/*distance < interactDistance &&*/ hacked && !isHackingActivate)
         {
             StartCoroutine(Ring());
+            StartCoroutine(ResetAfterDelay());
         }
         
     }
+
 
 
 
@@ -72,6 +80,23 @@ public class SirenCode : MonoBehaviour
         newEnemyCode.isHeared = false;
         soundCheck.transform.localScale = new Vector3(20, 1, 1);
         ringing = false;
+
+    }
+
+
+
+
+
+    private IEnumerator ResetAfterDelay()
+    {
+
+        isHackingActivate = true;
+
+        yield return new WaitForSeconds(sirenHackingDuration);
+
+        hacked = false;
+
+        isHackingActivate = false;
 
     }
     
