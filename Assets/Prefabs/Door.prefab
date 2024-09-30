@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3400909124627130912}
   m_Layer: 0
   m_Name: DoorManager
-  m_TagString: Untagged
+  m_TagString: DoorManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   downdoorObject: {fileID: 7886889662551296466}
   hacked: 0
   detected: 0
-  doorHackingDuration: 0
+  doorHackingDuration: 3
 --- !u!114 &1305237649516887109
 MonoBehaviour:
   m_ObjectHideFlags: 0
