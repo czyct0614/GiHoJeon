@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ringing: 0
+  hacked: 0
+  sirenHackingDuration: 3
 --- !u!61 &1922692497926903067
 BoxCollider2D:
   m_ObjectHideFlags: 0

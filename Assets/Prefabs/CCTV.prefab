@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 4315425991024384125}
   m_Layer: 0
   m_Name: SearchRange
-  m_TagString: Untagged
+  m_TagString: CCTV
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hacked: 0
-  cctvHackingDuration: 0
+  cctvHackingDuration: 3
 --- !u!60 &6919992171185203419
 PolygonCollider2D:
   m_ObjectHideFlags: 0
