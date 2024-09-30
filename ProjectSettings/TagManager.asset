@@ -4,10 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Monster
   - Ground
-  - DeadLine
-  - FlyingPlatform
   - Item
   - Portal
   - ItemWindow
@@ -20,21 +17,8 @@ TagManager:
   - HealthBarImage
   - ChargeBarImage
   - SpawnPoint
-  - Shield
-  - ShieldEnemy
-  - DashEnemy
-  - SkillSelectWindow
   - SelectedSkill
-  - Ladder
-  - StrongEnemy
-  - VeryStrongEnemy
-  - PStrongEnemy
-  - TurretEnemy
   - Enemy
-  - PlatformEnemy
-  - ExplodingEnemy
-  - CurseEnemy
-  - BOSS
   - Wall
   - door
   - SoundRange
@@ -47,6 +31,7 @@ TagManager:
   - DoorManager
   - CeilingLight
   - FoxHole
+  - CCTV
   layers:
   - Default
   - TransparentFX
