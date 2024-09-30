@@ -23,4 +23,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HallMap.unity
     guid: b261fd8039b54ef4e889ccc7c6d21a8e
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 8659e8b37ccec6d42b0e4671e60b0cd9, type: 2}

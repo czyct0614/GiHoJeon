@@ -15,6 +15,7 @@ public class UpperVentinteractionScript : MonoBehaviour
     public bool doShow;
 
     public float changeSpeedRate;
+    private PlayerInput playerInput; // PlayerInput 인스턴스
 
     void Start()
     {
@@ -27,10 +28,29 @@ public class UpperVentinteractionScript : MonoBehaviour
 
 
 
+    private void Awake()
+    {
+        playerInput = new PlayerInput();
+        playerInput.Enable(); // 입력 활성화
+    }
+
+
+
+
+
+    private void OnDisable()
+    {
+        playerInput.Disable(); // 입력 비활성화
+    }
+
+
+
+
+
     void Update()
     {
 
-        if (entered && Input.GetButtonDown("Interact"))
+        if (entered && playerInput.Player.Interact.triggered)
         {
             Vent.SetActive(doShow);
             player.position = transformPoint;

@@ -7,16 +7,38 @@ public class FoxHoleScript : MonoBehaviour
 
     private GameObject player;
     private NewPlayerCode playermove;
+    private PlayerSoundRange playerSoundRange;
 
     public bool hided = false;
     public bool entered = false;
+    private PlayerInput playerInput; // PlayerInput 인스턴스
     
     void Start()
     {
 
         player = GameObject.FindGameObjectWithTag("Player");
         playermove = player.GetComponent<NewPlayerCode>();
+        playerSoundRange = player.GetComponent<PlayerSoundRange>();
 
+    }
+
+
+
+
+
+    private void Awake()
+    {
+        playerInput = new PlayerInput();
+        playerInput.Enable(); // 입력 활성화
+    }
+
+
+
+
+
+    private void OnDisable()
+    {
+        playerInput.Disable(); // 입력 비활성화
     }
 
 
@@ -33,15 +55,15 @@ public class FoxHoleScript : MonoBehaviour
 
 
 
-        if (!hided && Input.GetButtonDown("Interact") && entered)
+        if (!hided && playerInput.Player.Interact.triggered && entered)
         {
-            playermove.DeactivateSoundRange();
+            playerSoundRange.DeactivateSoundRange();
             playermove.EnableAllBoxColliders(player, false);
             player.gameObject.SetActive(false);
             hided = true;
         }
 
-        else if (hided && Input.GetButtonDown("Interact") && entered)
+        else if (hided && playerInput.Player.Interact.triggered && entered)
         {
             player.gameObject.SetActive(true);
             playermove.EnableAllBoxColliders(player, true);
