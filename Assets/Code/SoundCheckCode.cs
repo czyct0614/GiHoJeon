@@ -9,6 +9,7 @@ public class SoundCheckCode : MonoBehaviour
     private GameObject player;
     public Vector2 lastPlayerPoint;
     private NewPlayerCode playerScript;
+    private DangerRate dangerBarScript;
 
     public bool canKill = false;
 
@@ -18,6 +19,7 @@ public class SoundCheckCode : MonoBehaviour
         newEnemyCode = GetComponentInParent<NewEnemyCode>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<NewPlayerCode>();
+        dangerBarScript = Script.Find<DangerRate>("DangerBar");
 
     }
 
@@ -28,7 +30,7 @@ public class SoundCheckCode : MonoBehaviour
     void OnTriggerStay2D(Collider2D other)
     {
 
-        if (other.CompareTag("SoundRange") && playerScript.soundAmount >= 7)
+        if (other.CompareTag("SoundRange") && playerScript.soundAmount >= 7 - dangerBarScript.CheckDangerRate())
         {
             Debug.Log("소리 감지");
             newEnemyCode.isHeared = true;
