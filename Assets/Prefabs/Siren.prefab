@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8140131693364991651}
   - component: {fileID: 1195331759049341052}
   - component: {fileID: 1922692497926903067}
+  - component: {fileID: 1537149634675571217}
   m_Layer: 0
   m_Name: Siren
   m_TagString: Siren
@@ -144,3 +145,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1537149634675571217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3276584166414779701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449dcd0fb984c6540a7f08937fb11078, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
