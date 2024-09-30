@@ -487,14 +487,14 @@ public class NewPlayerCode : MonoBehaviour
                     if (!isFastRunning)
                     {
                         isFastRunning = true;
-                        ChangeMaxSpeed(4.5f);
+                        ChangeMaxSpeed(1.5f);
                     }
                 }
                 else
                 {
                     if (isFastRunning)
                     {
-                        ChangeMaxSpeed(2/9f);
+                        ChangeMaxSpeed(2/3f);
                         isFastRunning = false;
                     }
                 }
@@ -504,14 +504,14 @@ public class NewPlayerCode : MonoBehaviour
                     if (!isCrouching)
                     {
                         isCrouching = true;
-                        ChangeMaxSpeed(1/9f);
+                        ChangeMaxSpeed(1/3f);
                     }
                 }
                 else
                 {
                     if (isCrouching)
                     {
-                        ChangeMaxSpeed(9f);
+                        ChangeMaxSpeed(3f);
                         isCrouching = false;
                     }
                 }
