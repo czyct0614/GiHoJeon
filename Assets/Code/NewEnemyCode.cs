@@ -35,6 +35,8 @@ public class NewEnemyCode : MonoBehaviour
 
     void Start()
     {
+        startPoint.y = transform.position.y;
+        endPoint.y = transform.position.y;
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         
