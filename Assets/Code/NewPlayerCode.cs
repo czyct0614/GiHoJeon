@@ -160,7 +160,7 @@ public class NewPlayerCode : MonoBehaviour
 
         isHided = false;
         
-        maxSpeed=15f;
+        maxSpeed=5f;
 
         isFastRunning = false;
         isCrouching = false;
