@@ -20,7 +20,7 @@ public class UpDoorMove : MonoBehaviour
 
     public bool isgoingup = false;
 
-    //public DoorDetectRangeCode doordetectrange;
+    public bool upDoorOpened;
     
 
    
@@ -30,7 +30,7 @@ public class UpDoorMove : MonoBehaviour
 
         originalPosition = transform.position;
 
-        //doordetectrange = GameObject.Find("DoorDetectRange").GetComponent<DoorDetectRangeCode>();
+        upDoorOpened = false;
         
     }
 
@@ -54,7 +54,7 @@ public class UpDoorMove : MonoBehaviour
         yield return StartCoroutine(MoveToPosition(transform, originalPosition, moveDuration));
 
         isgoingup = false;
-        //doordetectrange.isDooropen = true;
+        upDoorOpened = true;
 
     }
 

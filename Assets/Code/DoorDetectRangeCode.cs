@@ -7,14 +7,23 @@ public class DoorDetectRangeCode : MonoBehaviour
 
     private DoorManagerCode doorManagerCode;
 
-    //public bool isDooropen;
+    public UpDoorMove updoormove;
+    public DownDoorMove downdoormove;
 
+    public GameObject updoorObject;
+    public GameObject downdoorObject;
+
+
+    
     
 
 
 
     void Start()
     {
+        updoormove = updoorObject.GetComponent<UpDoorMove>();
+
+        downdoormove = downdoorObject.GetComponent<DownDoorMove>();
 
         doorManagerCode = GetComponentInParent<DoorManagerCode>();
 
@@ -24,7 +33,7 @@ public class DoorDetectRangeCode : MonoBehaviour
         }
 
         doorManagerCode.detected = false;
-        //isDooropen = false;
+        
         
 
         targetTags = new string[] { "Player", "NewEnemy" };
@@ -74,7 +83,9 @@ public class DoorDetectRangeCode : MonoBehaviour
             {
                 
                 doorManagerCode.detected = false;
-                //isDooropen = false;
+                
+                updoormove.upDoorOpened = false;
+                downdoormove.downDoorOpened = false;
                 
                 break; 
                 

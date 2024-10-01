@@ -20,14 +20,14 @@ public class DownDoorMove : MonoBehaviour
 
     public bool isgoingdown = false;
 
-    //public DoorDetectRangeCode doordetectrange;
+    public bool downDoorOpened;
     
 
     void Start()
     {
 
         originalPosition = transform.position;
-        //doordetectrange = GameObject.Find("DoorDetectRange").GetComponent<DoorDetectRangeCode>();
+        downDoorOpened = false;
         
     }
 
@@ -51,7 +51,7 @@ public class DownDoorMove : MonoBehaviour
         yield return StartCoroutine(MoveToPosition(transform, originalPosition, moveDuration));
 
         isgoingdown  = false;
-        //doordetectrange.isDooropen = true;
+        downDoorOpened = true;
         
     }
 

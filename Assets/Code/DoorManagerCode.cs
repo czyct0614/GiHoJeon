@@ -33,7 +33,7 @@ public class DoorManagerCode : MonoBehaviour
         
         downdoormove = downdoorObject.GetComponent<DownDoorMove>();
 
-        //doordetectrange = GameObject.Find("DoorDetectRange").GetComponent<DoorDetectRangeCode>();
+        
         hacked = false;
 
         isHackingActivate = false;
@@ -53,14 +53,7 @@ public class DoorManagerCode : MonoBehaviour
             
         }
 
-         /*if (detected &&  !hacked && doordetectrange.isDooropen )
-         {
-
-            return;
-         }*/
-
-
-
+        
 
         if (detected && !downdoormove.isgoingdown && !hacked)
         {
@@ -69,11 +62,13 @@ public class DoorManagerCode : MonoBehaviour
         }
 
         
-        /*if (detected && !hacked && doordetectrange.isDooropen)
+        if (updoormove.upDoorOpened && downdoormove.downDoorOpened)
         {
-            return;
-        }*/
-
+              
+           return;
+            
+        }
+           
         if (hacked && !isHackingActivate)
         {
             StartCoroutine(ResetAfterDelay());
