@@ -2,18 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
+using UnityEngine.InputSystem;
 
 public class SkillCode : MonoBehaviour
 {
+    private PlayerInput playerInput;
 
-    void Update()
+    private void Awake()
     {
+        playerInput = new PlayerInput();
 
-        if (Input.GetButtonDown("Skill"))
-        {
-            CastHackSkill();
-        }
+        // Skill 액션에 대한 이벤트 구독
+        playerInput.Player.Skill.performed += context => CastHackSkill();
+    }
 
+
+
+
+
+    private void OnEnable()
+    {
+        playerInput.Enable();
+    }
+
+
+
+
+
+    private void OnDisable()
+    {
+        playerInput.Disable();
     }
 
 

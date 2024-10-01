@@ -9,6 +9,7 @@ public class Box : MonoBehaviour
     private bool entered;
     private NewPlayerCode playerMove;
     private bool hided;
+    private PlayerInput playerInput; // PlayerInput 인스턴스
 
     void Start()
     {
@@ -22,10 +23,29 @@ public class Box : MonoBehaviour
 
 
 
+    private void Awake()
+    {
+        playerInput = new PlayerInput();
+        playerInput.Enable(); // 입력 활성화
+    }
+
+
+
+
+
+    private void OnDisable()
+    {
+        playerInput.Disable(); // 입력 비활성화
+    }
+
+
+
+
+
     void Update()
     {
 
-        if (Input.GetButtonDown("Interact") && entered)
+        if (playerInput.Player.Interact.triggered && entered)
         {
             if (!hided)
             {
@@ -36,19 +56,24 @@ public class Box : MonoBehaviour
                                                         player.transform.position.y,
                                                         player.transform.position.z);
 
-                hided=true;
-                entered=true;
+                hided = true;
+                entered = true;
 
             }
             else
             {
 
                 playerMove.GetOutOfHiding();
-                hided=false;
+                hided = false;
 
             }
-            
         }
+
+        if (hided)
+        {
+            playerMove.VelocityZero();
+        }
+
     }
 
 

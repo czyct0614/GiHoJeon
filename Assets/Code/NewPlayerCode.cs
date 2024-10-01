@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class NewPlayerCode : MonoBehaviour
 {
@@ -60,7 +61,6 @@ public class NewPlayerCode : MonoBehaviour
     public bool isHided = false;
 
     private GameObject player;
-    private GameObject soundRange;
 
     // 무적 상태 여부를 나타내는 변수
     private bool isInvincible = false;
@@ -81,6 +81,12 @@ public class NewPlayerCode : MonoBehaviour
 
     private NewEnemyCode newEnemyCode;
 
+    private InputAction moveAction;
+
+    private InputAction runAction;
+
+    private InputAction crouchAction;
+    private PlayerInput playerInput;
 
 
 
@@ -91,8 +97,6 @@ public class NewPlayerCode : MonoBehaviour
 
         // 맵 바꿔도 안 날아가게
         DontDestroyOnLoad(this.gameObject);
-
-        soundRange = GameObject.FindGameObjectWithTag("SoundRange");
 
         nowMap = SceneManager.GetActiveScene().name;
 
@@ -165,7 +169,32 @@ public class NewPlayerCode : MonoBehaviour
         isFastRunning = false;
         isCrouching = false;
 
+        playerInput = new PlayerInput();
+
+        moveAction = playerInput.Player.Move;
+        runAction = playerInput.Player.Run;
+        crouchAction = playerInput.Player.Crouch;
+
+        // Input Action 활성화
+        moveAction.Enable();
+        runAction.Enable();
+        crouchAction.Enable();
+
     }
+
+
+
+
+
+    private void OnDestroy()
+    {
+        // Input Action 비활성화
+        moveAction.Disable();
+        runAction.Disable();
+        crouchAction.Disable();
+    }
+
+
 
 
 
@@ -181,56 +210,9 @@ public class NewPlayerCode : MonoBehaviour
 
 
 
-        if (Input.GetButton("left") || Input.GetButton("right") || Input.GetButton("Run") || Input.GetButton("Interact"))
+        if (playerInput.Player.Kill.IsPressed())
         {
-            ActivateSoundRange();
-        }
-        else 
-        {
-            DeactivateSoundRange();
-        }
-
-
-
-        if (Input.GetButton("left") || Input.GetButton("right"))
-        {
-            soundAmount = 5;
-        }
-
-
-
-        if (Input.GetButton("Run"))
-        {
-            soundAmount = 10;
-        }
-
-        
-        if (Input.GetButton("Crouch"))
-        {
-            soundAmount = 2;
-        }
- 
-
-
-
-        if (Input.GetButton("Interact"))
-        {
-            soundAmount = 7;
-        }
-
-
-
-        if (Input.GetButton("Kill"))
-        {
-            soundAmount = 5;
             Kill();
-        }
-
-
-
-        if (Input.GetButton("Skill"))
-        {
-            soundAmount = 5;
         }
 
 
@@ -327,7 +309,7 @@ public class NewPlayerCode : MonoBehaviour
 
 
 
-        if (Input.GetButtonUp("left") || Input.GetButtonUp("right"))
+        if (playerInput.Player.Move.ReadValue<Vector2>().x==0)
         {
             rigid.velocity = new Vector2( 0f * rigid.velocity.normalized.x , rigid.velocity.y);
         }
@@ -479,78 +461,60 @@ public class NewPlayerCode : MonoBehaviour
 // 이동 & 방향전환
     private void Move()
     {
-
         // 이동
-        float h = Input.GetAxisRaw("Horizontal");
+        Vector2 movementInput = moveAction.ReadValue<Vector2>();
+        float h = movementInput.x;
         rigid.AddForce(Vector2.right * h * (maxSpeed / 15f), ForceMode2D.Impulse);
 
         isRunning = true;
-        
 
-        // 움직일 때 방향 바꾸기
-        if (Input.GetButton("left") || Input.GetButton("right"))
+        if (h != 0)
         {
             animator.SetBool("isRunning", true);
             animator.SetFloat("runSpeed", maxSpeed / 15f);
 
-            if (Input.GetButton("left") && Input.GetButton("right"))
+            if (runAction.IsPressed())
             {
-                VelocityZero();
-                velocityZero = true;
+                if (!isFastRunning)
+                {
+                    isFastRunning = true;
+                    ChangeMaxSpeed(4.5f);
+                }
             }
             else
             {
-                if (Input.GetButton("Run"))
+                if (isFastRunning)
                 {
-                    animator.SetBool("isFastRunning", true);
-                    animator.SetBool("isRunning", false);
-                    if (!isFastRunning)
-                    {
-                        isFastRunning = true;
-                        ChangeMaxSpeed(1.5f);
-                    }
+                    ChangeMaxSpeed(2 / 9f);
+                    isFastRunning = false;
                 }
-                else
-                {
-                    animator.SetBool("isFastRunning", false);
-                    if (isFastRunning)
-                    {
-                        ChangeMaxSpeed(2/3f);
-                        isFastRunning = false;
-                    }
-                }
-                
-                if (Input.GetButton("Crouch"))
-                {
-                    animator.SetBool("isCrouching", true);
-                    animator.SetBool("isRunning", false);
-                    if (!isCrouching)
-                    {
-                        isCrouching = true;
-                        ChangeMaxSpeed(1/3f);
-                    }
-                }
-                else
-                {
-                    animator.SetBool("isCrouching", false);
-                    if (isCrouching)
-                    {
-                        ChangeMaxSpeed(3f);
-                        isCrouching = false;
-                    }
-                }
-
-
-
-                velocityZero = false;
             }
 
-            // 왼쪽 화살표를 누를때 왼쪽 보기 / 오른쪽 화살표 누를 때 오른쪽 보기
-            spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
-            // 뒤집어졌는지
-            isFlipped = Input.GetAxisRaw("Horizontal");
-        }
+            if (crouchAction.IsPressed())
+            {
+                if (!isCrouching)
+                {
+                    isCrouching = true;
+                    ChangeMaxSpeed(1 / 9f);
+                }
+            }
+            else
+            {
+                if (isCrouching)
+                {
+                    ChangeMaxSpeed(9f);
+                    isCrouching = false;
+                }
+            }
 
+            velocityZero = false;
+            spriteRenderer.flipX = h == -1;
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+            velocityZero = true;
+        }
     }
 
 
@@ -644,31 +608,6 @@ public class NewPlayerCode : MonoBehaviour
     {
 
         maxSpeed = maxSpeed * amount;
-
-    }
-
-
-
-
-
-// 소리범위 켜는 함수
-    private void ActivateSoundRange()
-    {
-
-        soundRange.transform.localScale = new Vector3 (soundAmount, 3, 5);
-        soundRange.SetActive(true);
-
-    }
-
-
-
-
-
-// 소리범위 끄는 함수
-    public void DeactivateSoundRange()
-    {
-
-        soundRange.SetActive(false);
 
     }
 
