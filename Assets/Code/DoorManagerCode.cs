@@ -47,6 +47,15 @@ public class DoorManagerCode : MonoBehaviour
     void Update()
     {
 
+        if (detected && !hacked && updoormove.upDoorOpened && downdoormove.downDoorOpened)
+        {
+              
+           return;
+            
+        }
+
+        
+
         if (detected && !updoormove.isgoingup && !hacked)
         {
             StartCoroutine(updoormove.Up());
@@ -60,15 +69,9 @@ public class DoorManagerCode : MonoBehaviour
             StartCoroutine(downdoormove.Down());
             
         }
-
-        
-        if (updoormove.upDoorOpened && downdoormove.downDoorOpened)
-        {
-              
-           return;
-            
-        }
            
+
+
         if (hacked && !isHackingActivate)
         {
             StartCoroutine(ResetAfterDelay());

@@ -3,12 +3,12 @@ using UnityEngine;
 public class DoorDetectRangeCode : MonoBehaviour
 {
     // 감지할 오브젝트의 태그 배열
-    public string[] targetTags;
+    private string[] targetTags;
 
     private DoorManagerCode doorManagerCode;
 
-    public UpDoorMove updoormove;
-    public DownDoorMove downdoormove;
+    private UpDoorMove updoormove;
+    private DownDoorMove downdoormove;
 
     public GameObject updoorObject;
     public GameObject downdoorObject;
@@ -21,6 +21,7 @@ public class DoorDetectRangeCode : MonoBehaviour
 
     void Start()
     {
+
         updoormove = updoorObject.GetComponent<UpDoorMove>();
 
         downdoormove = downdoorObject.GetComponent<DownDoorMove>();
@@ -55,10 +56,7 @@ public class DoorDetectRangeCode : MonoBehaviour
             {
 
                 doorManagerCode.detected = true;
-                
-                
-                
-            
+
                 break;
 
             }
