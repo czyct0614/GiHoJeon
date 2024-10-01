@@ -13,17 +13,24 @@ public class UpDoorMove : MonoBehaviour
     public float triggerDistance = 5f;
     // 이동할 Y축 거리
     public float moveAmount = 3f;
-    // 이동하는 데 걸리는 시간
+    // 이동하는 데 걸리는 거리
     public float moveDuration;
-    // 열린 상태로 유지되는 시간
+    // 움직이는 시간
     public float stayOpenDuration;
 
     public bool isgoingup = false;
+
+    //public DoorDetectRangeCode doordetectrange;
+    
+
+   
 
     void Start()
     {
 
         originalPosition = transform.position;
+
+        //doordetectrange = GameObject.Find("DoorDetectRange").GetComponent<DoorDetectRangeCode>();
         
     }
 
@@ -47,6 +54,7 @@ public class UpDoorMove : MonoBehaviour
         yield return StartCoroutine(MoveToPosition(transform, originalPosition, moveDuration));
 
         isgoingup = false;
+        //doordetectrange.isDooropen = true;
 
     }
 

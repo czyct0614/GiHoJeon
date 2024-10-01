@@ -7,6 +7,10 @@ public class DoorDetectRangeCode : MonoBehaviour
 
     private DoorManagerCode doorManagerCode;
 
+    //public bool isDooropen;
+
+    
+
 
 
     void Start()
@@ -20,6 +24,8 @@ public class DoorDetectRangeCode : MonoBehaviour
         }
 
         doorManagerCode.detected = false;
+        //isDooropen = false;
+        
 
         targetTags = new string[] { "Player", "NewEnemy" };
 
@@ -33,16 +39,22 @@ public class DoorDetectRangeCode : MonoBehaviour
     {
        
         // 들어온 오브젝트의 태그가 배열에 있는지 확인
-        foreach (string targetTag in targetTags)
+        foreach (string targetTag in targetTags )
         {
             Debug.Log(other.tag);
-            if (other.CompareTag(targetTag))
+            if (other.CompareTag(targetTag) )
             {
 
                 doorManagerCode.detected = true;
+                
+                
+                
+            
                 break;
 
             }
+
+           
 
         }
 
@@ -62,10 +74,12 @@ public class DoorDetectRangeCode : MonoBehaviour
             {
                 
                 doorManagerCode.detected = false;
+                //isDooropen = false;
+                
                 break; 
                 
             }
-            
+             
         }
 
     }

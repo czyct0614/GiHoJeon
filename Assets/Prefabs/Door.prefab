@@ -106,6 +106,8 @@ MonoBehaviour:
   downdoorObject: {fileID: 7886889662551296466}
   hacked: 0
   detected: 0
+  doordetectrange: {fileID: 0}
+  isDooropen: 0
   doorHackingDuration: 3
 --- !u!114 &1305237649516887109
 MonoBehaviour:
@@ -256,6 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTags: []
+  isDooropen: 0
 --- !u!50 &8701892922515189333
 Rigidbody2D:
   serializedVersion: 4
@@ -387,6 +390,8 @@ MonoBehaviour:
   moveDuration: 0.5
   stayOpenDuration: 2
   isgoingup: 0
+  doordetectrange: {fileID: 0}
+  isDooropen: 0
 --- !u!61 &1963023344509173531
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -563,6 +568,8 @@ MonoBehaviour:
   moveDuration: 0.5
   stayOpenDuration: 2
   isgoingdown: 0
+  doordetectrange: {fileID: 0}
+  isDooropen: 0
 --- !u!61 &1117912318855494953
 BoxCollider2D:
   m_ObjectHideFlags: 0

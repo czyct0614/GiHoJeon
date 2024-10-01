@@ -15,6 +15,10 @@ public class DoorManagerCode : MonoBehaviour
     public bool hacked;
     public bool detected;
 
+    //public DoorDetectRangeCode doordetectrange;
+    
+    
+
     //해킹 지속시간(인스펙터창에서 바꿀 수 있음)
     public int doorHackingDuration;
 
@@ -29,6 +33,7 @@ public class DoorManagerCode : MonoBehaviour
         
         downdoormove = downdoorObject.GetComponent<DownDoorMove>();
 
+        //doordetectrange = GameObject.Find("DoorDetectRange").GetComponent<DoorDetectRangeCode>();
         hacked = false;
 
         isHackingActivate = false;
@@ -45,14 +50,29 @@ public class DoorManagerCode : MonoBehaviour
         if (detected && !updoormove.isgoingup && !hacked)
         {
             StartCoroutine(updoormove.Up());
+            
         }
+
+         /*if (detected &&  !hacked && doordetectrange.isDooropen )
+         {
+
+            return;
+         }*/
+
 
 
 
         if (detected && !downdoormove.isgoingdown && !hacked)
         {
             StartCoroutine(downdoormove.Down());
+            
         }
+
+        
+        /*if (detected && !hacked && doordetectrange.isDooropen)
+        {
+            return;
+        }*/
 
         if (hacked && !isHackingActivate)
         {
