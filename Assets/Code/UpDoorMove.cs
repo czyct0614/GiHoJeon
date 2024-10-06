@@ -47,14 +47,20 @@ public class UpDoorMove : MonoBehaviour
         Vector3 targetPosition = originalPosition + new Vector3(0, moveAmount, 0);
         yield return StartCoroutine(MoveToPosition(transform, targetPosition, moveDuration));
 
-        // Wait for some time
-        yield return new WaitForSeconds(stayOpenDuration);
-
-        // Move the door down
-        yield return StartCoroutine(MoveToPosition(transform, originalPosition, moveDuration));
+    
 
         isgoingup = false;
         upDoorOpened = true;
+
+    }
+
+
+    public IEnumerator UpDone()
+    {
+
+
+            // Move the door down
+        yield return StartCoroutine(MoveToPosition(transform, originalPosition, moveDuration));
 
     }
 

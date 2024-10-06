@@ -47,10 +47,12 @@ public class DoorManagerCode : MonoBehaviour
     void Update()
     {
 
-        if (detected && !hacked && updoormove.upDoorOpened && downdoormove.downDoorOpened)
+        if (!detected && !hacked && updoormove.upDoorOpened && downdoormove.downDoorOpened)
         {
               
-           return;
+           
+           StartCoroutine(updoormove.UpDone());
+           StartCoroutine(downdoormove.DownDone());
             
         }
 

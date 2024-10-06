@@ -82,8 +82,7 @@ public class DoorDetectRangeCode : MonoBehaviour
                 
                 doorManagerCode.detected = false;
                 
-                updoormove.upDoorOpened = false;
-                downdoormove.downDoorOpened = false;
+                
                 
                 break; 
                 

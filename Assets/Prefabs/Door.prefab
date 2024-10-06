@@ -100,14 +100,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf97e0db148e214c926005dcca62668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updoormove: {fileID: 0}
-  downdoormove: {fileID: 0}
+  updoormove: {fileID: 8749209573780132843}
+  downdoormove: {fileID: 7629896421138707814}
   updoorObject: {fileID: 5337687664378209522}
   downdoorObject: {fileID: 7886889662551296466}
   hacked: 0
   detected: 0
-  doordetectrange: {fileID: 0}
-  isDooropen: 0
   doorHackingDuration: 3
 --- !u!114 &1305237649516887109
 MonoBehaviour:
@@ -257,8 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee89fb97f8ad6947a5672f8c7a4dd0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTags: []
-  isDooropen: 0
+  updoorObject: {fileID: 5337687664378209522}
+  downdoorObject: {fileID: 7886889662551296466}
 --- !u!50 &8701892922515189333
 Rigidbody2D:
   serializedVersion: 4
@@ -390,8 +388,7 @@ MonoBehaviour:
   moveDuration: 0.5
   stayOpenDuration: 2
   isgoingup: 0
-  doordetectrange: {fileID: 0}
-  isDooropen: 0
+  upDoorOpened: 0
 --- !u!61 &1963023344509173531
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -568,8 +565,7 @@ MonoBehaviour:
   moveDuration: 0.5
   stayOpenDuration: 2
   isgoingdown: 0
-  doordetectrange: {fileID: 0}
-  isDooropen: 0
+  downDoorOpened: 0
 --- !u!61 &1117912318855494953
 BoxCollider2D:
   m_ObjectHideFlags: 0
