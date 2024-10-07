@@ -3371,7 +3371,7 @@ MonoBehaviour:
   canInput: 1
   isHided: 0
   soundAmount: 0
---- !u!114 &7506282235987891520
+--- !u!114 &7506282235987891529
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3380,7 +3380,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3533926364410082651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b6cee0de6cb75848941fbd0a3920489, type: 3}
+  m_Script: {fileID: 11500000, guid: e55a8756e5580664cb3696b0c196481b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   soundRange: {fileID: 0}

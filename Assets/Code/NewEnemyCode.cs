@@ -192,18 +192,34 @@ public class NewEnemyCode : MonoBehaviour
 
         if (distanceToPlayer <= attackRange && canAttack)
         {
-            if (!isFirstAttack)
-            {
-                Attack();
-            }
-            else
-            {
-                // 처음 공격 시 쿨타임 설정
-                isFirstAttack = false;
-                canAttack = false;
-                Invoke("ResetAttack", attackCooldown);
-            }
+            StartCoroutine(AttackWithDelay());
         }
+    }
+
+
+
+
+
+    IEnumerator AttackWithDelay()
+    {
+        canAttack = false;
+        
+        // 선딜레이 추가
+        yield return new WaitForSeconds(0.5f); // 0.5초의 선딜레이, 필요에 따라 조정 가능
+
+        // 선딜레이 후 플레이어가 여전히 공격 범위 내에 있는지 확인
+        if (distanceToPlayer <= attackRange)
+        {
+            Attack();
+        }
+        else
+        {
+            Debug.Log("플레이어가 공격 범위를 벗어났습니다. 공격 취소.");
+        }
+        
+        yield return new WaitForSeconds(attackCooldown);
+        
+        canAttack = true;
     }
 
 
@@ -212,9 +228,6 @@ public class NewEnemyCode : MonoBehaviour
 
     void Attack()
     {
-        // 공격 쿨다운 설정
-        canAttack = false;
-        Invoke("ResetAttack", attackCooldown);
         //animator.SetBool("Attack", true);
 
         // 플레이어에게 피해 입힘
@@ -225,11 +238,7 @@ public class NewEnemyCode : MonoBehaviour
 
 
 
-    void ResetAttack()
-    {
-        // 공격 가능 상태로 변경
-        canAttack = true;
-    }
+    // ResetAttack 함수는 더 이상 필요하지 않으므로 제거했습니다.
 
 
 
@@ -242,14 +251,15 @@ public class NewEnemyCode : MonoBehaviour
 
         patrolling = true;
 
-        transform.position = Vector2.MoveTowards(transform.position, moveEndPoint, Time.deltaTime * moveSpeed);
+        // x축으로만 이동하도록 수정
+        float newX = Mathf.MoveTowards(transform.position.x, moveEndPoint.x, Time.deltaTime * moveSpeed);
+        transform.position = new Vector2(newX, transform.position.y);
 
-        if (transform.position.x == endPoint.x)
+        if (Mathf.Approximately(transform.position.x, endPoint.x))
         {
             moveEndPoint = startPoint;
         }
-
-        else if (transform.position.x == startPoint.x)
+        else if (Mathf.Approximately(transform.position.x, startPoint.x))
         {
             moveEndPoint = endPoint;
         }
@@ -266,7 +276,7 @@ public class NewEnemyCode : MonoBehaviour
 
         patrolling = false;
         findingPlayer = true;
-        moveEndPoint = lastPlayerPoint;
+        moveEndPoint = new Vector2(lastPlayerPoint.x, transform.position.y); // y 좌표 유지
 
         if (isPlayerDetected)
         {
@@ -279,7 +289,9 @@ public class NewEnemyCode : MonoBehaviour
 
         while (Mathf.Abs(transform.position.x - lastPlayerPoint.x) > 0.01f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, lastPlayerPoint, Time.deltaTime * moveSpeed);
+            // x축으로만 이동하도록 수정
+            float newX = Mathf.MoveTowards(transform.position.x, lastPlayerPoint.x, Time.deltaTime * moveSpeed);
+            transform.position = new Vector2(newX, transform.position.y);
             yield return new WaitForSeconds(0.05f);
 
             if (patrolling)
