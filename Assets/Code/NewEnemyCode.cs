@@ -38,6 +38,7 @@ public class NewEnemyCode : MonoBehaviour
     public bool hacked;
     private bool isHackingActivate;
     private bool canAttack = true;
+    private bool isFirstAttack = true;
 
     void Start()
     {
@@ -176,7 +177,6 @@ public class NewEnemyCode : MonoBehaviour
 
     private void AttackPlayer()
     {
-
         Debug.Log("공격");
 
         if (!isPlayerDetected) return;
@@ -191,10 +191,19 @@ public class NewEnemyCode : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, moveEndPoint, Time.deltaTime * attackMoveSpeed);
 
         if (distanceToPlayer <= attackRange && canAttack)
+        {
+            if (!isFirstAttack)
             {
                 Attack();
             }
-
+            else
+            {
+                // 처음 공격 시 쿨타임 설정
+                isFirstAttack = false;
+                canAttack = false;
+                Invoke("ResetAttack", attackCooldown);
+            }
+        }
     }
 
 
@@ -203,7 +212,6 @@ public class NewEnemyCode : MonoBehaviour
 
     void Attack()
     {
-
         // 공격 쿨다운 설정
         canAttack = false;
         Invoke("ResetAttack", attackCooldown);
@@ -211,7 +219,6 @@ public class NewEnemyCode : MonoBehaviour
 
         // 플레이어에게 피해 입힘
         playerScript.TakeDamage(attackDamage);
-
     }
 
 
@@ -220,10 +227,8 @@ public class NewEnemyCode : MonoBehaviour
 
     void ResetAttack()
     {
-
         // 공격 가능 상태로 변경
         canAttack = true;
-
     }
 
 
