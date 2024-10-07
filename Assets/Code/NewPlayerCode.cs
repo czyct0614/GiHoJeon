@@ -213,6 +213,7 @@ public class NewPlayerCode : MonoBehaviour
 
         if (playerInput.Player.Kill.IsPressed())
         {
+            Debug.Log("킬");
             Kill();
         }
 
@@ -703,25 +704,49 @@ public class NewPlayerCode : MonoBehaviour
 
 
 
-//암살 함수
-    void Kill()
+    // 가장 가까운 적을 찾고 암살하는 함수
+    private void Kill()
     {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("NewEnemy");
+        GameObject nearestEnemy = null;
 
-        if (soundCheckCode.canKill)
+        float minDistance = 5f;
+
+        foreach (GameObject enemy in enemies)
         {
-            if (transform.position.x > newEnemy.transform.position.x && !newEnemyCode.isFacingRight)
-            {
-                newEnemy.SetActive(false);
-                Debug.Log("암살");
-            }
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
-            else if (transform.position.x < newEnemy.transform.position.x && newEnemyCode.isFacingRight)
+            if (distance < minDistance)
             {
-                newEnemy.SetActive(false);
-                Debug.Log("암살");
+                minDistance = distance;
+                nearestEnemy = enemy;
             }
         }
 
+        if (nearestEnemy != null)
+        {
+            newEnemy = nearestEnemy;
+            newEnemyCode = nearestEnemy.GetComponent<NewEnemyCode>();
+            
+            // 플레이어와 적의 위치 관계 확인
+            bool isPlayerOnRight = transform.position.x > newEnemy.transform.position.x;
+            
+            // 적이 플레이어와 반대 방향을 바라보고 있는지 확인
+            if ((isPlayerOnRight && !newEnemyCode.isFacingRight) || (!isPlayerOnRight && newEnemyCode.isFacingRight))
+            {
+                // 암살 조건 충족 시 적 비활성화
+                newEnemy.SetActive(false);
+                Debug.Log("가장 가까운 적을 암살했습니다.");
+            }
+            else
+            {
+                Debug.Log("적이 플레이어를 바라보고 있어 암살할 수 없습니다.");
+            }
+        }
+        else
+        {
+            Debug.Log("근처에 적이 없습니다.");
+        }
     }
 
 }
