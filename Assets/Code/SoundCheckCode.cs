@@ -8,7 +8,7 @@ public class SoundCheckCode : MonoBehaviour
     private NewEnemyCode newEnemyCode;
     private GameObject player;
     public Vector2 lastPlayerPoint;
-    private NewPlayerCode playerScript;
+    private PlayerSoundRange playerScript;
     private DangerRate dangerBarScript;
 
     public bool canKill = false;
@@ -18,7 +18,7 @@ public class SoundCheckCode : MonoBehaviour
 
         newEnemyCode = GetComponentInParent<NewEnemyCode>();
         player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<NewPlayerCode>();
+        playerScript = player.GetComponent<PlayerSoundRange>();
         dangerBarScript = Script.Find<DangerRate>("DangerBar");
 
     }
@@ -67,7 +67,8 @@ public class SoundCheckCode : MonoBehaviour
 
         // 위험도에 비례하여 사운드체크 오브젝트의 가로 길이 조절
         Vector3 newScale = transform.localScale;
-        newScale.x = 20f + (currentDangerRate * 1f); // 위험도에 따라 1씩 증가
+        // 위험도에 따라 1씩 증가
+        newScale.x = 20f + (currentDangerRate * 1f);
         transform.localScale = newScale;
 
         Debug.Log("사운드체크 오브젝트 가로 길이: " + newScale.x);

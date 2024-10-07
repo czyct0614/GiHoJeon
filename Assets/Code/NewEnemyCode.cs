@@ -251,14 +251,15 @@ public class NewEnemyCode : MonoBehaviour
 
         patrolling = true;
 
-        transform.position = Vector2.MoveTowards(transform.position, moveEndPoint, Time.deltaTime * moveSpeed);
+        // x축으로만 이동하도록 수정
+        float newX = Mathf.MoveTowards(transform.position.x, moveEndPoint.x, Time.deltaTime * moveSpeed);
+        transform.position = new Vector2(newX, transform.position.y);
 
-        if (transform.position.x == endPoint.x)
+        if (Mathf.Approximately(transform.position.x, endPoint.x))
         {
             moveEndPoint = startPoint;
         }
-
-        else if (transform.position.x == startPoint.x)
+        else if (Mathf.Approximately(transform.position.x, startPoint.x))
         {
             moveEndPoint = endPoint;
         }
@@ -275,7 +276,7 @@ public class NewEnemyCode : MonoBehaviour
 
         patrolling = false;
         findingPlayer = true;
-        moveEndPoint = lastPlayerPoint;
+        moveEndPoint = new Vector2(lastPlayerPoint.x, transform.position.y); // y 좌표 유지
 
         if (isPlayerDetected)
         {
@@ -288,7 +289,9 @@ public class NewEnemyCode : MonoBehaviour
 
         while (Mathf.Abs(transform.position.x - lastPlayerPoint.x) > 0.01f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, lastPlayerPoint, Time.deltaTime * moveSpeed);
+            // x축으로만 이동하도록 수정
+            float newX = Mathf.MoveTowards(transform.position.x, lastPlayerPoint.x, Time.deltaTime * moveSpeed);
+            transform.position = new Vector2(newX, transform.position.y);
             yield return new WaitForSeconds(0.05f);
 
             if (patrolling)
