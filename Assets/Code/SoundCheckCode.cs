@@ -59,4 +59,18 @@ public class SoundCheckCode : MonoBehaviour
 
     }
 
+
+    private void Update()
+    {
+        // DangerRate 스크립트에서 현재 위험도 가져오기
+        float currentDangerRate = dangerBarScript.CheckDangerRate();
+
+        // 위험도에 비례하여 사운드체크 오브젝트의 가로 길이 조절
+        Vector3 newScale = transform.localScale;
+        newScale.x = 20f + (currentDangerRate * 1f); // 위험도에 따라 1씩 증가
+        transform.localScale = newScale;
+
+        Debug.Log("사운드체크 오브젝트 가로 길이: " + newScale.x);
+    }
+
 }
