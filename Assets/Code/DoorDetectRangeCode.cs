@@ -51,6 +51,7 @@ public class DoorDetectRangeCode : MonoBehaviour
         // 들어온 오브젝트의 태그가 배열에 있는지 확인
         foreach (string targetTag in targetTags )
         {
+
             Debug.Log(other.tag);
             if (other.CompareTag(targetTag) )
             {
@@ -60,8 +61,6 @@ public class DoorDetectRangeCode : MonoBehaviour
                 break;
 
             }
-
-           
 
         }
 
@@ -81,8 +80,6 @@ public class DoorDetectRangeCode : MonoBehaviour
             {
                 
                 doorManagerCode.detected = false;
-                
-                
                 
                 break; 
                 

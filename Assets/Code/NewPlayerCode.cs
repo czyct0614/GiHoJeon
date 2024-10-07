@@ -129,7 +129,7 @@ public class NewPlayerCode : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        //currentHealth = maxHealth;
+        currentHealth = maxHealth;
 
         //ChangeHealthBarAmount();
 

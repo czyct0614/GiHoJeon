@@ -11,6 +11,11 @@ public class NewEnemyCode : MonoBehaviour
     public float moveSpeed = 1f;
     public float attackMoveSpeed = 3f;
     public float newEnemyHackingDuration;
+    private float distanceToPlayer;
+    private float attackRange = 1.5f;
+    private float attackCooldown = 2f;
+
+    private int attackDamage = 5;
 
     // 플레이어 레이어
     public LayerMask playerLayer;
@@ -32,6 +37,7 @@ public class NewEnemyCode : MonoBehaviour
     public bool findingPlayer = false;
     public bool hacked;
     private bool isHackingActivate;
+    private bool canAttack = true;
 
     void Start()
     {
@@ -86,8 +92,10 @@ public class NewEnemyCode : MonoBehaviour
             Patrol();
         }
 
-            // 이동 방향에 따라 시야 범위 회전
-            UpdateVisionDirection(moveEndPoint);
+        // 이동 방향에 따라 시야 범위 회전
+        UpdateVisionDirection(moveEndPoint);
+
+        distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
     }
 
@@ -172,13 +180,49 @@ public class NewEnemyCode : MonoBehaviour
         Debug.Log("공격");
 
         if (!isPlayerDetected) return;
+
         if (hacked) return;
+
         patrolling = false;
         attacking = true;
 
         // 플레이어를 향해 이동합니다.
         moveEndPoint = new Vector2(player.position.x, transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, moveEndPoint, Time.deltaTime * attackMoveSpeed);
+
+        if (distanceToPlayer <= attackRange && canAttack)
+            {
+                Attack();
+            }
+
+    }
+
+
+
+
+
+    void Attack()
+    {
+
+        // 공격 쿨다운 설정
+        canAttack = false;
+        Invoke("ResetAttack", attackCooldown);
+        //animator.SetBool("Attack", true);
+
+        // 플레이어에게 피해 입힘
+        playerScript.TakeDamage(attackDamage);
+
+    }
+
+
+
+
+
+    void ResetAttack()
+    {
+
+        // 공격 가능 상태로 변경
+        canAttack = true;
 
     }
 

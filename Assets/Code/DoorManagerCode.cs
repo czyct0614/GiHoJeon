@@ -49,27 +49,22 @@ public class DoorManagerCode : MonoBehaviour
 
         if (!detected && !hacked && updoormove.upDoorOpened && downdoormove.downDoorOpened)
         {
-              
-           
            StartCoroutine(updoormove.UpDone());
            StartCoroutine(downdoormove.DownDone());
-            
         }
 
         
 
-        if (detected && !updoormove.isgoingup && !hacked)
+        if (detected && !updoormove.isGoingUp && !hacked && !updoormove.isBackUp)
         {
             StartCoroutine(updoormove.Up());
-            
         }
 
         
 
-        if (detected && !downdoormove.isgoingdown && !hacked)
+        if (detected && !downdoormove.isGoingDown && !hacked && !downdoormove.isBackDown)
         {
             StartCoroutine(downdoormove.Down());
-            
         }
            
 
