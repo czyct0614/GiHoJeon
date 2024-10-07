@@ -179,6 +179,7 @@ public class NewPlayerCode : MonoBehaviour
         moveAction.Enable();
         runAction.Enable();
         crouchAction.Enable();
+        playerInput.Enable();
 
     }
 
