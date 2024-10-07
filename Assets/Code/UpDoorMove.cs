@@ -14,11 +14,12 @@ public class UpDoorMove : MonoBehaviour
     // 이동할 Y축 거리
     public float moveAmount = 3f;
     // 이동하는 데 걸리는 거리
-    public float moveDuration;
+    private float moveDuration = 1f;
     // 움직이는 시간
     public float stayOpenDuration;
 
-    public bool isgoingup = false;
+    public bool isGoingUp = false;
+    public bool isBackUp = false;
 
     public bool upDoorOpened;
     
@@ -41,15 +42,13 @@ public class UpDoorMove : MonoBehaviour
     public IEnumerator Up()
     {
 
-        isgoingup = true;
+        isGoingUp = true;
 
         // Move the door up
         Vector3 targetPosition = originalPosition + new Vector3(0, moveAmount, 0);
         yield return StartCoroutine(MoveToPosition(transform, targetPosition, moveDuration));
 
-    
-
-        isgoingup = false;
+        isGoingUp = false;
         upDoorOpened = true;
 
     }
@@ -58,9 +57,13 @@ public class UpDoorMove : MonoBehaviour
     public IEnumerator UpDone()
     {
 
+        isBackUp = true;
 
-            // Move the door down
+        // Move the door down
+        upDoorOpened = false;
         yield return StartCoroutine(MoveToPosition(transform, originalPosition, moveDuration));
+
+        isBackUp = false;
 
     }
 
