@@ -10,15 +10,7 @@ public class Settingcode : MonoBehaviour
     public GameObject sButtonObject1;
     public GameObject sButtonObject2;
     public GameObject sButtonObject3;
-    public GameObject kButtonObject1;
-    public GameObject kButtonObject2;
-    public GameObject kButtonObject3;
-    public GameObject kButtonObject4;
-    public GameObject kButtonObject5;
-    public GameObject kButtonObject6;
-    public GameObject kButtonObject7;
     public GameObject volumePanel;
-    public GameObject KeyPanel;
 
     // 카메라 중심
     private Vector3 cameraCenter;
@@ -26,7 +18,6 @@ public class Settingcode : MonoBehaviour
     private Renderer myRenderer;
 
     public bool VisActive;
-    public bool KisActive;
 
     void Start()
     {
@@ -35,15 +26,7 @@ public class Settingcode : MonoBehaviour
         sButtonObject1.SetActive(false);
         sButtonObject2.SetActive(false);
         sButtonObject3.SetActive(false);
-        kButtonObject1.SetActive(false);
-        kButtonObject2.SetActive(false);
-        kButtonObject3.SetActive(false);
-        kButtonObject4.SetActive(false);
-        kButtonObject5.SetActive(false);
-        kButtonObject6.SetActive(false);
-        kButtonObject7.SetActive(false);
         settingsPanel.SetActive(false);
-        KeyPanel.SetActive(false);
 
     }
 
@@ -55,7 +38,6 @@ public class Settingcode : MonoBehaviour
     {
 
         VisActive = volumePanel.activeSelf;
-        KisActive = KeyPanel.activeSelf;
 
         if (Input.GetButtonDown("Escape") && !VisActive)
         {
@@ -103,29 +85,13 @@ public class Settingcode : MonoBehaviour
 
     public void respawnSetting()
     {
-        myRenderer = GetComponent<Renderer>();
+
         myRenderer.enabled = true;
 
         // 버튼 상태
         sButtonObject1.SetActive(false);
         sButtonObject2.SetActive(false);
         sButtonObject3.SetActive(false);
-
-    }
-
-
-
-
-
-    public void respawnKey()
-    {
-        myRenderer = GetComponent<Renderer>();
-        myRenderer.enabled = true;
-
-        // 버튼 상태
-        //sButtonObject1.SetActive(false);
-        //sButtonObject2.SetActive(false);
-        //sButtonObject3.SetActive(false);
 
     }
 
