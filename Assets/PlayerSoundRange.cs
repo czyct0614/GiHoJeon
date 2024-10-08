@@ -5,7 +5,7 @@ public class PlayerSoundRange : MonoBehaviour
 {
     private PlayerInput playerInput; // PlayerInput 인스턴스
     private Vector2 moveInput; // 이동 입력을 저장할 변수
-    public int soundAmount; // 소리 양
+    private int soundAmount; // 소리 양
     public GameObject soundRange;
 
     private void Awake()
