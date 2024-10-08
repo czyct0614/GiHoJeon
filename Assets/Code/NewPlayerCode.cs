@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 
 public class NewPlayerCode : MonoBehaviour
 {
@@ -80,13 +79,6 @@ public class NewPlayerCode : MonoBehaviour
     private GameObject newEnemy;
 
     private NewEnemyCode newEnemyCode;
-
-    private InputAction moveAction;
-
-    private InputAction runAction;
-
-    private InputAction crouchAction;
-    private PlayerInput playerInput;
 
 
 
@@ -169,30 +161,6 @@ public class NewPlayerCode : MonoBehaviour
         isFastRunning = false;
         isCrouching = false;
 
-        playerInput = new PlayerInput();
-
-        moveAction = playerInput.Player.Move;
-        runAction = playerInput.Player.Run;
-        crouchAction = playerInput.Player.Crouch;
-
-        // Input Action 활성화
-        moveAction.Enable();
-        runAction.Enable();
-        crouchAction.Enable();
-        playerInput.Enable();
-
-    }
-
-
-
-
-
-    private void OnDestroy()
-    {
-        // Input Action 비활성화
-        moveAction.Disable();
-        runAction.Disable();
-        crouchAction.Disable();
     }
 
 
@@ -211,7 +179,7 @@ public class NewPlayerCode : MonoBehaviour
 
 
 
-        if (playerInput.Player.Kill.IsPressed())
+        if (Input.GetKeyDown(KeySetting.keys[KeyAction.Kill]))
         {
             Debug.Log("킬");
             Kill();
@@ -311,7 +279,7 @@ public class NewPlayerCode : MonoBehaviour
 
 
 
-        if (playerInput.Player.Move.ReadValue<Vector2>().x==0)
+        if (Input.GetKey(KeySetting.keys[KeyAction.Left])&&Input.GetKey(KeySetting.keys[KeyAction.Right]))
         {
             rigid.velocity = new Vector2( 0f * rigid.velocity.normalized.x , rigid.velocity.y);
         }
@@ -321,6 +289,7 @@ public class NewPlayerCode : MonoBehaviour
 // 속도 낮을때 멈추기
         if (Mathf.Abs(rigid.velocity.x) < 0.1) // 속도가 0 == 멈춤
         {
+            
             // 모션 초기화
             animator.SetBool("isRunning",false);
             animator.SetBool("isFastRunning",false);
@@ -464,8 +433,7 @@ public class NewPlayerCode : MonoBehaviour
     private void Move()
     {
         // 이동
-        Vector2 movementInput = moveAction.ReadValue<Vector2>();
-        float h = movementInput.x;
+        float h = Input.GetKey(KeySetting.keys[KeyAction.Right])?1:Input.GetKey(KeySetting.keys[KeyAction.Left])?-1:0;
         rigid.AddForce(Vector2.right * h * (maxSpeed / 15f), ForceMode2D.Impulse);
 
         isRunning = true;
@@ -475,7 +443,7 @@ public class NewPlayerCode : MonoBehaviour
             animator.SetBool("isRunning", true);
             animator.SetFloat("runSpeed", maxSpeed / 15f);
 
-            if (runAction.IsPressed())
+            if (Input.GetKey(KeySetting.keys[KeyAction.Run]))
             {
                 if (!isFastRunning)
                 {
@@ -492,7 +460,7 @@ public class NewPlayerCode : MonoBehaviour
                 }
             }
 
-            if (crouchAction.IsPressed())
+            if (Input.GetKey(KeySetting.keys[KeyAction.Crouch]))
             {
                 if (!isCrouching)
                 {
@@ -510,12 +478,12 @@ public class NewPlayerCode : MonoBehaviour
             }
 
             velocityZero = false;
-            spriteRenderer.flipX = h == -1;
+            spriteRenderer.flipX = h < 0;
         }
         else
         {
             animator.SetBool("isRunning", false);
-            velocityZero = true;
+            VelocityZero();
         }
     }
 

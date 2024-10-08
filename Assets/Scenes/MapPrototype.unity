@@ -8523,6 +8523,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 3522331969755479482, guid: 8288107a004f8dd41b31295fc5502129, type: 3}
+      propertyPath: m_TagString
+      value: Music
+      objectReference: {fileID: 0}
     - target: {fileID: 4402418556489832814, guid: 8288107a004f8dd41b31295fc5502129, type: 3}
       propertyPath: m_audioClip
       value: 

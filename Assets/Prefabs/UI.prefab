@@ -1917,7 +1917,6 @@ GameObject:
   - component: {fileID: 7025394942887523013}
   - component: {fileID: 4586122085521482287}
   - component: {fileID: 1461629395668188326}
-  - component: {fileID: 1017916033096988470}
   m_Layer: 5
   m_Name: InteractChangeButton
   m_TagString: Untagged
@@ -2027,24 +2026,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4586122085521482287}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1017916033096988470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2412055089824001180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f210b7dc786cde6439946488ebe1e958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputActions: {fileID: -944628639613478452, guid: cf21a7554c4125045a3a256ab4c74dfc, type: 3}
-  actionToRebind: {fileID: 0}
-  rebindButton: {fileID: 1461629395668188326}
-  bindingDisplayText: {fileID: 0}
-  bindingIndex: 0
+      m_Calls:
+      - m_Target: {fileID: 3208738703721917993}
+        m_TargetAssemblyTypeName: KeyManager, Assembly-CSharp
+        m_MethodName: ChangeKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2483319908150667476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2979,7 +2973,6 @@ GameObject:
   - component: {fileID: 8551561248619167945}
   - component: {fileID: 5542555403729215207}
   - component: {fileID: 4394630551651317037}
-  - component: {fileID: 1167096172367442843}
   m_Layer: 5
   m_Name: LeftMoveChangeButton
   m_TagString: Untagged
@@ -3089,24 +3082,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5542555403729215207}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1167096172367442843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3811878222348929520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f210b7dc786cde6439946488ebe1e958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputActions: {fileID: -944628639613478452, guid: cf21a7554c4125045a3a256ab4c74dfc, type: 3}
-  actionToRebind: {fileID: 0}
-  rebindButton: {fileID: 4394630551651317037}
-  bindingDisplayText: {fileID: 0}
-  bindingIndex: 0
+      m_Calls:
+      - m_Target: {fileID: 3208738703721917993}
+        m_TargetAssemblyTypeName: KeyManager, Assembly-CSharp
+        m_MethodName: ChangeKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4017364365825410698
 GameObject:
   m_ObjectHideFlags: 0
@@ -4397,7 +4385,6 @@ GameObject:
   - component: {fileID: 8689879218115086539}
   - component: {fileID: 243796659663910901}
   - component: {fileID: 985283945826493737}
-  - component: {fileID: 3471090670976989732}
   m_Layer: 5
   m_Name: RightMoveChangeButton
   m_TagString: Untagged
@@ -4507,24 +4494,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 243796659663910901}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &3471090670976989732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5179332487015289967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f210b7dc786cde6439946488ebe1e958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputActions: {fileID: -944628639613478452, guid: cf21a7554c4125045a3a256ab4c74dfc, type: 3}
-  actionToRebind: {fileID: 0}
-  rebindButton: {fileID: 985283945826493737}
-  bindingDisplayText: {fileID: 0}
-  bindingIndex: 0
+      m_Calls:
+      - m_Target: {fileID: 3208738703721917993}
+        m_TargetAssemblyTypeName: KeyManager, Assembly-CSharp
+        m_MethodName: ChangeKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5235044900848878718
 GameObject:
   m_ObjectHideFlags: 0
@@ -5154,7 +5136,6 @@ GameObject:
   - component: {fileID: 8419994731730114282}
   - component: {fileID: 681132514842602019}
   - component: {fileID: 7092633583344261707}
-  - component: {fileID: 8129199457002147263}
   m_Layer: 5
   m_Name: CrouchChangeButton
   m_TagString: Untagged
@@ -5264,24 +5245,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 681132514842602019}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &8129199457002147263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5724255304256671108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f210b7dc786cde6439946488ebe1e958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputActions: {fileID: -944628639613478452, guid: cf21a7554c4125045a3a256ab4c74dfc, type: 3}
-  actionToRebind: {fileID: 0}
-  rebindButton: {fileID: 7092633583344261707}
-  bindingDisplayText: {fileID: 0}
-  bindingIndex: 0
+      m_Calls:
+      - m_Target: {fileID: 3208738703721917993}
+        m_TargetAssemblyTypeName: KeyManager, Assembly-CSharp
+        m_MethodName: ChangeKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6009859352091338794
 GameObject:
   m_ObjectHideFlags: 0
@@ -5294,7 +5270,6 @@ GameObject:
   - component: {fileID: 1008027411583395322}
   - component: {fileID: 4045277531994927389}
   - component: {fileID: 7793622111608098126}
-  - component: {fileID: 2692092330233633997}
   m_Layer: 5
   m_Name: KillChangeButton
   m_TagString: Untagged
@@ -5404,24 +5379,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4045277531994927389}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2692092330233633997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6009859352091338794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f210b7dc786cde6439946488ebe1e958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputActions: {fileID: -944628639613478452, guid: cf21a7554c4125045a3a256ab4c74dfc, type: 3}
-  actionToRebind: {fileID: 5157096891044459959, guid: cf21a7554c4125045a3a256ab4c74dfc, type: 3}
-  rebindButton: {fileID: 7793622111608098126}
-  bindingDisplayText: {fileID: 1865829260302613709}
-  bindingIndex: 0
+      m_Calls:
+      - m_Target: {fileID: 3208738703721917993}
+        m_TargetAssemblyTypeName: KeyManager, Assembly-CSharp
+        m_MethodName: ChangeKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6205731472406345517
 GameObject:
   m_ObjectHideFlags: 0
@@ -5661,7 +5631,6 @@ GameObject:
   - component: {fileID: 1597235135122294547}
   - component: {fileID: 6678840947094476231}
   - component: {fileID: 5812439421237604226}
-  - component: {fileID: 3343465168260422856}
   m_Layer: 5
   m_Name: SkillChangeButton
   m_TagString: Untagged
@@ -5771,24 +5740,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6678840947094476231}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &3343465168260422856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6592044549818831456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f210b7dc786cde6439946488ebe1e958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputActions: {fileID: -944628639613478452, guid: cf21a7554c4125045a3a256ab4c74dfc, type: 3}
-  actionToRebind: {fileID: 3160903519639003940, guid: cf21a7554c4125045a3a256ab4c74dfc, type: 3}
-  rebindButton: {fileID: 5812439421237604226}
-  bindingDisplayText: {fileID: 4609233314753701877}
-  bindingIndex: 0
+      m_Calls:
+      - m_Target: {fileID: 3208738703721917993}
+        m_TargetAssemblyTypeName: KeyManager, Assembly-CSharp
+        m_MethodName: ChangeKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6890285435138128756
 GameObject:
   m_ObjectHideFlags: 0
@@ -6127,6 +6091,7 @@ GameObject:
   m_Component:
   - component: {fileID: 914847788290118278}
   - component: {fileID: 4633642783138716867}
+  - component: {fileID: 3208738703721917993}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -6165,6 +6130,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20fddfb7643e5dc4d9853904d96f9d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3208738703721917993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7005552610227866622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00e77cd8c901d64f8dfac07ee802d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7099433706916309554
@@ -7300,6 +7277,7 @@ GameObject:
   - component: {fileID: 4006229628132739487}
   - component: {fileID: 1396057385264052962}
   - component: {fileID: 7364819873002526287}
+  - component: {fileID: 7918656179114356946}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -7396,6 +7374,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7918656179114356946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8084837699119387232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dcf83e0be53af74395bccbe2ffc3084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txt:
+  - {fileID: 1982250061519807189}
+  - {fileID: 6114492287444813124}
+  - {fileID: 1865829260302613709}
+  - {fileID: 7137501440790396900}
+  - {fileID: 4813756567598528877}
+  - {fileID: 4609233314753701877}
+  - {fileID: 6599650893067215654}
 --- !u!1 &8294104666578150814
 GameObject:
   m_ObjectHideFlags: 0
@@ -7408,7 +7406,6 @@ GameObject:
   - component: {fileID: 5110731626651224576}
   - component: {fileID: 9162541981251306908}
   - component: {fileID: 2405367018863701033}
-  - component: {fileID: 1435233475700153305}
   m_Layer: 5
   m_Name: RunChangeButton
   m_TagString: Untagged
@@ -7518,24 +7515,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9162541981251306908}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1435233475700153305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8294104666578150814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f210b7dc786cde6439946488ebe1e958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputActions: {fileID: -944628639613478452, guid: cf21a7554c4125045a3a256ab4c74dfc, type: 3}
-  actionToRebind: {fileID: 2574826198513783523, guid: cf21a7554c4125045a3a256ab4c74dfc, type: 3}
-  rebindButton: {fileID: 2405367018863701033}
-  bindingDisplayText: {fileID: 7137501440790396900}
-  bindingIndex: 0
+      m_Calls:
+      - m_Target: {fileID: 3208738703721917993}
+        m_TargetAssemblyTypeName: KeyManager, Assembly-CSharp
+        m_MethodName: ChangeKey
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8585097176268724904
 GameObject:
   m_ObjectHideFlags: 0
