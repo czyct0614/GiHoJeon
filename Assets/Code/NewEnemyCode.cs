@@ -77,7 +77,7 @@ public class NewEnemyCode : MonoBehaviour
         {
             if (isPlayerDetected)
             {
-                UpdateVisionDirectionWhileAttacking(moveEndPoint);
+                UpdateVisionDirectionWhileAttacking();
             }
             else
             {
@@ -95,7 +95,6 @@ public class NewEnemyCode : MonoBehaviour
         {
             StopAllCoroutines();
             ChaseAndAttackPlayer();
-            return;
         }
 
 
@@ -111,12 +110,11 @@ public class NewEnemyCode : MonoBehaviour
         {
             StopAllCoroutines(); // 기존 코루틴 중지
             StartCoroutine(FindPlayer(Script.Find<SoundCheckCode>("SoundCheck").lastPlayerPoint));
-            return; // 다른 행동을 하지 않도록 함수 종료
         }
 
 
 
-        if ((!isHeared && !isPlayerDetected && !findingPlayer && !sirenCode.ringing) || hacked)
+        if (!isHeared && !isPlayerDetected && !findingPlayer && !sirenCode.ringing && !hacked)
         {
             Patrol();
         }
@@ -145,7 +143,7 @@ public class NewEnemyCode : MonoBehaviour
 
 
 
-    void UpdateVisionDirectionWhileAttacking(Vector2 moveEndPoint)
+    void UpdateVisionDirectionWhileAttacking()
     {
 
         // 플레이어가 오른쪽을 바라보고 있고 (flipX가 false), 적이 왼쪽을 바라보고 있다면 (isFacingRight가 false)
@@ -319,7 +317,7 @@ public class NewEnemyCode : MonoBehaviour
             float newX = Mathf.MoveTowards(transform.position.x, lastPlayerPoint.x, Time.deltaTime * soundTrackingSpeed);
             transform.position = new Vector2(newX, transform.position.y);
             
-            yield return null; // 매 프레임마다 실행
+            yield return new WaitForSeconds(0.05f); // 매 프레임마다 실행
         }
 
         // 1초간 대기

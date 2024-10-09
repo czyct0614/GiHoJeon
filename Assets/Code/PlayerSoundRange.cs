@@ -8,7 +8,9 @@ public class PlayerSoundRange : MonoBehaviour
 
     private void Awake()
     {
+
         soundRange = GameObject.FindGameObjectWithTag("SoundRange"); 
+
     }
 
 
@@ -17,8 +19,10 @@ public class PlayerSoundRange : MonoBehaviour
 
     private void Update()
     {
+
         moveInput = Input.GetKey(KeySetting.keys[KeyAction.Right])?1:Input.GetKey(KeySetting.keys[KeyAction.Left])?-1:0;
         UpdateSoundAmount();
+
     }
 
 
@@ -27,6 +31,7 @@ public class PlayerSoundRange : MonoBehaviour
 
     private void UpdateSoundAmount()
     {
+
         // 소리 양 업데이트
         soundAmount = 0; // 기본값 초기화
 
@@ -36,26 +41,43 @@ public class PlayerSoundRange : MonoBehaviour
             soundAmount = 5; // 소리 양 설정
         }
 
+
+
         // 추가적인 입력에 따라 소리 양 설정
         if (Input.GetKey(KeySetting.keys[KeyAction.Run]))
         {
             soundAmount = 10;
         }
 
+
+
         if (Input.GetKey(KeySetting.keys[KeyAction.Interact]))
         {
             soundAmount = 7;
         }
+
+
 
         if (Input.GetKey(KeySetting.keys[KeyAction.Kill]))
         {
             soundAmount = 5;
         }
 
+
+
         if (Input.GetKey(KeySetting.keys[KeyAction.Skill]))
         {
             soundAmount = 5;
         }
+
+
+
+        if (Input.GetKey(KeySetting.keys[KeyAction.Crouch]))
+        {
+            soundAmount = 2;
+        }
+
+
 
         if(soundAmount == 0)
         {
@@ -64,6 +86,7 @@ public class PlayerSoundRange : MonoBehaviour
         else{
             ActivateSoundRange();
         }
+
     }
     
 
