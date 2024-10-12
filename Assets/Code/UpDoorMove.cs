@@ -14,7 +14,7 @@ public class UpDoorMove : MonoBehaviour
     // 이동할 Y축 거리
     public float moveAmount = 3f;
     // 이동하는 데 걸리는 거리
-    private float moveDuration = 1f;
+    private float moveDuration = 0.5f;
     // 움직이는 시간
     public float stayOpenDuration;
 
@@ -71,7 +71,7 @@ public class UpDoorMove : MonoBehaviour
 
 
 
-    private IEnumerator MoveToPosition(Transform transform, Vector3 position, float timeToMove)
+    public IEnumerator MoveToPosition(Transform transform, Vector3 position, float timeToMove)
     {
 
         var currentPos = transform.position;

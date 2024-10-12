@@ -257,6 +257,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updoorObject: {fileID: 5337687664378209522}
   downdoorObject: {fileID: 7886889662551296466}
+  newEnemyObject: {fileID: 0}
+  newEnemyCode: {fileID: 0}
 --- !u!50 &8701892922515189333
 Rigidbody2D:
   serializedVersion: 4
@@ -385,9 +387,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerDistance: 5
   moveAmount: 3
-  moveDuration: 0.5
   stayOpenDuration: 2
-  isgoingup: 0
+  isGoingUp: 0
+  isBackUp: 0
   upDoorOpened: 0
 --- !u!61 &1963023344509173531
 BoxCollider2D:
@@ -562,9 +564,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerDistance: 5
   moveAmount: -3
-  moveDuration: 0.5
   stayOpenDuration: 2
-  isgoingdown: 0
+  isGoingDown: 0
+  isBackDown: 0
   downDoorOpened: 0
 --- !u!61 &1117912318855494953
 BoxCollider2D:

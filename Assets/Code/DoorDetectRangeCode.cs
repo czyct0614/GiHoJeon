@@ -12,6 +12,9 @@ public class DoorDetectRangeCode : MonoBehaviour
 
     public GameObject updoorObject;
     public GameObject downdoorObject;
+    
+    public GameObject newEnemyObject;
+    public NewEnemyCode newEnemyCode;
 
 
     
@@ -23,6 +26,10 @@ public class DoorDetectRangeCode : MonoBehaviour
     {
 
         updoormove = updoorObject.GetComponent<UpDoorMove>();
+
+        newEnemyObject = GameObject.FindGameObjectWithTag("NewEnemy");
+
+        newEnemyCode = newEnemyObject.GetComponent<NewEnemyCode>();
 
         downdoormove = downdoorObject.GetComponent<DownDoorMove>();
 
@@ -51,14 +58,25 @@ public class DoorDetectRangeCode : MonoBehaviour
         // 들어온 오브젝트의 태그가 배열에 있는지 확인
         foreach (string targetTag in targetTags )
         {
-
+        // 콜라이더 범위 안에 들어왔을때 적의 상태가 순찰중이라면 문이 열리지 않는다
             Debug.Log(other.tag);
-            if (other.CompareTag(targetTag) )
-            {
+            if (other.CompareTag(targetTag))
+            {   
+                
+                updoormove.StopCoroutine("UpDone");
+                downdoormove.StopCoroutine("DownDone");
+                
+                if (targetTag == "Player")
 
-                doorManagerCode.detected = true;
+                   doorManagerCode.detected = true;
 
-                break;
+
+                if (targetTag == "NewEnemy" && !newEnemyCode.patrolling) 
+                 
+                   doorManagerCode.detected = true;
+
+
+              break;
 
             }
 
@@ -79,6 +97,8 @@ public class DoorDetectRangeCode : MonoBehaviour
             if (other.CompareTag(targetTag))
             {
                 
+                updoormove.StopCoroutine("Up");
+                downdoormove.StopCoroutine("Down");
                 doorManagerCode.detected = false;
                 
                 break; 
