@@ -75,14 +75,7 @@ public class NewEnemyCode : MonoBehaviour
 
         if (!hacked)
         {
-            if (isPlayerDetected)
-            {
-                UpdateVisionDirectionWhileAttacking();
-            }
-            else
-            {
-                UpdateVisionDirection(moveEndPoint);
-            }
+            UpdateVisionDirection(moveEndPoint);
         }
 
 
@@ -108,7 +101,7 @@ public class NewEnemyCode : MonoBehaviour
 
         if (isHeared && !isPlayerDetected && !hacked)
         {
-            StopAllCoroutines(); // 기존 코루틴 중지
+            StopAllCoroutines();
             StartCoroutine(FindPlayer(Script.Find<SoundCheckCode>("SoundCheck").lastPlayerPoint));
         }
 
@@ -133,26 +126,6 @@ public class NewEnemyCode : MonoBehaviour
             Flip();
         }
         else if (moveEndPoint.x < transform.position.x && isFacingRight)
-        {
-            Flip();
-        }
-
-    }
-
-
-
-
-
-    void UpdateVisionDirectionWhileAttacking()
-    {
-
-        // 플레이어가 오른쪽을 바라보고 있고 (flipX가 false), 적이 왼쪽을 바라보고 있다면 (isFacingRight가 false)
-        if (!playerSpriteRenderer.flipX && !isFacingRight)
-        {
-            Flip();
-        }
-        // 플레이어가 왼쪽을 바라보고 있고 (flipX가 true), 적이 오른쪽을 바라보고 있다면 (isFacingRight가 true)
-        else if (playerSpriteRenderer.flipX && isFacingRight)
         {
             Flip();
         }
@@ -214,10 +187,9 @@ public class NewEnemyCode : MonoBehaviour
     {
 
         if (!isPlayerDetected) return;
+        if (hacked) return;
 
         Debug.Log("플레이어 추적 및 공격");
-
-        if (hacked) return;
 
         patrolling = false;
         attacking = true;
@@ -317,15 +289,16 @@ public class NewEnemyCode : MonoBehaviour
             float newX = Mathf.MoveTowards(transform.position.x, lastPlayerPoint.x, Time.deltaTime * soundTrackingSpeed);
             transform.position = new Vector2(newX, transform.position.y);
             
-            yield return new WaitForSeconds(0.05f); // 매 프레임마다 실행
+            yield return new WaitForSeconds(0.001f); // 매 프레임마다 실행
         }
 
         // 1초간 대기
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         // 다른 행동 실행
         findingPlayer = false;
         patrolling = true;
+
         Debug.Log("플레이어를 찾지 못했습니다. 순찰을 재개합니다.");
 
     }
