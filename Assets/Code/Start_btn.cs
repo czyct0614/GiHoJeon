@@ -13,11 +13,16 @@ public class Start_btn : MonoBehaviour
     public GameObject player;
 
     private SceneController sceneController;
+    private SaveManager saveManager;
 
     void Start()
     {
 
         sceneController = FindObjectOfType<SceneController>();
+        saveManager = FindObjectOfType<SaveManager>();
+
+        // 게임 시작 시 저장된 데이터를 자동으로 로드하여 반영
+        saveManager.LoadGame();
 
     }
 
@@ -33,6 +38,7 @@ public class Start_btn : MonoBehaviour
         sceneController.LoadScene(transferMapName);
         
         player.GetComponent<NewPlayerCode>().Revival();
+        saveManager.SaveGame();
 
     }
 

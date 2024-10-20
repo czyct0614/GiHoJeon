@@ -961,6 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dangerBarImage: {fileID: 1994315921492627238}
+  dangerRate: 0
 --- !u!1 &910944147418377872
 GameObject:
   m_ObjectHideFlags: 0
@@ -5483,6 +5484,37 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 1.4, y: 15}
   m_UseGraphicAlpha: 0
+--- !u!1 &6467393956166089048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4139163811538217602}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4139163811538217602
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6467393956166089048}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.2755718, y: -197.9405, z: 14.20507}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 914847788290118278}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6544525093065543293
 GameObject:
   m_ObjectHideFlags: 0
@@ -6118,6 +6150,7 @@ Transform:
   - {fileID: 5984402888138279223}
   - {fileID: 2620379803157396020}
   - {fileID: 2519648503110271209}
+  - {fileID: 4139163811538217602}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4633642783138716867
@@ -6144,6 +6177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00e77cd8c901d64f8dfac07ee802d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultKeys: 61000000640000007100000030010000320100006500000066000000
 --- !u!1 &7099433706916309554
 GameObject:
   m_ObjectHideFlags: 0

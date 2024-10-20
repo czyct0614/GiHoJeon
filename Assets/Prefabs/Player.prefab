@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1275637507562501390}
   - component: {fileID: 3148546951094872525}
-  - component: {fileID: 4348156742812374532}
   m_Layer: 0
   m_Name: JumpPoint
   m_TagString: Else
@@ -78,18 +77,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4348156742812374532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6111783047736008750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80a8492ae4441c498927e3492b31371, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9001837065108196279
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +88,7 @@ GameObject:
   - component: {fileID: 6706256164887007886}
   - component: {fileID: 8913311490110925025}
   - component: {fileID: 179159842911267662}
-  - component: {fileID: 7091882314350821103}
+  - component: {fileID: 6544883274037981694}
   - component: {fileID: 1251142057131298220}
   - component: {fileID: 5757208229397368692}
   - component: {fileID: 4980205348556909250}
@@ -209,7 +196,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7091882314350821103
+--- !u!114 &6544883274037981694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,38 +205,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 9001837065108196279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a4d4e722c239db418e2f408a3236c0c, type: 3}
+  m_Script: {fileID: 11500000, guid: faaea7acc176005418a09943eae4e085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargrBarImage: {fileID: 0}
-  missilePrefab: {fileID: 6893506956618878376, guid: dca9e5aa1c2ff544288fc2e7c24fb0dc, type: 3}
-  skillSelectPrefab: {fileID: 7036774277444454461, guid: ef7daa44353ad86449d36b84a895cbb9, type: 3}
-  isSkillReady: 0
-  shootCooldown: 0.25
   spriteRenderer: {fileID: 0}
-  isJumping: 0
-  healthBarImage: {fileID: 0}
   maxHealth: 10
   currentHealth: 10
-  maxSpeed: 15
+  maxSpeed: 0
   isFlipped: 0
-  isFastRunning: 0
-  isCrouching: 0
-  jumpPower: 40
-  canJump: 1
-  tr: {fileID: 5757208229397368692}
-  dashingPower: 9
-  dashingTime: 0.2
-  dashingCooldown: 1
-  playerOnPlatform: 0
   lastSpawnPoint: {x: 0, y: 0}
   invincibleDuration: 0.5
   nowMap: 
   dead: 0
-  isDying: 0
+  isDying: 1
   canInput: 1
   isHided: 0
-  climbSpeed: 10
   soundAmount: 0
 --- !u!95 &1251142057131298220
 Animator:
@@ -421,7 +391,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 2.6666667, y: 2.6666667}
     newSize: {x: 0.71, y: 0.67}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -466,7 +436,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 2.6666667, y: 2.6666667}
     newSize: {x: 0.71, y: 0.67}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

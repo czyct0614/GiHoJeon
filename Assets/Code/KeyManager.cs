@@ -7,7 +7,7 @@ public enum KeyAction {Left, Right, Kill, Run, Crouch, Skill, Interact, KEYCOUNT
 public static class KeySetting {public static Dictionary<KeyAction, KeyCode> keys = new Dictionary<KeyAction, KeyCode>();}
 public class KeyManager : MonoBehaviour
 {  
-    KeyCode[] defaultKeys = new KeyCode[] {KeyCode.A, KeyCode.D, KeyCode.Q, KeyCode.LeftShift, KeyCode.LeftControl, KeyCode.E, KeyCode.F};
+    public KeyCode[] defaultKeys = new KeyCode[] {KeyCode.A, KeyCode.D, KeyCode.Q, KeyCode.LeftShift, KeyCode.LeftControl, KeyCode.E, KeyCode.F};
     private void Awake()
     {
 

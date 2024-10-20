@@ -6,6 +6,7 @@ public class DangerRate : MonoBehaviour
 {
 
     [SerializeField] private Image dangerBarImage;
+    public int dangerRate;
 
     void Start()
     {
@@ -77,6 +78,8 @@ public class DangerRate : MonoBehaviour
 
         }
 
+        dangerRate = num;
+
     }
 
 
@@ -142,6 +145,8 @@ public class DangerRate : MonoBehaviour
                 break;
 
         }
+
+        dangerRate = finalRate;
 
     }
 
