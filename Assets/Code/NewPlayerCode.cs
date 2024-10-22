@@ -80,6 +80,8 @@ public class NewPlayerCode : MonoBehaviour
 
     private NewEnemyCode newEnemyCode;
 
+    public Vector3 startpoint;
+
 
 
 

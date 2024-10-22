@@ -4,24 +4,19 @@ using UnityEngine;
 // Scene 매니저 라이브러리 추가
 using UnityEngine.SceneManagement;
 
-public class Start_btn : MonoBehaviour
+public class StartButtonCode : MonoBehaviour
 {
-
-    // 이동할 맵 이름을 설정합니다.
-    public string transferMapName;
-
-    public GameObject player;
 
     private SceneController sceneController;
     private SaveManager saveManager;
+
+    public NewPlayerCode newPlayerCode;
 
     void Start()
     {
 
         sceneController = FindObjectOfType<SceneController>();
         saveManager = FindObjectOfType<SaveManager>();
-
-        // 게임 시작 시 저장된 데이터를 자동으로 로드하여 반영
 
     }
 
@@ -31,12 +26,10 @@ public class Start_btn : MonoBehaviour
 
     public void GameStart()
     {
-
+        saveManager.StartGame();
         // 지정한 씬으로 이동합니다.
-        GM.SaveCurrentMap(transferMapName);
-        sceneController.LoadScene(transferMapName);
-        
-        player.GetComponent<NewPlayerCode>().Revival();
+        GM.SaveCurrentMap(newPlayerCode.nowMap);
+        sceneController.LoadScene(newPlayerCode.nowMap);
 
     }
 

@@ -32,6 +32,21 @@ TagManager:
   - CeilingLight
   - FoxHole
   - CCTV
+  - FlyingPlatform
+  - DeadLine
+  - PStrongEnemy
+  - ExplodingEnemy
+  - TurretEnemy
+  - Ladder
+  - VeryStrongEnemy
+  - StrongEnemy
+  - Monster
+  - PlatformEnemy
+  - ShieldEnemy
+  - Shield
+  - CurseEnemy
+  - DashEnemy
+  - UI
   layers:
   - Default
   - TransparentFX
