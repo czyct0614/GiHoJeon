@@ -1900,7 +1900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c906328c2bc15ed4d955db235f958605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7506282235987891504}
+  player: {fileID: 3533926364410082651}
 --- !u!50 &1330359211
 Rigidbody2D:
   serializedVersion: 4
@@ -3418,7 +3418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b6cee0de6cb75848941fbd0a3920489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundRange: {fileID: 0}
+  soundAmount: 0
+  soundRange: {fileID: 1330359206}
 --- !u!114 &7506282235987891521
 MonoBehaviour:
   m_ObjectHideFlags: 0

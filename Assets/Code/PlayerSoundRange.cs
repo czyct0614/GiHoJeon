@@ -43,15 +43,21 @@ public class PlayerSoundRange : MonoBehaviour
 
 
 
-        // 추가적인 입력에 따라 소리 양 설정
-        if (Input.GetKey(KeySetting.keys[KeyAction.Run]))
+        if (Input.GetKey(KeySetting.keys[KeyAction.Crouch]))
         {
-            soundAmount = 12;
+            soundAmount = 2;
         }
 
 
 
         if (Input.GetKey(KeySetting.keys[KeyAction.Interact]))
+        {
+            soundAmount = 6;
+        }
+
+
+
+        if (Input.GetKey(KeySetting.keys[KeyAction.Skill]))
         {
             soundAmount = 6;
         }
@@ -65,16 +71,10 @@ public class PlayerSoundRange : MonoBehaviour
 
 
 
-        if (Input.GetKey(KeySetting.keys[KeyAction.Skill]))
+        // 추가적인 입력에 따라 소리 양 설정
+        if (Input.GetKey(KeySetting.keys[KeyAction.Run]))
         {
-            soundAmount = 6;
-        }
-
-
-
-        if (Input.GetKey(KeySetting.keys[KeyAction.Crouch]))
-        {
-            soundAmount = 2;
+            soundAmount = 12;
         }
 
 
@@ -110,6 +110,27 @@ public class PlayerSoundRange : MonoBehaviour
     {
 
         soundRange.SetActive(false);
+
+    }
+
+
+
+
+
+    void OnEnable() 
+    {
+
+	    ActivateSoundRange();
+	
+    }
+
+
+
+
+    private void OnDisable() 
+    {
+
+        DeactivateSoundRange();
 
     }
 }

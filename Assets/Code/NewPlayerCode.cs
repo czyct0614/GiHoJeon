@@ -128,7 +128,7 @@ public class NewPlayerCode : MonoBehaviour
         playerCollider = GetComponent<Collider2D>();
 
 
-
+/*
         if (!playerExists)
         {
             playerExists = true;
@@ -138,7 +138,7 @@ public class NewPlayerCode : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
+*/
 
 
         // 부활무적 시간
