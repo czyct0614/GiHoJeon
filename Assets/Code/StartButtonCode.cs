@@ -27,8 +27,6 @@ public class StartButtonCode : MonoBehaviour
     public void GameStart()
     {
         saveManager.StartGame();
-        // 지정한 씬으로 이동합니다.
-        GM.SaveCurrentMap(newPlayerCode.nowMap);
         sceneController.LoadScene(newPlayerCode.nowMap);
 
     }

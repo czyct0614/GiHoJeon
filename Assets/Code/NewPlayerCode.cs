@@ -85,6 +85,7 @@ public class NewPlayerCode : MonoBehaviour
     private KillMotionCode killMotionCode;
 
     public Vector3 startpoint;
+    
 
 
 
@@ -216,8 +217,8 @@ public class NewPlayerCode : MonoBehaviour
                 rigid.gravityScale = 8f;
                 isDying = false;
             }
-            
-            nowMap = SceneManager.GetActiveScene().name;
+                nowMap = SceneManager.GetActiveScene().name;
+
         }
     
 
@@ -448,7 +449,7 @@ public class NewPlayerCode : MonoBehaviour
     private void Move()
     {
         // 이동
-        float h = Input.GetKey(KeySetting.keys[KeyAction.Right])&&Input.GetKey(KeySetting.keys[KeyAction.Left])?0
+        float h = Input.GetKey(KeySetting.keys[KeyAction.Right]) && Input.GetKey(KeySetting.keys[KeyAction.Left])?0
                   :Input.GetKey(KeySetting.keys[KeyAction.Right])?1
                   :Input.GetKey(KeySetting.keys[KeyAction.Left])?-1
                   :0;

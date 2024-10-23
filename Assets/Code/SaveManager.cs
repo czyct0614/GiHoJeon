@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class SaveManager : MonoBehaviour
         {
             Debug.LogError("Player GameObject not assigned.");
         }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void StartGame()
@@ -57,7 +59,7 @@ public class SaveManager : MonoBehaviour
 
         // 플레이어와 레벨 데이터를 가져와서 저장
         GameData data = new GameData(
-            newPlayerCode.nowMap,
+            SceneManager.GetActiveScene().name,
             player.transform.position,
             newPlayerCode.currentHealth,
             dangerRate.dangerRate,
@@ -66,6 +68,7 @@ public class SaveManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(Path.Combine(Application.persistentDataPath, "gamedata.json"), json);
+        Debug.Log("잘 됨");
     }
 
     // 게임 데이터를 불러오는 함수
@@ -83,6 +86,8 @@ public class SaveManager : MonoBehaviour
                 newPlayerCode.nowMap = data.playerMapName;
                 newPlayerCode.startpoint = data.playerPosition;
                 newPlayerCode.currentHealth = data.playerHealth;
+                dangerRate.ChangeDangerRate(data.playerDangerRate);
+                keyManager.ChangeKeys(data.defaultKeys);
             }
             else
             {
