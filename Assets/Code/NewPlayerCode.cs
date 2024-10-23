@@ -80,6 +80,10 @@ public class NewPlayerCode : MonoBehaviour
 
     private NewEnemyCode newEnemyCode;
 
+    private GameObject killMotion;
+
+    private KillMotionCode killMotionCode;
+
     public Vector3 startpoint;
 
 
@@ -98,17 +102,26 @@ public class NewPlayerCode : MonoBehaviour
 
         newEnemy = GameObject.FindGameObjectWithTag("NewEnemy");
 
-        if(newEnemy!=null)
+        if(newEnemy != null)
         {
             newEnemyCode = newEnemy.GetComponent<NewEnemyCode>();
         }
 
         soundCheck = GameObject.FindGameObjectWithTag("SoundCheck");
 
-        if(soundCheck!=null)
+        if(soundCheck != null)
         {
             soundCheckCode = soundCheck.GetComponent<SoundCheckCode>();
         }
+
+        killMotion = GameObject.FindGameObjectWithTag("KillMotion");
+
+        if(killMotion != null)
+        {
+            killMotionCode = killMotion.GetComponent<KillMotionCode>();
+        }
+
+        killMotion.SetActive(false);
 
         Time.timeScale = 1f;
 
@@ -707,9 +720,11 @@ public class NewPlayerCode : MonoBehaviour
             // 적이 플레이어와 반대 방향을 바라보고 있는지 확인
             if ((isPlayerOnRight && !newEnemyCode.isFacingRight) || (!isPlayerOnRight && newEnemyCode.isFacingRight))
             {
+                killMotion.SetActive(true);
                 // 암살 조건 충족 시 적 비활성화
-                newEnemy.SetActive(false);
+                nearestEnemy.SetActive(false);
                 Debug.Log("가장 가까운 적을 암살했습니다.");
+                Invoke("DeactivateKillMotion", 1f);
             }
             else
             {
@@ -720,6 +735,15 @@ public class NewPlayerCode : MonoBehaviour
         {
             Debug.Log("근처에 적이 없습니다.");
         }
+    }
+
+
+
+
+
+    private void DeactivateKillMotion()
+    {
+        killMotion.SetActive(false);
     }
 
 }

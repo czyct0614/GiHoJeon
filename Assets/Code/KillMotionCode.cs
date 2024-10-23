@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RealUI : MonoBehaviour
+public class KillMotionCode : MonoBehaviour
 {
 
-    public Transform CameraTransform;
+    private Transform CameraTransform;
 
     void Awake()
     {
+
+        DontDestroyOnLoad(this.gameObject);
 
         CameraTransform = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
 
