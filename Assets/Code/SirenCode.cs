@@ -21,6 +21,8 @@ public class SirenCode : MonoBehaviour
     public float sirenHackingDuration;
     private bool isHackingActivate;
 
+    public GameObject hackedPrefab;
+
     void Start()
     {
 
@@ -91,6 +93,8 @@ public class SirenCode : MonoBehaviour
     {
 
         isHackingActivate = true;
+
+        GameObject hackedObject = Instantiate(hackedPrefab, transform.position, transform.rotation);
 
         yield return new WaitForSeconds(sirenHackingDuration);
 
