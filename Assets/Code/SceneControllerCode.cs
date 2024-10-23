@@ -8,11 +8,11 @@ public class SceneController : MonoBehaviour
     private static SceneController instance;
 
     // Player 관련 변수
-    private GameObject player;
+    public GameObject player;
     private NewPlayerCode playerMove;
 
     // UI 관련 변수
-    private GameObject uiCanvas;  // UI 오브젝트를 참조할 변수
+    public GameObject uiCanvas;  // UI 오브젝트를 참조할 변수
 
     private void Awake()
     {

@@ -9,7 +9,7 @@ public class SoundCheckCode : MonoBehaviour
     private GameObject player;
     public Vector2 lastPlayerPoint;
     private PlayerSoundRange playerScript;
-    private DangerRate dangerBarScript;
+    public DangerRate dangerBarScript;
 
     public bool canKill = false;
 

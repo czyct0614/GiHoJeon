@@ -10,6 +10,7 @@ public class KeyManager : MonoBehaviour
     public KeyCode[] defaultKeys = new KeyCode[] {KeyCode.A, KeyCode.D, KeyCode.Q, KeyCode.LeftShift, KeyCode.LeftControl, KeyCode.E, KeyCode.F};
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
 
         for (int i = 0;i < (int) KeyAction.KEYCOUNT;i++)
         {

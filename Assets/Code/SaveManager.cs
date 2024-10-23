@@ -33,7 +33,7 @@ public class SaveManager : MonoBehaviour
     public void StartGame()
     {
         GameData data = new GameData(
-            "HallMap",
+            "Chapter 1",
             new Vector3(-22, 0, 0),
             10,
             0,
