@@ -694,6 +694,7 @@ public class NewPlayerCode : MonoBehaviour
     // 가장 가까운 적을 찾고 암살하는 함수
     private void Kill()
     {
+        
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("NewEnemy");
         GameObject nearestEnemy = null;
 
@@ -721,11 +722,10 @@ public class NewPlayerCode : MonoBehaviour
             // 적이 플레이어와 반대 방향을 바라보고 있는지 확인
             if ((isPlayerOnRight && !newEnemyCode.isFacingRight) || (!isPlayerOnRight && newEnemyCode.isFacingRight))
             {
-                killMotion.SetActive(true);
+                StartCoroutine(PlayKillMotion());
                 // 암살 조건 충족 시 적 비활성화
                 nearestEnemy.SetActive(false);
                 Debug.Log("가장 가까운 적을 암살했습니다.");
-                Invoke("DeactivateKillMotion", 1f);
             }
             else
             {
@@ -736,15 +736,20 @@ public class NewPlayerCode : MonoBehaviour
         {
             Debug.Log("근처에 적이 없습니다.");
         }
+
     }
 
-
-
-
-
-    private void DeactivateKillMotion()
+    private IEnumerator PlayKillMotion()
     {
+
+        killMotion.SetActive(true);
+        Time.timeScale = 0f;
+        
+        yield return new WaitForSecondsRealtime(1f);  // 실제 시간으로 1초 대기
+        
         killMotion.SetActive(false);
+        Time.timeScale = 1f;
+
     }
 
 }
