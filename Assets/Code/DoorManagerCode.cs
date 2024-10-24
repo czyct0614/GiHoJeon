@@ -16,14 +16,14 @@ public class DoorManagerCode : MonoBehaviour
     public bool detected;
 
     //public DoorDetectRangeCode doordetectrange;
-    
-    
 
     //해킹 지속시간(인스펙터창에서 바꿀 수 있음)
     public int doorHackingDuration;
 
     //ResetAfterDelay() 코루틴 한번만 실행되게 하는 변수
     private bool isHackingActivate;
+
+    public GameObject hackedPrefab;
 
     void Start()
     {
@@ -85,7 +85,11 @@ public class DoorManagerCode : MonoBehaviour
 
         isHackingActivate = true;
 
+        GameObject hackedObject = Instantiate(hackedPrefab, transform.position, transform.rotation);
+
         yield return new WaitForSeconds(doorHackingDuration);
+
+        Destroy(hackedObject);
 
         hacked = false;
 

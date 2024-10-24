@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastPlayerPoint: {x: 0, y: 0}
+  dangerBarScript: {fileID: 0}
   canKill: 0
 --- !u!61 &6467733948474077816
 BoxCollider2D:
@@ -391,8 +392,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1310b43ed225e845ad5beee6af10d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  attackMoveSpeed: 3
+  patrolSpeed: 1
+  soundTrackingSpeed: 2
+  chaseSpeed: 3
   newEnemyHackingDuration: 3
   playerLayer:
     serializedVersion: 2
@@ -407,6 +409,7 @@ MonoBehaviour:
   patrolling: 0
   findingPlayer: 0
   hacked: 0
+  hackedPrefab: {fileID: 6907800154513070589, guid: 4d16b8811e847ce49a90fe0ab25bc8f4, type: 3}
 --- !u!61 &5062069233189498150
 BoxCollider2D:
   m_ObjectHideFlags: 0

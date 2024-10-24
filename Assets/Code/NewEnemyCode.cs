@@ -43,6 +43,8 @@ public class NewEnemyCode : MonoBehaviour
     private bool isHackingActivate;
     private bool canAttack = true;
 
+    public GameObject hackedPrefab;
+
     void Start()
     {
 
@@ -309,7 +311,13 @@ public class NewEnemyCode : MonoBehaviour
 
         isHackingActivate = true;
 
+        GameObject hackedObject = Instantiate(hackedPrefab, transform.position, transform.rotation);
+        
+        hackedObject.transform.SetParent(transform);
+
         yield return new WaitForSeconds(newEnemyHackingDuration);
+
+        Destroy(hackedObject);
 
         hacked = false;
 

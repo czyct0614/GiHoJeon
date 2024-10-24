@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 public class CCTVCode : MonoBehaviour
@@ -18,6 +19,9 @@ public class CCTVCode : MonoBehaviour
     // SpriteRenderer 컴포넌트 참조
     private SpriteRenderer spriteRenderer;
 
+    public GameObject hackedPrefab;
+    private Transform bodyTransform;
+
 
 
     void Start()
@@ -28,6 +32,13 @@ public class CCTVCode : MonoBehaviour
         isHackingActivate = false;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // 부모 오브젝트에서 CCTVBody 태그를 가진 자식 오브젝트의 Transform을 찾습니다.
+        if (transform.parent != null)
+        {
+            bodyTransform = transform.parent.GetComponentsInChildren<Transform>()
+                .FirstOrDefault(t => t.CompareTag("CCTVBody"));
+        }
 
         if (spriteRenderer != null)
         {
@@ -80,7 +91,11 @@ public class CCTVCode : MonoBehaviour
 
         isHackingActivate = true;
 
+        GameObject hackedObject = Instantiate(hackedPrefab, bodyTransform.position, Quaternion.identity);
+
         yield return new WaitForSeconds(cctvHackingDuration);
+
+        Destroy(hackedObject);
 
         hacked = false;
 

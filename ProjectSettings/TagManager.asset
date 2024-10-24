@@ -48,6 +48,8 @@ TagManager:
   - DashEnemy
   - UI
   - KillMotion
+  - SkillSelectWindow
+  - CCTVBody
   layers:
   - Default
   - TransparentFX

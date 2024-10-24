@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hacked: 0
   ceilingHackingDuration: 3
+  hackedPrefab: {fileID: 6907800154513070589, guid: 4d16b8811e847ce49a90fe0ab25bc8f4, type: 3}
 --- !u!1 &8629263233262328706
 GameObject:
   m_ObjectHideFlags: 0

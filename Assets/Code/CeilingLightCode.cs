@@ -15,6 +15,8 @@ public class CeilingLightCode : MonoBehaviour
 
     private LightRangeCode lightRangeCode;
 
+    public GameObject hackedPrefab;
+
     void Start()
     {
         hacked = false;
@@ -48,7 +50,11 @@ public class CeilingLightCode : MonoBehaviour
 
         isHackingActivate = true;
 
+        GameObject hackedObject = Instantiate(hackedPrefab, transform.position, transform.rotation);
+
         yield return new WaitForSeconds(ceilingHackingDuration);
+
+        Destroy(hackedObject);
 
         hacked = false;
 

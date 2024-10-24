@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 250786331576859032}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: CCTVBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -300,6 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hacked: 0
   cctvHackingDuration: 3
+  hackedPrefab: {fileID: 6907800154513070589, guid: 4d16b8811e847ce49a90fe0ab25bc8f4, type: 3}
 --- !u!60 &6919992171185203419
 PolygonCollider2D:
   m_ObjectHideFlags: 0

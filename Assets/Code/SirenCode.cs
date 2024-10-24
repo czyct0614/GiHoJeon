@@ -98,8 +98,9 @@ public class SirenCode : MonoBehaviour
 
         yield return new WaitForSeconds(sirenHackingDuration);
 
-        hacked = false;
+        Destroy(hackedObject);
 
+        hacked = false;
         isHackingActivate = false;
 
     }

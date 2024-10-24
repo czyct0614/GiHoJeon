@@ -567,6 +567,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CCTV
       objectReference: {fileID: 0}
+    - target: {fileID: 3557109448107051361, guid: 77de69b9ef31c97469a6d36efbc2d2f7, type: 3}
+      propertyPath: m_TagString
+      value: CCTVBody
+      objectReference: {fileID: 0}
     - target: {fileID: 4353775567798337227, guid: 77de69b9ef31c97469a6d36efbc2d2f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.5
@@ -882,6 +886,10 @@ PrefabInstance:
       propertyPath: endPoint.x
       value: 89.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
+      propertyPath: hackedPrefab
+      value: 
+      objectReference: {fileID: 6907800154513070589, guid: 4d16b8811e847ce49a90fe0ab25bc8f4, type: 3}
     - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
       propertyPath: startPoint.x
       value: 71.5
@@ -2088,6 +2096,10 @@ PrefabInstance:
       value: 167.5
       objectReference: {fileID: 0}
     - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
+      propertyPath: hackedPrefab
+      value: 
+      objectReference: {fileID: 6907800154513070589, guid: 4d16b8811e847ce49a90fe0ab25bc8f4, type: 3}
+    - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
       propertyPath: startPoint.x
       value: 132.5
       objectReference: {fileID: 0}
@@ -2157,6 +2169,10 @@ PrefabInstance:
       propertyPath: endPoint.x
       value: 45.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
+      propertyPath: hackedPrefab
+      value: 
+      objectReference: {fileID: 6907800154513070589, guid: 4d16b8811e847ce49a90fe0ab25bc8f4, type: 3}
     - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
       propertyPath: startPoint.x
       value: 14.5
@@ -2346,6 +2362,10 @@ PrefabInstance:
       propertyPath: endPoint.x
       value: 167.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
+      propertyPath: hackedPrefab
+      value: 
+      objectReference: {fileID: 6907800154513070589, guid: 4d16b8811e847ce49a90fe0ab25bc8f4, type: 3}
     - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
       propertyPath: startPoint.x
       value: 132.5
@@ -3712,6 +3732,10 @@ PrefabInstance:
       propertyPath: endPoint.x
       value: 61.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
+      propertyPath: hackedPrefab
+      value: 
+      objectReference: {fileID: 6907800154513070589, guid: 4d16b8811e847ce49a90fe0ab25bc8f4, type: 3}
     - target: {fileID: 7562237319625681423, guid: c162ebde69e6aee4485c68c3a1a47175, type: 3}
       propertyPath: startPoint.x
       value: 55.5
