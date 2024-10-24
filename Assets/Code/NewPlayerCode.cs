@@ -467,14 +467,14 @@ public class NewPlayerCode : MonoBehaviour
                 if (!isFastRunning)
                 {
                     isFastRunning = true;
-                    ChangeMaxSpeed(4.5f);
+                    ChangeMaxSpeed(3f); // 여기를 4.5f에서 3f로 변경
                 }
             }
             else
             {
                 if (isFastRunning)
                 {
-                    ChangeMaxSpeed(2 / 9f);
+                    ChangeMaxSpeed(1/3f); // 여기를 2/9f에서 1/3f로 변경
                     isFastRunning = false;
                 }
             }
@@ -611,6 +611,7 @@ public class NewPlayerCode : MonoBehaviour
         VelocityZero();
         spriteRenderer.color = new Color(1,1,1,0.5f);
         isHided = true;
+        
         // 모션 초기화
         animator.SetBool("isRunning",false);
         animator.SetBool("isFastRunning",false);
@@ -694,7 +695,7 @@ public class NewPlayerCode : MonoBehaviour
     // 가장 가까운 적을 찾고 암살하는 함수
     private void Kill()
     {
-        
+
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("NewEnemy");
         GameObject nearestEnemy = null;
 
@@ -745,7 +746,8 @@ public class NewPlayerCode : MonoBehaviour
         killMotion.SetActive(true);
         Time.timeScale = 0f;
         
-        yield return new WaitForSecondsRealtime(1f);  // 실제 시간으로 1초 대기
+        // 실제 시간으로 1초 대기
+        yield return new WaitForSecondsRealtime(1f);
         
         killMotion.SetActive(false);
         Time.timeScale = 1f;
