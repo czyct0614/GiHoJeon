@@ -45,6 +45,8 @@ public class NewEnemyCode : MonoBehaviour
 
     public GameObject hackedPrefab;
 
+    private Coroutine currentFindPlayerCoroutine;
+
     void Start()
     {
 
@@ -86,9 +88,10 @@ public class NewEnemyCode : MonoBehaviour
 
 
 
-        if (isPlayerDetected && !hacked)
+        if (isPlayerDetected && !hacked && !attacking)
         {
-            StopAllCoroutines();
+            StopCoroutine("Patrol");
+            StopCoroutine("FindPlayer");
             ChaseAndAttackPlayer();
         }
 
@@ -103,8 +106,12 @@ public class NewEnemyCode : MonoBehaviour
 
         if (isHeared && !isPlayerDetected && !hacked)
         {
-            StopAllCoroutines();
-            StartCoroutine(FindPlayer(Script.Find<SoundCheckCode>("SoundCheck").lastPlayerPoint));
+            StopCoroutine("Patrol");
+            if (currentFindPlayerCoroutine != null)
+            {
+                StopCoroutine(currentFindPlayerCoroutine);
+            }
+            currentFindPlayerCoroutine = StartCoroutine(FindPlayer(Script.Find<SoundCheckCode>("SoundCheck").lastPlayerPoint));
         }
 
 
@@ -170,7 +177,8 @@ public class NewEnemyCode : MonoBehaviour
 
         isPlayerDetected = true;
 
-        StopAllCoroutines();
+        StopCoroutine("Patrol");
+        StopCoroutine("FindPlayer");
         ChaseAndAttackPlayer();
 
     }
@@ -197,14 +205,14 @@ public class NewEnemyCode : MonoBehaviour
         attacking = true;
         findingPlayer = false;
 
-        // 플레이어를 향해 이동합니다.
-        moveEndPoint = new Vector2(player.transform.position.x, transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, moveEndPoint, Time.deltaTime * chaseSpeed);
-
         if (distanceToPlayer <= attackRange && canAttack)
         {
             StartCoroutine(AttackWithDelay());
         }
+
+        // 플레이어를 향해 이동합니다.
+        moveEndPoint = new Vector2(player.transform.position.x, transform.position.y);
+        transform.position = Vector2.MoveTowards(transform.position, moveEndPoint, Time.deltaTime * chaseSpeed);
         
     }
 
@@ -294,14 +302,16 @@ public class NewEnemyCode : MonoBehaviour
             yield return new WaitForSeconds(0.001f); // 매 프레임마다 실행
         }
 
-        // 1초간 대기
+        // 2초간 대기
         yield return new WaitForSeconds(2f);
 
         // 다른 행동 실행
         findingPlayer = false;
-        patrolling = true;
 
         Debug.Log("플레이어를 찾지 못했습니다. 순찰을 재개합니다.");
+
+        // 코루틴이 끝날 때 currentFindPlayerCoroutine을 null로 설정
+        currentFindPlayerCoroutine = null;
 
     }
 
@@ -312,7 +322,7 @@ public class NewEnemyCode : MonoBehaviour
         isHackingActivate = true;
 
         GameObject hackedObject = Instantiate(hackedPrefab, transform.position, transform.rotation);
-        
+
         hackedObject.transform.SetParent(transform);
 
         yield return new WaitForSeconds(newEnemyHackingDuration);

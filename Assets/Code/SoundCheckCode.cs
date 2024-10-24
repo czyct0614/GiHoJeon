@@ -42,7 +42,6 @@ public class SoundCheckCode : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             canKill = true;
-            Debug.Log("캔킬");
         }
 
     }
